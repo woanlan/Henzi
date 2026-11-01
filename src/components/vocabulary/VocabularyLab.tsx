@@ -182,7 +182,7 @@ export function VocabularyLab() {
           </div>
           <div>
             <span className="font-bold text-stone-900 text-xs flex items-center gap-1.5">
-              Thử Thách Phản Xạ: Mini-Game Nối Từ 60 Giây
+              Thử Thách Phản Xạ: Nối Từ 60 Giây
               <span className="text-[10px] bg-rose-100 text-rose-800 px-1.5 py-0.2 rounded-full font-bold">HOT</span>
             </span>
             <span className="text-[11px] text-stone-500">

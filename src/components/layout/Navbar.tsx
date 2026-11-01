@@ -44,10 +44,10 @@ export function Navbar() {
     { href: "/leaderboard", label: "Đua Top", icon: Trophy },
   ];
 
-  // Extended practice skills & labs in dropdown
+  // Extended practice skills & labs in dropdown (clean, consistent & badge-free)
   const practiceSkills = [
-    { href: "/curriculum", label: "Hành Trình Duolingo & Giáo Trình", icon: Map, desc: "Bản đồ 9 trạm S-curve & 12 bài khóa HSK", badge: "Bản Đồ" },
-    { href: "/match", label: "Mini-Game Nối Từ 60s", icon: Gamepad2, desc: "Phản xạ từ vựng chạy đua 60s cực vui", badge: "Game" },
+    { href: "/curriculum", label: "Hành Trình Duolingo & Giáo Trình", icon: Map, desc: "Lộ trình 9 trạm S-curve & 12 bài khóa HSK" },
+    { href: "/match", label: "Nối Từ 60 Giây", icon: Gamepad2, desc: "Phản xạ từ vựng chạy đua 60s cực vui" },
     { href: "/writing", label: "Luyện Viết Chữ Hán", icon: PenTool, desc: "Tập viết thuận bút & Tự gõ mọi chữ" },
     { href: "/pinyin", label: "Bảng Âm Tiết Pinyin", icon: Sparkles, desc: "Ma trận 21 thanh mẫu & 4 thanh điệu" },
     { href: "/radicals", label: "Chiết Tự 214 Bộ Thủ", icon: BookOpen, desc: "Nguồn gốc chữ tượng hình & mẹo nhớ" },
@@ -201,16 +201,9 @@ export function Navbar() {
                           <SkillIcon className="w-3.5 h-3.5" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="flex items-center justify-between gap-1">
-                            <span className="font-bold text-stone-900 text-xs whitespace-nowrap">
-                              {skill.label}
-                            </span>
-                            {skill.badge && (
-                              <span className="text-[9px] font-bold px-1.5 py-0.2 rounded-full bg-amber-100 text-amber-800 shrink-0">
-                                {skill.badge}
-                              </span>
-                            )}
-                          </div>
+                          <span className="font-bold text-stone-900 text-xs block whitespace-nowrap">
+                            {skill.label}
+                          </span>
                           <span className="text-[11px] text-stone-500 block leading-tight mt-0.5 truncate">
                             {skill.desc}
                           </span>
@@ -401,8 +394,8 @@ export function Navbar() {
               { href: "/writing", label: "Luyện Viết Chữ", icon: PenTool },
               { href: "/exams", label: "Thi Thử HSK", icon: FileCheck },
               { href: "/leaderboard", label: "Đua Top Tuần", icon: Trophy },
-              { href: "/curriculum", label: "Bản Đồ Duolingo", icon: Map, badge: "RPG" },
-              { href: "/match", label: "Game Nối Từ 60s", icon: Gamepad2, badge: "Hot" },
+              { href: "/curriculum", label: "Hành Trình Duolingo", icon: Map },
+              { href: "/match", label: "Nối Từ 60 Giây", icon: Gamepad2 },
               { href: "/pinyin", label: "Bảng Pinyin", icon: Sparkles },
               { href: "/radicals", label: "214 Bộ Thủ", icon: BookOpen },
               { href: "/listening", label: "Luyện Nghe", icon: Volume2 },
@@ -427,11 +420,6 @@ export function Navbar() {
                     <Icon className="w-4 h-4 text-amber-600 shrink-0" />
                     <span className="whitespace-nowrap">{link.label}</span>
                   </div>
-                  {link.badge && (
-                    <span className="text-[9px] font-bold px-1.5 py-0.2 rounded-full bg-amber-500 text-white">
-                      {link.badge}
-                    </span>
-                  )}
                 </Link>
               );
             })}

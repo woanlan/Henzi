@@ -49,13 +49,13 @@ export default function DashboardPage() {
     },
     {
       href: "/match",
-      title: "Mini-Game Nối Từ Phản Xạ 60s",
+      title: "Nối Từ Phản Xạ 60 Giây",
       desc: "Thử thách ghép cặp chữ Hán & nghĩa tiếng Việt chạy đua với thời gian, tích combo x2, x3",
       icon: Gamepad2,
-      badge: "HOT • Mini-Game",
+      badge: "Luyện Phản Xạ",
       badgeColor: "bg-rose-100 text-rose-800",
       color: "text-rose-600 bg-rose-50 border-rose-200",
-      btnText: "Chơi Game Ngay",
+      btnText: "Bắt Đầu Chơi",
     },
     {
       href: "/leaderboard",
