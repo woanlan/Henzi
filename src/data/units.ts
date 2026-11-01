@@ -1,0 +1,153 @@
+import { Unit } from "@/types";
+
+export const UNITS_DATA: Unit[] = [
+  // --- HSK 1 ---
+  {
+    id: "unit-1-1",
+    hskLevel: 1,
+    unitNumber: 1,
+    title: "问候与礼貌 (Lời chào & Lịch sự)",
+    titleVn: "Unit 1: Chào hỏi, cảm ơn và làm quen cơ bản",
+    descriptionVn: "Nắm vững ngữ âm Pinyin, các nguyên âm, phụ âm và thanh điệu cơ bản trong tiếng Phổ thông.",
+    iconName: "HandHeart",
+    estimatedHours: 3.5,
+    lessons: [
+      {
+        id: "lesson-1-1",
+        unitId: "unit-1-1",
+        lessonNumber: 1,
+        title: "你好与谢谢",
+        titleVn: "Bài 1: Chào hỏi và cảm ơn cơ bản",
+        learningObjectives: [
+          "Phát âm chính xác 4 thanh điệu (Thanh 1, 2, 3, 4)",
+          "Sử dụng 你好 (Nǐ hǎo) và 谢谢 (Xièxie) đúng ngữ cảnh",
+          "Biết cách chào tạm biệt 再见 (Zàijiàn)",
+        ],
+        estimatedMinutes: 20,
+        vocabularyCount: 8,
+        grammarPointsCount: 2,
+        isCompleted: true,
+      },
+      {
+        id: "lesson-1-2",
+        unitId: "unit-1-1",
+        lessonNumber: 2,
+        title: "你是哪国人",
+        titleVn: "Bài 2: Giới thiệu quốc tịch & bạn bè",
+        learningObjectives: [
+          "Hỏi và trả lời về quốc tịch bằng mẫu câu 是...人",
+          "Giới thiệu bạn bè và người quen",
+          "Luyện tập phát âm âm cuốn lưỡi 'r' và thanh nhẹ",
+        ],
+        estimatedMinutes: 25,
+        vocabularyCount: 10,
+        grammarPointsCount: 3,
+        isCompleted: false,
+      },
+      {
+        id: "lesson-1-3",
+        unitId: "unit-1-1",
+        lessonNumber: 3,
+        title: "在餐馆喝茶吃米饭",
+        titleVn: "Bài 3: Ẩm thực & gọi món cơ bản",
+        learningObjectives: [
+          "Học tên các món ăn và đồ uống phổ biến (trà, cơm, nước)",
+          "Sử dụng động từ 想 (muốn) và 要 (cần)",
+          "Cách nói số lượng và đơn vị tiền tệ",
+        ],
+        estimatedMinutes: 30,
+        vocabularyCount: 12,
+        grammarPointsCount: 2,
+        isCompleted: false,
+      },
+    ],
+  },
+  {
+    id: "unit-1-2",
+    hskLevel: 1,
+    unitNumber: 2,
+    title: "时间与日常 (Thời gian & Sinh hoạt)",
+    titleVn: "Unit 2: Ngày giờ, lịch trình và vị trí",
+    descriptionVn: "Học cách diễn đạt thứ, ngày, tháng, giờ và vị trí nơi chốn quen thuộc.",
+    iconName: "CalendarClock",
+    estimatedHours: 4.0,
+    lessons: [
+      {
+        id: "lesson-1-4",
+        unitId: "unit-1-2",
+        lessonNumber: 4,
+        title: "现在几点",
+        titleVn: "Bài 4: Hỏi và nói giờ giấc",
+        learningObjectives: [
+          "Nắm vững các con số từ 1 đến 100",
+          "Hỏi giờ bằng mẫu câu 现在几点 (Xiànzài jǐ diǎn)",
+          "Phân biệt sáng, trưa, chiều, tối",
+        ],
+        estimatedMinutes: 25,
+        vocabularyCount: 10,
+        grammarPointsCount: 2,
+        isCompleted: false,
+      },
+    ],
+  },
+
+  // --- HSK 2 ---
+  {
+    id: "unit-2-1",
+    hskLevel: 2,
+    unitNumber: 1,
+    title: "出行与交通 (Đi lại & Du lịch)",
+    titleVn: "Unit 1: Sân bay, tàu hỏa và đặt vé",
+    descriptionVn: "Mở rộng vốn từ vựng di chuyển, mua sắm và hỏi đường đi.",
+    iconName: "PlaneTakeoff",
+    estimatedHours: 5.0,
+    lessons: [
+      {
+        id: "lesson-2-1",
+        unitId: "unit-2-1",
+        lessonNumber: 1,
+        title: "去机场的路上",
+        titleVn: "Bài 1: Trên đường ra sân bay",
+        learningObjectives: [
+          "Sử dụng phó từ chỉ hành động đang diễn ra 正在",
+          "Từ vựng về phương tiện giao thông (máy bay, xe taxi)",
+          "Diễn đạt khoảng cách và thời gian di chuyển",
+        ],
+        estimatedMinutes: 30,
+        vocabularyCount: 15,
+        grammarPointsCount: 3,
+        isCompleted: false,
+      },
+    ],
+  },
+
+  // --- HSK 3 ---
+  {
+    id: "unit-3-1",
+    hskLevel: 3,
+    unitNumber: 1,
+    title: "职场与社交 (Công sở & Giao tiếp xã hội)",
+    titleVn: "Unit 1: Môi trường làm việc và giải quyết vấn đề",
+    descriptionVn: "Giao tiếp tự tin trong môi trường văn phòng, trao đổi công việc và thảo luận.",
+    iconName: "Briefcase",
+    estimatedHours: 6.0,
+    lessons: [
+      {
+        id: "lesson-3-1",
+        unitId: "unit-3-1",
+        lessonNumber: 1,
+        title: "工作环境与影响",
+        titleVn: "Bài 1: Môi trường làm việc & ảnh hưởng",
+        learningObjectives: [
+          "Sử dụng kết cấu 对...产生影响",
+          "Thảo luận về áp lực và động lực trong công việc",
+          "Viết email công việc ngắn gọn",
+        ],
+        estimatedMinutes: 35,
+        vocabularyCount: 18,
+        grammarPointsCount: 4,
+        isCompleted: false,
+      },
+    ],
+  },
+];
