@@ -6,6 +6,7 @@ import { useApp } from "@/context/AppContext";
 import { UNITS_DATA } from "@/data/units";
 import { HSK_LEVELS } from "@/data/hsk-levels";
 import { soundManager } from "@/lib/utils";
+import { DuolingoPathView } from "@/components/curriculum/DuolingoPathView";
 import {
   BookOpen,
   Clock,
@@ -18,10 +19,13 @@ import {
   Volume2,
   PenTool,
   ShieldCheck,
+  Map,
+  List,
 } from "lucide-react";
 
 export function CurriculumView() {
   const { currentHskLevel, setCurrentHskLevel } = useApp();
+  const [viewMode, setViewMode] = useState<"path" | "list">("path");
   const levelInfo = HSK_LEVELS.find((l) => l.level === currentHskLevel) || HSK_LEVELS[0];
   const units = UNITS_DATA.filter((u) => u.hskLevel === currentHskLevel);
 
@@ -56,29 +60,101 @@ export function CurriculumView() {
           </div>
         </div>
 
-        {/* Level Selector Tabs */}
-        <div className="flex flex-wrap gap-2 pt-2 border-t border-stone-100">
-          {HSK_LEVELS.map((lvl) => (
+        {/* Level Selector Tabs & View Mode Switcher */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3 border-t border-stone-100">
+          <div className="flex flex-wrap gap-2">
+            {HSK_LEVELS.map((lvl) => (
+              <button
+                key={lvl.level}
+                onClick={() => {
+                  soundManager.playClick();
+                  setCurrentHskLevel(lvl.level);
+                }}
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                  currentHskLevel === lvl.level
+                    ? "bg-amber-600 text-white shadow-xs scale-102"
+                    : "bg-stone-100 text-stone-700 hover:bg-stone-200"
+                }`}
+              >
+                Cấp HSK {lvl.level}
+              </button>
+            ))}
+          </div>
+
+          {/* View Mode Toggle */}
+          <div className="flex items-center bg-stone-100 p-1 rounded-2xl border border-stone-200 self-start sm:self-auto">
             <button
-              key={lvl.level}
               onClick={() => {
                 soundManager.playClick();
-                setCurrentHskLevel(lvl.level);
+                setViewMode("path");
               }}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-                currentHskLevel === lvl.level
-                  ? "bg-amber-600 text-white shadow-xs scale-102"
-                  : "bg-stone-100 text-stone-700 hover:bg-stone-200"
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                viewMode === "path"
+                  ? "bg-white text-stone-900 shadow-2xs"
+                  : "text-stone-500 hover:text-stone-900"
               }`}
             >
-              Cấp độ HSK {lvl.level}
+              <Map className="w-3.5 h-3.5 text-amber-600" />
+              <span>Bản Đồ Duolingo</span>
             </button>
-          ))}
+            <button
+              onClick={() => {
+                soundManager.playClick();
+                setViewMode("list");
+              }}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                viewMode === "list"
+                  ? "bg-white text-stone-900 shadow-2xs"
+                  : "text-stone-500 hover:text-stone-900"
+              }`}
+            >
+              <List className="w-3.5 h-3.5 text-amber-600" />
+              <span>Danh Sách Bài</span>
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Units & Lessons List */}
-      <div className="space-y-6">
+      {/* Duolingo Interactive Path & Assessment Highlight Banner */}
+      <div className="bg-emerald-500/10 border border-emerald-200/80 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+            <Map className="w-5 h-5" />
+          </div>
+          <div>
+            <span className="font-bold text-stone-900 text-xs flex items-center gap-1.5">
+              Học Tiếng Trung Qua Bản Đồ Cây Kỹ Năng Duolingo
+              <span className="text-[10px] bg-emerald-100 text-emerald-800 px-1.5 py-0.2 rounded-full font-bold">MỚI</span>
+            </span>
+            <span className="text-[11px] text-stone-600">
+              Chinh phục các chặng leo dốc, mở rương báu phần thưởng và hoàn thành mini-lesson tương tác
+            </span>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2 shrink-0">
+          <Link
+            href="/learn"
+            className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl flex items-center gap-1 transition-all shadow-xs"
+          >
+            <span>Vào Bản Đồ Học Ngay</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+          <Link
+            href="/onboarding"
+            className="px-3.5 py-2 bg-white hover:bg-stone-50 border border-stone-200 text-stone-800 text-xs font-bold rounded-xl flex items-center gap-1 transition-all shadow-2xs"
+          >
+            <span>Test Trình Độ</span>
+          </Link>
+        </div>
+      </div>
+
+      {/* Main Content: Path View vs List View */}
+      {viewMode === "path" ? (
+        <DuolingoPathView />
+      ) : (
+        /* Units & Lessons List */
+        <div className="space-y-6 animate-fadeIn">
         {units.length === 0 ? (
           <div className="bg-white p-8 rounded-2xl border border-stone-200 text-center space-y-2">
             <p className="text-stone-700 font-bold text-sm">
@@ -189,6 +265,7 @@ export function CurriculumView() {
           ))
         )}
       </div>
+      )}
     </div>
   );
 }

@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import { useApp } from "@/context/AppContext";
 import { VocabularyItem } from "@/types";
 import { audioEngine } from "@/lib/audio";
 import { soundManager } from "@/lib/utils";
+import { ExportFlashcardsModal } from "@/components/vocabulary/ExportFlashcardsModal";
 import {
   Zap,
   Volume2,
@@ -20,6 +22,9 @@ import {
   ChevronLeft,
   ChevronRight,
   Sparkles,
+  Download,
+  Gamepad2,
+  ArrowRight,
 } from "lucide-react";
 
 export function VocabularyLab() {
@@ -32,6 +37,8 @@ export function VocabularyLab() {
     recordReview,
     audioSpeed,
   } = useApp();
+
+  const [showExportModal, setShowExportModal] = useState(false);
 
   // Active view: "flashcards" | "quiz" | "notebook" | "all"
   const [activeTab, setActiveTab] = useState<"flashcards" | "quiz" | "notebook" | "all">("flashcards");
@@ -153,6 +160,51 @@ export function VocabularyLab() {
             }`}
           >
             Tra Cứu Tất Cả
+          </button>
+
+          {/* Export Anki / Print Button */}
+          <button
+            onClick={() => setShowExportModal(true)}
+            className="px-3 py-1.5 text-xs font-bold rounded-lg border border-amber-200 bg-amber-50 hover:bg-amber-100 text-amber-900 flex items-center gap-1.5 transition-colors shadow-2xs"
+            title="Xuất sang Anki hoặc in thẻ giấy"
+          >
+            <Download className="w-3.5 h-3.5 text-amber-600" />
+            <span>Xuất Anki & In Thẻ</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Quick Action Game & Anki Banner */}
+      <div className="bg-linear-to-r from-rose-500/10 via-amber-500/10 to-emerald-500/10 border border-stone-200 rounded-2xl p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs">
+        <div className="flex items-center gap-2.5">
+          <div className="w-9 h-9 rounded-xl bg-rose-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+            <Gamepad2 className="w-5 h-5" />
+          </div>
+          <div>
+            <span className="font-bold text-stone-900 text-xs flex items-center gap-1.5">
+              Thử Thách Phản Xạ: Mini-Game Nối Từ 60 Giây
+              <span className="text-[10px] bg-rose-100 text-rose-800 px-1.5 py-0.2 rounded-full font-bold">HOT</span>
+            </span>
+            <span className="text-[11px] text-stone-500">
+              Luyện phản xạ nhận diện từ vựng HSK {currentHskLevel} chạy đua thời gian
+            </span>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2 shrink-0">
+          <Link
+            href="/match"
+            className="px-3.5 py-1.5 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold rounded-xl flex items-center gap-1 transition-all shadow-xs"
+          >
+            <span>Chơi Game Nối Từ Ngay</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+          <button
+            onClick={() => setShowExportModal(true)}
+            className="px-3.5 py-1.5 bg-white hover:bg-stone-50 border border-stone-300 text-stone-800 text-xs font-bold rounded-xl flex items-center gap-1 transition-all shadow-2xs cursor-pointer"
+          >
+            <Download className="w-3.5 h-3.5 text-amber-600" />
+            <span>Xuất Anki & In PDF</span>
           </button>
         </div>
       </div>
@@ -522,6 +574,13 @@ export function VocabularyLab() {
           </div>
         </div>
       )}
+
+      {/* Export Flashcards & Anki Modal */}
+      <ExportFlashcardsModal
+        isOpen={showExportModal}
+        onClose={() => setShowExportModal(false)}
+        vocabItems={filteredVocab}
+      />
     </div>
   );
 }

@@ -1,16 +1,24 @@
-import React from "react";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
-import { AITutorView } from "@/components/ai/AITutorView";
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useApp } from "@/context/AppContext";
 
 export default function AITutorPage() {
+  const router = useRouter();
+  const { setIsAiChatOpen } = useApp();
+
+  useEffect(() => {
+    setIsAiChatOpen(true);
+    router.replace("/dashboard");
+  }, [router, setIsAiChatOpen]);
+
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAFAF9]">
-      <Navbar />
-      <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6">
-        <AITutorView />
-      </main>
-      <Footer />
+    <div className="min-h-screen flex items-center justify-center bg-[#FAFAF9] text-stone-500 text-sm">
+      <div className="flex items-center gap-2">
+        <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping" />
+        <span>Đang mở Thầy Giáo AI box chat...</span>
+      </div>
     </div>
   );
 }

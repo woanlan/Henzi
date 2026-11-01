@@ -26,8 +26,10 @@ export default function HomePage() {
   const [heroCardFlipped, setHeroCardFlipped] = useState(false);
 
   const speak = (zh: string) => {
-    soundManager.playClick();
-    audioEngine.speak(zh);
+    try {
+      soundManager.playClick();
+      audioEngine.speak(zh);
+    } catch {}
   };
 
   return (
@@ -36,7 +38,7 @@ export default function HomePage() {
 
       <main className="flex-1 space-y-24 pb-20">
         {/* HERO SECTION */}
-        <section className="relative pt-12 sm:pt-20 pb-16 overflow-hidden">
+        <section className="relative pt-10 sm:pt-16 pb-16 overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               {/* Left Column: Headline & Value Proposition */}
@@ -56,30 +58,11 @@ export default function HomePage() {
                 </h1>
 
                 <p className="text-base sm:text-lg text-stone-600 max-w-2xl leading-relaxed mx-auto lg:mx-0">
-                  Nền tảng học tiếng Trung toàn diện kết hợp tinh hoa của <b>Duolingo</b> (chuỗi lửa học tập), <b>Anki</b> (thuật toán lặp lại ngắt quãng SM-2), <b>Quizlet</b> (đa chế độ phản xạ) và <b>Gia Sư AI</b> bóc tách đa tầng ngữ pháp dành riêng cho người Việt.
+                  Nền tảng học tiếng Trung toàn diện kết hợp tinh hoa của <b>Duolingo</b> (chuỗi lửa học tập & bản đồ phiêu lưu), <b>Anki</b> (thuật toán lặp lại ngắt quãng SM-2), <b>Quizlet</b> (đa chế độ phản xạ) và <b>Gia Sư AI</b> bóc tách đa tầng ngữ pháp dành riêng cho người Việt.
                 </p>
 
-                {/* Primary CTA Buttons */}
-                <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-2">
-                  <Link
-                    href="/dashboard"
-                    className="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-sm transition-all shadow-md hover:scale-102 flex items-center justify-center gap-2"
-                  >
-                    <span>Vào Học Miễn Phí Ngay</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-
-                  <Link
-                    href="/curriculum"
-                    className="w-full sm:w-auto px-6 py-3.5 rounded-2xl bg-white hover:bg-stone-50 border border-stone-200 text-stone-800 font-bold text-sm transition-all shadow-xs flex items-center justify-center gap-2"
-                  >
-                    <Compass className="w-4 h-4 text-stone-500" />
-                    <span>Khám Phá Giáo Trình HSK 1–6</span>
-                  </Link>
-                </div>
-
                 {/* Trust Badges */}
-                <div className="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-stone-500 font-medium">
+                <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-stone-500 font-medium">
                   <span className="flex items-center gap-1.5">
                     <CheckCircle2 className="w-4 h-4 text-emerald-600" /> 100% Phát âm giọng chuẩn Bắc Kinh
                   </span>
@@ -105,7 +88,7 @@ export default function HomePage() {
                   {/* Character Flash Box */}
                   <div
                     onClick={() => {
-                      soundManager.playClick();
+                      try { soundManager.playClick(); } catch {}
                       setHeroCardFlipped(!heroCardFlipped);
                     }}
                     className="p-8 rounded-2xl bg-stone-50 border border-stone-200/80 text-center cursor-pointer hover:border-amber-400 transition-all select-none space-y-3"
@@ -139,7 +122,7 @@ export default function HomePage() {
                   <div className="flex items-center justify-between gap-3 pt-2 border-t border-stone-100">
                     <button
                       onClick={() => speak("学，学习")}
-                      className="flex-1 py-2.5 px-3 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-800 font-bold text-xs flex items-center justify-center gap-2 transition-colors"
+                      className="flex-1 py-2.5 px-3 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-800 font-bold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer"
                     >
                       <Volume2 className="w-4 h-4 text-amber-600" />
                       <span>Nghe Phát Âm</span>
@@ -189,7 +172,7 @@ export default function HomePage() {
                 Gamification Duolingo
               </h3>
               <p className="text-xs text-stone-500 leading-relaxed">
-                Chuỗi ngày học liên tục (Streak), bảng xếp hạng XP, huy hiệu thành tích và các thử thách tuần tạo động lực học tập mỗi ngày.
+                Chuỗi ngày học liên tục (Streak), bảng xếp hạng XP, huy hiệu thành tích và bản đồ phiêu lưu tạo động lực học tập mỗi ngày.
               </p>
             </div>
 
@@ -213,7 +196,7 @@ export default function HomePage() {
                 Writing Lab (Thuận Bút)
               </h3>
               <p className="text-xs text-stone-500 leading-relaxed">
-                Luyện viết chữ Hán trên ô Mễ Tự Cách (米字格) với hoạt ảnh thứ tự nét bút chính xác, nhận diện nét viết và chế độ chép chính tả.
+                Luyện viết chữ Hán trên ô Mễ Tự Cách (米字格) với hoạt ảnh thứ tự nét bút chính xác, tự nhập chữ tùy thích và cảm biến chấm điểm.
               </p>
             </div>
 
@@ -225,7 +208,7 @@ export default function HomePage() {
                 Gia Sư AI Đa Tầng
               </h3>
               <p className="text-xs text-stone-500 leading-relaxed">
-                Bóc tách 6 tầng cấu trúc câu: Chữ Hán • Pinyin • Tiếng Việt • Từ vựng cốt lõi • Phân tích ngữ pháp • Mẫu câu mở rộng tự nhiên.
+                Bóc tách 6 tầng cấu trúc câu: Chữ Hán • Pinyin • Tiếng Việt • Từ vựng cốt lõi • Phân tích ngữ pháp • Gọi thoại đàm thoại trực tiếp.
               </p>
             </div>
           </div>
@@ -298,7 +281,7 @@ export default function HomePage() {
               <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
                 Làm Chủ Tiếng Trung Cùng HANZI MASTER
               </h2>
-              <p className="text-xs sm:text-sm text-stone-400 leading-relaxed">
+              <p className="text-xs text-stone-400 leading-relaxed">
                 Đăng ký tài khoản miễn phí để lưu trữ tiến độ học tập trên đám mây, tham gia kỳ thi thử HSK bấm giờ và tương tác với Gia Sư AI.
               </p>
             </div>
@@ -306,15 +289,16 @@ export default function HomePage() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
               <Link
                 href="/auth/login"
-                className="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-sm transition-all shadow-md hover:scale-105"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-sm transition-all shadow-md hover:scale-105 flex items-center justify-center gap-2"
               >
-                Đăng Ký Học Viên Miễn Phí
+                <span>Đăng Ký Học Viên Miễn Phí</span>
               </Link>
               <Link
                 href="/dashboard"
-                className="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-stone-800 hover:bg-stone-700 text-stone-200 font-bold text-sm transition-all"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-stone-800 hover:bg-stone-700 text-stone-200 font-bold text-sm transition-all flex items-center justify-center gap-2"
               >
-                Trải Nghiệm Bản Demo Ngay
+                <span>Vào Bảng Điều Khiển</span>
+                <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </div>

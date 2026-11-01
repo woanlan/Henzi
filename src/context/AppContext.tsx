@@ -28,6 +28,9 @@ interface AppContextType {
     wordsDifficult: number;
     reviewQueueCount: number;
   };
+  isAiChatOpen: boolean;
+  setIsAiChatOpen: (open: boolean) => void;
+  toggleAiChat: () => void;
 }
 
 const DEFAULT_USER: UserProfile = {
@@ -56,6 +59,12 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [notebookIds, setNotebookIds] = useState<Set<string>>(new Set(["vocab-hsk1-001", "vocab-hsk1-002"]));
   const [audioSpeed, setAudioSpeedState] = useState<0.75 | 1.0 | 1.25>(1.0);
   const [preferredScript, setPreferredScriptState] = useState<"simplified" | "traditional">("simplified");
+  const [isAiChatOpen, setIsAiChatOpen] = useState(false);
+
+  const toggleAiChat = () => {
+    soundManager.playClick();
+    setIsAiChatOpen((prev) => !prev);
+  };
 
   // Load from LocalStorage on mount
   useEffect(() => {
@@ -215,6 +224,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         preferredScript,
         setPreferredScript,
         stats,
+        isAiChatOpen,
+        setIsAiChatOpen,
+        toggleAiChat,
       }}
     >
       {children}

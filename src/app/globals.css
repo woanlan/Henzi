@@ -82,3 +82,24 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #A8A29E;
 }
+
+/* Hide Next.js dev turbopack indicator overlay */
+nextjs-portal,
+[data-nextjs-toast],
+[data-nextjs-dev-overlay] {
+  display: none !important;
+}
+
+/* Gentle mascot floating animation */
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+.animate-float-gentle {
+  animation: floatGentle 2.6s ease-in-out infinite;
+}

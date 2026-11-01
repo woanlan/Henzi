@@ -265,15 +265,63 @@ function translateVietnameseToChinese(vn: string): {
   vocab: { word: string; pinyin: string; meaningVn: string; partOfSpeech?: string }[];
 } {
   const lower = vn.toLowerCase();
-  if (lower.includes("uống trà") || lower.includes("trời rất đẹp")) {
+
+  if (lower.includes("căn hộ") || lower.includes("chung cư")) {
+    return {
+      zh: "公寓",
+      vocab: [
+        { word: "公", pinyin: "gōng", meaningVn: "công (chung, công cộng)", partOfSpeech: "Tính từ" },
+        { word: "寓", pinyin: "yù", meaningVn: "ngụ (nơi ở, cư ngụ)", partOfSpeech: "Động từ" },
+      ],
+    };
+  }
+
+  if (lower.includes("bằng phẳng") || lower.includes("phẳng")) {
+    return {
+      zh: "平坦",
+      vocab: [
+        { word: "平", pinyin: "píng", meaningVn: "bằng, phẳng", partOfSpeech: "Tính từ" },
+        { word: "坦", pinyin: "tǎn", meaningVn: "phẳng lặng, bằng phẳng", partOfSpeech: "Tính từ" },
+      ],
+    };
+  }
+
+  if (lower.includes("uống trà") || lower.includes("trời rất đẹp") || lower.includes("uống")) {
     return {
       zh: "今天天气很好，我们一起去喝茶吧。",
       vocab: [
         { word: "今天", pinyin: "jīntiān", meaningVn: "hôm nay", partOfSpeech: "Danh từ" },
         { word: "天气", pinyin: "tiānqì", meaningVn: "thời tiết", partOfSpeech: "Danh từ" },
         { word: "很好", pinyin: "hěn hǎo", meaningVn: "rất đẹp, rất tốt", partOfSpeech: "Cụm tính từ" },
-        { word: "一起", pinyin: "yìqǐ", meaningVn: "cùng nhau", partOfSpeech: "Phó từ" },
+        { word: "我们", pinyin: "wǒmen", meaningVn: "chúng mình", partOfSpeech: "Đại từ" },
+        { word: "去", pinyin: "qù", meaningVn: "đi", partOfSpeech: "Động từ" },
         { word: "喝茶", pinyin: "hē chá", meaningVn: "uống trà", partOfSpeech: "Cụm động từ" },
+        { word: "吧", pinyin: "ba", meaningVn: "nhé (trợ từ ngữ khí)", partOfSpeech: "Trợ từ" },
+      ],
+    };
+  }
+
+  if (lower.includes("mặc ấm") || lower.includes("trời lạnh")) {
+    return {
+      zh: "今天天气很冷，记得多穿衣服。",
+      vocab: [
+        { word: "今天", pinyin: "jīntiān", meaningVn: "hôm nay", partOfSpeech: "Danh từ" },
+        { word: "天气", pinyin: "tiānqì", meaningVn: "thời tiết", partOfSpeech: "Danh từ" },
+        { word: "很冷", pinyin: "hěn lěng", meaningVn: "rất lạnh", partOfSpeech: "Cụm tính từ" },
+        { word: "记得", pinyin: "jìde", meaningVn: "nhớ, ghi nhớ", partOfSpeech: "Động từ" },
+        { word: "多穿", pinyin: "duō chuān", meaningVn: "mặc nhiều hơn", partOfSpeech: "Cụm động từ" },
+        { word: "衣服", pinyin: "yīfu", meaningVn: "quần áo", partOfSpeech: "Danh từ" },
+      ],
+    };
+  }
+
+  if (lower.includes("máy bay") || lower.includes("sân bay")) {
+    return {
+      zh: "我是坐飞机来的，现在去机场。",
+      vocab: [
+        { word: "飞机", pinyin: "fēijī", meaningVn: "máy bay", partOfSpeech: "Danh từ" },
+        { word: "机场", pinyin: "jīchǎng", meaningVn: "sân bay", partOfSpeech: "Danh từ" },
+        { word: "坐", pinyin: "zuò", meaningVn: "ngồi, đi (phương tiện)", partOfSpeech: "Động từ" },
       ],
     };
   }
@@ -300,7 +348,18 @@ function translateVietnameseToChinese(vn: string): {
     };
   }
 
-  // Default natural sentence
+  if (lower.includes("du lịch")) {
+    return {
+      zh: "我想去中国旅游，体验中国文化。",
+      vocab: [
+        { word: "想", pinyin: "xiǎng", meaningVn: "muốn", partOfSpeech: "Động từ năng nguyện" },
+        { word: "中国", pinyin: "Zhōngguó", meaningVn: "Trung Quốc", partOfSpeech: "Danh từ" },
+        { word: "旅游", pinyin: "lǚyóu", meaningVn: "du lịch", partOfSpeech: "Động từ" },
+      ],
+    };
+  }
+
+  // Fallback
   return {
     zh: "我们每天都在认真学习汉语。",
     vocab: [

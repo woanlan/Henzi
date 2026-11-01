@@ -12,10 +12,16 @@ export async function POST(req: NextRequest) {
     const geminiKey = (customApiKey && !customApiKey.startsWith("sk-")) ? customApiKey : process.env.GEMINI_API_KEY;
     const openAiKey = (customApiKey && customApiKey.startsWith("sk-")) ? customApiKey : process.env.OPENAI_API_KEY;
 
-    // 1. If Gemini Key is available, call Gemini 3.8 Flash
+    // 1. If Gemini Key is available, call Gemini models with fallback
     if (geminiKey && !geminiKey.includes("your-key")) {
-      try {
-        const systemPrompt = `Bạn là Từ Điển Song Hướng Hán-Việt & Việt-Hán chuyên nghiệp chuẩn Cambridge Dictionary kiêm Gia Sư AI tại nền tảng HANZI MASTER.
+      const candidateModels = [
+        "gemini-3.5-flash",
+        "gemini-3.5-flash-lite",
+        "gemini-flash-lite-latest",
+        "gemini-3.8-flash",
+      ];
+
+      const systemPrompt = `Bạn là Từ Điển Song Hướng Hán-Việt & Việt-Hán chuyên nghiệp chuẩn Cambridge Dictionary kiêm Gia Sư AI tại nền tảng HANZI MASTER.
 Trình độ mục tiêu: HSK ${hskLevel}.
 
 QUY TẮC TRA CỨU SONG HƯỚNG THEO CHUẨN TỪ ĐIỂN CAMBRIDGE:
@@ -57,36 +63,42 @@ BẮT BUỘC TRẢ VỀ ĐỊNH DẠNG JSON HỢP LỆ DUY NHẤT:
   }
 }`;
 
-        const geminiRes = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${geminiKey}`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              contents: [
-                {
-                  role: "user",
-                  parts: [{ text: `${systemPrompt}\n\nChế độ yêu cầu: ${direction}\nNội dung người dùng tra cứu: "${message}"` }],
+      for (const modelName of candidateModels) {
+        try {
+          const geminiRes = await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${geminiKey}`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                contents: [
+                  {
+                    role: "user",
+                    parts: [{ text: `${systemPrompt}\n\nChế độ yêu cầu: ${direction}\nNội dung người dùng tra cứu: "${message}"` }],
+                  },
+                ],
+                generationConfig: {
+                  responseMimeType: "application/json",
+                  temperature: 0.4,
                 },
-              ],
-              generationConfig: {
-                responseMimeType: "application/json",
-                temperature: 0.5,
-              },
-            }),
-          }
-        );
+              }),
+            }
+          );
 
-        if (geminiRes.ok) {
-          const geminiData = await geminiRes.json();
-          const rawText = geminiData.candidates?.[0]?.content?.parts?.[0]?.text;
-          if (rawText) {
-            const parsed = JSON.parse(rawText);
-            return NextResponse.json(parsed);
+          if (geminiRes.ok) {
+            const geminiData = await geminiRes.json();
+            const rawText = geminiData.candidates?.[0]?.content?.parts?.[0]?.text;
+            if (rawText) {
+              const parsed = JSON.parse(rawText);
+              return NextResponse.json(parsed);
+            }
+          } else {
+            const errBody = await geminiRes.text();
+            console.warn(`Model ${modelName} returned ${geminiRes.status}:`, errBody.slice(0, 150));
           }
+        } catch (modelErr) {
+          console.warn(`Model ${modelName} call exception:`, modelErr);
         }
-      } catch (err) {
-        console.warn("Gemini call exception:", err);
       }
     }
 
