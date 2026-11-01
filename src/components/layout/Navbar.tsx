@@ -60,43 +60,46 @@ export function Navbar() {
   const isPracticeActive = practiceSkills.some((s) => pathname === s.href);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-stone-200/90 bg-[#FAFAF9]/95 backdrop-blur-md shadow-2xs transition-all">
-      <div className="w-full max-w-[1600px] mx-auto px-3 sm:px-4 lg:px-6">
-        <div className="flex items-center justify-between h-16 sm:h-18 gap-2">
+    <header className="sticky top-0 z-50 w-full border-b border-stone-200/90 bg-[#FAFAF9]/95 backdrop-blur-md shadow-2xs transition-all overflow-x-clip">
+      <div className="w-full max-w-[1600px] mx-auto px-2.5 sm:px-4 lg:px-6">
+        <div className="flex items-center justify-between h-16 sm:h-18 gap-1.5 sm:gap-2">
           {/* ======================================================== */}
           {/* 1. SEPARATE LOGO & BRAND SECTION                         */}
           {/* ======================================================== */}
-          <div className="flex items-center shrink-0">
+          <div className="flex items-center shrink-0 gap-1.5 sm:gap-3">
             <Link
               href="/"
-              className="flex items-center gap-2.5 sm:gap-3 group pr-1 hover:opacity-95 transition-opacity shrink-0"
+              className="flex items-center gap-2 sm:gap-2.5 group hover:opacity-95 transition-opacity shrink-0"
               title="Về Trang Chủ HANZI MASTER"
             >
-              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-linear-to-br from-amber-500 to-amber-700 text-white flex items-center justify-center font-hanzi text-xl sm:text-2xl font-black shadow-md border-2 border-amber-400/40 transition-transform group-hover:scale-105 shrink-0">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-linear-to-br from-amber-500 to-amber-700 text-white flex items-center justify-center font-hanzi text-lg sm:text-xl font-black shadow-md border-2 border-amber-400/40 transition-transform group-hover:scale-105 shrink-0">
                 汉
               </div>
               <div className="flex flex-col shrink-0">
-                <span className="font-black tracking-tight text-stone-900 text-lg sm:text-xl leading-none font-sans whitespace-nowrap">
+                <span className="font-black tracking-tight text-stone-900 text-base sm:text-lg lg:text-xl leading-none font-sans whitespace-nowrap">
                   HANZI <span className="text-amber-600">MASTER</span>
                 </span>
-                <span className="text-[10px] text-stone-400 font-bold tracking-wider uppercase mt-0.5 whitespace-nowrap">
+                <span className="text-[10px] text-stone-400 font-bold tracking-wider uppercase mt-0.5 whitespace-nowrap hidden 2xl:block">
                   HSK 1–6 Tiếng Trung
                 </span>
               </div>
             </Link>
 
             {/* Vertical Divider */}
-            <div className="h-7 w-px bg-stone-300 mx-3 sm:mx-4 hidden md:block shrink-0" />
+            <div className="h-6 w-px bg-stone-200 hidden md:block shrink-0" />
 
-            {/* Level Switcher Selector (Compact & Clean) */}
+            {/* Level Switcher Selector (Responsive & Compact) */}
             <div className="relative hidden md:block shrink-0">
               <button
                 onClick={() => setLevelDropdownOpen(!levelDropdownOpen)}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-50 hover:bg-amber-100 border border-amber-200 text-stone-800 transition-all shadow-2xs hover:border-amber-300 whitespace-nowrap shrink-0 cursor-pointer"
+                className="flex items-center gap-1.5 px-2 xl:px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-50 hover:bg-amber-100 border border-amber-200 text-stone-800 transition-all shadow-2xs hover:border-amber-300 whitespace-nowrap shrink-0 cursor-pointer"
+                title="Thay đổi cấp độ HSK mục tiêu"
               >
                 <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse shrink-0" />
-                <span className="whitespace-nowrap">Cấp Độ HSK {currentHskLevel}</span>
-                <ChevronDown className="w-3.5 h-3.5 text-stone-400 shrink-0" />
+                <span className="whitespace-nowrap">
+                  <span className="hidden xl:inline">Cấp Độ </span>HSK {currentHskLevel}
+                </span>
+                <ChevronDown className="w-3 h-3 xl:w-3.5 xl:h-3.5 text-stone-400 shrink-0" />
               </button>
 
               {levelDropdownOpen && (
@@ -134,9 +137,9 @@ export function Navbar() {
           </div>
 
           {/* ======================================================== */}
-          {/* 2. NAVIGATION BAR (BALANCED & HARMONIOUS)                 */}
+          {/* 2. NAVIGATION BAR (RESPONSIVE & AUTO-BALANCED)            */}
           {/* ======================================================== */}
-          <nav className="hidden lg:flex items-center gap-1.5 xl:gap-2 shrink-0">
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-1.5 2xl:gap-2 shrink-0">
             {/* Primary items */}
             {primaryNavLinks.map((link) => {
               const Icon = link.icon;
@@ -145,13 +148,13 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs xl:text-[13px] font-semibold transition-all whitespace-nowrap shrink-0 ${
+                  className={`flex items-center gap-1 xl:gap-1.5 px-2 xl:px-2.5 2xl:px-3 py-1.5 rounded-xl text-xs xl:text-[13px] font-semibold transition-all whitespace-nowrap shrink-0 ${
                     isActive
                       ? "bg-amber-100 text-amber-900 font-bold shadow-2xs border border-amber-200/80"
                       : "text-stone-700 hover:text-stone-900 hover:bg-stone-100"
                   }`}
                 >
-                  <Icon className={`w-4 h-4 shrink-0 ${isActive ? "text-amber-700" : "text-stone-500"}`} />
+                  <Icon className={`w-3.5 h-3.5 xl:w-4 xl:h-4 shrink-0 ${isActive ? "text-amber-700" : "text-stone-500"}`} />
                   <span className="whitespace-nowrap">{link.label}</span>
                 </Link>
               );
@@ -161,20 +164,20 @@ export function Navbar() {
             <div className="relative shrink-0">
               <button
                 onClick={() => setPracticeDropdownOpen(!practiceDropdownOpen)}
-                className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs xl:text-[13px] font-semibold transition-all whitespace-nowrap shrink-0 cursor-pointer ${
+                className={`flex items-center gap-1 xl:gap-1.5 px-2 xl:px-2.5 2xl:px-3 py-1.5 rounded-xl text-xs xl:text-[13px] font-semibold transition-all whitespace-nowrap shrink-0 cursor-pointer ${
                   isPracticeActive
                     ? "bg-amber-100 text-amber-900 font-bold shadow-2xs border border-amber-200/80"
                     : "text-stone-700 hover:text-stone-900 hover:bg-stone-100"
                 }`}
               >
-                <Layers className={`w-4 h-4 shrink-0 ${isPracticeActive ? "text-amber-700" : "text-stone-500"}`} />
+                <Layers className={`w-3.5 h-3.5 xl:w-4 xl:h-4 shrink-0 ${isPracticeActive ? "text-amber-700" : "text-stone-500"}`} />
                 <span className="whitespace-nowrap">Kỹ Năng Khác</span>
-                <ChevronDown className={`w-3.5 h-3.5 text-stone-400 shrink-0 transition-transform ${practiceDropdownOpen ? "rotate-180" : ""}`} />
+                <ChevronDown className={`w-3 h-3 xl:w-3.5 xl:h-3.5 text-stone-400 shrink-0 transition-transform ${practiceDropdownOpen ? "rotate-180" : ""}`} />
               </button>
 
               {practiceDropdownOpen && (
                 <div
-                  className="absolute left-0 mt-2 w-72 max-h-[82vh] overflow-y-auto rounded-2xl bg-white border border-stone-200 shadow-xl p-2 z-50 animate-fadeIn"
+                  className="absolute right-0 mt-2 w-72 max-h-[82vh] overflow-y-auto rounded-2xl bg-white border border-stone-200 shadow-xl p-2 z-50 animate-fadeIn"
                   onMouseLeave={() => setPracticeDropdownOpen(false)}
                 >
                   <div className="px-3 py-1 text-[11px] font-bold text-stone-400 uppercase tracking-wider">
@@ -219,26 +222,11 @@ export function Navbar() {
               )}
             </div>
 
-            {/* Gia Sư AI - Action Button */}
-            <button
-              onClick={toggleAiChat}
-              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs xl:text-sm font-bold transition-all border cursor-pointer whitespace-nowrap shrink-0 ${
-                isAiChatOpen
-                  ? "bg-amber-600 text-white border-amber-600 shadow-xs"
-                  : "bg-linear-to-r from-amber-50 to-orange-50 hover:from-amber-100 hover:to-orange-100 text-amber-900 border-amber-200/90 shadow-2xs"
-              }`}
-              title="Mở Thầy Giáo AI & Từ Điển Song Hướng"
-            >
-              <Sparkles className={`w-3.5 h-3.5 shrink-0 ${isAiChatOpen ? "text-white fill-white" : "text-amber-600 fill-amber-500/30"}`} />
-              <span className="whitespace-nowrap">Gia Sư AI</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-            </button>
-
             {/* Admin Link if role is admin */}
             {user.role === "admin" && (
               <Link
                 href="/admin"
-                className={`flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-xl text-xs xl:text-sm font-bold transition-all whitespace-nowrap shrink-0 ${
+                className={`flex items-center gap-1.5 px-2 xl:px-2.5 py-1.5 rounded-xl text-xs xl:text-sm font-bold transition-all whitespace-nowrap shrink-0 ${
                   pathname === "/admin"
                     ? "bg-red-100 text-red-800 shadow-2xs"
                     : "text-red-700 hover:bg-red-50"
@@ -251,21 +239,39 @@ export function Navbar() {
           </nav>
 
           {/* ======================================================== */}
-          {/* 3. USER BADGES & ROLE SWITCHER (CRISP & COMPACT)         */}
+          {/* 3. USER BADGES, GIA SƯ AI & ROLE SWITCHER                */}
           {/* ======================================================== */}
-          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            {/* Gia Sư AI - Always Prominent Action Button */}
+            <button
+              onClick={toggleAiChat}
+              className={`flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-xl text-xs xl:text-xs font-bold transition-all border cursor-pointer whitespace-nowrap shrink-0 ${
+                isAiChatOpen
+                  ? "bg-amber-600 text-white border-amber-600 shadow-xs"
+                  : "bg-linear-to-r from-amber-50 to-orange-50 hover:from-amber-100 hover:to-orange-100 text-amber-900 border-amber-200/90 shadow-2xs"
+              }`}
+              title="Mở Gia Sư AI & Từ Điển Song Hướng"
+            >
+              <Sparkles className={`w-3.5 h-3.5 shrink-0 ${isAiChatOpen ? "text-white fill-white" : "text-amber-600 fill-amber-500/30"}`} />
+              <span className="whitespace-nowrap">Gia Sư AI</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+            </button>
+
             {/* Streak Badge */}
             <div
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-orange-50 border border-orange-200 text-orange-800 text-xs font-bold shadow-2xs whitespace-nowrap shrink-0"
+              className="flex items-center gap-1 px-2 xl:px-2.5 py-1.5 rounded-xl bg-orange-50 border border-orange-200 text-orange-800 text-xs font-bold shadow-2xs whitespace-nowrap shrink-0"
               title="Chuỗi ngày học liên tục"
             >
               <Flame className="w-3.5 h-3.5 fill-orange-500 text-orange-500 animate-pulse shrink-0" />
-              <span className="whitespace-nowrap">{user.dailyStreak} ngày</span>
+              <span className="whitespace-nowrap">
+                {user.dailyStreak}
+                <span className="hidden xl:inline"> ngày</span>
+              </span>
             </div>
 
-            {/* XP Badge */}
+            {/* XP Badge (Visible on wider screens to keep compact view uncluttered) */}
             <div
-              className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-bold shadow-2xs whitespace-nowrap shrink-0"
+              className="hidden xl:flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-bold shadow-2xs whitespace-nowrap shrink-0"
               title="Điểm kinh nghiệm học tập"
             >
               <Zap className="w-3.5 h-3.5 fill-amber-500 text-amber-600 shrink-0" />
@@ -276,7 +282,8 @@ export function Navbar() {
             <div className="relative shrink-0">
               <button
                 onClick={() => setRoleDropdownOpen(!roleDropdownOpen)}
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border border-stone-300 text-xs font-bold text-stone-800 bg-white hover:bg-stone-50 transition-all shadow-2xs whitespace-nowrap shrink-0 cursor-pointer"
+                className="flex items-center gap-1 px-2 xl:px-2.5 py-1.5 rounded-xl border border-stone-300 text-xs font-bold text-stone-800 bg-white hover:bg-stone-50 transition-all shadow-2xs whitespace-nowrap shrink-0 cursor-pointer"
+                title="Thay đổi vai trò hiển thị"
               >
                 <span className="capitalize whitespace-nowrap">
                   {user.role === "student"
