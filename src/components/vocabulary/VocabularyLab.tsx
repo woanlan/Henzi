@@ -123,7 +123,7 @@ export function VocabularyLab() {
         </div>
 
         {/* Navigation Tabs */}
-        <div className="flex items-center gap-1.5 p-1 bg-stone-100 rounded-xl">
+        <div className="flex items-center gap-1.5 p-1 bg-stone-100 rounded-xl overflow-x-auto max-w-full no-scrollbar whitespace-nowrap">
           <button
             onClick={() => setActiveTab("flashcards")}
             className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${
@@ -241,7 +241,7 @@ export function VocabularyLab() {
               soundManager.playClick();
               setIsFlipped(!isFlipped);
             }}
-            className="w-full min-h-[340px] bg-white rounded-3xl border border-stone-200 shadow-sm p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:border-amber-400/80 transition-all select-none relative group"
+            className="w-full min-h-[280px] sm:min-h-[340px] bg-white rounded-3xl border border-stone-200 shadow-sm p-5 sm:p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:border-amber-400/80 transition-all select-none relative group"
           >
             <span className="absolute top-4 right-4 text-[10px] text-stone-400 font-semibold uppercase tracking-wider">
               {isFlipped ? "Mặt Sau (Nghĩa)" : "Mặt Trước (Nhấn để lật thẻ)"}
@@ -250,7 +250,7 @@ export function VocabularyLab() {
             {!isFlipped ? (
               // Front: Chinese Characters
               <div className="space-y-4 my-auto">
-                <div className="font-hanzi text-7xl font-extrabold text-stone-900 tracking-wider">
+                <div className="font-hanzi text-5xl sm:text-7xl font-extrabold text-stone-900 tracking-wider">
                   {currentCard.simplified}
                 </div>
                 {currentCard.traditional && currentCard.traditional !== currentCard.simplified && (
@@ -327,30 +327,30 @@ export function VocabularyLab() {
             <span className="text-[11px] font-bold text-stone-400 uppercase tracking-wider block text-center">
               Đánh giá độ ghi nhớ để thuật toán xếp lịch ôn tập:
             </span>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-3 gap-1.5 sm:gap-3">
               <button
                 onClick={() => handleRating(1)}
-                className="py-3 px-4 rounded-xl border border-red-200 bg-red-50 hover:bg-red-100 text-red-800 font-bold text-xs flex flex-col items-center gap-1 transition-colors shadow-2xs"
+                className="py-2.5 sm:py-3 px-1.5 sm:px-4 rounded-xl border border-red-200 bg-red-50 hover:bg-red-100 text-red-800 font-bold text-[11px] sm:text-xs flex flex-col items-center gap-0.5 sm:gap-1 transition-colors shadow-2xs text-center"
               >
-                <AlertCircle className="w-4 h-4 text-red-600" />
+                <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
                 <span>Từ Khó (Quên)</span>
-                <span className="text-[10px] font-normal text-red-600">Ôn lại ngay mai</span>
+                <span className="text-[10px] font-normal text-red-600 hidden xs:inline">Ôn lại ngay mai</span>
               </button>
               <button
                 onClick={() => handleRating(3)}
-                className="py-3 px-4 rounded-xl border border-amber-200 bg-amber-50 hover:bg-amber-100 text-amber-800 font-bold text-xs flex flex-col items-center gap-1 transition-colors shadow-2xs"
+                className="py-2.5 sm:py-3 px-1.5 sm:px-4 rounded-xl border border-amber-200 bg-amber-50 hover:bg-amber-100 text-amber-800 font-bold text-[11px] sm:text-xs flex flex-col items-center gap-0.5 sm:gap-1 transition-colors shadow-2xs text-center"
               >
-                <HelpCircle className="w-4 h-4 text-amber-600" />
-                <span>Đang Học (Gợi nhớ)</span>
-                <span className="text-[10px] font-normal text-amber-700">Ôn sau 3 ngày</span>
+                <HelpCircle className="w-4 h-4 text-amber-600 shrink-0" />
+                <span>Đang Học</span>
+                <span className="text-[10px] font-normal text-amber-700 hidden xs:inline">Ôn sau 3 ngày</span>
               </button>
               <button
                 onClick={() => handleRating(5)}
-                className="py-3 px-4 rounded-xl border border-emerald-200 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold text-xs flex flex-col items-center gap-1 transition-colors shadow-2xs"
+                className="py-2.5 sm:py-3 px-1.5 sm:px-4 rounded-xl border border-emerald-200 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold text-[11px] sm:text-xs flex flex-col items-center gap-0.5 sm:gap-1 transition-colors shadow-2xs text-center"
               >
-                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                <span>Đã Thuộc (Nhớ rõ)</span>
-                <span className="text-[10px] font-normal text-emerald-700">Ôn sau 7 ngày</span>
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Đã Thuộc</span>
+                <span className="text-[10px] font-normal text-emerald-700 hidden xs:inline">Ôn sau 7 ngày</span>
               </button>
             </div>
           </div>

@@ -232,13 +232,13 @@ export function AITutorChatBox() {
         </div>
       )}
 
-      {/* 2. Floating Chat Box */}
+      {/* 2. Floating Chat Box (Responsive App Modal on Mobile & Anchor Pill on Desktop) */}
       {isAiChatOpen && (
         <div
-          className={`fixed z-50 bg-white border border-stone-200/90 shadow-2xl rounded-3xl flex flex-col overflow-hidden transition-all duration-300 ${
+          className={`fixed z-50 bg-white border border-stone-200/90 shadow-2xl rounded-2xl sm:rounded-3xl flex flex-col overflow-hidden transition-all duration-300 ${
             isExpanded
-              ? "bottom-4 right-4 left-4 top-16 sm:left-auto sm:top-auto sm:bottom-6 sm:right-6 sm:w-[560px] sm:h-[84vh]"
-              : "bottom-4 right-4 left-4 sm:left-auto sm:bottom-6 sm:right-6 w-auto sm:w-[450px] h-[600px] max-h-[88vh]"
+              ? "inset-2 sm:inset-auto sm:bottom-6 sm:right-6 sm:w-[560px] sm:h-[84vh]"
+              : "bottom-2 right-2 left-2 top-14 sm:inset-auto sm:bottom-6 sm:right-6 w-auto sm:w-[450px] sm:h-[600px] sm:max-h-[88vh]"
           }`}
         >
           {/* Header */}

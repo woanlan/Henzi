@@ -156,12 +156,12 @@ export function LeaderboardView() {
       {/* Main Leaderboard Table */}
       <div className="bg-white rounded-3xl border border-stone-200 shadow-2xs overflow-hidden">
         {/* Table Header */}
-        <div className="px-6 py-3.5 bg-stone-50 border-b border-stone-200 flex items-center justify-between text-xs font-bold text-stone-500">
-          <div className="flex items-center gap-6">
-            <span className="w-8 text-center">Hạng</span>
+        <div className="px-3 sm:px-6 py-3.5 bg-stone-50 border-b border-stone-200 flex items-center justify-between text-xs font-bold text-stone-500">
+          <div className="flex items-center gap-3 sm:gap-6">
+            <span className="w-6 sm:w-8 text-center">Hạng</span>
             <span>Học viên</span>
           </div>
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-3 sm:gap-8">
             <span className="hidden sm:inline">Chuỗi Streak</span>
             <span>Kinh nghiệm</span>
           </div>
@@ -179,16 +179,16 @@ export function LeaderboardView() {
             return (
               <div
                 key={u.id}
-                className={`px-6 py-3.5 flex items-center justify-between transition-colors ${
+                className={`px-3 sm:px-6 py-3.5 flex items-center justify-between transition-colors ${
                   u.isCurrentUser
                     ? "bg-amber-50/90 font-bold border-l-4 border-l-amber-600"
                     : "hover:bg-stone-50/80"
                 }`}
               >
                 {/* Left: Rank & Avatar & Name */}
-                <div className="flex items-center gap-4 sm:gap-6">
+                <div className="flex items-center gap-2.5 sm:gap-6 min-w-0">
                   {/* Rank indicator */}
-                  <div className="w-8 flex items-center justify-center font-mono font-black text-sm">
+                  <div className="w-6 sm:w-8 flex items-center justify-center font-mono font-black text-sm shrink-0">
                     {isTop1 ? (
                       <span className="text-xl">🥇</span>
                     ) : isTop2 ? (

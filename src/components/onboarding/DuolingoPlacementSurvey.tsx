@@ -314,11 +314,11 @@ export function DuolingoPlacementSurvey() {
         {/* STEP 1: CURRENT PROFICIENCY */}
         {currentStep === 1 && (
           <div className="space-y-6 animate-fadeIn">
-            <div className="flex items-start gap-4 sm:gap-6">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-6">
               <PandaMascot mood="happy" size="md" />
 
-              <div className="relative bg-[#202F36] border-2 border-[#2B3D47] rounded-3xl p-5 sm:p-6 shadow-xl flex-1 mt-2">
-                <div className="absolute top-6 -left-3 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-12 border-r-[#202F36]" />
+              <div className="relative bg-[#202F36] border-2 border-[#2B3D47] rounded-3xl p-5 sm:p-6 shadow-xl flex-1 mt-1 sm:mt-2 w-full text-center sm:text-left">
+                <div className="hidden sm:block absolute top-6 -left-3 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-12 border-r-[#202F36]" />
                 <h1 className="text-lg sm:text-2xl font-black text-white tracking-tight">
                   Trình độ tiếng Trung (giản thể) của bạn ở mức nào?
                 </h1>
@@ -374,11 +374,11 @@ export function DuolingoPlacementSurvey() {
         {/* STEP 2: LEARNING GOAL */}
         {currentStep === 2 && (
           <div className="space-y-6 animate-fadeIn">
-            <div className="flex items-start gap-4 sm:gap-6">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-6">
               <PandaMascot mood="thinking" size="md" />
 
-              <div className="relative bg-[#202F36] border-2 border-[#2B3D47] rounded-3xl p-5 sm:p-6 shadow-xl flex-1 mt-2">
-                <div className="absolute top-6 -left-3 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-12 border-r-[#202F36]" />
+              <div className="relative bg-[#202F36] border-2 border-[#2B3D47] rounded-3xl p-5 sm:p-6 shadow-xl flex-1 mt-1 sm:mt-2 w-full text-center sm:text-left">
+                <div className="hidden sm:block absolute top-6 -left-3 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-12 border-r-[#202F36]" />
                 <h1 className="text-lg sm:text-2xl font-black text-white tracking-tight">
                   Mục tiêu chính khi học tiếng Trung của bạn là gì?
                 </h1>
@@ -443,11 +443,11 @@ export function DuolingoPlacementSurvey() {
         {/* STEP 3: DAILY COMMITMENT */}
         {currentStep === 3 && (
           <div className="space-y-6 animate-fadeIn">
-            <div className="flex items-start gap-4 sm:gap-6">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-3 sm:gap-6">
               <PandaMascot mood="happy" size="md" />
 
-              <div className="relative bg-[#202F36] border-2 border-[#2B3D47] rounded-3xl p-5 sm:p-6 shadow-xl flex-1 mt-2">
-                <div className="absolute top-6 -left-3 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-12 border-r-[#202F36]" />
+              <div className="relative bg-[#202F36] border-2 border-[#2B3D47] rounded-3xl p-5 sm:p-6 shadow-xl flex-1 mt-1 sm:mt-2 w-full text-center sm:text-left">
+                <div className="hidden sm:block absolute top-6 -left-3 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-r-12 border-r-[#202F36]" />
                 <h1 className="text-lg sm:text-2xl font-black text-white tracking-tight">
                   Mỗi ngày bạn muốn dành bao nhiêu thời gian?
                 </h1>

@@ -200,7 +200,7 @@ export function ExamCenter() {
 
             {/* Audio player if listening question */}
             {currentQ.section === "listening" && currentQ.promptAudioText && (
-              <div className="bg-amber-50 p-4 rounded-2xl border border-amber-200/80 flex items-center justify-between">
+              <div className="bg-amber-50 p-3 sm:p-4 rounded-2xl border border-amber-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div>
                   <span className="text-[10px] font-bold text-amber-800 uppercase tracking-wider block">
                     Băng ghi âm câu hỏi (Nhấn để nghe)
@@ -214,7 +214,7 @@ export function ExamCenter() {
                     soundManager.playClick();
                     audioEngine.speak(currentQ.promptAudioText!, { rate: audioSpeed });
                   }}
-                  className="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold flex items-center gap-1.5 shadow-2xs"
+                  className="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-2xs self-start sm:self-auto cursor-pointer"
                 >
                   <Volume2 className="w-4 h-4" />
                   <span>Phát Đoạn Băng</span>

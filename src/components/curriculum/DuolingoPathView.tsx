@@ -360,14 +360,14 @@ export function DuolingoPathView() {
         </div>
 
         {/* Progress & Navigation Controls */}
-        <div className="flex flex-wrap items-center gap-3 self-start md:self-auto">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 w-full md:w-auto justify-between md:justify-end">
           {/* Progress Pill */}
-          <div className="bg-white px-3.5 py-1.5 rounded-xl border border-stone-200 shadow-2xs flex items-center gap-2.5 text-xs font-bold">
-            <span className="text-stone-500">Tiến độ:</span>
-            <span className="text-emerald-700 font-extrabold font-mono">
-              {totalCompletedCount} / {nodes.length} trạm
+          <div className="bg-white px-3 py-1.5 rounded-xl border border-stone-200 shadow-2xs flex items-center gap-2 text-xs font-bold">
+            <span className="text-stone-500 hidden xs:inline">Tiến độ:</span>
+            <span className="text-emerald-700 font-extrabold font-mono text-xs">
+              {totalCompletedCount}/{nodes.length}
             </span>
-            <div className="w-20 bg-stone-100 h-2 rounded-full overflow-hidden">
+            <div className="w-16 sm:w-20 bg-stone-100 h-2 rounded-full overflow-hidden">
               <div
                 className="bg-emerald-500 h-full rounded-full transition-all duration-500"
                 style={{ width: `${progressPercent}%` }}
@@ -377,7 +377,7 @@ export function DuolingoPathView() {
           </div>
 
           {/* Quick Jump & Scroll Buttons */}
-          <div className="flex items-center gap-1 bg-white p-1 rounded-xl border border-stone-200 shadow-2xs">
+          <div className="flex items-center gap-1 bg-white p-1 rounded-xl border border-stone-200 shadow-2xs shrink-0">
             <button
               onClick={scrollLeft}
               className="p-1.5 rounded-lg text-stone-600 hover:text-stone-900 hover:bg-stone-100 transition-colors cursor-pointer"
@@ -391,7 +391,7 @@ export function DuolingoPathView() {
               title="Nhảy tới vị trí đang học"
             >
               <Navigation className="w-3.5 h-3.5 text-amber-600 fill-amber-600" />
-              <span>Vị trí hiện tại</span>
+              <span>Vị trí học</span>
             </button>
             <button
               onClick={scrollRight}
@@ -407,7 +407,7 @@ export function DuolingoPathView() {
       {/* --- HORIZONTAL ADVENTURE MAP VIEWPORT (LEFT TO RIGHT) --- */}
       <div
         ref={scrollContainerRef}
-        className="relative w-full h-[520px] overflow-x-auto overflow-y-hidden bg-linear-to-b from-amber-50/40 via-[#FDFBF7] to-emerald-50/30 select-none custom-scroll-smooth"
+        className="relative w-full h-[520px] overflow-x-auto overflow-y-hidden bg-linear-to-b from-amber-50/40 via-[#FDFBF7] to-emerald-50/30 select-none custom-scroll-smooth touch-pan-x"
         style={{ scrollbarWidth: "thin" }}
       >
         {/* Landscape Background Canvas */}

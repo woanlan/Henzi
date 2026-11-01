@@ -235,12 +235,12 @@ export function MatchMadnessGame() {
       )}
 
       {/* ======================================================== */}
-      {/* 2. PLAYING BOARD (2 COLUMNS)                             */}
+      {/* 2. PLAYING BOARD (2 COLUMNS - RESPONSIVE TOUCH)          */}
       {/* ======================================================== */}
       {gameState === "playing" && (
-        <div className="grid grid-cols-2 gap-4 sm:gap-6 animate-fadeIn">
+        <div className="grid grid-cols-2 gap-2.5 sm:gap-6 animate-fadeIn">
           {/* Left Column: Hanzi & Pinyin */}
-          <div className="space-y-3">
+          <div className="space-y-2.5 sm:space-y-3">
             <span className="text-xs font-bold text-stone-400 uppercase tracking-wider block text-center">
               Cột Chữ Hán
             </span>
@@ -255,7 +255,7 @@ export function MatchMadnessGame() {
                     soundManager.playClick();
                     setSelectedLeft(word.id);
                   }}
-                  className={`w-full p-4 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer flex items-center justify-between group text-left ${
+                  className={`w-full p-2.5 sm:p-5 rounded-xl sm:rounded-2xl border-2 transition-all cursor-pointer flex items-center justify-between group text-left h-[68px] sm:h-[88px] ${
                     isWrong
                       ? "bg-rose-50 border-rose-500 text-rose-900 animate-shake"
                       : isSelected
@@ -263,22 +263,22 @@ export function MatchMadnessGame() {
                       : "bg-white hover:bg-stone-50 border-stone-200 text-stone-900 shadow-2xs"
                   }`}
                 >
-                  <div>
-                    <span className="font-hanzi text-2xl sm:text-3xl font-black block">
+                  <div className="min-w-0">
+                    <span className="font-hanzi text-xl sm:text-3xl font-black block truncate">
                       {word.zh}
                     </span>
-                    <span className="text-xs font-mono font-bold text-stone-400 mt-0.5 block">
+                    <span className="text-[10px] sm:text-xs font-mono font-bold text-stone-400 mt-0.5 block truncate">
                       [{word.pinyin}]
                     </span>
                   </div>
-                  <Volume2 className="w-4 h-4 text-stone-300 group-hover:text-amber-600 transition-colors" />
+                  <Volume2 className="w-4 h-4 text-stone-300 group-hover:text-amber-600 transition-colors shrink-0 hidden xs:block" />
                 </button>
               );
             })}
           </div>
 
           {/* Right Column: Vietnamese Meaning */}
-          <div className="space-y-3">
+          <div className="space-y-2.5 sm:space-y-3">
             <span className="text-xs font-bold text-stone-400 uppercase tracking-wider block text-center">
               Cột Nghĩa Tiếng Việt
             </span>
@@ -293,7 +293,7 @@ export function MatchMadnessGame() {
                     soundManager.playClick();
                     setSelectedRight(word.id);
                   }}
-                  className={`w-full p-4 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer flex items-center justify-center text-center font-bold text-sm sm:text-base group h-[76px] sm:h-[88px] ${
+                  className={`w-full p-2.5 sm:p-5 rounded-xl sm:rounded-2xl border-2 transition-all cursor-pointer flex items-center justify-center text-center font-bold text-xs sm:text-base group h-[68px] sm:h-[88px] leading-snug ${
                     isWrong
                       ? "bg-rose-50 border-rose-500 text-rose-900 animate-shake"
                       : isSelected
@@ -301,7 +301,7 @@ export function MatchMadnessGame() {
                       : "bg-white hover:bg-stone-50 border-stone-200 text-stone-800 shadow-2xs"
                   }`}
                 >
-                  <span>{word.vn}</span>
+                  <span className="line-clamp-2">{word.vn}</span>
                 </button>
               );
             })}

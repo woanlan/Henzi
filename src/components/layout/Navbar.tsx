@@ -242,10 +242,10 @@ export function Navbar() {
           {/* 3. USER BADGES, GIA SƯ AI & ROLE SWITCHER                */}
           {/* ======================================================== */}
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-            {/* Gia Sư AI - Always Prominent Action Button */}
+            {/* Gia Sư AI - Always Prominent Action Button (Adaptive on Mobile) */}
             <button
               onClick={toggleAiChat}
-              className={`flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-xl text-xs xl:text-xs font-bold transition-all border cursor-pointer whitespace-nowrap shrink-0 ${
+              className={`flex items-center gap-1.5 px-2 sm:px-2.5 xl:px-3 py-1.5 rounded-xl text-xs xl:text-xs font-bold transition-all border cursor-pointer whitespace-nowrap shrink-0 ${
                 isAiChatOpen
                   ? "bg-amber-600 text-white border-amber-600 shadow-xs"
                   : "bg-linear-to-r from-amber-50 to-orange-50 hover:from-amber-100 hover:to-orange-100 text-amber-900 border-amber-200/90 shadow-2xs"
@@ -253,7 +253,7 @@ export function Navbar() {
               title="Mở Gia Sư AI & Từ Điển Song Hướng"
             >
               <Sparkles className={`w-3.5 h-3.5 shrink-0 ${isAiChatOpen ? "text-white fill-white" : "text-amber-600 fill-amber-500/30"}`} />
-              <span className="whitespace-nowrap">Gia Sư AI</span>
+              <span className="whitespace-nowrap hidden sm:inline">Gia Sư AI</span>
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
             </button>
 
@@ -278,8 +278,8 @@ export function Navbar() {
               <span className="whitespace-nowrap">{user.totalXp} XP</span>
             </div>
 
-            {/* Role Switcher Pill */}
-            <div className="relative shrink-0">
+            {/* Role Switcher Pill (Visible on tablet & desktop, integrated in drawer on mobile) */}
+            <div className="relative shrink-0 hidden sm:block">
               <button
                 onClick={() => setRoleDropdownOpen(!roleDropdownOpen)}
                 className="flex items-center gap-1 px-2 xl:px-2.5 py-1.5 rounded-xl border border-stone-300 text-xs font-bold text-stone-800 bg-white hover:bg-stone-50 transition-all shadow-2xs whitespace-nowrap shrink-0 cursor-pointer"
@@ -350,13 +350,14 @@ export function Navbar() {
       </div>
 
       {/* ======================================================== */}
-      {/* 4. EXPANDED MOBILE MENU DRAWER                           */}
+      {/* 4. EXPANDED MOBILE MENU DRAWER (RESPONSIVE TOUCH-FIRST)  */}
       {/* ======================================================== */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-stone-200 bg-white px-4 pt-3 pb-6 space-y-3 shadow-xl max-h-[85vh] overflow-y-auto">
+        <div className="lg:hidden border-t border-stone-200 bg-white px-3 sm:px-4 pt-3 pb-6 space-y-3 shadow-xl max-h-[85vh] overflow-y-auto custom-scroll-smooth animate-fadeIn">
+          {/* Level Switcher */}
           <div className="flex items-center justify-between pb-2.5 border-b border-stone-100">
             <span className="text-xs font-bold text-stone-600">Cấp độ HSK mục tiêu:</span>
-            <div className="flex gap-1.5">
+            <div className="flex gap-1 sm:gap-1.5">
               {([1, 2, 3, 4, 5, 6] as HSKLevelNumber[]).map((lvl) => (
                 <button
                   key={lvl}
@@ -373,7 +374,27 @@ export function Navbar() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-2 pt-1">
+          {/* Role Switcher in Mobile Drawer */}
+          <div className="flex sm:hidden items-center justify-between pb-2.5 border-b border-stone-100">
+            <span className="text-xs font-bold text-stone-600">Vai trò trải nghiệm:</span>
+            <div className="flex gap-1.5">
+              {(["student", "teacher", "admin"] as const).map((r) => (
+                <button
+                  key={r}
+                  onClick={() => switchRole(r)}
+                  className={`px-2 py-1 rounded-lg text-xs font-bold capitalize transition-all ${
+                    user.role === r
+                      ? "bg-stone-900 text-white shadow-2xs"
+                      : "bg-stone-100 text-stone-600 hover:bg-stone-200"
+                  }`}
+                >
+                  {r === "student" ? "Học viên" : r === "teacher" ? "Giáo viên" : "Quản trị"}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
             {[
               { href: "/dashboard", label: "Tổng Quan", icon: Compass },
               { href: "/vocabulary", label: "Từ Vựng SRS", icon: Zap },

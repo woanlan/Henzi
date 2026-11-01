@@ -141,10 +141,15 @@ export function WritingLab() {
       // Clear immediately before creating to guarantee exactly 1 SVG element
       writerBoxRef.current.innerHTML = "";
 
+      // Adapt canvas size dynamically to viewport width for mobile screens
+      const isMobileSmall = typeof window !== "undefined" && window.innerWidth < 400;
+      const canvasDim = isMobileSmall ? 270 : 320;
+      const pad = isMobileSmall ? 18 : 24;
+
       const writer = HanziWriter.create(writerBoxRef.current, currentChar.character, {
-        width: 320,
-        height: 320,
-        padding: 24,
+        width: canvasDim,
+        height: canvasDim,
+        padding: pad,
         showOutline: showGuide && mode !== "dictation",
         strokeAnimationSpeed: 1.2,
         delayBetweenStrokes: 200,
@@ -517,7 +522,7 @@ export function WritingLab() {
           </div>
 
           <div className="relative">
-            <div className="flex items-center gap-2">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
               <div className="relative flex-1">
                 <input
                   type="text"
@@ -772,13 +777,13 @@ export function WritingLab() {
             </div>
           </div>
 
-          {/* Interactive Rice Grid (米字格) Container - Fixed 320x320 strict single-canvas frame */}
-          <div className="relative w-[320px] h-[320px] rounded-2xl overflow-hidden mizige-grid shadow-inner select-none touch-none flex items-center justify-center">
+          {/* Interactive Rice Grid (米字格) Container - Responsive for mobile 270px up to 320px */}
+          <div className="relative w-[270px] h-[270px] sm:w-[320px] sm:h-[320px] rounded-2xl overflow-hidden mizige-grid shadow-inner select-none touch-none flex items-center justify-center">
             {/* Engine 1: HanziWriter Interactive DOM */}
             {engineType === "hanzi_writer" && (
               <div
                 ref={writerBoxRef}
-                className="w-[320px] h-[320px] flex items-center justify-center cursor-crosshair z-10"
+                className="w-full h-full flex items-center justify-center cursor-crosshair z-10"
               />
             )}
 
@@ -786,7 +791,7 @@ export function WritingLab() {
             {engineType === "freehand" && (
               <>
                 {showGuide && mode !== "dictation" && (
-                  <div className="absolute inset-0 flex items-center justify-center font-hanzi text-[240px] font-bold text-red-500/20 pointer-events-none select-none">
+                  <div className="absolute inset-0 flex items-center justify-center font-hanzi text-[200px] sm:text-[240px] font-bold text-red-500/20 pointer-events-none select-none">
                     {currentChar.character}
                   </div>
                 )}
