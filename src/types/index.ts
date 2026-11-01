@@ -205,6 +205,11 @@ export interface AIMessageBreakdown {
   originalZh: string;
   pinyin: string;
   vietnameseTranslation: string;
+  direction?: 'zh_to_vn' | 'vn_to_zh';
+  partOfSpeech?: string;
+  collocations?: string[];
+  synonyms?: string[];
+  antonyms?: string[];
   vocabBreakdown: { word: string; pinyin: string; meaningVn: string; partOfSpeech?: string }[];
   grammarAnalysis: string[];
   naturalUsageExamples: { zh: string; pinyin: string; vn: string }[];

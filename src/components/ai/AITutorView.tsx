@@ -17,37 +17,57 @@ import {
   Copy,
   Check,
   Key,
-  Settings,
-  ShieldCheck,
   X,
+  ArrowRightLeft,
+  Search,
+  Bookmark,
+  Layers,
+  ExternalLink,
+  BookMarked,
+  FileText,
 } from "lucide-react";
 
 export function AITutorView() {
-  const { currentHskLevel, audioSpeed } = useApp();
+  const { currentHskLevel, audioSpeed, toggleNotebook, notebookIds } = useApp();
+
+  // Mode: "dictionary" (Cambridge-style lookup) | "tutor_chat" (free conversation)
+  const [activeTab, setActiveTab] = useState<"dictionary" | "tutor_chat">("dictionary");
+
+  // Translation direction for Cambridge Dictionary mode: "vn_to_zh" (Việt -> Hán) | "zh_to_vn" (Hán -> Việt)
+  const [dictDirection, setDictDirection] = useState<"vn_to_zh" | "zh_to_vn">("vn_to_zh");
+
   const [messages, setMessages] = useState<AIChatMessage[]>([
     {
       id: "msg-welcome",
       sender: "assistant",
-      content: "你好！(Nǐ hǎo!) Tôi là Trợ Lý & Gia Sư AI Tiếng Trung của bạn. Bạn muốn phân tích câu tiếng Trung, tra cứu ngữ pháp hay luyện dịch câu nào hôm nay?",
+      content: "Chào mừng bạn đến với Từ Điển Song Hướng Hán-Việt & Việt-Hán chuẩn Cambridge Dictionary! Bạn có thể tra từ đơn (như 'căn hộ', 'phẳng', 'máy bay') hoặc câu hoàn chỉnh.",
       timestamp: "Vừa xong",
       breakdown: {
-        originalZh: "你好！很高兴为你提供中文学习辅导。",
-        pinyin: "nǐ hǎo! hěn gāo xìng wèi nǐ tí gōng zhōng wén xué xí fǔ dǎo.",
-        vietnameseTranslation: "Xin chào! Rất vui được hỗ trợ bạn học tiếng Trung.",
+        originalZh: "公寓",
+        pinyin: "gōngyù",
+        vietnameseTranslation: "Căn hộ, chung cư (tương đương 'flat / apartment' trong tiếng Anh)",
+        direction: "vn_to_zh",
+        partOfSpeech: "Danh từ (Lượng từ: 套 tào, 间 jiān)",
+        collocations: ["单身公寓 (căn hộ độc thân)", "公寓楼 (tòa nhà chung cư)", "租公寓 (thuê căn hộ)"],
+        synonyms: ["单元房", "住宅"],
         vocabBreakdown: [
-          { word: "辅导", pinyin: "fǔdǎo", meaningVn: "phụ đạo, gia sư, hướng dẫn", partOfSpeech: "Động từ / Danh từ" },
-          { word: "提供", pinyin: "tígōng", meaningVn: "cung cấp, mang lại", partOfSpeech: "Động từ" },
-          { word: "很高兴", pinyin: "hěn gāoxìng", meaningVn: "rất vui", partOfSpeech: "Tính từ" },
+          { word: "公", pinyin: "gōng", meaningVn: "công (công cộng, chung)", partOfSpeech: "Tính từ" },
+          { word: "寓", pinyin: "yù", meaningVn: "ngụ (nơi cư trú, ở)", partOfSpeech: "Động từ" },
         ],
         grammarAnalysis: [
-          "Mẫu câu '为...提供...' nghĩa là 'Cung cấp ... cho ai đó'.",
-          "Thanh điệu: Chú ý biến điệu của 你好 (Ní hǎo).",
+          "Lượng từ thông dụng: Dùng '一套公寓' (yí tào gōngyù - một căn hộ khép kín) hoặc '一间公寓' (yì jiān gōngyù).",
+          "So sánh với 房子 (fángzi): 房子 chỉ ngôi nhà nói chung (cả nhà mặt đất), còn 公寓 chỉ căn hộ thuộc tòa nhà chung cư.",
         ],
         naturalUsageExamples: [
           {
-            zh: "有什么我可以帮你的吗？",
-            pinyin: "Yǒu shénme wǒ kěyǐ bāng nǐ de ma?",
-            vn: "Có điều gì tôi có thể giúp được bạn không?",
+            zh: "他在市中心租了一套两居室的公寓。",
+            pinyin: "Tā zài shì zhōngxīn zū le yí tào liǎng jū shì de gōngyù.",
+            vn: "Anh ấy đã thuê một căn hộ 2 phòng ngủ ở trung tâm thành phố.",
+          },
+          {
+            zh: "这栋公寓的环境非常安静舒适。",
+            pinyin: "Zhè dòng gōngyù de huánjìng fēicháng ānjìng shūshì.",
+            vn: "Môi trường của khu căn hộ này rất yên tĩnh và tiện nghi.",
           },
         ],
       },
@@ -62,7 +82,6 @@ export function AITutorView() {
   const [savedKeyNotification, setSavedKeyNotification] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Load API key from local storage on mount
   useEffect(() => {
     if (typeof window !== "undefined") {
       const stored = localStorage.getItem("hanzi_openai_key");
@@ -90,6 +109,11 @@ export function AITutorView() {
     scrollToBottom();
   }, [messages, loading]);
 
+  const toggleDirection = () => {
+    soundManager.playClick();
+    setDictDirection((prev) => (prev === "vn_to_zh" ? "zh_to_vn" : "vn_to_zh"));
+  };
+
   const handleSend = async (textToSend?: string) => {
     const query = textToSend || input;
     if (!query.trim() || loading) return;
@@ -115,6 +139,7 @@ export function AITutorView() {
           hskLevel: currentHskLevel,
           conversationHistory: messages.slice(-4),
           customApiKey: apiKey.trim() || undefined,
+          direction: dictDirection,
         }),
       });
 
@@ -149,62 +174,105 @@ export function AITutorView() {
     setTimeout(() => setCopiedId(null), 2000);
   };
 
-  const promptSuggestions = [
-    "Giải thích giúp tôi câu: 我是昨天坐飞机来的",
-    "Phân biệt cách dùng của '二' (èr) và '两' (liǎng)",
-    "Dịch sang tiếng Trung: Hôm nay trời lạnh, bạn nhớ mặc ấm nhé",
-    "Giải thích câu: 我是越南人",
+  // Dynamic suggestions based on direction
+  const vnSuggestions = [
+    "Căn hộ",
+    "Thời tiết hôm nay rất lạnh, bạn nhớ mặc ấm nhé",
+    "Bằng phẳng",
+    "Tôi muốn đi du lịch Trung Quốc",
+    "Cảm ơn sự giúp đỡ của bạn",
   ];
 
+  const zhSuggestions = [
+    "我是昨天坐飞机来的",
+    "二 và 两 khác nhau như thế nào",
+    "请把门关上",
+    "博大精深",
+  ];
+
+  const currentSuggestions = dictDirection === "vn_to_zh" ? vnSuggestions : zhSuggestions;
+
   return (
-    <div className="flex flex-col h-[calc(100vh-9rem)] max-w-5xl mx-auto w-full bg-white rounded-3xl border border-stone-200 shadow-sm overflow-hidden">
-      {/* Header */}
-      <div className="px-6 py-4 border-b border-stone-200 bg-stone-50/70 flex items-center justify-between">
+    <div className="flex flex-col h-[calc(100vh-8.5rem)] max-w-6xl mx-auto w-full bg-white rounded-3xl border border-stone-200 shadow-sm overflow-hidden">
+      {/* Header: Mode & Cambridge Direction Switcher */}
+      <div className="px-6 py-4 border-b border-stone-200 bg-stone-50/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        {/* Left: Branding & Cambridge badge */}
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-amber-500/10 text-amber-600 flex items-center justify-center border border-amber-200">
-            <Sparkles className="w-5 h-5 fill-amber-500" />
+          <div className="w-11 h-11 rounded-2xl bg-linear-to-br from-amber-500 to-amber-700 text-white flex items-center justify-center font-hanzi text-2xl font-black shadow-md border border-amber-400/40">
+            典
           </div>
           <div>
-            <h2 className="text-base font-bold text-stone-900 flex items-center gap-2">
-              Gia Sư AI Tiếng Trung
-              <span className="text-[11px] font-semibold bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full">
-                Chuẩn HSK {currentHskLevel}
+            <div className="flex items-center gap-2">
+              <h2 className="text-base font-extrabold text-stone-900 tracking-tight">
+                Từ Điển Song Hướng Hán ⇄ Việt
+              </h2>
+              <span className="text-[10px] font-bold bg-amber-100 text-amber-900 px-2.5 py-0.5 rounded-full uppercase tracking-wider border border-amber-200">
+                Cambridge Style
               </span>
-            </h2>
-            <p className="text-xs text-stone-500">
-              Phân tích đa tầng: Chữ Hán • Pinyin • Tiếng Việt • Từ vựng • Ngữ pháp
+            </div>
+            <p className="text-xs text-stone-500 mt-0.5">
+              Tra cứu từ loại • Pinyin có dấu • Nghĩa đa ngữ cảnh • Câu ví dụ song ngữ
             </p>
           </div>
         </div>
 
+        {/* Right: Direction Toggle & Settings */}
         <div className="flex items-center gap-2">
-          {/* API Key settings button */}
-          <button
-            onClick={() => setShowKeyModal(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-xl border border-stone-200 bg-white hover:bg-stone-50 text-stone-700 transition-colors shadow-2xs"
-            title="Cấu hình OpenAI API Key (Tùy chọn)"
-          >
-            <Key className="w-3.5 h-3.5 text-amber-600" />
-            <span className="hidden sm:inline">
-              {apiKey ? "API Key Đã Bật" : "Cấu Hình API Key"}
-            </span>
-          </button>
+          {/* Cambridge Direction Switcher Pill */}
+          <div className="flex items-center bg-white p-1 rounded-2xl border border-stone-200 shadow-2xs">
+            <button
+              onClick={() => {
+                soundManager.playClick();
+                setDictDirection("vn_to_zh");
+              }}
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                dictDirection === "vn_to_zh"
+                  ? "bg-amber-600 text-white shadow-2xs"
+                  : "text-stone-600 hover:text-stone-900"
+              }`}
+            >
+              Việt → Hán
+            </button>
 
+            <button
+              onClick={toggleDirection}
+              className="p-1.5 text-stone-400 hover:text-amber-700 hover:bg-stone-100 rounded-lg transition-colors"
+              title="Đổi chiều tra cứu"
+            >
+              <ArrowRightLeft className="w-3.5 h-3.5" />
+            </button>
+
+            <button
+              onClick={() => {
+                soundManager.playClick();
+                setDictDirection("zh_to_vn");
+              }}
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                dictDirection === "zh_to_vn"
+                  ? "bg-amber-600 text-white shadow-2xs"
+                  : "text-stone-600 hover:text-stone-900"
+              }`}
+            >
+              Hán → Việt
+            </button>
+          </div>
+
+          {/* Reset chat */}
           <button
             onClick={() => {
               soundManager.playClick();
               setMessages([messages[0]]);
             }}
             className="text-stone-400 hover:text-stone-600 p-2 rounded-xl hover:bg-stone-200/50 transition-colors"
-            title="Làm mới cuộc trò chuyện"
+            title="Xóa làm mới tra cứu"
           >
             <RotateCcw className="w-4 h-4" />
           </button>
         </div>
       </div>
 
-      {/* Message List */}
-      <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 bg-stone-50/30">
+      {/* Message & Dictionary Results Area */}
+      <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 bg-stone-50/40">
         {messages.map((msg) => (
           <div
             key={msg.id}
@@ -216,11 +284,11 @@ export function AITutorView() {
             <div className="flex items-center gap-2 mb-1 px-1 text-[11px] text-stone-400">
               {msg.sender === "assistant" ? (
                 <>
-                  <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                  <span className="font-semibold text-stone-700">HANZI AI Tutor</span>
+                  <BookOpen className="w-3.5 h-3.5 text-amber-600" />
+                  <span className="font-bold text-stone-800">HANZI Cambridge Dictionary</span>
                 </>
               ) : (
-                <span className="font-semibold text-stone-700">Bạn</span>
+                <span className="font-bold text-stone-800">Yêu cầu của bạn</span>
               )}
               <span>•</span>
               <span>{msg.timestamp}</span>
@@ -228,35 +296,49 @@ export function AITutorView() {
 
             {/* Bubble */}
             <div
-              className={`max-w-3xl rounded-2xl p-4 sm:p-5 text-sm leading-relaxed ${
+              className={`max-w-4xl w-full rounded-3xl p-5 text-sm leading-relaxed ${
                 msg.sender === "user"
-                  ? "bg-amber-600 text-white shadow-xs rounded-br-xs"
-                  : "bg-white text-stone-800 border border-stone-200 shadow-sm rounded-bl-xs"
+                  ? "bg-amber-600 text-white shadow-xs rounded-br-xs ml-auto max-w-xl"
+                  : "bg-white text-stone-900 border border-stone-200 shadow-sm rounded-bl-xs"
               }`}
             >
-              <p className="whitespace-pre-wrap">{msg.content}</p>
+              <p className="whitespace-pre-wrap font-medium">{msg.content}</p>
 
-              {/* 6-Layer Educational Breakdown Card */}
+              {/* ======================================================== */}
+              {/* CAMBRIDGE-STYLE DICTIONARY ENTRY CARD                    */}
+              {/* ======================================================== */}
               {msg.breakdown && (
-                <div className="mt-4 pt-4 border-t border-stone-100 space-y-4">
-                  {/* Layer 1 & 2: Chinese & Pinyin */}
-                  <div className="bg-stone-50 rounded-2xl p-4 border border-stone-200/70">
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-[11px] font-bold text-stone-400 uppercase tracking-wider">
-                        Câu Tiếng Trung Chuẩn
-                      </span>
+                <div className="mt-5 pt-5 border-t border-stone-100 space-y-5 animate-fadeIn">
+                  {/* Cambridge Headword Box */}
+                  <div className="bg-stone-50/80 rounded-2xl p-5 border border-stone-200 space-y-3">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <div className="flex items-center gap-3">
+                        <span className="text-[11px] font-bold text-stone-400 uppercase tracking-wider">
+                          Mục Từ Tra Cứu (Headword)
+                        </span>
+                        {msg.breakdown.partOfSpeech && (
+                          <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-100 text-blue-900 border border-blue-200">
+                            {msg.breakdown.partOfSpeech}
+                          </span>
+                        )}
+                        <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900">
+                          HSK {currentHskLevel}
+                        </span>
+                      </div>
+
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => speakText(msg.breakdown!.originalZh)}
-                          className="flex items-center gap-1.5 text-xs text-amber-800 hover:text-amber-900 font-bold bg-amber-100 hover:bg-amber-200/80 px-2.5 py-1 rounded-lg transition-colors shadow-2xs"
+                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-bold transition-all shadow-2xs"
                         >
-                          <Volume2 className="w-3.5 h-3.5 text-amber-700" />
-                          <span>Phát âm</span>
+                          <Volume2 className="w-4 h-4 text-amber-700" />
+                          <span>Phát âm (zh-CN)</span>
                         </button>
+
                         <button
                           onClick={() => copyToClipboard(msg.breakdown!.originalZh, msg.id)}
-                          className="text-stone-400 hover:text-stone-600 p-1"
-                          title="Sao chép câu"
+                          className="p-1.5 text-stone-400 hover:text-stone-700 rounded-lg"
+                          title="Sao chép từ"
                         >
                           {copiedId === msg.id ? (
                             <Check className="w-4 h-4 text-emerald-600" />
@@ -267,29 +349,76 @@ export function AITutorView() {
                       </div>
                     </div>
 
-                    <div className="font-hanzi text-2xl sm:text-3xl font-extrabold text-stone-900 tracking-wide my-2">
+                    {/* Large Headword typography */}
+                    <div className="font-hanzi text-3xl sm:text-4xl font-black text-stone-900 tracking-wide">
                       {msg.breakdown.originalZh}
                     </div>
 
-                    <div className="text-amber-800 font-mono text-sm sm:text-base font-semibold">
-                      {msg.breakdown.pinyin}
+                    {/* Pinyin with tone marks */}
+                    <div className="text-amber-800 font-mono text-base sm:text-lg font-bold">
+                      /{msg.breakdown.pinyin}/
                     </div>
 
-                    {/* Layer 3: Vietnamese Translation */}
-                    <div className="mt-3 text-stone-800 font-medium text-sm sm:text-base flex items-start gap-2 pt-2.5 border-t border-stone-200/60">
-                      <span className="text-stone-400 font-bold text-xs uppercase mt-0.5">Dịch:</span>
-                      <span>{msg.breakdown.vietnameseTranslation}</span>
+                    {/* Definition in Vietnamese */}
+                    <div className="pt-3 border-t border-stone-200/70 text-stone-800 font-semibold text-base sm:text-lg">
+                      {msg.breakdown.vietnameseTranslation}
                     </div>
                   </div>
 
-                  {/* Layer 4: Vocabulary Breakdown */}
-                  {msg.breakdown.vocabBreakdown?.length > 0 && (
-                    <div>
-                      <h4 className="text-xs font-bold text-stone-800 mb-2.5 flex items-center gap-1.5 uppercase tracking-wider">
-                        <BookOpen className="w-4 h-4 text-amber-600" />
-                        <span>Bóc Tách Từ Vựng Cốt Lõi</span>
+                  {/* Collocations & Phrases (Cụm từ hay đi kèm) */}
+                  {msg.breakdown.collocations && msg.breakdown.collocations.length > 0 && (
+                    <div className="space-y-2">
+                      <h4 className="text-xs font-bold text-stone-700 uppercase tracking-wider flex items-center gap-1.5">
+                        <Layers className="w-4 h-4 text-amber-600" />
+                        <span>Cụm Từ Thông Dụng Đi Kèm (Collocations)</span>
                       </h4>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                      <div className="flex flex-wrap gap-2">
+                        {msg.breakdown.collocations.map((col, idx) => (
+                          <span
+                            key={idx}
+                            className="px-3 py-1.5 rounded-xl bg-stone-100 border border-stone-200 text-xs font-semibold text-stone-800 font-hanzi"
+                          >
+                            {col}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Synonyms & Antonyms */}
+                  {(msg.breakdown.synonyms?.length || msg.breakdown.antonyms?.length) && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                      {msg.breakdown.synonyms && msg.breakdown.synonyms.length > 0 && (
+                        <div className="p-3 rounded-xl bg-emerald-50/70 border border-emerald-200 space-y-1">
+                          <span className="font-bold text-emerald-900 uppercase text-[10px] tracking-wider block">
+                            Từ Đồng Nghĩa:
+                          </span>
+                          <span className="font-hanzi font-bold text-emerald-950">
+                            {msg.breakdown.synonyms.join(", ")}
+                          </span>
+                        </div>
+                      )}
+                      {msg.breakdown.antonyms && msg.breakdown.antonyms.length > 0 && (
+                        <div className="p-3 rounded-xl bg-red-50/70 border border-red-200 space-y-1">
+                          <span className="font-bold text-red-900 uppercase text-[10px] tracking-wider block">
+                            Từ Trái Nghĩa:
+                          </span>
+                          <span className="font-hanzi font-bold text-red-950">
+                            {msg.breakdown.antonyms.join(", ")}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Layer 4: Vocabulary Decomposition */}
+                  {msg.breakdown.vocabBreakdown?.length > 0 && (
+                    <div className="space-y-2">
+                      <h4 className="text-xs font-bold text-stone-700 uppercase tracking-wider flex items-center gap-1.5">
+                        <BookOpen className="w-4 h-4 text-amber-600" />
+                        <span>Chi Tiết Từng Chữ Hán Cấu Thành</span>
+                      </h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
                         {msg.breakdown.vocabBreakdown.map((item, idx) => (
                           <div
                             key={idx}
@@ -317,12 +446,12 @@ export function AITutorView() {
                     </div>
                   )}
 
-                  {/* Layer 5: Grammar Analysis */}
+                  {/* Layer 5: Grammar & Usage Notes */}
                   {msg.breakdown.grammarAnalysis?.length > 0 && (
-                    <div className="bg-amber-50/70 rounded-2xl p-4 border border-amber-200/80">
-                      <h4 className="text-xs font-bold text-amber-950 mb-2 flex items-center gap-1.5 uppercase tracking-wider">
+                    <div className="bg-amber-50/70 rounded-2xl p-4 border border-amber-200/80 space-y-2">
+                      <h4 className="text-xs font-bold text-amber-950 uppercase tracking-wider flex items-center gap-1.5">
                         <GraduationCap className="w-4 h-4 text-amber-700" />
-                        <span>Phân Tích Ngữ Pháp</span>
+                        <span>Ngữ Pháp & Lưu Ý Cách Dùng (Grammar Notes)</span>
                       </h4>
                       <ul className="space-y-1.5 text-xs text-amber-950 leading-relaxed list-disc list-inside">
                         {msg.breakdown.grammarAnalysis.map((gram, idx) => (
@@ -332,34 +461,34 @@ export function AITutorView() {
                     </div>
                   )}
 
-                  {/* Layer 6: Natural Usage Examples */}
+                  {/* Cambridge Example Sentences Block */}
                   {msg.breakdown.naturalUsageExamples?.length > 0 && (
-                    <div>
-                      <h4 className="text-xs font-bold text-stone-800 mb-2 flex items-center gap-1.5 uppercase tracking-wider">
-                        <Lightbulb className="w-4 h-4 text-amber-600" />
-                        <span>Mẫu Câu Mở Rộng Tự Nhiên</span>
+                    <div className="space-y-3">
+                      <h4 className="text-xs font-bold text-stone-700 uppercase tracking-wider flex items-center gap-1.5">
+                        <FileText className="w-4 h-4 text-amber-600" />
+                        <span>Câu Ví Dụ Thực Tế Song Ngữ (Examples)</span>
                       </h4>
-                      <div className="space-y-2">
+                      <div className="space-y-2.5">
                         {msg.breakdown.naturalUsageExamples.map((ex, idx) => (
                           <div
                             key={idx}
-                            className="text-xs bg-stone-50 rounded-xl p-3 border border-stone-200/80 flex items-start justify-between gap-3"
+                            className="bg-stone-50 rounded-2xl p-4 border-l-4 border-l-amber-500 border border-stone-200/80 flex items-start justify-between gap-4"
                           >
-                            <div className="space-y-0.5">
-                              <div className="font-hanzi font-bold text-stone-900 text-sm">
+                            <div className="space-y-1">
+                              <div className="font-hanzi font-bold text-stone-900 text-base">
                                 {ex.zh}
                               </div>
-                              <div className="text-[11px] text-amber-800 font-mono">
+                              <div className="text-xs text-amber-800 font-mono font-medium">
                                 {ex.pinyin}
                               </div>
-                              <div className="text-xs text-stone-700 mt-1">
-                                {ex.vn}
+                              <div className="text-xs font-medium text-stone-700 mt-1 italic">
+                                &ldquo;{ex.vn}&rdquo;
                               </div>
                             </div>
                             <button
                               onClick={() => speakText(ex.zh)}
-                              className="text-amber-700 hover:text-amber-900 p-2 rounded-lg hover:bg-amber-100/70 transition-colors shrink-0"
-                              title="Nghe mẫu câu"
+                              className="p-2 text-amber-700 hover:text-amber-900 hover:bg-amber-100 rounded-xl transition-colors shrink-0"
+                              title="Nghe câu ví dụ"
                             >
                               <Volume2 className="w-4 h-4" />
                             </button>
@@ -375,17 +504,20 @@ export function AITutorView() {
         ))}
 
         {loading && (
-          <div className="flex items-center gap-2.5 text-xs text-stone-600 animate-pulse bg-white p-3 rounded-2xl border border-stone-200 w-fit">
+          <div className="flex items-center gap-2.5 text-xs text-stone-600 animate-pulse bg-white p-3.5 rounded-2xl border border-stone-200 w-fit shadow-2xs">
             <Sparkles className="w-4 h-4 text-amber-500 animate-spin" />
-            <span>Gia sư AI đang bóc tách ngữ nghĩa, pinyin và cấu trúc câu...</span>
+            <span>Gia sư AI đang dịch thuật và tra cứu dữ liệu từ điển Cambridge...</span>
           </div>
         )}
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Suggested Prompts */}
-      <div className="px-4 py-2.5 bg-stone-50 border-t border-stone-200 overflow-x-auto flex gap-2 no-scrollbar">
-        {promptSuggestions.map((sug, idx) => (
+      {/* Suggested Search Prompts */}
+      <div className="px-6 py-2.5 bg-stone-50 border-t border-stone-200 overflow-x-auto flex items-center gap-2 no-scrollbar">
+        <span className="text-[11px] font-bold text-stone-400 uppercase tracking-wider shrink-0">
+          Gợi ý tra cứu:
+        </span>
+        {currentSuggestions.map((sug, idx) => (
           <button
             key={idx}
             onClick={() => handleSend(sug)}
@@ -396,8 +528,8 @@ export function AITutorView() {
         ))}
       </div>
 
-      {/* Input Box */}
-      <div className="p-4 bg-white border-t border-stone-200 flex items-center gap-3">
+      {/* Input Search Box */}
+      <div className="p-4 sm:p-5 bg-white border-t border-stone-200 flex items-center gap-3">
         <div className="relative flex-1">
           <input
             type="text"
@@ -406,89 +538,67 @@ export function AITutorView() {
             onKeyDown={(e) => {
               if (e.key === "Enter") handleSend();
             }}
-            placeholder="Gõ câu tiếng Trung cần giải thích, từ cần phân biệt hoặc câu tiếng Việt cần dịch..."
-            className="w-full px-4 py-3 pr-10 text-sm rounded-xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-amber-500/30 focus:border-amber-500 transition-all placeholder:text-stone-400"
+            placeholder={
+              dictDirection === "vn_to_zh"
+                ? "Nhập từ hoặc câu tiếng Việt cần chuyển sang chữ Hán (Ví dụ: căn hộ, thời tiết, bằng phẳng, tôi muốn uống trà...)"
+                : "Nhập chữ Hán cần tra cứu nghĩa, pinyin và ngữ pháp (Ví dụ: 公寓, 坐飞机, 博大精深...)"
+            }
+            className="w-full px-4 py-3.5 pr-10 text-sm rounded-2xl border border-stone-300 focus:outline-none focus:ring-2 focus:ring-amber-500/30 focus:border-amber-500 transition-all placeholder:text-stone-400"
           />
-          <MessageSquare className="absolute right-3.5 top-3.5 w-4 h-4 text-stone-400" />
+          <Search className="absolute right-4 top-4 w-4 h-4 text-stone-400" />
         </div>
 
         <button
           onClick={() => handleSend()}
           disabled={!input.trim() || loading}
-          className="px-6 py-3 rounded-xl bg-amber-600 hover:bg-amber-700 disabled:opacity-40 text-white text-sm font-bold flex items-center gap-2 transition-colors shadow-xs"
+          className="px-6 py-3.5 rounded-2xl bg-amber-600 hover:bg-amber-700 disabled:opacity-40 text-white text-sm font-bold flex items-center gap-2 transition-all shadow-xs"
         >
-          <span>Gửi</span>
+          <span>Tra Cứu</span>
           <Send className="w-4 h-4" />
         </button>
       </div>
 
-      {/* Modal: Configure OpenAI API Key */}
+      {/* Modal: API Key Setup */}
       {showKeyModal && (
         <div className="fixed inset-0 z-50 bg-stone-900/40 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white rounded-3xl border border-stone-200 p-6 max-w-md w-full shadow-2xl space-y-4 animate-scaleUp">
+          <div className="bg-white rounded-3xl border border-stone-200 p-6 max-w-md w-full shadow-2xl space-y-4">
             <div className="flex items-center justify-between border-b border-stone-100 pb-3">
-              <div className="flex items-center gap-2">
+              <h3 className="text-base font-bold text-stone-900 flex items-center gap-2">
                 <Key className="w-5 h-5 text-amber-600" />
-                <h3 className="text-base font-bold text-stone-900">
-                  Cấu Hình OpenAI API Key
-                </h3>
-              </div>
+                <span>Cấu Hình Khóa AI Trực Tuyến</span>
+              </h3>
               <button
                 onClick={() => setShowKeyModal(false)}
-                className="text-stone-400 hover:text-stone-600 p-1 rounded-lg"
+                className="text-stone-400 hover:text-stone-600 p-1"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
-
             <p className="text-xs text-stone-600 leading-relaxed">
-              Nếu bạn có khóa OpenAI (ví dụ <code>sk-proj-...</code>), hãy dán vào đây để kích hoạt mô hình <b>GPT-4o-mini</b> trực tuyến. Khóa được lưu an toàn trực tiếp trên trình duyệt của bạn.
+              Hệ thống hiện đã tích hợp sẵn khóa <b>Google Gemini 3.8 Flash</b>. Nếu muốn sử dụng OpenAI key riêng, bạn có thể dán vào đây:
             </p>
-
-            <form onSubmit={saveApiKey} className="space-y-4">
+            <form onSubmit={saveApiKey} className="space-y-3">
               <input
                 type="password"
                 value={apiKey}
                 onChange={(e) => setApiKey(e.target.value)}
                 placeholder="sk-proj-..."
-                className="w-full px-3.5 py-2.5 text-xs font-mono rounded-xl border border-stone-300 focus:outline-none focus:border-amber-500"
+                className="w-full px-3 py-2 text-xs font-mono rounded-xl border border-stone-300 focus:outline-none focus:border-amber-500"
               />
-
-              {savedKeyNotification && (
-                <div className="p-2.5 bg-emerald-50 text-emerald-800 text-xs font-bold rounded-xl border border-emerald-200 flex items-center gap-2">
-                  <Check className="w-4 h-4 text-emerald-600" />
-                  <span>Đã lưu API Key thành công!</span>
-                </div>
-              )}
-
-              <div className="flex items-center justify-between pt-2">
+              <div className="flex justify-end gap-2 pt-2">
                 <button
                   type="button"
-                  onClick={() => {
-                    setApiKey("");
-                    localStorage.removeItem("hanzi_openai_key");
-                    setShowKeyModal(false);
-                  }}
-                  className="text-xs text-red-600 hover:underline font-semibold"
+                  onClick={() => setShowKeyModal(false)}
+                  className="px-4 py-2 rounded-xl border border-stone-200 text-xs font-semibold text-stone-600"
                 >
-                  Xóa Khóa (Dùng Bộ Phân Tích Offline)
+                  Đóng
                 </button>
-
-                <div className="flex gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setShowKeyModal(false)}
-                    className="px-3.5 py-2 rounded-xl border border-stone-200 text-stone-600 text-xs font-semibold hover:bg-stone-50"
-                  >
-                    Đóng
-                  </button>
-                  <button
-                    type="submit"
-                    className="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold shadow-2xs"
-                  >
-                    Lưu Khóa
-                  </button>
-                </div>
+                <button
+                  type="submit"
+                  className="px-4 py-2 rounded-xl bg-amber-600 text-white text-xs font-bold"
+                >
+                  Lưu Khóa
+                </button>
               </div>
             </form>
           </div>

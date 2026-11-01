@@ -3,7 +3,7 @@ import { analyzeQuery } from "@/lib/ai-engine";
 
 export async function POST(req: NextRequest) {
   try {
-    const { message, hskLevel = 1, conversationHistory = [], customApiKey } = await req.json();
+    const { message, hskLevel = 1, conversationHistory = [], customApiKey, direction = "auto" } = await req.json();
 
     if (!message || typeof message !== "string") {
       return NextResponse.json({ error: "Tin nhắn không được để trống" }, { status: 400 });
@@ -12,28 +12,47 @@ export async function POST(req: NextRequest) {
     const geminiKey = (customApiKey && !customApiKey.startsWith("sk-")) ? customApiKey : process.env.GEMINI_API_KEY;
     const openAiKey = (customApiKey && customApiKey.startsWith("sk-")) ? customApiKey : process.env.OPENAI_API_KEY;
 
-    // 1. If Gemini Key is available, call Gemini 3.8 Flash (Ultra-fast & High-Intelligence)
+    // 1. If Gemini Key is available, call Gemini 3.8 Flash
     if (geminiKey && !geminiKey.includes("your-key")) {
       try {
-        const systemPrompt = `Bạn là Gia Sư AI Tiếng Trung chuyên nghiệp cho học viên Việt Nam tại nền tảng HANZI MASTER.
-Trình độ HSK hiện tại của học viên: HSK ${hskLevel}.
-Hãy giải thích ngắn gọn, thân thiện, mang tính sư phạm bằng tiếng Việt và chuẩn mực tiếng Trung.
-KHI GIẢI THÍCH MỘT CÂU TIẾNG TRUNG HOẶC TỪ VỰNG HOẶC DỊCH CÂU, BẮT BUỘC trả về định dạng JSON hợp lệ duy nhất:
+        const systemPrompt = `Bạn là Từ Điển Song Hướng Hán-Việt & Việt-Hán chuyên nghiệp chuẩn Cambridge Dictionary kiêm Gia Sư AI tại nền tảng HANZI MASTER.
+Trình độ mục tiêu: HSK ${hskLevel}.
+
+QUY TẮC TRA CỨU SONG HƯỚNG THEO CHUẨN TỪ ĐIỂN CAMBRIDGE:
+1. NẾU NGƯỜI DÙNG NHẬP TIẾNG VIỆT (hoặc chế độ Việt -> Hán):
+   - Chuyển ngữ/dịch chuẩn xác sang Chữ Hán (giản thể) tương ứng nhất.
+   - Cung cấp phiên âm Pinyin đầy đủ dấu thanh điệu.
+   - Nêu rõ Từ loại (Danh từ, Động từ, Tính từ, Lượng từ...) và lượng từ đi kèm (nếu là danh từ).
+   - Đưa ra định nghĩa tiếng Việt chi tiết, sắc thái biểu đạt.
+   - Bóc tách các từ cấu thành (vocabBreakdown).
+   - Nêu các cụm từ hay đi kèm (collocations) và từ đồng nghĩa/trái nghĩa.
+   - Cung cấp ít nhất 2 câu ví dụ song ngữ Hán - Việt thực tế.
+
+2. NẾU NGƯỜI DÙNG NHẬP TIẾNG TRUNG (hoặc chế độ Hán -> Việt):
+   - Giải thích nghĩa tiếng Việt chuẩn xác, pinyin có dấu thanh điệu.
+   - Bóc tách từ vựng, từ loại, phân tích ngữ pháp sâu sắc và câu ví dụ song ngữ.
+
+BẮT BUỘC TRẢ VỀ ĐỊNH DẠNG JSON HỢP LỆ DUY NHẤT:
 {
-  "content": "Lời phản hồi chào hỏi, giải thích tổng quan ngắn gọn bằng tiếng Việt",
+  "content": "Lời giải thích mở đầu ngắn gọn, chuẩn mực sư phạm từ điển Cambridge",
   "breakdown": {
-    "originalZh": "Câu hoặc từ tiếng Trung chuẩn (chỉ gồm chữ Hán, KHÔNG chứa chữ tiếng Việt)",
+    "originalZh": "Từ hoặc câu tiếng Trung chuẩn (chỉ gồm chữ Hán, KHÔNG chứa chữ tiếng Việt)",
     "pinyin": "Phiên âm pinyin có dấu thanh điệu chuẩn xác",
-    "vietnameseTranslation": "Bản dịch nghĩa tiếng Việt chuẩn xác",
+    "vietnameseTranslation": "Nghĩa tiếng Việt chuẩn xác theo ngữ cảnh từ điển",
+    "direction": "vn_to_zh hoặc zh_to_vn",
+    "partOfSpeech": "Danh từ / Động từ / Tính từ / Lượng từ...",
+    "collocations": ["Cụm từ hay đi kèm 1", "Cụm từ 2"],
+    "synonyms": ["Từ đồng nghĩa 1", "Từ đồng nghĩa 2"],
+    "antonyms": ["Từ trái nghĩa 1"],
     "vocabBreakdown": [
-      {"word": "生词", "pinyin": "shēngcí", "meaningVn": "nghĩa tiếng Việt", "partOfSpeech": "Danh từ/Động từ/Tính từ..."}
+      {"word": "chữ Hán", "pinyin": "pinyin", "meaningVn": "nghĩa tiếng Việt", "partOfSpeech": "từ loại"}
     ],
     "grammarAnalysis": [
-      "Điểm ngữ pháp 1: ...",
-      "Điểm ngữ pháp 2: ..."
+      "Điểm ngữ pháp / Lưu ý cách dùng 1",
+      "Lượng từ đi kèm / Lưu ý 2"
     ],
     "naturalUsageExamples": [
-      {"zh": "Mẫu câu ví dụ chữ Hán", "pinyin": "pinyin ví dụ", "vn": "dịch ví dụ tiếng Việt"}
+      {"zh": "Câu ví dụ tiếng Trung", "pinyin": "pinyin ví dụ", "vn": "dịch nghĩa tiếng Việt ví dụ"}
     ]
   }
 }`;
@@ -47,12 +66,12 @@ KHI GIẢI THÍCH MỘT CÂU TIẾNG TRUNG HOẶC TỪ VỰNG HOẶC DỊCH CÂU
               contents: [
                 {
                   role: "user",
-                  parts: [{ text: `${systemPrompt}\n\nTin nhắn của học viên: "${message}"` }],
+                  parts: [{ text: `${systemPrompt}\n\nChế độ yêu cầu: ${direction}\nNội dung người dùng tra cứu: "${message}"` }],
                 },
               ],
               generationConfig: {
                 responseMimeType: "application/json",
-                temperature: 0.7,
+                temperature: 0.5,
               },
             }),
           }
@@ -65,15 +84,13 @@ KHI GIẢI THÍCH MỘT CÂU TIẾNG TRUNG HOẶC TỪ VỰNG HOẶC DỊCH CÂU
             const parsed = JSON.parse(rawText);
             return NextResponse.json(parsed);
           }
-        } else {
-          console.warn("Gemini API returned error status:", geminiRes.status);
         }
       } catch (err) {
         console.warn("Gemini call exception:", err);
       }
     }
 
-    // 2. If OpenAI Key is available, call OpenAI
+    // 2. If OpenAI Key is available
     if (openAiKey && !openAiKey.includes("your-key") && openAiKey.startsWith("sk-")) {
       try {
         const response = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -87,16 +104,16 @@ KHI GIẢI THÍCH MỘT CÂU TIẾNG TRUNG HOẶC TỪ VỰNG HOẶC DỊCH CÂU
             messages: [
               {
                 role: "system",
-                content: `Bạn là Gia Sư AI Tiếng Trung chuyên nghiệp cho học viên Việt Nam tại nền tảng HANZI MASTER. Trình độ: HSK ${hskLevel}. Luôn trả về JSON định dạng breakdown.`,
+                content: `Bạn là Từ Điển Song Hướng Hán-Việt & Việt-Hán chuẩn Cambridge Dictionary tại HANZI MASTER. Trình độ: HSK ${hskLevel}. Luôn trả về JSON định dạng breakdown.`,
               },
               ...conversationHistory.slice(-4).map((m: { sender: string; content: string }) => ({
                 role: m.sender === "user" ? "user" : "assistant",
                 content: m.content,
               })),
-              { role: "user", content: message },
+              { role: "user", content: `Tra cứu (${direction}): ${message}` },
             ],
             response_format: { type: "json_object" },
-            temperature: 0.7,
+            temperature: 0.5,
           }),
         });
 
@@ -116,7 +133,7 @@ KHI GIẢI THÍCH MỘT CÂU TIẾNG TRUNG HOẶC TỪ VỰNG HOẶC DỊCH CÂU
   } catch (error) {
     console.error("AI Route Error:", error);
     return NextResponse.json(
-      { error: "Có lỗi khi xử lý yêu cầu gia sư AI." },
+      { error: "Có lỗi khi xử lý tra cứu từ điển." },
       { status: 500 }
     );
   }
