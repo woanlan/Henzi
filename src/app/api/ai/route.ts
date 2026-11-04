@@ -21,47 +21,43 @@ export async function POST(req: NextRequest) {
         "gemini-3.8-flash",
       ];
 
-      const systemPrompt = `Bạn là Từ Điển Song Hướng Hán-Việt & Việt-Hán chuyên nghiệp chuẩn Cambridge Dictionary kiêm Gia Sư AI tại nền tảng HANZI MASTER.
-Trình độ mục tiêu: HSK ${hskLevel}.
+      const systemPrompt = `Bạn là "Thầy Giáo AI" - Gia sư tiếng Trung tận tâm, thông thái và am hiểu sâu sắc tại nền tảng HANZI MASTER.
+Trình độ người học hiện tại: HSK ${hskLevel}.
 
-QUY TẮC TRA CỨU SONG HƯỚNG THEO CHUẨN TỪ ĐIỂN CAMBRIDGE:
-1. NẾU NGƯỜI DÙNG NHẬP TIẾNG VIỆT (hoặc chế độ Việt -> Hán):
-   - Chuyển ngữ/dịch chuẩn xác sang Chữ Hán (giản thể) tương ứng nhất.
-   - Cung cấp phiên âm Pinyin đầy đủ dấu thanh điệu.
-   - Nêu rõ Từ loại (Danh từ, Động từ, Tính từ, Lượng từ...) và lượng từ đi kèm (nếu là danh từ).
-   - Đưa ra định nghĩa tiếng Việt chi tiết, sắc thái biểu đạt.
-   - Bóc tách các từ cấu thành (vocabBreakdown).
-   - Nêu các cụm từ hay đi kèm (collocations) và từ đồng nghĩa/trái nghĩa.
-   - Cung cấp ít nhất 2 câu ví dụ song ngữ Hán - Việt thực tế.
+NGUYÊN TẮC PHẢN HỒI THÔNG MINH THEO Ý ĐỊNH NGƯỜI HỌC:
+1. NẾU NGƯỜI DÙNG HỎI CÂU HỎI HỌC TẬP, PHƯƠNG PHÁP, GIAO TIẾP HOẶC THẮC MẮC NGỮ PHÁP:
+   - Hãy trả lời TRỰC TIẾP, chính xác, ân cần và sư phạm bằng tiếng Việt trong trường "content".
+   - Đưa ra lời khuyên thiết thực, phân tích dễ hiểu kèm ví dụ câu tiếng Trung minh họa cụ thể.
+   - Nếu có ví dụ hoặc câu tiếng Trung trọng tâm trong câu trả lời, hãy điền trường "breakdown" để người học tiện xem Pinyin, âm Hán Việt và nghe đọc. Nếu không cần thiết, "breakdown" có thể để null hoặc tập trung vào ví dụ tiêu biểu.
 
-2. NẾU NGƯỜI DÙNG NHẬP TIẾNG TRUNG (hoặc chế độ Hán -> Việt):
-   - Giải thích nghĩa tiếng Việt chuẩn xác, pinyin có dấu thanh điệu.
-   - Bóc tách từ vựng, từ loại, phân tích ngữ pháp sâu sắc và câu ví dụ song ngữ.
+2. NẾU NGƯỜI DÙNG YÊU CẦU DỊCH, TRA TỪ HOẶC BÓC TÁCH CÂU:
+   - Cung cấp bản dịch chuẩn xác theo khẩu ngữ tự nhiên của người bản xứ trong "content".
+   - Cung cấp đầy đủ cấu trúc "breakdown" chi tiết gồm: chữ Hán, Pinyin có dấu thanh điệu, nghĩa tiếng Việt, bóc tách từ vựng, điểm ngữ pháp và câu ví dụ.
 
-BẮT BUỘC TRẢ VỀ ĐỊNH DẠNG JSON HỢP LỆ DUY NHẤT:
+QUY ĐỊNH ĐỊNH DẠNG JSON TRẢ VỀ:
+BẮT BUỘC trả về đúng định dạng JSON hợp lệ duy nhất:
 {
-  "content": "Lời giải thích mở đầu ngắn gọn, chuẩn mực sư phạm từ điển Cambridge",
+  "content": "Lời giải đáp trực diện, thân thiện, rõ ràng và đầy đủ bằng tiếng Việt của Thầy giáo AI",
   "breakdown": {
-    "originalZh": "Từ hoặc câu tiếng Trung chuẩn (chỉ gồm chữ Hán, KHÔNG chứa chữ tiếng Việt)",
+    "originalZh": "Câu hoặc từ tiếng Trung trọng tâm (chỉ chứa chữ Hán)",
     "pinyin": "Phiên âm pinyin có dấu thanh điệu chuẩn xác",
-    "vietnameseTranslation": "Nghĩa tiếng Việt chuẩn xác theo ngữ cảnh từ điển",
+    "vietnameseTranslation": "Nghĩa tiếng Việt chuẩn xác theo ngữ cảnh",
     "direction": "vn_to_zh hoặc zh_to_vn",
-    "partOfSpeech": "Danh từ / Động từ / Tính từ / Lượng từ...",
-    "collocations": ["Cụm từ hay đi kèm 1", "Cụm từ 2"],
-    "synonyms": ["Từ đồng nghĩa 1", "Từ đồng nghĩa 2"],
-    "antonyms": ["Từ trái nghĩa 1"],
+    "partOfSpeech": "Từ loại (Danh từ, Động từ, Tính từ, Cụm từ...)",
+    "collocations": ["Cụm từ thông dụng 1", "Cụm từ 2"],
     "vocabBreakdown": [
       {"word": "chữ Hán", "pinyin": "pinyin", "meaningVn": "nghĩa tiếng Việt", "partOfSpeech": "từ loại"}
     ],
     "grammarAnalysis": [
-      "Điểm ngữ pháp / Lưu ý cách dùng 1",
-      "Lượng từ đi kèm / Lưu ý 2"
+      "Điểm ngữ pháp cốt lõi hoặc mẹo nhớ 1",
+      "Lưu ý ngữ cảnh sử dụng 2"
     ],
     "naturalUsageExamples": [
-      {"zh": "Câu ví dụ tiếng Trung", "pinyin": "pinyin ví dụ", "vn": "dịch nghĩa tiếng Việt ví dụ"}
+      {"zh": "Câu ví dụ tiếng Trung", "pinyin": "pinyin câu ví dụ", "vn": "dịch nghĩa tiếng Việt"}
     ]
   }
-}`;
+}
+Nếu câu hỏi là chào hỏi xã giao hoặc không có câu tiếng Trung nào cần bóc tách, trường "breakdown" có thể chứa một câu tiếng Trung chào đón/khích lệ phù hợp với câu hỏi của người học.`;
 
       for (const modelName of candidateModels) {
         try {
@@ -74,12 +70,12 @@ BẮT BUỘC TRẢ VỀ ĐỊNH DẠNG JSON HỢP LỆ DUY NHẤT:
                 contents: [
                   {
                     role: "user",
-                    parts: [{ text: `${systemPrompt}\n\nChế độ yêu cầu: ${direction}\nNội dung người dùng tra cứu: "${message}"` }],
+                    parts: [{ text: `${systemPrompt}\n\nChế độ tra cứu: ${direction}\nNội dung câu hỏi của người học: "${message}"` }],
                   },
                 ],
                 generationConfig: {
                   responseMimeType: "application/json",
-                  temperature: 0.4,
+                  temperature: 0.5,
                 },
               }),
             }
@@ -116,13 +112,13 @@ BẮT BUỘC TRẢ VỀ ĐỊNH DẠNG JSON HỢP LỆ DUY NHẤT:
             messages: [
               {
                 role: "system",
-                content: `Bạn là Từ Điển Song Hướng Hán-Việt & Việt-Hán chuẩn Cambridge Dictionary tại HANZI MASTER. Trình độ: HSK ${hskLevel}. Luôn trả về JSON định dạng breakdown.`,
+                content: `Bạn là Thầy Giáo AI dạy tiếng Trung tại HANZI MASTER. Trình độ: HSK ${hskLevel}. Luôn trả lời trực diện, nhiệt tình, sư phạm và trả về JSON định dạng breakdown.`,
               },
               ...conversationHistory.slice(-4).map((m: { sender: string; content: string }) => ({
                 role: m.sender === "user" ? "user" : "assistant",
                 content: m.content,
               })),
-              { role: "user", content: `Tra cứu (${direction}): ${message}` },
+              { role: "user", content: `Câu hỏi/Tra cứu: ${message}` },
             ],
             response_format: { type: "json_object" },
             temperature: 0.5,
@@ -139,13 +135,13 @@ BẮT BUỘC TRẢ VỀ ĐỊNH DẠNG JSON HỢP LỆ DUY NHẤT:
       }
     }
 
-    // 3. High-precision Educational NLP Engine (Local Offline Mode)
+    // 3. Educational NLP Engine (Local Offline Mode)
     const result = analyzeQuery(message, hskLevel);
     return NextResponse.json(result);
   } catch (error) {
     console.error("AI Route Error:", error);
     return NextResponse.json(
-      { error: "Có lỗi khi xử lý tra cứu từ điển." },
+      { error: "Có lỗi khi xử lý câu hỏi với Thầy Giáo AI." },
       { status: 500 }
     );
   }

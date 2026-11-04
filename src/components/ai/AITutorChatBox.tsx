@@ -46,31 +46,8 @@ export function AITutorChatBox() {
     {
       id: "msg-welcome",
       sender: "assistant",
-      content: "Xin chào! Thầy là Gia Sư AI kiêm Từ Điển Song Hướng Hán-Việt & Việt-Hán. Bạn cần tra từ vựng, dịch câu, hay gọi thoại luyện phản xạ với thầy hôm nay?",
+      content: "Xin chào! Thầy là Gia Sư AI Tiếng Trung tại HANZI MASTER 🐼.\n\nThầy có thể giúp bạn giải đáp mọi thắc mắc về ngữ pháp HSK, sửa lỗi phát âm, tra cứu từ vựng, hoặc cùng bạn luyện hội thoại phản xạ trực tiếp. Bạn muốn hỏi điều gì hôm nay?",
       timestamp: "Vừa xong",
-      breakdown: {
-        originalZh: "公寓",
-        pinyin: "gōngyù",
-        vietnameseTranslation: "Căn hộ, chung cư (tương đương 'flat / apartment')",
-        direction: "vn_to_zh",
-        partOfSpeech: "Danh từ (Lượng từ: 套 tào, 间 jiān)",
-        collocations: ["单身公寓 (căn hộ độc thân)", "租公寓 (thuê căn hộ)", "公寓楼 (tòa chung cư)"],
-        vocabBreakdown: [
-          { word: "公", pinyin: "gōng", meaningVn: "công (công cộng, chung)", partOfSpeech: "Tính từ" },
-          { word: "寓", pinyin: "yù", meaningVn: "ngụ (nơi cư trú, ở)", partOfSpeech: "Động từ" },
-        ],
-        grammarAnalysis: [
-          "Lượng từ thông dụng: Dùng '一套公寓' (yí tào gōngyù - 1 căn hộ) hoặc '一间公寓'.",
-          "So sánh: 房子 (fángzi) chỉ ngôi nhà nói chung, còn 公寓 (gōngyù) chỉ căn hộ trong tòa chung cư.",
-        ],
-        naturalUsageExamples: [
-          {
-            zh: "他在市中心租了一套公寓。",
-            pinyin: "Tā zài shì zhōngxīn zū le yí tào gōngyù.",
-            vn: "Anh ấy đã thuê một căn hộ ở trung tâm thành phố.",
-          },
-        ],
-      },
     },
   ]);
 
