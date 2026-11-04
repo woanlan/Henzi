@@ -1,18 +1,31 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { AppProvider } from "@/context/AppContext";
 import { AITutorChatBox } from "@/components/ai/AITutorChatBox";
 
+export const viewport: Viewport = {
+  themeColor: "#D97706",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+};
+
 export const metadata: Metadata = {
   title: "HANZI MASTER — Nền Tảng Học Tiếng Trung HSK 1–6",
   description: "Master Chinese, One Step at a Time. Nền tảng học tiếng Trung toàn diện dành cho người Việt kết hợp Duolingo, Anki, Quizlet và Gia sư AI.",
-  keywords: ["tiếng Trung", "học HSK", "HSK 1-6", "từ vựng HSK", "luyện viết chữ Hán", "gia sư AI tiếng Trung"],
+  keywords: ["tiếng Trung", "học HSK", "HSK 1-6", "từ vựng HSK", "luyện viết chữ Hán", "gia sư AI tiếng Trung", "đọc hiểu tiếng Trung", "hội thoại HSK"],
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "HanziMaster",
+  },
   icons: {
     icon: [
       { url: "/icon.svg", type: "image/svg+xml" },
       { url: "/favicon.ico", sizes: "32x32" },
     ],
-    apple: "/apple-touch-icon.png",
+    apple: "/apple-icon.png",
   },
 };
 

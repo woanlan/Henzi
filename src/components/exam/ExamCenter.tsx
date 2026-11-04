@@ -5,6 +5,7 @@ import { useApp } from "@/context/AppContext";
 import { EXAM_MANIFESTS, MOCK_EXAM_QUESTIONS } from "@/data/mock-exams";
 import { audioEngine } from "@/lib/audio";
 import { soundManager, formatSecondsToMinutes } from "@/lib/utils";
+import confetti from "canvas-confetti";
 import {
   FileCheck,
   Clock,
@@ -18,6 +19,8 @@ import {
   Play,
   ArrowRight,
   ShieldAlert,
+  Flag,
+  Check,
 } from "lucide-react";
 
 export function ExamCenter() {
@@ -29,6 +32,7 @@ export function ExamCenter() {
   const [examState, setExamState] = useState<"idle" | "in_progress" | "submitted">("idle");
   const [currentQuestionIdx, setCurrentQuestionIdx] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [flaggedQuestions, setFlaggedQuestions] = useState<Record<string, boolean>>({});
   const [timeRemainingSeconds, setTimeRemainingSeconds] = useState(manifest.durationMinutes * 60);
 
   // Timer countdown
@@ -53,6 +57,7 @@ export function ExamCenter() {
     soundManager.playClick();
     setExamState("in_progress");
     setAnswers({});
+    setFlaggedQuestions({});
     setCurrentQuestionIdx(0);
     setTimeRemainingSeconds(manifest.durationMinutes * 60);
   };
@@ -62,10 +67,16 @@ export function ExamCenter() {
     setAnswers((prev) => ({ ...prev, [questionId]: answer }));
   };
 
+  const toggleFlag = (questionId: string) => {
+    soundManager.playClick();
+    setFlaggedQuestions((prev) => ({ ...prev, [questionId]: !prev[questionId] }));
+  };
+
   const submitExam = () => {
     setExamState("submitted");
     soundManager.playFanfare();
     addXP(100);
+    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
   };
 
   const currentQ = questions[currentQuestionIdx] || questions[0];
@@ -101,14 +112,14 @@ export function ExamCenter() {
           <div>
             <h1 className="text-xl font-bold text-stone-900 flex items-center gap-2">
               <FileCheck className="w-5 h-5 text-amber-600" />
-              <span>Trung Tâm Thi Thử HSK {currentHskLevel} Bấm Giờ</span>
+              <span>Trung Tâm Thi Thử HSK {currentHskLevel} Chuẩn Hóa iBT</span>
             </h1>
             <p className="text-xs text-stone-500 mt-1">
-              Mô phỏng kỳ thi HSK chuẩn hóa quốc tế với đề thi phân mục Nghe Hiểu & Đọc Hiểu
+              Giao diện mô phỏng kỳ thi máy tính quốc tế (CTI/Hanban) với đồng hồ đếm ngược và bảng điều hướng câu hỏi
             </p>
           </div>
 
-          <div className="flex items-center gap-2 text-xs font-semibold text-stone-600 bg-stone-100 px-3 py-1.5 rounded-xl border border-stone-200">
+          <div className="flex items-center gap-2 text-xs font-semibold text-stone-600 bg-stone-100 px-3 py-1.5 rounded-xl border border-stone-200 shrink-0">
             <Clock className="w-4 h-4 text-amber-600" />
             <span>Thời gian: {manifest.durationMinutes} phút</span>
           </div>
@@ -117,7 +128,7 @@ export function ExamCenter() {
         <div className="p-2.5 bg-amber-50 rounded-xl border border-amber-200/60 text-xs text-amber-900 flex items-center gap-2">
           <ShieldAlert className="w-4 h-4 text-amber-700 shrink-0" />
           <span>
-            <b>Lưu ý giáo dục:</b> Đây là hệ thống thi thử mô phỏng giáo trình chuẩn HANZI MASTER nhằm phục vụ luyện tập kỹ năng làm bài, không thay thế chứng chỉ thi HSK chính thức tại các điểm thi Hanban.
+            <b>Quy chế thi mô phỏng:</b> Bài thi tự động thu bài khi hết giờ. Thí sinh có thể gắn cờ câu hỏi để xem lại trước khi nộp bài.
           </span>
         </div>
       </div>
@@ -151,7 +162,7 @@ export function ExamCenter() {
 
           <button
             onClick={startExam}
-            className="px-8 py-3 rounded-2xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-sm transition-all shadow-md hover:scale-105 inline-flex items-center gap-2"
+            className="px-8 py-3 rounded-2xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-sm transition-all shadow-md hover:scale-105 inline-flex items-center gap-2 cursor-pointer"
           >
             <Play className="w-4 h-4 fill-white" />
             <span>Bắt Đầu Làm Bài Thi Ngay</span>
@@ -159,134 +170,213 @@ export function ExamCenter() {
         </div>
       )}
 
-      {/* STATE 2: IN PROGRESS */}
+      {/* STATE 2: IN PROGRESS (iBT INTERFACE) */}
       {examState === "in_progress" && (
-        <div className="space-y-6">
-          {/* Top Exam Bar: Timer & Progress */}
-          <div className="sticky top-20 z-40 bg-stone-900 text-white p-4 rounded-2xl shadow-lg flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <span className="text-xs font-bold bg-amber-500 text-stone-950 px-2 py-0.5 rounded">
-                Câu {currentQuestionIdx + 1} / {questions.length}
-              </span>
-              <span className="text-xs font-medium text-stone-300 hidden sm:inline">
-                Phần: {currentQ.section === "listening" ? "听力 (Nghe Hiểu)" : "阅读 (Đọc Hiểu)"}
-              </span>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          {/* Main Question Area (8 cols) */}
+          <div className="lg:col-span-8 space-y-5">
+            {/* Top Exam Status Bar */}
+            <div className="bg-stone-900 text-white p-4 rounded-2xl shadow-lg flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <span className="text-xs font-bold bg-amber-500 text-stone-950 px-2 py-0.5 rounded">
+                  Câu {currentQuestionIdx + 1} / {questions.length}
+                </span>
+                <span className="text-xs font-medium text-stone-300 hidden sm:inline">
+                  {currentQ.section === "listening" ? "听力 (Nghe Hiểu)" : "阅读 (Đọc Hiểu)"}
+                </span>
+              </div>
+
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-1.5 text-sm font-mono font-bold text-amber-400">
+                  <Clock className="w-4 h-4" />
+                  <span>{formatSecondsToMinutes(timeRemainingSeconds)}</span>
+                </div>
+                <button
+                  onClick={submitExam}
+                  className="px-3.5 py-1.5 bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold rounded-lg transition-colors cursor-pointer"
+                >
+                  Nộp Bài
+                </button>
+              </div>
             </div>
 
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-1.5 text-sm font-mono font-bold text-amber-400">
-                <Clock className="w-4 h-4" />
-                <span>{formatSecondsToMinutes(timeRemainingSeconds)}</span>
+            {/* Question Card */}
+            <div className="bg-white p-6 sm:p-8 rounded-3xl border border-stone-200 shadow-sm space-y-6">
+              <div className="flex items-center justify-between border-b border-stone-100 pb-3">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-bold text-stone-400 uppercase tracking-wider">
+                    Câu hỏi số {currentQ.questionNumber} ({currentQ.points} điểm)
+                  </span>
+                  <span className="text-xs font-semibold uppercase tracking-wider px-2 py-0.5 rounded bg-stone-100 text-stone-600">
+                    {currentQ.section}
+                  </span>
+                </div>
+
+                <button
+                  onClick={() => toggleFlag(currentQ.id)}
+                  className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-semibold transition-colors cursor-pointer ${
+                    flaggedQuestions[currentQ.id]
+                      ? "bg-amber-100 text-amber-900 font-bold"
+                      : "text-stone-400 hover:text-stone-700 hover:bg-stone-50"
+                  }`}
+                  title="Gắn cờ câu hỏi này để xem lại sau"
+                >
+                  <Flag className={`w-3.5 h-3.5 ${flaggedQuestions[currentQ.id] ? "fill-amber-600 text-amber-600" : ""}`} />
+                  <span>{flaggedQuestions[currentQ.id] ? "Đã gắn cờ" : "Gắn cờ"}</span>
+                </button>
               </div>
-              <button
-                onClick={submitExam}
-                className="px-4 py-1.5 bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold rounded-lg transition-colors"
-              >
-                Nộp Bài Sớm
-              </button>
+
+              {/* Audio player if listening question */}
+              {currentQ.section === "listening" && currentQ.promptAudioText && (
+                <div className="bg-amber-50 p-4 rounded-2xl border border-amber-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div>
+                    <span className="text-[10px] font-bold text-amber-800 uppercase tracking-wider block">
+                      Đoạn ghi âm câu hỏi (Nghe và chọn)
+                    </span>
+                    <span className="text-xs text-amber-950 font-medium">
+                      Hãy lắng nghe phát âm chuẩn để chọn câu trả lời
+                    </span>
+                  </div>
+                  <button
+                    onClick={() => {
+                      soundManager.playClick();
+                      audioEngine.speak(currentQ.promptAudioText!, { rate: audioSpeed });
+                    }}
+                    className="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-2xs cursor-pointer shrink-0"
+                  >
+                    <Volume2 className="w-4 h-4" />
+                    <span>Phát Đoạn Băng</span>
+                  </button>
+                </div>
+              )}
+
+              {/* Prompt text */}
+              <div className="font-hanzi text-lg sm:text-xl font-bold text-stone-900 leading-relaxed">
+                {currentQ.promptZh}
+              </div>
+
+              {/* Options */}
+              {currentQ.options && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                  {currentQ.options.map((opt, idx) => {
+                    const isSelected = answers[currentQ.id] === opt;
+                    return (
+                      <button
+                        key={idx}
+                        onClick={() => selectAnswer(currentQ.id, opt)}
+                        className={`p-4 rounded-xl border text-sm text-left transition-all font-hanzi flex items-center justify-between cursor-pointer ${
+                          isSelected
+                            ? "bg-amber-100 border-amber-500 text-amber-950 font-bold ring-2 ring-amber-300/40"
+                            : "bg-stone-50 border-stone-200/90 hover:bg-stone-100 text-stone-800"
+                        }`}
+                      >
+                        <span>{opt}</span>
+                        {isSelected && <CheckCircle className="w-4 h-4 text-amber-700" />}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+
+              {/* Navigation between questions */}
+              <div className="flex items-center justify-between pt-6 border-t border-stone-100">
+                <button
+                  onClick={() => setCurrentQuestionIdx((prev) => Math.max(0, prev - 1))}
+                  disabled={currentQuestionIdx === 0}
+                  className="px-4 py-2 rounded-xl border border-stone-200 text-xs font-semibold text-stone-600 hover:bg-stone-50 disabled:opacity-40 cursor-pointer"
+                >
+                  ← Câu Trước
+                </button>
+
+                {currentQuestionIdx < questions.length - 1 ? (
+                  <button
+                    onClick={() => setCurrentQuestionIdx((prev) => prev + 1)}
+                    className="px-6 py-2 rounded-xl bg-stone-900 hover:bg-stone-800 text-white text-xs font-bold cursor-pointer"
+                  >
+                    Câu Kế Tiếp →
+                  </button>
+                ) : (
+                  <button
+                    onClick={submitExam}
+                    className="px-6 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold cursor-pointer"
+                  >
+                    Nộp Bài Thi
+                  </button>
+                )}
+              </div>
             </div>
           </div>
 
-          {/* Question Box */}
-          <div className="bg-white p-6 sm:p-8 rounded-3xl border border-stone-200 shadow-sm space-y-6">
+          {/* Right Column: Answer Sheet Navigation Grid (4 cols) */}
+          <div className="lg:col-span-4 bg-white p-5 rounded-3xl border border-stone-200 shadow-sm space-y-4 sticky top-24">
             <div className="flex items-center justify-between border-b border-stone-100 pb-3">
-              <span className="text-xs font-bold text-stone-400 uppercase tracking-wider">
-                Câu hỏi số {currentQ.questionNumber} ({currentQ.points} điểm)
+              <span className="text-xs font-black uppercase tracking-wider text-stone-800">
+                Bảng Câu Hỏi (Answer Sheet)
               </span>
-              <span className="text-xs font-semibold uppercase tracking-wider px-2 py-0.5 rounded bg-stone-100 text-stone-600">
-                {currentQ.section}
+              <span className="text-xs font-bold text-amber-700">
+                {Object.keys(answers).length} / {questions.length} đã làm
               </span>
             </div>
 
-            {/* Audio player if listening question */}
-            {currentQ.section === "listening" && currentQ.promptAudioText && (
-              <div className="bg-amber-50 p-3 sm:p-4 rounded-2xl border border-amber-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                <div>
-                  <span className="text-[10px] font-bold text-amber-800 uppercase tracking-wider block">
-                    Băng ghi âm câu hỏi (Nhấn để nghe)
-                  </span>
-                  <span className="text-xs text-amber-950 font-medium">
-                    Hãy lắng nghe kỹ và chọn đáp án chính xác
-                  </span>
-                </div>
-                <button
-                  onClick={() => {
-                    soundManager.playClick();
-                    audioEngine.speak(currentQ.promptAudioText!, { rate: audioSpeed });
-                  }}
-                  className="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-2xs self-start sm:self-auto cursor-pointer"
-                >
-                  <Volume2 className="w-4 h-4" />
-                  <span>Phát Đoạn Băng</span>
-                </button>
-              </div>
-            )}
+            <div className="grid grid-cols-5 gap-2">
+              {questions.map((q, idx) => {
+                const isAnswered = !!answers[q.id];
+                const isCurrent = currentQuestionIdx === idx;
+                const isFlagged = flaggedQuestions[q.id];
 
-            {/* Prompt text */}
-            <div className="font-hanzi text-lg sm:text-xl font-bold text-stone-900 leading-relaxed">
-              {currentQ.promptZh}
+                let btnStyle = "bg-stone-50 border-stone-200 text-stone-600 hover:border-amber-400";
+                if (isCurrent) {
+                  btnStyle = "bg-amber-600 text-white border-amber-600 ring-2 ring-amber-300 font-black";
+                } else if (isFlagged) {
+                  btnStyle = "bg-orange-100 border-orange-400 text-orange-900 font-bold";
+                } else if (isAnswered) {
+                  btnStyle = "bg-emerald-50 border-emerald-400 text-emerald-900 font-bold";
+                }
+
+                return (
+                  <button
+                    key={q.id}
+                    onClick={() => {
+                      soundManager.playClick();
+                      setCurrentQuestionIdx(idx);
+                    }}
+                    className={`h-9 rounded-xl border text-xs flex items-center justify-center relative transition-all cursor-pointer ${btnStyle}`}
+                  >
+                    <span>{idx + 1}</span>
+                    {isFlagged && (
+                      <span className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-orange-600" />
+                    )}
+                  </button>
+                );
+              })}
             </div>
 
-            {/* Options */}
-            {currentQ.options && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                {currentQ.options.map((opt, idx) => {
-                  const isSelected = answers[currentQ.id] === opt;
-                  return (
-                    <button
-                      key={idx}
-                      onClick={() => selectAnswer(currentQ.id, opt)}
-                      className={`p-4 rounded-xl border text-sm text-left transition-all font-hanzi flex items-center justify-between ${
-                        isSelected
-                          ? "bg-amber-100 border-amber-500 text-amber-950 font-bold ring-2 ring-amber-300/40"
-                          : "bg-stone-50 border-stone-200/90 hover:bg-stone-100 text-stone-800"
-                      }`}
-                    >
-                      <span>{opt}</span>
-                      {isSelected && <CheckCircle className="w-4 h-4 text-amber-700" />}
-                    </button>
-                  );
-                })}
+            {/* Legend */}
+            <div className="text-[11px] text-stone-500 space-y-1.5 pt-3 border-t border-stone-100">
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 rounded-md bg-emerald-50 border border-emerald-400 inline-block" />
+                <span>Đã trả lời</span>
               </div>
-            )}
-
-            {/* Navigation between questions */}
-            <div className="flex items-center justify-between pt-6 border-t border-stone-100">
-              <button
-                onClick={() => setCurrentQuestionIdx((prev) => Math.max(0, prev - 1))}
-                disabled={currentQuestionIdx === 0}
-                className="px-4 py-2 rounded-xl border border-stone-200 text-xs font-semibold text-stone-600 hover:bg-stone-50 disabled:opacity-40"
-              >
-                ← Câu Trước
-              </button>
-
-              {currentQuestionIdx < questions.length - 1 ? (
-                <button
-                  onClick={() => setCurrentQuestionIdx((prev) => prev + 1)}
-                  className="px-6 py-2 rounded-xl bg-stone-900 hover:bg-stone-800 text-white text-xs font-bold"
-                >
-                  Câu Kế Tiếp →
-                </button>
-              ) : (
-                <button
-                  onClick={submitExam}
-                  className="px-6 py-2 rounded-xl bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold"
-                >
-                  Nộp Bài Thi
-                </button>
-              )}
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 rounded-md bg-orange-100 border border-orange-400 inline-block" />
+                <span>Đã gắn cờ xem lại</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 rounded-md bg-amber-600 inline-block" />
+                <span>Câu đang làm</span>
+              </div>
             </div>
           </div>
         </div>
       )}
 
-      {/* STATE 3: SUBMITTED REPORT */}
+      {/* STATE 3: SUBMITTED REPORT & OFFICIAL CERTIFICATE STAMP */}
       {examState === "submitted" && (
         <div className="space-y-6 animate-fadeIn">
-          {/* Result Banner */}
-          <div className="bg-white p-8 rounded-3xl border border-stone-200 shadow-sm text-center space-y-4">
+          {/* Result Banner with Certificate Aesthetic */}
+          <div className="bg-white p-8 rounded-3xl border-2 border-stone-300 shadow-md text-center space-y-5 relative overflow-hidden">
             <div
-              className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto ${
+              className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto shadow-sm ${
                 isPassed ? "bg-emerald-100 text-emerald-700" : "bg-red-100 text-red-700"
               }`}
             >
@@ -294,32 +384,35 @@ export function ExamCenter() {
             </div>
 
             <div className="space-y-1">
-              <h2 className="text-2xl font-bold text-stone-900">
-                {isPassed ? "Chúc Mừng! Bạn Đã Đỗ Kỳ Thi" : "Chưa Đạt Điểm Qua! Cần Cố Gắng Hơn"}
+              <span className="text-[10px] font-mono uppercase tracking-widest text-stone-400">
+                BÁO CÁO KẾT QUẢ THI MÔ PHỎNG HSK
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-black text-stone-900">
+                {isPassed ? "Chúc Mừng! Bạn Đã Đạt Chuẩn HSK" : "Chưa Đạt Điểm! Cần Cố Gắng Thêm"}
               </h2>
               <p className="text-xs text-stone-500">
-                Kết quả bài thi mô phỏng tiêu chuẩn HSK {currentHskLevel}
+                Mã đề thi: H{currentHskLevel}1003 • Cấp độ HSK {currentHskLevel}
               </p>
             </div>
 
-            {/* Big Score Card */}
-            <div className="p-6 rounded-2xl bg-stone-50 border border-stone-200 max-w-sm mx-auto">
+            {/* Score Card */}
+            <div className="p-6 rounded-2xl bg-stone-50 border border-stone-200 max-w-sm mx-auto space-y-2">
               <span className="text-[11px] font-bold text-stone-400 uppercase tracking-wider block">
-                Tổng Điểm Đạt Được
+                Tổng Điểm Toàn Bài
               </span>
-              <div className="text-5xl font-extrabold text-amber-700 my-1 font-mono">
+              <div className="text-5xl font-black text-amber-700 font-mono">
                 {totalScore} <span className="text-lg text-stone-400 font-normal">/ {manifest.maxScore}</span>
               </div>
               <span
-                className={`inline-block px-3 py-1 rounded-full text-xs font-bold mt-2 ${
-                  isPassed ? "bg-emerald-100 text-emerald-800" : "bg-red-100 text-red-800"
+                className={`inline-block px-4 py-1 rounded-full text-xs font-black uppercase ${
+                  isPassed ? "bg-emerald-100 text-emerald-800 border border-emerald-300" : "bg-red-100 text-red-800 border border-red-300"
                 }`}
               >
-                {isPassed ? "ĐẠT CHUẨN (PASSED)" : "KHÔNG ĐẠT (FAILED)"}
+                {isPassed ? "✓ ĐẠT CHUẨN (PASSED)" : "✕ KHÔNG ĐẠT (FAILED)"}
               </span>
             </div>
 
-            {/* Score Breakdown by Section */}
+            {/* Section Breakdown */}
             <div className="grid grid-cols-2 gap-4 max-w-md mx-auto text-xs">
               <div className="p-3 bg-stone-50 rounded-xl border border-stone-200">
                 <span className="text-stone-500 block">Nghe Hiểu (听力):</span>
@@ -334,7 +427,7 @@ export function ExamCenter() {
             <div className="pt-2">
               <button
                 onClick={startExam}
-                className="px-6 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs inline-flex items-center gap-2 shadow-2xs"
+                className="px-6 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs inline-flex items-center gap-2 shadow-sm cursor-pointer"
               >
                 <RotateCcw className="w-4 h-4" />
                 <span>Làm Lại Đề Thi Này</span>
@@ -343,9 +436,9 @@ export function ExamCenter() {
           </div>
 
           {/* Detailed Question Review */}
-          <div className="bg-white p-6 rounded-3xl border border-stone-200 shadow-sm space-y-4">
+          <div className="bg-white p-6 sm:p-8 rounded-3xl border border-stone-200 shadow-sm space-y-4">
             <h3 className="text-base font-bold text-stone-900">
-              Chi Tiết Từng Câu Hỏi & Lời Giải Thích
+              Chi Tiết Từng Câu Hỏi & Phân Tích Lỗi Sai
             </h3>
 
             <div className="space-y-3">
@@ -381,7 +474,7 @@ export function ExamCenter() {
                     </div>
 
                     <p className="text-stone-600 italic pt-1 border-t border-stone-200/50">
-                      → Giải thích: {q.explanationVn}
+                      → Lời giải: {q.explanationVn}
                     </p>
                   </div>
                 );

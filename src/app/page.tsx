@@ -20,6 +20,11 @@ import {
   ShieldCheck,
   RotateCw,
   Compass,
+  BookOpen,
+  MessageSquare,
+  Briefcase,
+  Crown,
+  GitCompare,
 } from "lucide-react";
 
 export default function HomePage() {
@@ -73,6 +78,23 @@ export default function HomePage() {
                     <CheckCircle2 className="w-4 h-4 text-emerald-600" /> Gia sư AI giải đáp 24/7
                   </span>
                 </div>
+
+                <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-4">
+                  <Link
+                    href="/dashboard"
+                    className="px-6 py-3.5 rounded-2xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-sm shadow-md transition-all hover:scale-105 flex items-center gap-2"
+                  >
+                    <span>Bắt Đầu Học Miễn Phí</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                  <Link
+                    href="/upgrade"
+                    className="px-6 py-3.5 rounded-2xl bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-900 font-bold text-sm transition-all flex items-center gap-2"
+                  >
+                    <Crown className="w-4 h-4 text-amber-600 fill-amber-600" />
+                    <span>Nâng Cấp Gói VIP Master</span>
+                  </Link>
+                </div>
               </div>
 
               {/* Right Column: Live Interactive Taste-Skill Card */}
@@ -98,23 +120,25 @@ export default function HomePage() {
                         <div className="font-hanzi text-7xl font-extrabold text-stone-900 tracking-wider">
                           学
                         </div>
-                        <div className="text-xs text-stone-500 flex items-center justify-center gap-1">
-                          <RotateCw className="w-3.5 h-3.5 text-stone-400" />
-                          <span>Chạm vào thẻ để lật xem phiên âm</span>
-                        </div>
-                      </>
-                    ) : (
-                      <div className="space-y-2 animate-fadeIn">
-                        <div className="font-mono text-2xl font-bold text-amber-700">
+                        <div className="text-amber-800 font-bold font-mono text-base">
                           xué
                         </div>
+                        <p className="text-xs text-stone-400">
+                          (Chạm để lật xem nghĩa & âm Hán Việt)
+                        </p>
+                      </>
+                    ) : (
+                      <>
                         <div className="text-xl font-bold text-stone-900">
-                          Học (học tập, nghiên cứu)
+                          Học, Học tập
                         </div>
-                        <div className="text-xs text-stone-500">
-                          Bộ Tử (子) • 8 nét bút
+                        <div className="text-xs text-amber-800 font-semibold">
+                          Âm Hán Việt: HỌC (Bộ Tử 子)
                         </div>
-                      </div>
+                        <p className="text-xs text-stone-500 italic mt-2">
+                          &quot;好好学习，天天向上&quot; (Học tập tốt, ngày ngày tiến bộ)
+                        </p>
+                      </>
                     )}
                   </div>
 
@@ -149,7 +173,112 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 4 CORE ADVANTAGES (DUOLINGO + ANKI + QUIZLET + AI) */}
+        {/* NEW EXTENDED FEATURE LABS (READING, CONVERSATION, TOPICS, DISCRIMINATION) */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          <div className="text-center space-y-3 max-w-3xl mx-auto">
+            <span className="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">
+              Không Gian Luyện Tập Toàn Diện
+            </span>
+            <h2 className="text-3xl font-extrabold text-stone-900 tracking-tight">
+              Đáp Ứng Mọi Nhu Cầu Học & Đi Làm
+            </h2>
+            <p className="text-sm text-stone-600">
+              Vượt xa kho đề tĩnh truyền thống, HANZI MASTER mang đến trải nghiệm tương tác trực quan cho từng kỹ năng quan trọng nhất.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* 1. Reading Lab */}
+            <Link
+              href="/reading"
+              className="bg-white p-6 rounded-3xl border border-stone-200 shadow-2xs hover:shadow-md hover:border-amber-300 transition-all flex flex-col justify-between space-y-4 group"
+            >
+              <div className="space-y-3">
+                <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200 text-amber-700 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <BookOpen className="w-6 h-6" />
+                </div>
+                <h3 className="font-bold text-stone-900 text-base group-hover:text-amber-700 transition-colors">
+                  Đọc Hiểu Tương Tác
+                </h3>
+                <p className="text-xs text-stone-500 leading-relaxed">
+                  Văn bản HSK phân tầng. Bấm vào từng câu, từng chữ để xem phiên âm Pinyin, âm Hán Việt và làm bài tập trắc nghiệm củng cố ngay.
+                </p>
+              </div>
+              <div className="text-xs font-bold text-amber-700 flex items-center gap-1 pt-2 border-t border-stone-100">
+                <span>Vào phòng Đọc hiểu</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
+
+            {/* 2. Conversation Lab */}
+            <Link
+              href="/conversation"
+              className="bg-white p-6 rounded-3xl border border-stone-200 shadow-2xs hover:shadow-md hover:border-amber-300 transition-all flex flex-col justify-between space-y-4 group"
+            >
+              <div className="space-y-3">
+                <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-200 text-blue-700 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <MessageSquare className="w-6 h-6" />
+                </div>
+                <h3 className="font-bold text-stone-900 text-base group-hover:text-blue-700 transition-colors">
+                  Hội Thoại & Đóng Vai A/B
+                </h3>
+                <p className="text-xs text-stone-500 leading-relaxed">
+                  Audio hội thoại chạy chữ karaoke chuẩn Bắc Kinh. Chọn đóng vai nhân vật A hoặc B để luyện phản xạ nói trong tình huống thực tế.
+                </p>
+              </div>
+              <div className="text-xs font-bold text-blue-700 flex items-center gap-1 pt-2 border-t border-stone-100">
+                <span>Vào phòng Hội thoại</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
+
+            {/* 3. Topic Vocabulary */}
+            <Link
+              href="/topics"
+              className="bg-white p-6 rounded-3xl border border-stone-200 shadow-2xs hover:shadow-md hover:border-amber-300 transition-all flex flex-col justify-between space-y-4 group"
+            >
+              <div className="space-y-3">
+                <div className="w-12 h-12 rounded-2xl bg-orange-50 border border-orange-200 text-orange-700 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <Briefcase className="w-6 h-6" />
+                </div>
+                <h3 className="font-bold text-stone-900 text-base group-hover:text-orange-700 transition-colors">
+                  Từ Vựng Chuyên Ngành
+                </h3>
+                <p className="text-xs text-stone-500 leading-relaxed">
+                  Mặc cả Taobao, 1688, Logistics xuất nhập khẩu, quản lý nhà máy xưởng may và tiếng Trung phỏng vấn xin việc deal lương.
+                </p>
+              </div>
+              <div className="text-xs font-bold text-orange-700 flex items-center gap-1 pt-2 border-t border-stone-100">
+                <span>Xem từ vựng đi làm</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
+
+            {/* 4. Word Discrimination */}
+            <Link
+              href="/grammar"
+              className="bg-white p-6 rounded-3xl border border-stone-200 shadow-2xs hover:shadow-md hover:border-amber-300 transition-all flex flex-col justify-between space-y-4 group"
+            >
+              <div className="space-y-3">
+                <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-700 flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <GitCompare className="w-6 h-6" />
+                </div>
+                <h3 className="font-bold text-stone-900 text-base group-hover:text-emerald-700 transition-colors">
+                  Phân Biệt Từ Gần Nghĩa
+                </h3>
+                <p className="text-xs text-stone-500 leading-relaxed">
+                  Giải mã các cặp từ bẫy HSK 3–6 như: 合适 vs 适合, 突然 vs 忽然, 以为 vs 认为 kèm mẹo nhớ nhanh không bao giờ nhầm lẫn.
+                </p>
+              </div>
+              <div className="text-xs font-bold text-emerald-700 flex items-center gap-1 pt-2 border-t border-stone-100">
+                <span>Tra cứu bẫy từ HSK</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </Link>
+          </div>
+        </section>
+
+        {/* 4 CORE METHODOLOGIES (DUOLINGO + ANKI + QUIZLET + AI) */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="text-center space-y-3 max-w-3xl mx-auto">
             <span className="text-xs font-bold uppercase tracking-wider text-amber-700 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">
@@ -288,17 +417,17 @@ export default function HomePage() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
               <Link
-                href="/auth/login"
+                href="/dashboard"
                 className="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-sm transition-all shadow-md hover:scale-105 flex items-center justify-center gap-2"
               >
-                <span>Đăng Ký Học Viên Miễn Phí</span>
+                <span>Bắt Đầu Trải Nghiệm Ngay</span>
               </Link>
               <Link
-                href="/dashboard"
-                className="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-stone-800 hover:bg-stone-700 text-stone-200 font-bold text-sm transition-all flex items-center justify-center gap-2"
+                href="/upgrade"
+                className="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-stone-800 hover:bg-stone-700 text-amber-300 font-bold text-sm transition-all flex items-center justify-center gap-2"
               >
-                <span>Vào Bảng Điều Khiển</span>
-                <ArrowRight className="w-4 h-4" />
+                <Crown className="w-4 h-4 fill-amber-300 text-amber-300" />
+                <span>Xem Gói VIP Master</span>
               </Link>
             </div>
           </div>

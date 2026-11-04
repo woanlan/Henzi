@@ -1,0 +1,316 @@
+export interface MeasureWord {
+  id: string;
+  word: string;
+  pinyin: string;
+  hanViet: string;
+  category: 'dong_vat' | 'do_vat' | 'trang_phuc' | 'xe_co_nha_cua' | 'an_uong_chua';
+  categoryVn: string;
+  ruleExplanationVn: string;
+  collocations: {
+    nounZh: string;
+    nounPinyin: string;
+    nounVn: string;
+    phraseZh: string;
+    phrasePinyin: string;
+    phraseVn: string;
+  }[];
+}
+
+export const MEASURE_WORDS_DATABASE: MeasureWord[] = [
+  {
+    id: "mw-01",
+    word: "把",
+    pinyin: "bǎ",
+    hanViet: "Bả",
+    category: "do_vat",
+    categoryVn: "Đồ vật có tay cầm hoặc nắm được",
+    ruleExplanationVn: "Dùng cho những đồ vật có tay cầm, cán, hoặc đồ vật dùng tay để nắm giữ như ô (dù), ghế tựa, dao, chìa khóa, quạt.",
+    collocations: [
+      {
+        nounZh: "雨伞",
+        nounPinyin: "yǔsǎn",
+        nounVn: "cây dù, chiếc ô",
+        phraseZh: "一把雨伞",
+        phrasePinyin: "yì bǎ yǔsǎn",
+        phraseVn: "một chiếc ô",
+      },
+      {
+        nounZh: "椅子",
+        nounPinyin: "yǐzi",
+        nounVn: "chiếc ghế",
+        phraseZh: "一把椅子",
+        phrasePinyin: "yì bǎ yǐzi",
+        phraseVn: "một chiếc ghế (có chỗ cầm/tựa)",
+      },
+      {
+        nounZh: "钥匙",
+        nounPinyin: "yàoshi",
+        nounVn: "chìa khóa",
+        phraseZh: "一把钥匙",
+        phrasePinyin: "yì bǎ yàoshi",
+        phraseVn: "một chùm / chiếc chìa khóa",
+      },
+      {
+        nounZh: "刀",
+        nounPinyin: "dāo",
+        nounVn: "con dao",
+        phraseZh: "一把刀",
+        phrasePinyin: "yì bǎ dāo",
+        phraseVn: "một con dao (có chuôi cầm)",
+      },
+    ],
+  },
+  {
+    id: "mw-02",
+    word: "张",
+    pinyin: "zhāng",
+    hanViet: "Trương",
+    category: "do_vat",
+    categoryVn: "Vật thể có bề mặt phẳng rộng",
+    ruleExplanationVn: "Dùng cho các đồ vật có mặt phẳng, mỏng hoặc có thể trải ra như giấy, bàn, giường, vé, ảnh, da mặt.",
+    collocations: [
+      {
+        nounZh: "桌子",
+        nounPinyin: "zhuōzi",
+        nounVn: "cái bàn",
+        phraseZh: "一张桌子",
+        phrasePinyin: "yì zhāng zhuōzi",
+        phraseVn: "một cái bàn",
+      },
+      {
+        nounZh: "纸",
+        nounPinyin: "zhǐ",
+        nounVn: "tờ giấy",
+        phraseZh: "一张纸",
+        phrasePinyin: "yì zhāng zhǐ",
+        phraseVn: "một tờ giấy",
+      },
+      {
+        nounZh: "照片",
+        nounPinyin: "zhàopiàn",
+        nounVn: "bức ảnh",
+        phraseZh: "一张照片",
+        phrasePinyin: "yì zhāng zhàopiàn",
+        phraseVn: "một tấm ảnh",
+      },
+      {
+        nounZh: "票",
+        nounPinyin: "piào",
+        nounVn: "tấm vé",
+        phraseZh: "一张机票",
+        phrasePinyin: "yì zhāng jīpiào",
+        phraseVn: "một tấm vé máy bay",
+      },
+    ],
+  },
+  {
+    id: "mw-03",
+    word: "条",
+    pinyin: "tiáo",
+    hanViet: "Điều",
+    category: "do_vat",
+    categoryVn: "Vật thể dài, mềm, hẹp hoặc uốn lượn",
+    ruleExplanationVn: "Dùng cho những vật thể thon dài, uốn khúc như sông, đường phố, dây thừng, cá, quần, váy, tin nhắn.",
+    collocations: [
+      {
+        nounZh: "鱼",
+        nounPinyin: "yú",
+        nounVn: "con cá",
+        phraseZh: "一条鱼",
+        phrasePinyin: "yì tiáo yú",
+        phraseVn: "một con cá",
+      },
+      {
+        nounZh: "路",
+        nounPinyin: "lù",
+        nounVn: "con đường",
+        phraseZh: "一条路",
+        phrasePinyin: "yì tiáo lù",
+        phraseVn: "một con đường",
+      },
+      {
+        nounZh: "裤子",
+        nounPinyin: "kùzi",
+        nounVn: "chiếc quần",
+        phraseZh: "一条裤子",
+        phrasePinyin: "yì tiáo kùzi",
+        phraseVn: "một chiếc quần dài",
+      },
+      {
+        nounZh: "消息",
+        nounPinyin: "xiāoxi",
+        nounVn: "tin nhắn / mẩu tin",
+        phraseZh: "一条短信",
+        phrasePinyin: "yì tiáo duǎnxìn",
+        phraseVn: "một mẩu tin nhắn",
+      },
+    ],
+  },
+  {
+    id: "mw-04",
+    word: "件",
+    pinyin: "jiàn",
+    hanViet: "Kiện",
+    category: "trang_phuc",
+    categoryVn: "Quần áo thân trên, sự việc, hành lý",
+    ruleExplanationVn: "Dùng cho các loại áo (áo khoác, áo len, sơ mi), sự việc/vấn đề (事情), hành lý (行李), quà tặng (礼物).",
+    collocations: [
+      {
+        nounZh: "衣服",
+        nounPinyin: "yīfu",
+        nounVn: "bộ quần áo, chiếc áo",
+        phraseZh: "一件衣服",
+        phrasePinyin: "yí jiàn yīfu",
+        phraseVn: "một chiếc áo",
+      },
+      {
+        nounZh: "事情",
+        nounPinyin: "shìqing",
+        nounVn: "sự việc, chuyện",
+        phraseZh: "一件事",
+        phrasePinyin: "yí jiàn shì",
+        phraseVn: "một sự việc",
+      },
+      {
+        nounZh: "礼物",
+        nounPinyin: "lǐwù",
+        nounVn: "món quà",
+        phraseZh: "一件礼物",
+        phrasePinyin: "yí jiàn lǐwù",
+        phraseVn: "một món quà",
+      },
+    ],
+  },
+  {
+    id: "mw-05",
+    word: "只",
+    pinyin: "zhī",
+    hanViet: "Chích",
+    category: "dong_vat",
+    categoryVn: "Loài thú nhỏ, chim chóc, một chiếc trong cặp đôi",
+    ruleExplanationVn: "Dùng cho động vật vừa và nhỏ (mèo, chó, chim, gà, thỏ) hoặc 1 chiếc đơn lẻ của bộ phận cơ thể có đôi (tay, chân, mắt, tai) hoặc đồ vật theo đôi (chiếc giày).",
+    collocations: [
+      {
+        nounZh: "猫",
+        nounPinyin: "māo",
+        nounVn: "con mèo",
+        phraseZh: "一只猫",
+        phrasePinyin: "yì zhī māo",
+        phraseVn: "một con mèo",
+      },
+      {
+        nounZh: "鸟",
+        nounPinyin: "niǎo",
+        nounVn: "con chim",
+        phraseZh: "一只鸟",
+        phrasePinyin: "yì zhī niǎo",
+        phraseVn: "một chú chim",
+      },
+      {
+        nounZh: "手",
+        nounPinyin: "shǒu",
+        nounVn: "bàn tay",
+        phraseZh: "一只手",
+        phrasePinyin: "yì zhī shǒu",
+        phraseVn: "một bàn tay",
+      },
+      {
+        nounZh: "鞋",
+        nounPinyin: "xié",
+        nounVn: "chiếc giày",
+        phraseZh: "一只鞋",
+        phrasePinyin: "yì zhī xié",
+        phraseVn: "một chiếc giày (lẻ chiếc)",
+      },
+    ],
+  },
+  {
+    id: "mw-06",
+    word: "辆",
+    pinyin: "liàng",
+    hanViet: "Lượng",
+    category: "xe_co_nha_cua",
+    categoryVn: "Phương tiện giao thông có bánh xe",
+    ruleExplanationVn: "Dùng riêng cho các loại xe có bánh: ô tô, xe đạp, xe máy, xe buýt, xe taxi (trừ tàu hỏa thường dùng 列, máy bay dùng 架).",
+    collocations: [
+      {
+        nounZh: "汽车",
+        nounPinyin: "qìchē",
+        nounVn: "xe ô tô",
+        phraseZh: "一辆汽车",
+        phrasePinyin: "yí liàng qìchē",
+        phraseVn: "một chiếc ô tô",
+      },
+      {
+        nounZh: "自行车",
+        nounPinyin: "zìxíngchē",
+        nounVn: "xe đạp",
+        phraseZh: "一辆自行车",
+        phrasePinyin: "yí liàng zìxíngchē",
+        phraseVn: "một chiếc xe đạp",
+      },
+    ],
+  },
+  {
+    id: "mw-07",
+    word: "座",
+    pinyin: "zuò",
+    hanViet: "Tòa",
+    category: "xe_co_nha_cua",
+    categoryVn: "Công trình kiến trúc to lớn, cố định",
+    ruleExplanationVn: "Dùng cho các công trình to lớn, đồ sộ, bất động như ngọn núi, cây cầu, tòa nhà cao tầng, bức tượng thành phố.",
+    collocations: [
+      {
+        nounZh: "山",
+        nounPinyin: "shān",
+        nounVn: "ngọn núi",
+        phraseZh: "一座山",
+        phrasePinyin: "yí zuò shān",
+        phraseVn: "một ngọn núi",
+      },
+      {
+        nounZh: "桥",
+        nounPinyin: "qiáo",
+        nounVn: "cây cầu",
+        phraseZh: "一座桥",
+        phrasePinyin: "yí zuò qiáo",
+        phraseVn: "một cây cầu lớn",
+      },
+      {
+        nounZh: "大楼",
+        nounPinyin: "dàlóu",
+        nounVn: "tòa nhà cao tầng",
+        phraseZh: "一座大楼",
+        phrasePinyin: "yí zuò dàlóu",
+        phraseVn: "một tòa cao ốc",
+      },
+    ],
+  },
+  {
+    id: "mw-08",
+    word: "支",
+    pinyin: "zhī",
+    hanViet: "Chi",
+    category: "do_vat",
+    categoryVn: "Vật thể hình que cứng, thẳng",
+    ruleExplanationVn: "Dùng cho các vật thể dạng cán thẳng, que cứng như bút viết, điếu thuốc, nến, súng, hoặc khúc ca (bài hát).",
+    collocations: [
+      {
+        nounZh: "笔",
+        nounPinyin: "bǐ",
+        nounVn: "cây bút",
+        phraseZh: "一支笔",
+        phrasePinyin: "yì zhī bǐ",
+        phraseVn: "một cây bút viết",
+      },
+      {
+        nounZh: "香烟",
+        nounPinyin: "xiāngyān",
+        nounVn: "điếu thuốc lá",
+        phraseZh: "一支烟",
+        phrasePinyin: "yì zhī yān",
+        phraseVn: "một điếu thuốc",
+      },
+    ],
+  },
+];

@@ -1,11 +1,12 @@
 // ====================================================================
 // MANDARIN SPEECH & AUDIO ENGINE
-// Web Speech API Synthesis (TTS) & Recognition (STT)
+// Web Speech API Synthesis (TTS) & Recognition (STT) + Native Audio Player
 // ====================================================================
 
 export interface SpeechOptions {
   rate?: number; // 0.75, 1.0, 1.25
   pitch?: number;
+  audioUrl?: string; // Optional direct URL to native MP3 recording
   onStart?: () => void;
   onEnd?: () => void;
   onError?: (err: unknown) => void;
@@ -14,6 +15,7 @@ export interface SpeechOptions {
 class AudioEngine {
   private synth: SpeechSynthesis | null = null;
   private preferredVoice: SpeechSynthesisVoice | null = null;
+  private currentAudioElement: HTMLAudioElement | null = null;
 
   constructor() {
     if (typeof window !== "undefined" && "speechSynthesis" in window) {
@@ -28,26 +30,61 @@ class AudioEngine {
   private initVoice() {
     if (!this.synth) return;
     const voices = this.synth.getVoices();
-    // Prioritize high-quality Mandarin voices (e.g., Google 普通话, Microsoft Xiaoxiao, Yaoyao, Tingting, Li-Mu)
+    // Prioritize high-quality native Mandarin voices
     const zhVoices = voices.filter(
       (v) => v.lang === "zh-CN" || v.lang === "zh" || v.lang.startsWith("zh")
     );
-    this.preferredVoice =
-      zhVoices.find((v) => v.name.includes("Google") || v.name.includes("Natural") || v.name.includes("Xiaoxiao")) ||
-      zhVoices[0] ||
-      null;
+
+    // Prefer high-naturalness voices: Xiaoxiao, Yunxi, Yunyang, Google 普通话
+    const priorityKeywords = ["Xiaoxiao", "Yunxi", "Yunyang", "Kangkang", "Google", "Natural", "Tingting"];
+    for (const kw of priorityKeywords) {
+      const match = zhVoices.find((v) => v.name.includes(kw));
+      if (match) {
+        this.preferredVoice = match;
+        return;
+      }
+    }
+
+    this.preferredVoice = zhVoices[0] || null;
   }
 
   speak(text: string, options: SpeechOptions = {}) {
-    if (typeof window === "undefined" || !this.synth) {
+    if (typeof window === "undefined") return;
+
+    // 1. If a direct native audio URL is provided, prioritize it
+    if (options.audioUrl) {
+      this.stop();
+      try {
+        const audio = new Audio(options.audioUrl);
+        this.currentAudioElement = audio;
+        audio.playbackRate = options.rate ?? 1.0;
+        if (options.onStart) audio.onplay = options.onStart;
+        if (options.onEnd) audio.onended = options.onEnd;
+        if (options.onError) audio.onerror = options.onError;
+        audio.play().catch(() => {
+          // Fallback to TTS if audio element fails to load
+          this.speakTTS(text, options);
+        });
+        return;
+      } catch {
+        // Fallback to TTS
+      }
+    }
+
+    this.speakTTS(text, options);
+  }
+
+  private speakTTS(text: string, options: SpeechOptions = {}) {
+    if (!this.synth) {
       console.warn("SpeechSynthesis not supported in this browser.");
       return;
     }
 
-    // Cancel current speaking if any
-    this.synth.cancel();
+    this.stop();
 
-    const utterance = new SpeechSynthesisUtterance(text);
+    // Clean text for natural Mandarin speech synthesis
+    const cleanText = text.replace(/[\(\)（）\[\]]/g, " ").trim();
+    const utterance = new SpeechSynthesisUtterance(cleanText);
     utterance.lang = "zh-CN";
     utterance.rate = options.rate ?? 1.0;
     utterance.pitch = options.pitch ?? 1.0;
@@ -69,6 +106,10 @@ class AudioEngine {
   stop() {
     if (this.synth) {
       this.synth.cancel();
+    }
+    if (this.currentAudioElement) {
+      this.currentAudioElement.pause();
+      this.currentAudioElement = null;
     }
   }
 

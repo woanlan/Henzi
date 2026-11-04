@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="mt-auto border-t border-stone-200 bg-stone-50/70 text-stone-600 text-xs">
+    <footer className="mt-auto border-t border-stone-200 bg-stone-50/70 text-stone-600 text-xs print:hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand & Mission */}
@@ -56,23 +56,38 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/writing" className="hover:text-amber-700 transition-colors">
-                  Tập Viết Thứ Tự Nét Chữ Hán (HanziWriter)
+                <Link href="/dictation" className="hover:text-amber-700 transition-colors">
+                  Phòng Luyện Chép Chính Tả (听写)
                 </Link>
               </li>
               <li>
-                <Link href="/listening" className="hover:text-amber-700 transition-colors">
-                  Phòng Luyện Nghe Đa Tốc Độ
+                <Link href="/measure-words" className="hover:text-amber-700 transition-colors">
+                  Bách Khoa Lượng Từ Tiếng Trung
                 </Link>
               </li>
               <li>
-                <Link href="/speaking" className="hover:text-amber-700 transition-colors">
-                  Luyện Nói & Chấm Thanh Điệu AI
+                <Link href="/translate" className="hover:text-amber-700 transition-colors">
+                  Tra Cứu & Dịch Bóc Tách 3 Tầng
                 </Link>
               </li>
               <li>
-                <Link href="/grammar" className="hover:text-amber-700 transition-colors">
-                  Kho Bách Khoa Ngữ Pháp HSK
+                <Link href="/worksheet" className="hover:text-amber-700 transition-colors">
+                  In Phiếu Luyện Viết Ô Mễ Khổ A4
+                </Link>
+              </li>
+              <li>
+                <Link href="/reading" className="hover:text-amber-700 transition-colors">
+                  Phòng Luyện Đọc Hiểu Đa Tầng HSK
+                </Link>
+              </li>
+              <li>
+                <Link href="/conversation" className="hover:text-amber-700 transition-colors">
+                  Luyện Hội Thoại & Đóng Vai A/B
+                </Link>
+              </li>
+              <li>
+                <Link href="/topics" className="hover:text-amber-700 transition-colors">
+                  Từ Vựng Chuyên Ngành & Đi Làm
                 </Link>
               </li>
               <li>
@@ -83,14 +98,22 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* AI Tutor & System */}
+          {/* Premium & System */}
           <div>
             <h4 className="font-semibold text-stone-900 uppercase tracking-wider text-[11px] mb-3">
-              Công Nghệ & Bảo Mật
+              Gói Học VIP & Bảo Mật
             </h4>
             <p className="text-stone-500 leading-relaxed mb-3">
-              Tích hợp cơ chế Dual-Mode: Chạy offline độc lập với dữ liệu mẫu phong phú hoặc kết nối Supabase PostgreSQL với bảo mật cấp hàng (RLS).
+              Trải nghiệm học tập trọn đời không giới hạn với Gia sư AI 6 tầng, kho 50+ đề thi mô phỏng và hỗ trợ 24/7.
             </p>
+            <div className="mb-4">
+              <Link
+                href="/upgrade"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow-sm transition-colors"
+              >
+                <span>Xem Bảng Giá Gói VIP</span>
+              </Link>
+            </div>
             <div className="flex items-center gap-2">
               <span className="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
               <span className="text-[11px] text-stone-600 font-medium">Hệ thống đang hoạt động ổn định</span>
@@ -98,9 +121,13 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-stone-200/80 flex flex-col sm:flex-row items-center justify-between text-[11px] text-stone-400">
-          <p>© 2026 HANZI MASTER. Bản quyền thuộc về đội ngũ phát triển.</p>
-          <p>Phiên bản 1.0.0 — Sẵn sàng cho triển khai thực tế.</p>
+        <div className="mt-8 pt-6 border-t border-stone-200/80 flex flex-col sm:flex-row items-center justify-between text-[11px] text-stone-400 gap-2">
+          <span>© 2026 HANZI MASTER. Bản quyền thuộc về nền tảng giáo dục tiếng Trung trực tuyến.</span>
+          <div className="flex items-center gap-4">
+            <Link href="/" className="hover:text-stone-600">Trang chủ</Link>
+            <Link href="/upgrade" className="hover:text-stone-600">Nâng cấp VIP</Link>
+            <Link href="/dashboard" className="hover:text-stone-600">Bảng điều khiển</Link>
+          </div>
         </div>
       </div>
     </footer>

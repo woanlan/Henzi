@@ -24,7 +24,12 @@ import {
   Trophy,
   Gamepad2,
   Map,
-  Home,
+  MessageSquare,
+  Briefcase,
+  Crown,
+  Headphones,
+  Printer,
+  Languages,
 } from "lucide-react";
 
 export function Navbar() {
@@ -32,83 +37,98 @@ export function Navbar() {
   const { user, currentHskLevel, setCurrentHskLevel, switchRole, toggleAiChat, isAiChatOpen } = useApp();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [levelDropdownOpen, setLevelDropdownOpen] = useState(false);
-  const [roleDropdownOpen, setRoleDropdownOpen] = useState(false);
-  const [practiceDropdownOpen, setPracticeDropdownOpen] = useState(false);
+  const [skillsDropdownOpen, setSkillsDropdownOpen] = useState(false);
 
-  // Core primary nav items (clean, uncluttered, perfectly balanced)
+  // 4 Core Primary Links only (Clean, spacious, uncrowded)
   const primaryNavLinks = [
     { href: "/dashboard", label: "Tổng Quan", icon: Compass },
     { href: "/vocabulary", label: "Từ Vựng", icon: Zap },
     { href: "/writing", label: "Luyện Viết", icon: PenTool },
     { href: "/exams", label: "Thi Thử HSK", icon: FileCheck },
-    { href: "/leaderboard", label: "Đua Top", icon: Trophy },
   ];
 
-  // Extended practice skills & labs in dropdown (clean, consistent & badge-free)
-  const practiceSkills = [
-    { href: "/curriculum", label: "Hành Trình Duolingo & Giáo Trình", icon: Map, desc: "Lộ trình 9 trạm S-curve & 12 bài khóa HSK" },
-    { href: "/match", label: "Nối Từ 60 Giây", icon: Gamepad2, desc: "Phản xạ từ vựng chạy đua 60s cực vui" },
-    { href: "/writing", label: "Luyện Viết Chữ Hán", icon: PenTool, desc: "Tập viết thuận bút & Tự gõ mọi chữ" },
-    { href: "/pinyin", label: "Bảng Âm Tiết Pinyin", icon: Sparkles, desc: "Ma trận 21 thanh mẫu & 4 thanh điệu" },
-    { href: "/radicals", label: "Chiết Tự 214 Bộ Thủ", icon: BookOpen, desc: "Nguồn gốc chữ tượng hình & mẹo nhớ" },
-    { href: "/listening", label: "Luyện Nghe Giọng Chuẩn", icon: Volume2, desc: "Giọng đọc Bắc Kinh đa tốc độ" },
-    { href: "/speaking", label: "Luyện Nói & Chấm Điểm", icon: Mic, desc: "Nhận diện & chấm điểm phát âm" },
-    { href: "/grammar", label: "Ngữ Pháp HSK", icon: GraduationCap, desc: "Bách khoa toàn thư ngữ pháp HSK" },
-    { href: "/onboarding", label: "Đánh Giá Trình Độ", icon: Compass, desc: "Khảo sát mục tiêu & bài test chuẩn Duolingo" },
+  // Extended categorized skills in the dropdown
+  const skillCategories = [
+    {
+      title: "Kỹ Năng Giao Tiếp",
+      items: [
+        { href: "/reading", label: "Đọc Hiểu Đa Tầng", icon: BookOpen, desc: "Tra từ trực tiếp & trắc nghiệm HSK" },
+        { href: "/conversation", label: "Hội Thoại & Đóng Vai", icon: MessageSquare, desc: "Giao tiếp A/B thực tế, karaoke audio" },
+        { href: "/dictation", label: "Chép Chính Tả (听写)", icon: Headphones, desc: "Luyện tai nghe & gõ chữ Hán" },
+        { href: "/listening", label: "Luyện Nghe Giọng Chuẩn", icon: Volume2, desc: "Giọng đọc Bắc Kinh đa tốc độ" },
+        { href: "/speaking", label: "Luyện Nói & Chấm Điểm", icon: Mic, desc: "Nhận diện & sửa thanh điệu AI" },
+      ],
+    },
+    {
+      title: "Bách Khoa Hán Ngữ & Công Cụ",
+      items: [
+        { href: "/measure-words", label: "Bách Khoa Lượng Từ", icon: Layers, desc: "50+ lượng từ cốt lõi & thử thách ghép" },
+        { href: "/translate", label: "Dịch & Bóc Tách 3 Tầng", icon: Languages, desc: "Hán tự, Pinyin & Hán Việt tức thời" },
+        { href: "/worksheet", label: "In Phiếu Viết Ô Mễ A4", icon: Printer, desc: "Xuất giấy luyện viết chữ Hán in mờ" },
+        { href: "/grammar", label: "Ngữ Pháp & Bẫy Từ", icon: GraduationCap, desc: "Bách khoa toàn thư & bẫy 近义词" },
+        { href: "/topics", label: "Từ Vựng Chuyên Ngành", icon: Briefcase, desc: "Đánh hàng 1688/Taobao, Logistics" },
+      ],
+    },
+    {
+      title: "Học Tập Mở Rộng",
+      items: [
+        { href: "/curriculum", label: "Hành Trình Duolingo", icon: Map, desc: "Lộ trình 9 trạm S-curve bài khóa" },
+        { href: "/pinyin", label: "Bảng Âm Tiết Pinyin", icon: Sparkles, desc: "Ma trận 21 thanh mẫu & 4 thanh điệu" },
+        { href: "/radicals", label: "Chiết Tự 214 Bộ Thủ", icon: BookOpen, desc: "Nguồn gốc chữ tượng hình" },
+        { href: "/match", label: "Nối Từ 60 Giây", icon: Gamepad2, desc: "Phản xạ từ vựng chạy đua cực vui" },
+        { href: "/leaderboard", label: "Bảng Vàng Đua Top", icon: Trophy, desc: "Xếp hạng kinh nghiệm học tập" },
+      ],
+    },
   ];
 
-  const isPracticeActive = practiceSkills.some((s) => pathname === s.href);
+  const allSkills = skillCategories.flatMap((c) => c.items);
+  const isSkillActive = allSkills.some((s) => pathname === s.href);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-stone-200/90 bg-[#FAFAF9]/95 backdrop-blur-md shadow-2xs transition-all overflow-x-clip">
-      <div className="w-full max-w-[1600px] mx-auto px-2.5 sm:px-4 lg:px-6">
-        <div className="flex items-center justify-between h-16 sm:h-18 gap-1.5 sm:gap-2">
+    <header className="sticky top-0 z-50 w-full border-b border-stone-200/90 bg-[#FAFAF9]/95 backdrop-blur-md shadow-2xs transition-all">
+      <div className="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 gap-2 sm:gap-4">
           {/* ======================================================== */}
-          {/* 1. SEPARATE LOGO & BRAND SECTION                         */}
+          {/* 1. BRAND LOGO & LEVEL PICKER                             */}
           {/* ======================================================== */}
-          <div className="flex items-center shrink-0 gap-1.5 sm:gap-3">
+          <div className="flex items-center shrink-0 gap-2 sm:gap-3">
             <Link
               href="/"
-              className="flex items-center gap-2 sm:gap-2.5 group hover:opacity-95 transition-opacity shrink-0"
+              className="flex items-center gap-2 group hover:opacity-95 transition-opacity shrink-0"
               title="Về Trang Chủ HANZI MASTER"
             >
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-linear-to-br from-amber-500 to-amber-700 text-white flex items-center justify-center font-hanzi text-lg sm:text-xl font-black shadow-md border-2 border-amber-400/40 transition-transform group-hover:scale-105 shrink-0">
+              <div className="w-9 h-9 rounded-xl bg-linear-to-br from-amber-500 to-amber-700 text-white flex items-center justify-center font-hanzi text-lg font-black shadow-md border border-amber-400/40 transition-transform group-hover:scale-105 shrink-0">
                 汉
               </div>
               <div className="flex flex-col shrink-0">
-                <span className="font-black tracking-tight text-stone-900 text-base sm:text-lg lg:text-xl leading-none font-sans whitespace-nowrap">
+                <span className="font-black tracking-tight text-stone-900 text-base sm:text-lg leading-none font-sans whitespace-nowrap">
                   HANZI <span className="text-amber-600">MASTER</span>
                 </span>
-                <span className="text-[10px] text-stone-400 font-bold tracking-wider uppercase mt-0.5 whitespace-nowrap hidden 2xl:block">
+                <span className="text-[9px] text-stone-400 font-bold tracking-wider uppercase mt-0.5 whitespace-nowrap hidden sm:block">
                   HSK 1–6 Tiếng Trung
                 </span>
               </div>
             </Link>
 
-            {/* Vertical Divider */}
-            <div className="h-6 w-px bg-stone-200 hidden md:block shrink-0" />
-
-            {/* Level Switcher Selector (Responsive & Compact) */}
-            <div className="relative hidden md:block shrink-0">
+            {/* Level Selector Dropdown */}
+            <div className="relative shrink-0">
               <button
                 onClick={() => setLevelDropdownOpen(!levelDropdownOpen)}
-                className="flex items-center gap-1.5 px-2 xl:px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-50 hover:bg-amber-100 border border-amber-200 text-stone-800 transition-all shadow-2xs hover:border-amber-300 whitespace-nowrap shrink-0 cursor-pointer"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-bold bg-amber-50 hover:bg-amber-100 border border-amber-200 text-stone-800 transition-all shadow-2xs hover:border-amber-300 whitespace-nowrap shrink-0 cursor-pointer"
                 title="Thay đổi cấp độ HSK mục tiêu"
               >
-                <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse shrink-0" />
-                <span className="whitespace-nowrap">
-                  <span className="hidden xl:inline">Cấp Độ </span>HSK {currentHskLevel}
-                </span>
-                <ChevronDown className="w-3 h-3 xl:w-3.5 xl:h-3.5 text-stone-400 shrink-0" />
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse shrink-0" />
+                <span>HSK {currentHskLevel}</span>
+                <ChevronDown className="w-3 h-3 text-stone-400 shrink-0" />
               </button>
 
               {levelDropdownOpen && (
                 <div
-                  className="absolute left-0 mt-2 w-48 rounded-2xl bg-white border border-stone-200 shadow-xl py-2 z-50 animate-fadeIn"
+                  className="absolute left-0 mt-2 w-44 rounded-2xl bg-white border border-stone-200 shadow-xl py-2 z-50 animate-fadeIn"
                   onMouseLeave={() => setLevelDropdownOpen(false)}
                 >
-                  <div className="px-3 py-1 text-[11px] font-bold text-stone-400 uppercase tracking-wider">
-                    Chọn Cấp Độ Mục Tiêu
+                  <div className="px-3 py-1 text-[10px] font-bold text-stone-400 uppercase tracking-wider">
+                    Cấp Độ Mục Tiêu
                   </div>
                   {([1, 2, 3, 4, 5, 6] as HSKLevelNumber[]).map((lvl) => (
                     <button
@@ -117,7 +137,7 @@ export function Navbar() {
                         setCurrentHskLevel(lvl);
                         setLevelDropdownOpen(false);
                       }}
-                      className={`w-full text-left px-3.5 py-1.5 text-xs flex items-center justify-between hover:bg-amber-50 transition-colors ${
+                      className={`w-full text-left px-3.5 py-1.5 text-xs flex items-center justify-between hover:bg-amber-50 transition-colors cursor-pointer ${
                         currentHskLevel === lvl
                           ? "font-extrabold text-amber-800 bg-amber-50"
                           : "text-stone-700 font-medium"
@@ -125,9 +145,7 @@ export function Navbar() {
                     >
                       <span>Cấp độ HSK {lvl}</span>
                       {currentHskLevel === lvl && (
-                        <span className="text-[10px] bg-amber-200 text-amber-900 font-bold px-1.5 py-0.2 rounded-full">
-                          Đang học
-                        </span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
                       )}
                     </button>
                   ))}
@@ -137,10 +155,9 @@ export function Navbar() {
           </div>
 
           {/* ======================================================== */}
-          {/* 2. NAVIGATION BAR (RESPONSIVE & AUTO-BALANCED)            */}
+          {/* 2. PRIMARY NAV LINKS & KỸ NĂNG DROPDOWN                  */}
           {/* ======================================================== */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-1.5 2xl:gap-2 shrink-0">
-            {/* Primary items */}
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-1.5 shrink-0">
             {primaryNavLinks.map((link) => {
               const Icon = link.icon;
               const isActive = pathname === link.href;
@@ -148,97 +165,110 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`flex items-center gap-1 xl:gap-1.5 px-2 xl:px-2.5 2xl:px-3 py-1.5 rounded-xl text-xs xl:text-[13px] font-semibold transition-all whitespace-nowrap shrink-0 ${
+                  className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs xl:text-[13px] font-semibold transition-all whitespace-nowrap shrink-0 ${
                     isActive
                       ? "bg-amber-100 text-amber-900 font-bold shadow-2xs border border-amber-200/80"
                       : "text-stone-700 hover:text-stone-900 hover:bg-stone-100"
                   }`}
                 >
-                  <Icon className={`w-3.5 h-3.5 xl:w-4 xl:h-4 shrink-0 ${isActive ? "text-amber-700" : "text-stone-500"}`} />
-                  <span className="whitespace-nowrap">{link.label}</span>
+                  <Icon className={`w-3.5 h-3.5 shrink-0 ${isActive ? "text-amber-700" : "text-stone-500"}`} />
+                  <span>{link.label}</span>
                 </Link>
               );
             })}
 
-            {/* Practice Skills (Drop-down) */}
+            {/* Unified Mega Dropdown: Phòng Luyện Tập & Kỹ Năng */}
             <div className="relative shrink-0">
               <button
-                onClick={() => setPracticeDropdownOpen(!practiceDropdownOpen)}
-                className={`flex items-center gap-1 xl:gap-1.5 px-2 xl:px-2.5 2xl:px-3 py-1.5 rounded-xl text-xs xl:text-[13px] font-semibold transition-all whitespace-nowrap shrink-0 cursor-pointer ${
-                  isPracticeActive
+                onClick={() => setSkillsDropdownOpen(!skillsDropdownOpen)}
+                className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs xl:text-[13px] font-semibold transition-all whitespace-nowrap shrink-0 cursor-pointer ${
+                  isSkillActive
                     ? "bg-amber-100 text-amber-900 font-bold shadow-2xs border border-amber-200/80"
                     : "text-stone-700 hover:text-stone-900 hover:bg-stone-100"
                 }`}
               >
-                <Layers className={`w-3.5 h-3.5 xl:w-4 xl:h-4 shrink-0 ${isPracticeActive ? "text-amber-700" : "text-stone-500"}`} />
-                <span className="whitespace-nowrap">Kỹ Năng Khác</span>
-                <ChevronDown className={`w-3 h-3 xl:w-3.5 xl:h-3.5 text-stone-400 shrink-0 transition-transform ${practiceDropdownOpen ? "rotate-180" : ""}`} />
+                <Layers className={`w-3.5 h-3.5 shrink-0 ${isSkillActive ? "text-amber-700" : "text-stone-500"}`} />
+                <span>Kỹ Năng Khác</span>
+                <ChevronDown className={`w-3 h-3 text-stone-400 shrink-0 transition-transform ${skillsDropdownOpen ? "rotate-180" : ""}`} />
               </button>
 
-              {practiceDropdownOpen && (
+              {skillsDropdownOpen && (
                 <div
-                  className="absolute right-0 mt-2 w-72 max-h-[82vh] overflow-y-auto rounded-2xl bg-white border border-stone-200 shadow-xl p-2 z-50 animate-fadeIn"
-                  onMouseLeave={() => setPracticeDropdownOpen(false)}
+                  className="absolute right-0 mt-2 w-[520px] rounded-3xl bg-white border border-stone-200 shadow-2xl p-5 z-50 animate-fadeIn grid grid-cols-2 gap-5"
+                  onMouseLeave={() => setSkillsDropdownOpen(false)}
                 >
-                  <div className="px-3 py-1 text-[11px] font-bold text-stone-400 uppercase tracking-wider">
-                    Các Phòng Luyện Tập & Công Cụ
+                  {skillCategories.slice(0, 2).map((cat, cIdx) => (
+                    <div key={cIdx} className="space-y-2">
+                      <span className="text-[10px] font-black uppercase tracking-wider text-stone-400 block pb-1 border-b border-stone-100">
+                        {cat.title}
+                      </span>
+                      <div className="space-y-1">
+                        {cat.items.map((item) => {
+                          const ItemIcon = item.icon;
+                          const isCurrent = pathname === item.href;
+                          return (
+                            <Link
+                              key={item.href}
+                              href={item.href}
+                              onClick={() => setSkillsDropdownOpen(false)}
+                              className={`flex items-start gap-2.5 p-2 rounded-xl text-xs transition-colors ${
+                                isCurrent
+                                  ? "bg-amber-50 text-amber-900 font-bold"
+                                  : "hover:bg-stone-50 text-stone-800"
+                              }`}
+                            >
+                              <div className="p-1.5 rounded-lg bg-stone-100 text-amber-700 shrink-0 mt-0.5">
+                                <ItemIcon className="w-3.5 h-3.5" />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <span className="font-bold text-stone-900 block leading-tight">
+                                  {item.label}
+                                </span>
+                                <span className="text-[10px] text-stone-400 block truncate mt-0.5">
+                                  {item.desc}
+                                </span>
+                              </div>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ))}
+
+                  {/* Bottom strip inside dropdown */}
+                  <div className="col-span-2 pt-2 border-t border-stone-100 flex items-center justify-between text-xs">
+                    <span className="text-stone-400 text-[11px]">
+                      Khám phá thêm công cụ học tập HSK:
+                    </span>
+                    <div className="flex items-center gap-3 font-semibold text-amber-700">
+                      <Link href="/pinyin" onClick={() => setSkillsDropdownOpen(false)} className="hover:underline">Bảng Pinyin</Link>
+                      <Link href="/radicals" onClick={() => setSkillsDropdownOpen(false)} className="hover:underline">214 Bộ Thủ</Link>
+                      <Link href="/match" onClick={() => setSkillsDropdownOpen(false)} className="hover:underline">Nối Từ 60s</Link>
+                    </div>
                   </div>
-                  {practiceSkills.map((skill) => {
-                    const SkillIcon = skill.icon;
-                    const isCurrent = pathname === skill.href;
-                    return (
-                      <Link
-                        key={skill.href}
-                        href={skill.href}
-                        onClick={() => setPracticeDropdownOpen(false)}
-                        className={`flex items-start gap-2.5 p-2 rounded-xl text-xs transition-colors ${
-                          isCurrent
-                            ? "bg-amber-50 text-amber-900 font-bold"
-                            : "hover:bg-stone-50 text-stone-800"
-                        }`}
-                      >
-                        <div className="p-1.5 rounded-lg bg-stone-100 text-amber-700 shrink-0 mt-0.5">
-                          <SkillIcon className="w-3.5 h-3.5" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <span className="font-bold text-stone-900 text-xs block whitespace-nowrap">
-                            {skill.label}
-                          </span>
-                          <span className="text-[11px] text-stone-500 block leading-tight mt-0.5 truncate">
-                            {skill.desc}
-                          </span>
-                        </div>
-                      </Link>
-                    );
-                  })}
                 </div>
               )}
             </div>
-
-            {/* Admin Link if role is admin */}
-            {user.role === "admin" && (
-              <Link
-                href="/admin"
-                className={`flex items-center gap-1.5 px-2 xl:px-2.5 py-1.5 rounded-xl text-xs xl:text-sm font-bold transition-all whitespace-nowrap shrink-0 ${
-                  pathname === "/admin"
-                    ? "bg-red-100 text-red-800 shadow-2xs"
-                    : "text-red-700 hover:bg-red-50"
-                }`}
-              >
-                <ShieldAlert className="w-4 h-4 text-red-600 shrink-0" />
-                <span className="whitespace-nowrap">Quản Trị</span>
-              </Link>
-            )}
           </nav>
 
           {/* ======================================================== */}
-          {/* 3. USER BADGES, GIA SƯ AI & ROLE SWITCHER                */}
+          {/* 3. RIGHT ACTIONS: VIP, AI TUTOR, STREAK, MOBILE TOGGLE    */}
           {/* ======================================================== */}
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-            {/* Gia Sư AI - Always Prominent Action Button (Adaptive on Mobile) */}
+            {/* VIP Upgrade Pill */}
+            <Link
+              href="/upgrade"
+              className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold transition-all bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white shadow-xs whitespace-nowrap shrink-0 border border-amber-400/40"
+              title="Nâng cấp VIP Master"
+            >
+              <Crown className="w-3.5 h-3.5 fill-current" />
+              <span>Nâng Cấp VIP</span>
+            </Link>
+
+            {/* Gia Sư AI Action */}
             <button
               onClick={toggleAiChat}
-              className={`flex items-center gap-1.5 px-2 sm:px-2.5 xl:px-3 py-1.5 rounded-xl text-xs xl:text-xs font-bold transition-all border cursor-pointer whitespace-nowrap shrink-0 ${
+              className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold transition-all border cursor-pointer whitespace-nowrap shrink-0 ${
                 isAiChatOpen
                   ? "bg-amber-600 text-white border-amber-600 shadow-xs"
                   : "bg-linear-to-r from-amber-50 to-orange-50 hover:from-amber-100 hover:to-orange-100 text-amber-900 border-amber-200/90 shadow-2xs"
@@ -246,95 +276,24 @@ export function Navbar() {
               title="Mở Gia Sư AI & Từ Điển Song Hướng"
             >
               <Sparkles className={`w-3.5 h-3.5 shrink-0 ${isAiChatOpen ? "text-white fill-white" : "text-amber-600 fill-amber-500/30"}`} />
-              <span className="whitespace-nowrap hidden sm:inline">Gia Sư AI</span>
+              <span className="hidden sm:inline">Gia Sư AI</span>
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
             </button>
 
             {/* Streak Badge */}
             <div
-              className="flex items-center gap-1 px-2 xl:px-2.5 py-1.5 rounded-xl bg-orange-50 border border-orange-200 text-orange-800 text-xs font-bold shadow-2xs whitespace-nowrap shrink-0"
+              className="flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-orange-50 border border-orange-200 text-orange-800 text-xs font-bold shadow-2xs whitespace-nowrap shrink-0"
               title="Chuỗi ngày học liên tục"
             >
               <Flame className="w-3.5 h-3.5 fill-orange-500 text-orange-500 animate-pulse shrink-0" />
-              <span className="whitespace-nowrap">
-                {user.dailyStreak}
-                <span className="hidden xl:inline"> ngày</span>
-              </span>
+              <span>{user.dailyStreak} ngày</span>
             </div>
 
-            {/* XP Badge (Visible on wider screens to keep compact view uncluttered) */}
-            <div
-              className="hidden xl:flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-bold shadow-2xs whitespace-nowrap shrink-0"
-              title="Điểm kinh nghiệm học tập"
-            >
-              <Zap className="w-3.5 h-3.5 fill-amber-500 text-amber-600 shrink-0" />
-              <span className="whitespace-nowrap">{user.totalXp} XP</span>
-            </div>
-
-            {/* Role Switcher Pill (Visible on tablet & desktop, integrated in drawer on mobile) */}
-            <div className="relative shrink-0 hidden sm:block">
-              <button
-                onClick={() => setRoleDropdownOpen(!roleDropdownOpen)}
-                className="flex items-center gap-1 px-2 xl:px-2.5 py-1.5 rounded-xl border border-stone-300 text-xs font-bold text-stone-800 bg-white hover:bg-stone-50 transition-all shadow-2xs whitespace-nowrap shrink-0 cursor-pointer"
-                title="Thay đổi vai trò hiển thị"
-              >
-                <span className="capitalize whitespace-nowrap">
-                  {user.role === "student"
-                    ? "Học viên"
-                    : user.role === "teacher"
-                    ? "Giáo viên"
-                    : "Quản trị"}
-                </span>
-                <ChevronDown className="w-3 h-3 text-stone-400 shrink-0" />
-              </button>
-
-              {roleDropdownOpen && (
-                <div
-                  className="absolute right-0 mt-2 w-48 rounded-2xl bg-white border border-stone-200 shadow-xl py-2 z-50 animate-fadeIn"
-                  onMouseLeave={() => setRoleDropdownOpen(false)}
-                >
-                  <div className="px-3 py-1 text-[11px] font-bold text-stone-400 uppercase tracking-wider">
-                    Đổi Vai Trò Trải Nghiệm
-                  </div>
-                  <button
-                    onClick={() => {
-                      switchRole("student");
-                      setRoleDropdownOpen(false);
-                    }}
-                    className="w-full text-left px-3 py-1.5 text-xs hover:bg-stone-100 flex items-center justify-between font-medium"
-                  >
-                    <span>Học viên (Student)</span>
-                    {user.role === "student" && <span className="text-amber-600 font-bold">✓</span>}
-                  </button>
-                  <button
-                    onClick={() => {
-                      switchRole("teacher");
-                      setRoleDropdownOpen(false);
-                    }}
-                    className="w-full text-left px-3 py-1.5 text-xs hover:bg-stone-100 flex items-center justify-between font-medium"
-                  >
-                    <span>Giáo viên (Teacher)</span>
-                    {user.role === "teacher" && <span className="text-amber-600 font-bold">✓</span>}
-                  </button>
-                  <button
-                    onClick={() => {
-                      switchRole("admin");
-                      setRoleDropdownOpen(false);
-                    }}
-                    className="w-full text-left px-3 py-1.5 text-xs hover:bg-stone-100 flex items-center justify-between text-red-700 font-bold"
-                  >
-                    <span>Quản trị viên (Admin)</span>
-                    {user.role === "admin" && <span>✓</span>}
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* Mobile Menu Hamburger */}
+            {/* Mobile Menu Hamburger Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 rounded-xl text-stone-700 hover:text-stone-900 hover:bg-stone-100 border border-stone-200 shrink-0 cursor-pointer"
-              aria-label="Menu"
+              className="p-2 rounded-xl border border-stone-200 text-stone-700 hover:bg-stone-100 lg:hidden shrink-0 cursor-pointer"
+              title="Mở menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -342,20 +301,18 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* ======================================================== */}
-      {/* 4. EXPANDED MOBILE MENU DRAWER (RESPONSIVE TOUCH-FIRST)  */}
-      {/* ======================================================== */}
+      {/* MOBILE DRAWER MENU */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-stone-200 bg-white px-3 sm:px-4 pt-3 pb-6 space-y-3 shadow-xl max-h-[85vh] overflow-y-auto custom-scroll-smooth animate-fadeIn">
-          {/* Level Switcher */}
+        <div className="lg:hidden border-t border-stone-200 bg-white/95 backdrop-blur-md px-4 py-4 space-y-4 shadow-xl max-h-[85vh] overflow-y-auto animate-fadeIn">
+          {/* Level Switcher in Mobile Drawer */}
           <div className="flex items-center justify-between pb-2.5 border-b border-stone-100">
             <span className="text-xs font-bold text-stone-600">Cấp độ HSK mục tiêu:</span>
-            <div className="flex gap-1 sm:gap-1.5">
+            <div className="flex gap-1.5">
               {([1, 2, 3, 4, 5, 6] as HSKLevelNumber[]).map((lvl) => (
                 <button
                   key={lvl}
                   onClick={() => setCurrentHskLevel(lvl)}
-                  className={`w-7 h-7 rounded-lg text-xs font-bold transition-all ${
+                  className={`w-7 h-7 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                     currentHskLevel === lvl
                       ? "bg-amber-600 text-white shadow-2xs"
                       : "bg-stone-100 text-stone-700 hover:bg-stone-200"
@@ -367,41 +324,25 @@ export function Navbar() {
             </div>
           </div>
 
-          {/* Role Switcher in Mobile Drawer */}
-          <div className="flex sm:hidden items-center justify-between pb-2.5 border-b border-stone-100">
-            <span className="text-xs font-bold text-stone-600">Vai trò trải nghiệm:</span>
-            <div className="flex gap-1.5">
-              {(["student", "teacher", "admin"] as const).map((r) => (
-                <button
-                  key={r}
-                  onClick={() => switchRole(r)}
-                  className={`px-2 py-1 rounded-lg text-xs font-bold capitalize transition-all ${
-                    user.role === r
-                      ? "bg-stone-900 text-white shadow-2xs"
-                      : "bg-stone-100 text-stone-600 hover:bg-stone-200"
-                  }`}
-                >
-                  {r === "student" ? "Học viên" : r === "teacher" ? "Giáo viên" : "Quản trị"}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+          {/* Links Grid */}
+          <div className="grid grid-cols-2 gap-2 pt-1">
             {[
               { href: "/dashboard", label: "Tổng Quan", icon: Compass },
               { href: "/vocabulary", label: "Từ Vựng SRS", icon: Zap },
+              { href: "/reading", label: "Luyện Đọc Hiểu", icon: BookOpen },
+              { href: "/conversation", label: "Luyện Hội Thoại", icon: MessageSquare },
+              { href: "/dictation", label: "Chép Chính Tả", icon: Headphones },
+              { href: "/measure-words", label: "Bách Khoa Lượng Từ", icon: Layers },
+              { href: "/translate", label: "Dịch & Bóc Tách", icon: Languages },
+              { href: "/worksheet", label: "In Phiếu Viết A4", icon: Printer },
               { href: "/writing", label: "Luyện Viết Chữ", icon: PenTool },
               { href: "/exams", label: "Thi Thử HSK", icon: FileCheck },
-              { href: "/leaderboard", label: "Đua Top Tuần", icon: Trophy },
-              { href: "/curriculum", label: "Hành Trình Duolingo", icon: Map },
-              { href: "/match", label: "Nối Từ 60 Giây", icon: Gamepad2 },
+              { href: "/topics", label: "Từ Vựng Chuyên Ngành", icon: Briefcase },
+              { href: "/grammar", label: "Ngữ Pháp & Bẫy Từ", icon: GraduationCap },
               { href: "/pinyin", label: "Bảng Pinyin", icon: Sparkles },
               { href: "/radicals", label: "214 Bộ Thủ", icon: BookOpen },
-              { href: "/listening", label: "Luyện Nghe", icon: Volume2 },
-              { href: "/speaking", label: "Luyện Nói", icon: Mic },
-              { href: "/grammar", label: "Ngữ Pháp", icon: GraduationCap },
-              { href: "/onboarding", label: "Test Trình Độ", icon: Compass },
+              { href: "/match", label: "Nối Từ 60 Giây", icon: Gamepad2 },
+              { href: "/upgrade", label: "Nâng Cấp Gói VIP", icon: Crown },
             ].map((link) => {
               const Icon = link.icon;
               const isActive = pathname === link.href;
@@ -410,16 +351,14 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center justify-between p-2.5 rounded-xl text-xs font-semibold transition-all ${
+                  className={`flex items-center gap-2 p-2.5 rounded-xl text-xs font-semibold transition-all ${
                     isActive
                       ? "bg-amber-100 text-amber-900 font-bold"
                       : "text-stone-700 hover:bg-stone-50"
                   }`}
                 >
-                  <div className="flex items-center gap-2">
-                    <Icon className="w-4 h-4 text-amber-600 shrink-0" />
-                    <span className="whitespace-nowrap">{link.label}</span>
-                  </div>
+                  <Icon className="w-4 h-4 text-amber-600 shrink-0" />
+                  <span className="truncate">{link.label}</span>
                 </Link>
               );
             })}
@@ -434,17 +373,6 @@ export function Navbar() {
               <Sparkles className="w-4 h-4 text-amber-600 fill-amber-500/30 shrink-0" />
               <span>Gia Sư AI (Bật Hộp Thoại Chat & Voice)</span>
             </button>
-
-            {user.role === "admin" && (
-              <Link
-                href="/admin"
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-2 p-2.5 rounded-xl text-xs font-bold text-red-700 hover:bg-red-50 col-span-2 border border-red-200 bg-red-50/50"
-              >
-                <ShieldAlert className="w-4 h-4 text-red-600 shrink-0" />
-                <span>Quản Trị Hệ Thống</span>
-              </Link>
-            )}
           </div>
         </div>
       )}

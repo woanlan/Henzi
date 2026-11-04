@@ -1,0 +1,22 @@
+{
+  "name": "HANZI MASTER — Học Tiếng Trung HSK",
+  "short_name": "HanziMaster",
+  "description": "Nền tảng tự học tiếng Trung toàn diện từ HSK 1 đến HSK 6",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAFAF9",
+  "theme_color": "#D97706",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

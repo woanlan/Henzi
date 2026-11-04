@@ -62,6 +62,10 @@ class SoundManager {
     }
   }
 
+  playCorrect() {
+    this.playSuccess();
+  }
+
   playError() {
     const ctx = this.getContext();
     if (!ctx) return;
