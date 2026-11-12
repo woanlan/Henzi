@@ -1,81 +1,487 @@
 import { pinyin } from "pinyin-pro";
 import { AIMessageBreakdown } from "@/types";
 
-// Comprehensive Dictionary for common HSK words and characters
-export const VOCAB_DICT: Record<string, { pinyin: string; vn: string; pos: string }> = {
-  // Common pronouns & particles
-  "我": { pinyin: "wǒ", vn: "tôi, mình", pos: "Đại từ" },
-  "你": { pinyin: "nǐ", vn: "bạn, cậu", pos: "Đại từ" },
-  "他": { pinyin: "tā", vn: "anh ấy, cậu ấy", pos: "Đại từ" },
-  "她": { pinyin: "tā", vn: "cô ấy, chị ấy", pos: "Đại từ" },
-  "我们": { pinyin: "wǒmen", vn: "chúng tôi, chúng mình", pos: "Đại từ" },
-  "你们": { pinyin: "nǐmen", vn: "các bạn", pos: "Đại từ" },
-  "他们": { pinyin: "tāmen", vn: "họ, các anh ấy", pos: "Đại từ" },
-  "这": { pinyin: "zhè", vn: "đây, này", pos: "Đại từ" },
-  "那": { pinyin: "nà", vn: "đó, kia", pos: "Đại từ" },
-  "的": { pinyin: "de", vn: "của, trợ từ kết cấu", pos: "Trợ từ" },
-  "是": { pinyin: "shì", vn: "là, đúng", pos: "Động từ" },
-  "不是": { pinyin: "bú shì", vn: "không phải là", pos: "Cụm động từ" },
-  "了": { pinyin: "le", vn: "rồi (trợ từ ngữ khí/hoàn thành)", pos: "Trợ từ" },
-  "吗": { pinyin: "ma", vn: "không, phải không (trợ từ nghi vấn)", pos: "Trợ từ" },
-  "呢": { pinyin: "ne", vn: "thế, nhỉ (trợ từ ngữ khí)", pos: "Trợ từ" },
-  "吧": { pinyin: "ba", vn: "nhé, đi (trợ từ đề nghị)", pos: "Trợ từ" },
+export interface KnowledgeItem {
+  zh: string;
+  pinyin: string;
+  meaningVn: string;
+  sinoVn?: string;
+  partOfSpeech: string;
+  strokeGuide?: string;
+  radicals?: string;
+  vocabBreakdown?: { word: string; pinyin: string; meaningVn: string; partOfSpeech?: string }[];
+  grammarAnalysis?: string[];
+  examples?: { zh: string; pinyin: string; vn: string }[];
+}
 
-  // Time & Weather
-  "今天": { pinyin: "jīntiān", vn: "hôm nay", pos: "Danh từ thời gian" },
-  "明天": { pinyin: "míngtiān", vn: "ngày mai", pos: "Danh từ thời gian" },
-  "昨天": { pinyin: "zuótiān", vn: "hôm qua", pos: "Danh từ thời gian" },
-  "现在": { pinyin: "xiànzài", vn: "bây giờ, hiện tại", pos: "Danh từ thời gian" },
-  "天气": { pinyin: "tiānqì", vn: "thời tiết", pos: "Danh từ" },
-  "很冷": { pinyin: "hěn lěng", vn: "rất lạnh", pos: "Cụm tính từ" },
-  "冷": { pinyin: "lěng", vn: "lạnh", pos: "Tính từ" },
-  "热": { pinyin: "rè", vn: "nóng", pos: "Tính từ" },
-  "下雨": { pinyin: "xià yǔ", vn: "mưa, trời mưa", pos: "Động từ" },
+// 1. Comprehensive Educational Knowledge Base for Common Vocabulary & Queries
+export const KNOWLEDGE_BASE: Record<string, KnowledgeItem> = {
+  // Family & Kinship
+  "bố": {
+    zh: "爸爸",
+    pinyin: "bàba",
+    meaningVn: "bố, ba, cha",
+    sinoVn: "Ba ba / Phụ",
+    partOfSpeech: "Danh từ xưng hô gia đình",
+    strokeGuide: "Chữ 爸 có 8 nét: Phẩy (撇) ➔ Chấm (点) ➔ Phẩy ➔ Mác (捺) [Bộ Phụ 父] ➔ Ngang gập (横折) ➔ Sổ (竖) ➔ Ngang (横) ➔ Sổ cong móc (竖弯钩) [Chữ Ba 巴].",
+    radicals: "Bộ Phụ (父 - người cha) ở trên + Chữ Ba (巴) ở dưới hài thanh (chỉ âm đọc).",
+    vocabBreakdown: [
+      { word: "爸", pinyin: "bà", meaningVn: "bố, ba, cha (âm Hán Việt: Ba)", partOfSpeech: "Danh từ" },
+      { word: "父", pinyin: "fù", meaningVn: "người cha, phụ thân (bộ thủ chỉ nghĩa)", partOfSpeech: "Bộ thủ" },
+    ],
+    grammarAnalysis: [
+      "Quy tắc phát âm: Từ '爸爸' có chữ thứ hai đọc thanh nhẹ không dấu (bàba), đọc lướt nhanh.",
+      "Trong văn phong trang trọng, xưng hô tôn kính có thể dùng '父亲' (fùqīn - phụ thân).",
+      "Khi gọi thân mật trong gia đình: 老爸 (lǎobà - bố già, bố yêu).",
+    ],
+    examples: [
+      { zh: "我爸爸是一名医生。", pinyin: "Wǒ bàba shì yì míng yīshēng.", vn: "Bố tôi là một bác sĩ." },
+      { zh: "爸爸，祝您父亲节快乐！", pinyin: "Bàba, zhù nín fùqīnjié kuàilè!", vn: "Bố ơi, chúc bố ngày của Cha vui vẻ!" },
+      { zh: "我爱我的爸爸妈妈。", pinyin: "Wǒ ài wǒ de bàba māma.", vn: "Tôi yêu bố mẹ của tôi." },
+    ],
+  },
+  "ba": {
+    zh: "爸爸",
+    pinyin: "bàba",
+    meaningVn: "ba, bố, cha",
+    sinoVn: "Ba ba / Phụ",
+    partOfSpeech: "Danh từ xưng hô",
+    strokeGuide: "Chữ 爸 có 8 nét: Bộ Phụ (父) 4 nét ở trên + chữ Ba (巴) 4 nét ở dưới.",
+    radicals: "Bộ Phụ (父) chỉ ý nghĩa người cha.",
+    vocabBreakdown: [
+      { word: "爸", pinyin: "bà", meaningVn: "ba, bố", partOfSpeech: "Danh từ" },
+      { word: "爸爸", pinyin: "bàba", meaningVn: "ba, bố", partOfSpeech: "Danh từ" },
+    ],
+    grammarAnalysis: [
+      "Chữ thứ hai đọc thanh nhẹ (bàba).",
+      "Có thể dùng '老爸' (lǎobà) để xưng hô thân mật.",
+    ],
+    examples: [
+      { zh: "我爸爸今天去上班。", pinyin: "Wǒ bàba jīntiān qù shàngbān.", vn: "Hôm nay ba tôi đi làm." },
+      { zh: "爸爸对我很好。", pinyin: "Bàba duì wǒ hěn hǎo.", vn: "Ba đối xử với tôi rất tốt." },
+    ],
+  },
+  "cha": {
+    zh: "爸爸",
+    pinyin: "bàba",
+    meaningVn: "cha, bố, ba",
+    sinoVn: "Phụ thân",
+    partOfSpeech: "Danh từ xưng hô",
+    strokeGuide: "Chữ 爸 có 8 nét: Bộ Phụ (父) ở trên + chữ Ba (巴) ở dưới.",
+    radicals: "Bộ Phụ (父) chỉ nghĩa người cha.",
+    vocabBreakdown: [
+      { word: "爸爸", pinyin: "bàba", meaningVn: "cha, bố", partOfSpeech: "Danh từ" },
+      { word: "父亲", pinyin: "fùqīn", meaningVn: "phụ thân, người cha (trang trọng)", partOfSpeech: "Danh từ" },
+    ],
+    grammarAnalysis: [
+      "Khẩu ngữ hàng ngày dùng '爸爸', văn viết hoặc trang trọng dùng '父亲'.",
+    ],
+    examples: [
+      { zh: "父亲节快乐！", pinyin: "Fùqīnjié kuàilè!", vn: "Chúc mừng ngày của Cha!" },
+    ],
+  },
+  "mẹ": {
+    zh: "妈妈",
+    pinyin: "māma",
+    meaningVn: "mẹ, má, u",
+    sinoVn: "Ma ma / Mẫu",
+    partOfSpeech: "Danh từ xưng hô",
+    strokeGuide: "Chữ 妈 có 6 nét: Gồm bộ Nữ (女) 3 nét bên trái + chữ Mã (马) 3 nét bên phải.",
+    radicals: "Bộ Nữ (女 - người phụ nữ) chỉ ý nghĩa + chữ Mã (马) chỉ âm đọc.",
+    vocabBreakdown: [
+      { word: "妈", pinyin: "mā", meaningVn: "mẹ (âm Hán Việt: Ma)", partOfSpeech: "Danh từ" },
+      { word: "女", pinyin: "nǚ", meaningVn: "người nữ, phụ nữ (bộ thủ)", partOfSpeech: "Bộ thủ" },
+    ],
+    grammarAnalysis: [
+      "Chữ thứ hai đọc thanh nhẹ (māma).",
+      "Trang trọng dùng '母亲' (mǔqīn - mẫu thân). Thân mật dùng '老妈' (lǎomā).",
+    ],
+    examples: [
+      { zh: "我妈妈做的饭很好吃。", pinyin: "Wǒ māma zuò de fàn hěn hǎochī.", vn: "Cơm mẹ tôi nấu rất ngon." },
+      { zh: "妈妈，我爱你！", pinyin: "Māma, wǒ ài nǐ!", vn: "Mẹ ơi, con yêu mẹ!" },
+    ],
+  },
+  "má": {
+    zh: "妈妈",
+    pinyin: "māma",
+    meaningVn: "má, mẹ",
+    partOfSpeech: "Danh từ",
+    vocabBreakdown: [{ word: "妈妈", pinyin: "māma", meaningVn: "mẹ, má", partOfSpeech: "Danh từ" }],
+    examples: [{ zh: "我妈妈很漂亮。", pinyin: "Wǒ māma hěn piàoliang.", vn: "Má tôi rất đẹp." }],
+  },
+  "con": {
+    zh: "孩子",
+    pinyin: "háizi",
+    meaningVn: "con, đứa trẻ",
+    sinoVn: "Hài tử",
+    partOfSpeech: "Danh từ",
+    strokeGuide: "Chữ 孩 có 9 nét (bộ Tử 子 bên trái), chữ 子 có 3 nét.",
+    vocabBreakdown: [
+      { word: "孩子", pinyin: "háizi", meaningVn: "con, đứa trẻ", partOfSpeech: "Danh từ" },
+      { word: "儿子", pinyin: "érzi", meaningVn: "con trai", partOfSpeech: "Danh từ" },
+      { word: "女儿", pinyin: "nǚ'ér", meaningVn: "con gái", partOfSpeech: "Danh từ" },
+    ],
+    grammarAnalysis: ["'孩子' chỉ con cái nói chung hoặc trẻ em."],
+    examples: [{ zh: "他们有两个孩子。", pinyin: "Tāmen yǒu liǎng gè háizi.", vn: "Họ có hai đứa con." }],
+  },
+  "con trai": {
+    zh: "儿子",
+    pinyin: "érzi",
+    meaningVn: "con trai",
+    partOfSpeech: "Danh từ",
+    vocabBreakdown: [{ word: "儿子", pinyin: "érzi", meaningVn: "con trai", partOfSpeech: "Danh từ" }],
+    examples: [{ zh: "我儿子今年五岁了。", pinyin: "Wǒ érzi jīnnián wǔ suì le.", vn: "Con trai tôi năm nay 5 tuổi rồi." }],
+  },
+  "con gái": {
+    zh: "女儿",
+    pinyin: "nǚ'ér",
+    meaningVn: "con gái",
+    partOfSpeech: "Danh từ",
+    vocabBreakdown: [{ word: "女儿", pinyin: "nǚ'ér", meaningVn: "con gái", partOfSpeech: "Danh từ" }],
+    examples: [{ zh: "我女儿很聪明。", pinyin: "Wǒ nǚ'ér hěn cōngmíng.", vn: "Con gái tôi rất thông minh." }],
+  },
+  "anh trai": {
+    zh: "哥哥",
+    pinyin: "gēge",
+    meaningVn: "anh trai",
+    sinoVn: "Ca ca",
+    partOfSpeech: "Danh từ",
+    vocabBreakdown: [{ word: "哥哥", pinyin: "gēge", meaningVn: "anh trai", partOfSpeech: "Danh từ" }],
+    examples: [{ zh: "我哥哥在北京工作。", pinyin: "Wǒ gēge zài Běijīng gōngzuò.", vn: "Anh trai tôi làm việc ở Bắc Kinh." }],
+  },
+  "em trai": {
+    zh: "弟弟",
+    pinyin: "dìdi",
+    meaningVn: "em trai",
+    sinoVn: "Đệ đệ",
+    partOfSpeech: "Danh từ",
+    vocabBreakdown: [{ word: "弟弟", pinyin: "dìdi", meaningVn: "em trai", partOfSpeech: "Danh từ" }],
+    examples: [{ zh: "我弟弟在上大学。", pinyin: "Wǒ dìdi zài shàng dàxué.", vn: "Em trai tôi đang học đại học." }],
+  },
+  "chị gái": {
+    zh: "姐姐",
+    pinyin: "jiějie",
+    meaningVn: "chị gái",
+    sinoVn: "Tỷ tỷ",
+    partOfSpeech: "Danh từ",
+    vocabBreakdown: [{ word: "姐姐", pinyin: "jiějie", meaningVn: "chị gái", partOfSpeech: "Danh từ" }],
+    examples: [{ zh: "姐姐喜欢看书。", pinyin: "Jiějie xǐhuan kàn shū.", vn: "Chị gái thích đọc sách." }],
+  },
+  "em gái": {
+    zh: "妹妹",
+    pinyin: "mèimei",
+    meaningVn: "em gái",
+    sinoVn: "Muội muội",
+    partOfSpeech: "Danh từ",
+    vocabBreakdown: [{ word: "妹妹", pinyin: "mèimei", meaningVn: "em gái", partOfSpeech: "Danh từ" }],
+    examples: [{ zh: "我妹妹会跳舞。", pinyin: "Wǒ mèimei huì tiàowǔ.", vn: "Em gái tôi biết múa." }],
+  },
+  "ông nội": {
+    zh: "爷爷",
+    pinyin: "yéye",
+    meaningVn: "ông nội",
+    sinoVn: "Da da",
+    partOfSpeech: "Danh từ",
+    vocabBreakdown: [{ word: "爷爷", pinyin: "yéye", meaningVn: "ông nội", partOfSpeech: "Danh từ" }],
+    examples: [{ zh: "爷爷今年八十岁了。", pinyin: "Yéye jīnnián bāshí suì le.", vn: "Ông nội năm nay 80 tuổi rồi." }],
+  },
+  "bà nội": {
+    zh: "奶奶",
+    pinyin: "nǎinai",
+    meaningVn: "bà nội",
+    sinoVn: "Nãi nãi",
+    partOfSpeech: "Danh từ",
+    vocabBreakdown: [{ word: "奶奶", pinyin: "nǎinai", meaningVn: "bà nội", partOfSpeech: "Danh từ" }],
+    examples: [{ zh: "奶奶身体很好。", pinyin: "Nǎinai shēntǐ hěn hǎo.", vn: "Bà nội sức khỏe rất tốt." }],
+  },
+  "gia đình": {
+    zh: "家庭",
+    pinyin: "jiātíng",
+    meaningVn: "gia đình, nhà",
+    sinoVn: "Gia đình",
+    partOfSpeech: "Danh từ",
+    vocabBreakdown: [{ word: "家", pinyin: "jiā", meaningVn: "nhà, gia đình", partOfSpeech: "Danh từ" }],
+    examples: [{ zh: "我家有四口人。", pinyin: "Wǒ jiā yǒu sì kǒu rén.", vn: "Nhà tôi có 4 người." }],
+  },
 
-  // Travel & Transportation
-  "坐": { pinyin: "zuò", vn: "ngồi, đi (bằng phương tiện)", pos: "Động từ" },
-  "飞机": { pinyin: "fēijī", vn: "máy bay", pos: "Danh từ" },
-  "坐飞机": { pinyin: "zuò fēijī", vn: "đi máy bay", pos: "Cụm động từ" },
-  "出租车": { pinyin: "chūzūchē", vn: "xe taxi", pos: "Danh từ" },
-  "公共汽车": { pinyin: "gōnggòng qìchē", vn: "xe buýt", pos: "Danh từ" },
-  "地铁": { pinyin: "dìtiě", vn: "tàu điện ngầm", pos: "Danh từ" },
-  "机场": { pinyin: "jīchǎng", vn: "sân bay", pos: "Danh từ" },
-  "来": { pinyin: "lái", vn: "đến, tới", pos: "Động từ" },
-  "去": { pinyin: "qù", vn: "đi", pos: "Động từ" },
-  "回": { pinyin: "huí", vn: "về, quay lại", pos: "Động từ" },
+  // Greetings & Social
+  "xin chào": {
+    zh: "你好",
+    pinyin: "nǐ hǎo",
+    meaningVn: "xin chào, chào bạn",
+    sinoVn: "Nhĩ hảo",
+    partOfSpeech: "Lời chào hỏi",
+    vocabBreakdown: [
+      { word: "你", pinyin: "nǐ", meaningVn: "bạn, cậu", partOfSpeech: "Đại từ" },
+      { word: "好", pinyin: "hǎo", meaningVn: "tốt, lành, khỏe", partOfSpeech: "Tính từ" },
+    ],
+    grammarAnalysis: ["Biến điệu thanh 3: 'nǐ' và 'hǎo' đều là thanh 3, khi đọc liền 'nǐ' chuyển thành thanh 2 ('ní hǎo')."],
+    examples: [{ zh: "你好！很高兴认识你。", pinyin: "Nǐ hǎo! Hěn gāoxìng rènshi nǐ.", vn: "Xin chào! Rất vui được quen biết bạn." }],
+  },
+  "chào": {
+    zh: "你好",
+    pinyin: "nǐ hǎo",
+    meaningVn: "chào bạn, xin chào",
+    partOfSpeech: "Lời chào",
+    vocabBreakdown: [{ word: "你好", pinyin: "nǐ hǎo", meaningVn: "xin chào", partOfSpeech: "Lời chào" }],
+    examples: [{ zh: "你好，欢迎光临！", pinyin: "Nǐ hǎo, huānyíng guānglín!", vn: "Chào bạn, hoan nghênh ghé thăm!" }],
+  },
+  "chào buổi sáng": {
+    zh: "早上好",
+    pinyin: "zǎoshang hǎo",
+    meaningVn: "chào buổi sáng, sớm an",
+    sinoVn: "Tảo thượng hảo",
+    partOfSpeech: "Lời chào",
+    vocabBreakdown: [
+      { word: "早上", pinyin: "zǎoshang", meaningVn: "buổi sáng", partOfSpeech: "Danh từ" },
+      { word: "好", pinyin: "hǎo", meaningVn: "tốt, khỏe", partOfSpeech: "Tính từ" },
+    ],
+    examples: [{ zh: "老师，早上好！", pinyin: "Lǎoshī, zǎoshang hǎo!", vn: "Em chào thầy, buổi sáng tốt lành!" }],
+  },
+  "chúc ngủ ngon": {
+    zh: "晚安",
+    pinyin: "wǎn'ān",
+    meaningVn: "chúc ngủ ngon, vãn an",
+    sinoVn: "Vãn an",
+    partOfSpeech: "Lời chúc",
+    vocabBreakdown: [
+      { word: "晚", pinyin: "wǎn", meaningVn: "muộn, tối", partOfSpeech: "Tính từ" },
+      { word: "安", pinyin: "ān", meaningVn: "bình an, an lành", partOfSpeech: "Tính từ" },
+    ],
+    examples: [{ zh: "时间不早了，晚安！", pinyin: "Shíjiān bù zǎo le, wǎn'ān!", vn: "Không còn sớm nữa, chúc ngủ ngon!" }],
+  },
+  "cảm ơn": {
+    zh: "谢谢",
+    pinyin: "xièxie",
+    meaningVn: "cảm ơn",
+    sinoVn: "Tạ tạ",
+    partOfSpeech: "Thán từ cảm tạ",
+    vocabBreakdown: [{ word: "谢", pinyin: "xiè", meaningVn: "cảm ơn, tạ ơn", partOfSpeech: "Động từ" }],
+    grammarAnalysis: ["Chữ thứ hai đọc thanh nhẹ: xièxie."],
+    examples: [{ zh: "谢谢你的帮助！", pinyin: "Xièxie nǐ de bāngzhù!", vn: "Cảm ơn sự giúp đỡ của bạn!" }],
+  },
+  "không có chi": {
+    zh: "不客气",
+    pinyin: "bú kèqi",
+    meaningVn: "không có chi, đừng khách sáo",
+    sinoVn: "Bất khách khí",
+    partOfSpeech: "Khẩu ngữ đáp lễ",
+    vocabBreakdown: [{ word: "客气", pinyin: "kèqi", meaningVn: "khách sáo", partOfSpeech: "Tính từ" }],
+    examples: [{ zh: "不用谢，不客气！", pinyin: "Bú yòng xiè, bú kèqi!", vn: "Không cần cảm ơn, đừng khách sáo!" }],
+  },
+  "xin lỗi": {
+    zh: "对不起",
+    pinyin: "duìbuqǐ",
+    meaningVn: "xin lỗi",
+    sinoVn: "Đối bất khởi",
+    partOfSpeech: "Khẩu ngữ xin lỗi",
+    vocabBreakdown: [{ word: "对不起", pinyin: "duìbuqǐ", meaningVn: "xin lỗi", partOfSpeech: "Động từ" }],
+    examples: [{ zh: "对不起，我迟到了。", pinyin: "Duìbuqǐ, wǒ chídào le.", vn: "Xin lỗi, tôi đến muộn rồi." }],
+  },
+  "không sao": {
+    zh: "没关系",
+    pinyin: "méi guānxi",
+    meaningVn: "không sao đâu, không hề gì",
+    sinoVn: "Một quan hệ",
+    partOfSpeech: "Khẩu ngữ đáp lại lời xin lỗi",
+    vocabBreakdown: [{ word: "没关系", pinyin: "méi guānxi", meaningVn: "không sao", partOfSpeech: "Cụm từ" }],
+    examples: [{ zh: "没关系，下次注意就好。", pinyin: "Méi guānxi, xià cì zhùyì jiù hǎo.", vn: "Không sao đâu, lần sau chú ý là được." }],
+  },
+  "tạm biệt": {
+    zh: "再见",
+    pinyin: "zàijiàn",
+    meaningVn: "tạm biệt, hẹn gặp lại",
+    sinoVn: "Tái kiến",
+    partOfSpeech: "Lời chào từ biệt",
+    vocabBreakdown: [
+      { word: "再", pinyin: "zài", meaningVn: "lại, lần nữa", partOfSpeech: "Phó từ" },
+      { word: "见", pinyin: "jiàn", meaningVn: "thấy, gặp", partOfSpeech: "Động từ" },
+    ],
+    examples: [{ zh: "明天见，再见！", pinyin: "Míngtiān jiàn, zàijiàn!", vn: "Mai gặp lại nhé, tạm biệt!" }],
+  },
 
-  // Daily activities & Clothing
-  "穿": { pinyin: "chuān", vn: "mặc (quần áo), đi (giày)", pos: "Động từ" },
-  "衣服": { pinyin: "yīfu", vn: "quần áo, trang phục", pos: "Danh từ" },
-  "保暖": { pinyin: "bǎonuǎn", vn: "giữ ấm", pos: "Động từ / Tính từ" },
-  "穿暖和": { pinyin: "chuān nuǎnhuo", vn: "mặc ấm", pos: "Cụm động từ" },
-  "记得": { pinyin: "jìde", vn: "nhớ, ghi nhớ", pos: "Động từ" },
-  "喝茶": { pinyin: "hē chá", vn: "uống trà", pos: "Cụm động từ" },
-  "吃饭": { pinyin: "chī fàn", vn: "ăn cơm", pos: "Cụm động từ" },
-  "学习": { pinyin: "xuéxí", vn: "học tập", pos: "Động từ" },
-  "汉语": { pinyin: "Hànyǔ", vn: "tiếng Hán, tiếng Trung", pos: "Danh từ" },
-  "中文": { pinyin: "Zhōngwén", vn: "tiếng Trung", pos: "Danh từ" },
-  "中国": { pinyin: "Zhōngguó", vn: "Trung Quốc", pos: "Danh từ riêng" },
-  "越南": { pinyin: "Yuènán", vn: "Việt Nam", pos: "Danh từ riêng" },
-  "越南人": { pinyin: "Yuènán rén", vn: "người Việt Nam", pos: "Danh từ" },
-  "朋友": { pinyin: "péngyou", vn: "bạn bè", pos: "Danh từ" },
-  "老师": { pinyin: "lǎoshī", vn: "giáo viên, thầy cô", pos: "Danh từ" },
-  "工作": { pinyin: "gōngzuò", vn: "làm việc, công việc", pos: "Động từ / Danh từ" },
-  "谢谢": { pinyin: "xièxie", vn: "cảm ơn", pos: "Thán từ" },
-  "你好": { pinyin: "nǐ hǎo", vn: "xin chào", pos: "Lời chào" },
-  "再见": { pinyin: "zàijiàn", vn: "tạm biệt", pos: "Động từ" },
-  "很高兴": { pinyin: "hěn gāoxìng", vn: "rất vui", pos: "Cụm tính từ" },
-  "认识": { pinyin: "rènshi", vn: "quen biết, làm quen", pos: "Động từ" },
+  // Daily Communication & Verbs
+  "tôi yêu bạn": {
+    zh: "我爱你",
+    pinyin: "wǒ ài nǐ",
+    meaningVn: "tôi yêu bạn, anh yêu em, em yêu anh",
+    sinoVn: "Ngã ái nhĩ",
+    partOfSpeech: "Mẫu câu biểu đạt tình cảm",
+    vocabBreakdown: [
+      { word: "我", pinyin: "wǒ", meaningVn: "tôi, mình", partOfSpeech: "Đại từ" },
+      { word: "爱", pinyin: "ài", meaningVn: "yêu, thương", partOfSpeech: "Động từ" },
+      { word: "你", pinyin: "nǐ", meaningVn: "bạn, em, anh", partOfSpeech: "Đại từ" },
+    ],
+    examples: [{ zh: "我爱你，一生一世。", pinyin: "Wǒ ài nǐ, yì shēng yí shì.", vn: "Anh yêu em trọn đời trọn kiếp." }],
+  },
+  "bạn tên gì": {
+    zh: "你叫什么名字？",
+    pinyin: "Nǐ jiào shénme míngzi?",
+    meaningVn: "bạn tên là gì?",
+    sinoVn: "Nhĩ khiếu thập ma danh tự",
+    partOfSpeech: "Câu hỏi nghi vấn",
+    vocabBreakdown: [
+      { word: "叫", pinyin: "jiào", meaningVn: "gọi là, tên là", partOfSpeech: "Động từ" },
+      { word: "什么", pinyin: "shénme", meaningVn: "cái gì, gì", partOfSpeech: "Đại từ nghi vấn" },
+      { word: "名字", pinyin: "míngzi", meaningVn: "tên gọi", partOfSpeech: "Danh từ" },
+    ],
+    examples: [{ zh: "你好，请问你叫什么名字？", pinyin: "Nǐ hǎo, qǐngwèn nǐ jiào shénme míngzi?", vn: "Xin chào, cho hỏi bạn tên gì thế?" }],
+  },
+  "ăn cơm": {
+    zh: "吃饭",
+    pinyin: "chī fàn",
+    meaningVn: "ăn cơm, dùng bữa",
+    sinoVn: "Cật phạn",
+    partOfSpeech: "Cụm động từ",
+    vocabBreakdown: [
+      { word: "吃", pinyin: "chī", meaningVn: "ăn", partOfSpeech: "Động từ" },
+      { word: "饭", pinyin: "fàn", meaningVn: "cơm, bữa ăn", partOfSpeech: "Danh từ" },
+    ],
+    examples: [{ zh: "你吃饭了吗？", pinyin: "Nǐ chī fàn le ma?", vn: "Bạn đã ăn cơm chưa?" }],
+  },
+  "uống nước": {
+    zh: "喝水",
+    pinyin: "hē shuǐ",
+    meaningVn: "uống nước",
+    partOfSpeech: "Cụm động từ",
+    vocabBreakdown: [
+      { word: "喝", pinyin: "hē", meaningVn: "uống", partOfSpeech: "Động từ" },
+      { word: "水", pinyin: "shuǐ", meaningVn: "nước", partOfSpeech: "Danh từ" },
+    ],
+    examples: [{ zh: "多喝水对身体好。", pinyin: "Duō hē shuǐ duì shēntǐ hǎo.", vn: "Uống nhiều nước rất tốt cho cơ thể." }],
+  },
+  "uống trà": {
+    zh: "喝茶",
+    pinyin: "hē chá",
+    meaningVn: "uống trà, thưởng trà",
+    partOfSpeech: "Cụm động từ",
+    vocabBreakdown: [{ word: "喝茶", pinyin: "hē chá", meaningVn: "uống trà", partOfSpeech: "Cụm động từ" }],
+    examples: [{ zh: "我们一起去喝茶吧。", pinyin: "Wǒmen yìqǐ qù hē chá ba.", vn: "Chúng mình cùng đi uống trà nhé." }],
+  },
+  "trà sữa": {
+    zh: "奶茶",
+    pinyin: "nǎichá",
+    meaningVn: "trà sữa",
+    partOfSpeech: "Danh từ",
+    vocabBreakdown: [{ word: "奶茶", pinyin: "nǎichá", meaningVn: "trà sữa", partOfSpeech: "Danh từ" }],
+    examples: [{ zh: "我想买一杯珍珠奶茶。", pinyin: "Wǒ xiǎng mǎi yì bēi zhēnzhū nǎichá.", vn: "Tôi muốn mua một cốc trà sữa trân châu." }],
+  },
+  "cà phê": {
+    zh: "咖啡",
+    pinyin: "kāfēi",
+    meaningVn: "cà phê",
+    partOfSpeech: "Danh từ",
+    vocabBreakdown: [{ word: "咖啡", pinyin: "kāfēi", meaningVn: "cà phê", partOfSpeech: "Danh từ" }],
+    examples: [{ zh: "来一杯热咖啡。", pinyin: "Lái yì bēi rè kāfēi.", vn: "Cho một cốc cà phê nóng." }],
+  },
+  "bao nhiêu tiền": {
+    zh: "多少钱",
+    pinyin: "duōshao qián",
+    meaningVn: "bao nhiêu tiền?",
+    sinoVn: "Đa thiểu tiền",
+    partOfSpeech: "Cụm từ nghi vấn giá cả",
+    vocabBreakdown: [
+      { word: "多少", pinyin: "duōshao", meaningVn: "bao nhiêu", partOfSpeech: "Đại từ nghi vấn" },
+      { word: "钱", pinyin: "qián", meaningVn: "tiền", partOfSpeech: "Danh từ" },
+    ],
+    examples: [{ zh: "老板，这个多少钱？", pinyin: "Lǎobǎn, zhè ge duōshao qián?", vn: "Ông chủ ơi, cái này bao nhiêu tiền?" }],
+  },
+  "đắt quá": {
+    zh: "太贵了",
+    pinyin: "tài guì le",
+    meaningVn: "đắt quá rồi, mắc quá",
+    partOfSpeech: "Cụm cảm thán",
+    vocabBreakdown: [
+      { word: "太...了", pinyin: "tài...le", meaningVn: "quá... rồi (cấu trúc cảm thán)", partOfSpeech: "Cấu trúc ngữ pháp" },
+      { word: "贵", pinyin: "guì", meaningVn: "đắt, quý", partOfSpeech: "Tính từ" },
+    ],
+    examples: [{ zh: "太贵了，能不能便宜点？", pinyin: "Tài guì le, néng bu néng piányi diǎn?", vn: "Đắt quá, có thể rẻ hơn chút được không?" }],
+  },
+  "rẻ hơn": {
+    zh: "便宜一点",
+    pinyin: "piányi yìdiǎn",
+    meaningVn: "rẻ hơn một chút",
+    partOfSpeech: "Cụm từ",
+    vocabBreakdown: [{ word: "便宜", pinyin: "piányi", meaningVn: "rẻ", partOfSpeech: "Tính từ" }],
+    examples: [{ zh: "便宜一点我就买。", pinyin: "Piányi yìdiǎn wǒ jiù mǎi.", vn: "Rẻ hơn chút thì tôi mua." }],
+  },
+  "ở đâu": {
+    zh: "在哪里",
+    pinyin: "zài nǎlǐ",
+    meaningVn: "ở đâu, tại đâu?",
+    partOfSpeech: "Cụm từ nghi vấn",
+    vocabBreakdown: [{ word: "哪里", pinyin: "nǎlǐ", meaningVn: "ở đâu", partOfSpeech: "Đại từ" }],
+    examples: [{ zh: "请问洗手间在哪里？", pinyin: "Qǐngwèn xǐshǒujiān zài nǎlǐ?", vn: "Xin hỏi nhà vệ sinh ở đâu ạ?" }],
+  },
+  "nhà vệ sinh": {
+    zh: "洗手间",
+    pinyin: "xǐshǒujiān",
+    meaningVn: "nhà vệ sinh, toilet",
+    partOfSpeech: "Danh từ",
+    vocabBreakdown: [{ word: "洗手间", pinyin: "xǐshǒujiān", meaningVn: "nhà vệ sinh", partOfSpeech: "Danh từ" }],
+    examples: [{ zh: "洗手间在左边。", pinyin: "Xǐshǒujiān zài zuǒbiān.", vn: "Nhà vệ sinh ở bên tay trái." }],
+  },
+  "sân bay": {
+    zh: "机场",
+    pinyin: "jīchǎng",
+    meaningVn: "sân bay, phi trường",
+    partOfSpeech: "Danh từ",
+    vocabBreakdown: [{ word: "机场", pinyin: "jīchǎng", meaningVn: "sân bay", partOfSpeech: "Danh từ" }],
+    examples: [{ zh: "我要去机场接朋友。", pinyin: "Wǒ yào qù jīchǎng jiē péngyou.", vn: "Tôi phải ra sân bay đón bạn." }],
+  },
+  "máy bay": {
+    zh: "飞机",
+    pinyin: "fēijī",
+    meaningVn: "máy bay",
+    partOfSpeech: "Danh từ",
+    vocabBreakdown: [{ word: "飞机", pinyin: "fēijī", meaningVn: "máy bay", partOfSpeech: "Danh từ" }],
+    examples: [{ zh: "我是坐飞机来的。", pinyin: "Wǒ shì zuò fēijī lái de.", vn: "Tôi là đi máy bay đến đấy." }],
+  },
+  "người việt nam": {
+    zh: "越南人",
+    pinyin: "Yuènán rén",
+    meaningVn: "người Việt Nam",
+    partOfSpeech: "Danh từ",
+    vocabBreakdown: [
+      { word: "越南", pinyin: "Yuènán", meaningVn: "Việt Nam", partOfSpeech: "Danh từ riêng" },
+      { word: "人", pinyin: "rén", meaningVn: "người", partOfSpeech: "Danh từ" },
+    ],
+    examples: [{ zh: "我是越南人，我正在学中文。", pinyin: "Wǒ shì Yuènán rén, wǒ zhèngzài xué Zhōngwén.", vn: "Tôi là người Việt Nam, tôi đang học tiếng Trung." }],
+  },
 };
 
+// 2. Intelligent Keyword Extractor from Vietnamese Inquiries
+export function extractVietnameseTarget(query: string): string {
+  const clean = query.trim().toLowerCase().replace(/[?.,!]/g, "");
+
+  // Patterns like: "bố ghi sao", "bố viết sao", "bố nói sao", "bố tiếng trung là gì"
+  const patterns = [
+    /^(?:từ|chữ|tiếng)?\s*(.+?)\s+(?:ghi\s+sao|viết\s+sao|nói\s+sao|đọc\s+sao|dịch\s+sao|là\s+gì|tiếng\s+trung\s+là\s+gì|viết\s+như\s+thế\s+nào|đọc\s+như\s+thế\s+nào)$/,
+    /^(?:cách\s+viết|cách\s+ghi|cách\s+đọc|cách\s+nói|cách\s+dịch)\s+(?:từ|chữ)?\s*(.+?)$/,
+    /^(?:làm\s+sao\s+để\s+(?:viết|ghi|đọc|nói)|dịch\s+giúp\s+tôi\s+từ)\s*(.+?)$/,
+    /^(?:từ|chữ)\s*(.+?)\s+(?:trong\s+tiếng\s+trung|nghĩa\s+là\s+gì)$/,
+  ];
+
+  for (const pat of patterns) {
+    const match = clean.match(pat);
+    if (match && match[1]) {
+      return match[1].trim();
+    }
+  }
+
+  return clean;
+}
+
+// 3. Main NLP Engine Query Analyzer
 export function analyzeQuery(input: string, hskLevel: number = 1): {
   content: string;
-  breakdown: AIMessageBreakdown;
+  breakdown: AIMessageBreakdown | null;
+  engine?: string;
 } {
   const trimmed = input.trim();
+  const lower = trimmed.toLowerCase();
 
-  // 1. Check for specific question types
-  // CASE A: Distinguishing "二" (èr) and "两" (liǎng)
+  // SPECIAL GRAMMAR A: Distinguishing "二" (èr) and "两" (liǎng)
   if (trimmed.includes("二") && trimmed.includes("两")) {
     return {
       content: `Dưới đây là lời giải thích chi tiết về sự khác nhau giữa "二" (èr) và "两" (liǎng) trong tiếng Trung:`,
@@ -86,287 +492,132 @@ export function analyzeQuery(input: string, hskLevel: number = 1): {
         vocabBreakdown: [
           { word: "二", pinyin: "èr", meaningVn: "số 2 (dùng cho số đếm, số thứ tự, số phòng, số điện thoại)", partOfSpeech: "Số từ" },
           { word: "两", pinyin: "liǎng", meaningVn: "hai, đôi (dùng trước lượng từ chỉ số lượng 2 cái/người)", partOfSpeech: "Số từ" },
-          { word: "区别", pinyin: "qūbié", meaningVn: "sự khác biệt, phân biệt", partOfSpeech: "Danh từ / Động từ" },
         ],
         grammarAnalysis: [
-          "Quy tắc 1: Khi đếm số thứ tự hoặc đọc số phòng, số điện thoại, số tầng: BẮT BUỘC dùng '二' (Ví dụ: 一、二、三; 第二课; 二号楼).",
-          "Quy tắc 2: Khi biểu thị số lượng có LƯỢNG TỪ đi kèm phía sau: BẮT BUỘC dùng '两' (Ví dụ: 两个人 - hai người; 两本书 - hai quyển sách; 两块钱 - hai đồng; KHÔNG NÓI *二个人).",
-          "Quy tắc 3: Trước đơn vị đo lường truyền thống (斤 cân, 里 dặm) có thể dùng cả hai, nhưng trước lượng từ thông dụng luôn ưu tiên '两'.",
+          "Quy tắc 1: Khi đếm số thứ tự hoặc đọc số phòng, số điện thoại: BẮT BUỘC dùng '二' (Ví dụ: 一、二、三; 第二课; 二号楼).",
+          "Quy tắc 2: Khi biểu thị số lượng có LƯỢNG TỪ đi kèm phía sau: BẮT BUỘC dùng '两' (Ví dụ: 两个人 - hai người; 两本书 - hai quyển sách; KHÔNG NÓI *二个人).",
         ],
         naturalUsageExamples: [
-          { zh: "我有两个中国朋友。", pinyin: "Wǒ yǒu liǎng gè Zhōngguó péngyou.", vn: "Tôi có hai người bạn Trung Quốc. (dùng 两 trước lượng từ 个)" },
-          { zh: "我的房间号码是二零二。", pinyin: "Wǒ de fángjiān hàomǎ shì èr líng èr.", vn: "Số phòng của tôi là 202. (dùng 二 cho số phòng)" },
+          { zh: "我有两个中国朋友。", pinyin: "Wǒ yǒu liǎng gè Zhōngguó péngyou.", vn: "Tôi có hai người bạn Trung Quốc." },
+          { zh: "我的房间号码是二零二。", pinyin: "Wǒ de fángjiān hàomǎ shì èr líng èr.", vn: "Số phòng của tôi là 202." },
         ],
       },
+      engine: "offline-pedagogy",
     };
   }
 
-  // CASE B: Sentence explanation: "我是昨天坐飞机来的" (Emphatic structure 是...的)
+  // SPECIAL GRAMMAR B: Sentence explanation: "我是昨天坐飞机来的" (Emphatic structure 是...的)
   if (trimmed.includes("我是昨天坐飞机来的") || (trimmed.includes("昨天") && trimmed.includes("飞机"))) {
     return {
-      content: `Thầy giáo AI giải thích câu "${trimmed.includes("我是昨天坐飞机来的") ? "我是昨天坐飞机来的" : "Tôi hôm qua đi máy bay đến"}": Đây là cấu trúc ngữ pháp cực kỳ quan trọng trong HSK mang tên "Câu nhấn mạnh 是...的".`,
+      content: `Thầy giáo AI giải thích câu: Đây là cấu trúc ngữ pháp cực kỳ quan trọng trong HSK mang tên "Câu nhấn mạnh 是...的".`,
       breakdown: {
         originalZh: "我是昨天坐飞机来的。",
         pinyin: "Wǒ shì zuótiān zuò fēijī lái de.",
-        vietnameseTranslation: "Tôi là hôm qua đi máy bay đến đấy. (Nhấn mạnh thời gian và phương tiện đến)",
+        vietnameseTranslation: "Tôi là hôm qua đi máy bay đến đấy. (Nhấn mạnh thời gian và phương thức)",
         vocabBreakdown: [
           { word: "昨天", pinyin: "zuótiān", meaningVn: "hôm qua (thời gian đã qua)", partOfSpeech: "Danh từ thời gian" },
-          { word: "坐", pinyin: "zuò", meaningVn: "ngồi, đi (bằng phương tiện)", partOfSpeech: "Động từ" },
-          { word: "飞机", pinyin: "fēijī", meaningVn: "máy bay", partOfSpeech: "Danh từ" },
+          { word: "坐飞机", pinyin: "zuò fēijī", meaningVn: "đi máy bay", partOfSpeech: "Cụm động từ" },
           { word: "来", pinyin: "lái", meaningVn: "đến, tới", partOfSpeech: "Động từ" },
         ],
         grammarAnalysis: [
-          "Cấu trúc nhấn mạnh '是...的': Dùng khi hành động ĐÃ XẢY RA trong quá khứ, người nói muốn nhấn mạnh THỜI GIAN (昨天 - hôm qua), PHƯƠNG THỨC (坐飞机 - đi máy bay) hoặc ĐỊA ĐIỂM.",
-          "Vị trí: '是' đứng ngay trước thành phần cần nhấn mạnh (昨天坐飞机), và '的' đứng ở cuối câu.",
-          "Dạng phủ định: Đặt '不' trước '是' -> '我不是昨天坐飞机来的' (Tôi không phải đi máy bay đến hôm qua đâu).",
+          "Cấu trúc nhấn mạnh '是...的': Dùng khi hành động ĐÃ XẢY RA trong quá khứ, người nói muốn nhấn mạnh THỜI GIAN (昨天), PHƯƠNG THỨC (坐飞机) hoặc ĐỊA ĐIỂM.",
+          "Vị trí: '是' đứng ngay trước thành phần cần nhấn mạnh, và '的' đứng ở cuối câu.",
         ],
         naturalUsageExamples: [
           { zh: "你是怎么来的？我是坐出租车来的。", pinyin: "Nǐ shì zěnme lái de? Wǒ shì zuò chūzūchē lái de.", vn: "Bạn đến bằng cách nào thế? Tôi đi taxi đến đấy." },
-          { zh: "他是去年去中国的。", pinyin: "Tā shì qùnián qù Zhōngguó de.", vn: "Anh ấy là đi Trung Quốc vào năm ngoái." },
         ],
       },
+      engine: "offline-pedagogy",
     };
   }
 
-  // CASE C: Translation request: "Hôm nay trời lạnh, bạn nhớ mặc ấm nhé"
-  if (trimmed.toLowerCase().includes("hôm nay trời lạnh") || (trimmed.includes("trời lạnh") && trimmed.includes("mặc ấm"))) {
-    const zhSentence = "今天天气很冷，你记得多穿点衣服保暖。";
+  // CHECK 1: Look up extracted Vietnamese keyword in Knowledge Base
+  const extractedKeyword = extractVietnameseTarget(trimmed);
+  let matchedItem: KnowledgeItem | null = null;
+  let matchedKey = "";
+
+  // Exact or contains match on Knowledge Base
+  if (KNOWLEDGE_BASE[extractedKeyword]) {
+    matchedItem = KNOWLEDGE_BASE[extractedKeyword];
+    matchedKey = extractedKeyword;
+  } else {
+    // Substring match: find key in query or query in key
+    for (const key of Object.keys(KNOWLEDGE_BASE)) {
+      if (lower.includes(key) || extractedKeyword.includes(key)) {
+        matchedItem = KNOWLEDGE_BASE[key];
+        matchedKey = key;
+        break;
+      }
+    }
+  }
+
+  if (matchedItem) {
+    const isAskingHowToWrite =
+      lower.includes("ghi sao") ||
+      lower.includes("viết sao") ||
+      lower.includes("viết như thế nào") ||
+      lower.includes("cách viết") ||
+      lower.includes("cách ghi");
+
+    let explanationContent = "";
+    if (isAskingHowToWrite && matchedItem.strokeGuide) {
+      explanationContent = `Từ **"${matchedKey.toUpperCase()}"** trong tiếng Trung được viết là: **${matchedItem.zh}** (Phiên âm Pinyin: **${matchedItem.pinyin}**).\n\n✍️ **Hướng dẫn cách viết**:\n${matchedItem.strokeGuide}\n\n💡 **Ý nghĩa bộ thủ & Mẹo nhớ**:\n${matchedItem.radicals || "Gồm các nét chữ Hán quy chuẩn theo HSK."}`;
+    } else {
+      explanationContent = `Thầy giáo AI giải đáp: Từ/khái niệm **"${matchedKey}"** trong tiếng Trung tương ứng là **${matchedItem.zh}** (Phiên âm: **${matchedItem.pinyin}**).\n\n📖 Nghĩa tiếng Việt: **${matchedItem.meaningVn}**${matchedItem.sinoVn ? ` (Âm Hán Việt: *${matchedItem.sinoVn}*)` : ""}.`;
+    }
+
     return {
-      content: `Dưới đây là bản dịch chuẩn xác và tự nhiên sang tiếng Trung theo khẩu ngữ người bản xứ:`,
+      content: explanationContent,
       breakdown: {
-        originalZh: zhSentence,
-        pinyin: pinyin(zhSentence, { toneType: "symbol" }),
-        vietnameseTranslation: "Hôm nay trời lạnh, bạn nhớ mặc ấm nhé (mặc thêm nhiều quần áo giữ ấm).",
-        vocabBreakdown: [
-          { word: "今天", pinyin: "jīntiān", meaningVn: "hôm nay", partOfSpeech: "Danh từ thời gian" },
-          { word: "天气", pinyin: "tiānqì", meaningVn: "thời tiết", partOfSpeech: "Danh từ" },
-          { word: "很冷", pinyin: "hěn lěng", meaningVn: "rất lạnh", partOfSpeech: "Cụm tính từ" },
-          { word: "记得", pinyin: "jìde", meaningVn: "nhớ, ghi nhớ", partOfSpeech: "Động từ" },
-          { word: "多穿", pinyin: "duō chuān", meaningVn: "mặc nhiều hơn", partOfSpeech: "Cụm động từ" },
-          { word: "衣服", pinyin: "yīfu", meaningVn: "quần áo", partOfSpeech: "Danh từ" },
+        originalZh: matchedItem.zh,
+        pinyin: matchedItem.pinyin,
+        vietnameseTranslation: matchedItem.meaningVn,
+        direction: "vn_to_zh",
+        partOfSpeech: matchedItem.partOfSpeech,
+        vocabBreakdown: matchedItem.vocabBreakdown || [
+          { word: matchedItem.zh, pinyin: matchedItem.pinyin, meaningVn: matchedItem.meaningVn, partOfSpeech: matchedItem.partOfSpeech },
         ],
-        grammarAnalysis: [
-          "Kết cấu '多 + Động từ' (多穿): Biểu thị làm hành động gì đó nhiều hơn (多穿 - mặc nhiều hơn, 多喝水 - uống nhiều nước hơn).",
-          "Phó từ '记得' (nhớ) đứng trước động từ để đưa ra lời nhắc nhở quan tâm ân cần.",
+        grammarAnalysis: matchedItem.grammarAnalysis || [
+          "Phát âm chuẩn theo thanh điệu và ngữ cảnh giao tiếp tự nhiên.",
         ],
-        naturalUsageExamples: [
-          { zh: "外面风很大，出门记得戴围巾。", pinyin: "Wàimiàn fēng hěn dà, chūmén jìde dài wéijīn.", vn: "Bên ngoài gió to lắm, ra ngoài nhớ quàng khăn nhé." },
-          { zh: "天气冷了，要注意身体。", pinyin: "Tiānqì lěng le, yào zhùyì shēntǐ.", vn: "Trời trở lạnh rồi, nhớ chú ý giữ gìn sức khỏe nhé." },
+        naturalUsageExamples: matchedItem.examples || [
+          { zh: `${matchedItem.zh}，很好！`, pinyin: `${matchedItem.pinyin}, hěn hǎo!`, vn: `${matchedItem.meaningVn}, rất tốt!` },
         ],
       },
+      engine: "offline-knowledge-base",
     };
   }
 
-  // CASE D: Chinese sentence extracted from query
-  // Extract pure Chinese substring if any
+  // CHECK 2: If query contains pure Chinese characters
   const chineseMatches = trimmed.match(/[\u4e00-\u9fa5]+/g);
   if (chineseMatches && chineseMatches.length > 0) {
-    // Join continuous Chinese words
     const targetZh = chineseMatches.join("");
     const generatedPinyin = pinyin(targetZh, { toneType: "symbol" });
 
-    // Segment into vocabularies
-    const vocabList: { word: string; pinyin: string; meaningVn: string; partOfSpeech?: string }[] = [];
-    let remaining = targetZh;
-
-    // Scan dictionary
-    Object.keys(VOCAB_DICT).sort((a, b) => b.length - a.length).forEach((dictWord) => {
-      if (remaining.includes(dictWord) && vocabList.length < 5) {
-        vocabList.push({
-          word: dictWord,
-          pinyin: VOCAB_DICT[dictWord].pinyin,
-          meaningVn: VOCAB_DICT[dictWord].vn,
-          partOfSpeech: VOCAB_DICT[dictWord].pos,
-        });
-        remaining = remaining.replace(dictWord, "");
-      }
-    });
-
-    // If still have single characters
-    if (vocabList.length < 2 && targetZh.length >= 2) {
-      for (let i = 0; i < Math.min(3, targetZh.length); i++) {
-        const char = targetZh[i];
-        if (!vocabList.some((v) => v.word.includes(char))) {
-          vocabList.push({
-            word: char,
-            pinyin: pinyin(char, { toneType: "symbol" }),
-            meaningVn: VOCAB_DICT[char]?.vn || "từ vựng trong câu",
-            partOfSpeech: VOCAB_DICT[char]?.pos || "Từ tố / Chữ Hán",
-          });
-        }
-      }
-    }
-
-    const vnTranslation = generateAccurateTranslation(targetZh);
-
     return {
-      content: `Thầy giáo AI đã trích xuất và phân tích câu tiếng Trung "${targetZh}" của bạn:`,
+      content: `Thầy giáo AI đã phân tích chữ Hán "${targetZh}" của bạn:`,
       breakdown: {
         originalZh: targetZh,
         pinyin: generatedPinyin,
-        vietnameseTranslation: vnTranslation,
-        vocabBreakdown: vocabList,
+        vietnameseTranslation: `Chữ Hán: ${targetZh}`,
+        vocabBreakdown: [
+          { word: targetZh, pinyin: generatedPinyin, meaningVn: "Mục từ tiếng Trung", partOfSpeech: "Từ vựng" },
+        ],
         grammarAnalysis: [
-          `Cấu trúc câu: Tuân theo quy tắc ngữ pháp HSK ${hskLevel} với trật tự Chủ ngữ + Trạng ngữ + Động từ + Tân ngữ.`,
-          "Thanh điệu: Chú ý biến điệu thanh nhẹ và thanh 3 khi hai âm tiết thanh 3 đi liền kề.",
-          "Ngữ cảnh sử dụng: Rất tự nhiên và thông dụng trong đời sống hàng ngày của người bản xứ.",
+          `Độ dài: ${targetZh.length} chữ Hán. Hãy chú ý thanh điệu khi phát âm.`,
         ],
         naturalUsageExamples: [
-          {
-            zh: "很高兴认识你，欢迎来到中国！",
-            pinyin: "Hěn gāoxìng rènshi nǐ, huānyíng lái dào Zhōngguó!",
-            vn: "Rất vui được quen biết bạn, chào mừng bạn đến với Trung Quốc!",
-          },
+          { zh: `${targetZh}。`, pinyin: generatedPinyin, vn: "Ví dụ phát âm và ngữ cảnh chuẩn." },
         ],
       },
+      engine: "offline-chinese-parser",
     };
   }
 
-  // CASE E: Vietnamese request to translate into Chinese
-  const translated = translateVietnameseToChinese(trimmed);
+  // CHECK 3: Honest, Pedagogical Fallback when word is unknown offline
   return {
-    content: `Dưới đây là câu tiếng Trung tương ứng chuẩn ngữ pháp HSK ${hskLevel}:`,
-    breakdown: {
-      originalZh: translated.zh,
-      pinyin: pinyin(translated.zh, { toneType: "symbol" }),
-      vietnameseTranslation: trimmed,
-      vocabBreakdown: translated.vocab,
-      grammarAnalysis: [
-        "Trật tự câu tiếng Hán: Trạng ngữ chỉ thời gian/nơi chốn luôn đứng trước động từ chính.",
-        "Trợ từ ngữ khí '吧' đặt cuối câu để tạo sắc thái đề xuất, rủ rê nhẹ nhàng, lịch sự.",
-      ],
-      naturalUsageExamples: [
-        {
-          zh: "只要每天坚持练习，你的中文就会进步很快。",
-          pinyin: "Zhǐyào měitiān jiānchí liànxí, nǐ de Zhōngwén jiù huì jìnbù hěn kuài.",
-          vn: "Chỉ cần mỗi ngày kiên trì luyện tập, tiếng Trung của bạn sẽ tiến bộ rất nhanh.",
-        },
-      ],
-    },
-  };
-}
-
-function generateAccurateTranslation(zh: string): string {
-  if (zh.includes("我是昨天坐飞机来的")) return "Tôi là hôm qua đi máy bay đến đấy.";
-  if (zh.includes("你好")) return "Xin chào bạn!";
-  if (zh.includes("谢谢")) return "Cảm ơn bạn rất nhiều.";
-  if (zh.includes("再见")) return "Hẹn gặp lại, tạm biệt!";
-  if (zh.includes("我是越南人")) return "Tôi là người Việt Nam.";
-  if (zh.includes("喝茶")) return "Uống trà, thưởng trà.";
-  if (zh.includes("吃米饭")) return "Ăn cơm trắng.";
-  if (zh.includes("天气很冷")) return "Thời tiết rất lạnh.";
-  if (zh.includes("去机场")) return "Đi đến sân bay.";
-  if (zh.includes("请把门关上")) return "Làm ơn đóng cửa lại.";
-  return "Nội dung câu tiếng Trung chuẩn ngữ pháp được diễn đạt rõ nghĩa.";
-}
-
-function translateVietnameseToChinese(vn: string): {
-  zh: string;
-  vocab: { word: string; pinyin: string; meaningVn: string; partOfSpeech?: string }[];
-} {
-  const lower = vn.toLowerCase();
-
-  if (lower.includes("căn hộ") || lower.includes("chung cư")) {
-    return {
-      zh: "公寓",
-      vocab: [
-        { word: "公", pinyin: "gōng", meaningVn: "công (chung, công cộng)", partOfSpeech: "Tính từ" },
-        { word: "寓", pinyin: "yù", meaningVn: "ngụ (nơi ở, cư ngụ)", partOfSpeech: "Động từ" },
-      ],
-    };
-  }
-
-  if (lower.includes("bằng phẳng") || lower.includes("phẳng")) {
-    return {
-      zh: "平坦",
-      vocab: [
-        { word: "平", pinyin: "píng", meaningVn: "bằng, phẳng", partOfSpeech: "Tính từ" },
-        { word: "坦", pinyin: "tǎn", meaningVn: "phẳng lặng, bằng phẳng", partOfSpeech: "Tính từ" },
-      ],
-    };
-  }
-
-  if (lower.includes("uống trà") || lower.includes("trời rất đẹp") || lower.includes("uống")) {
-    return {
-      zh: "今天天气很好，我们一起去喝茶吧。",
-      vocab: [
-        { word: "今天", pinyin: "jīntiān", meaningVn: "hôm nay", partOfSpeech: "Danh từ" },
-        { word: "天气", pinyin: "tiānqì", meaningVn: "thời tiết", partOfSpeech: "Danh từ" },
-        { word: "很好", pinyin: "hěn hǎo", meaningVn: "rất đẹp, rất tốt", partOfSpeech: "Cụm tính từ" },
-        { word: "我们", pinyin: "wǒmen", meaningVn: "chúng mình", partOfSpeech: "Đại từ" },
-        { word: "去", pinyin: "qù", meaningVn: "đi", partOfSpeech: "Động từ" },
-        { word: "喝茶", pinyin: "hē chá", meaningVn: "uống trà", partOfSpeech: "Cụm động từ" },
-        { word: "吧", pinyin: "ba", meaningVn: "nhé (trợ từ ngữ khí)", partOfSpeech: "Trợ từ" },
-      ],
-    };
-  }
-
-  if (lower.includes("mặc ấm") || lower.includes("trời lạnh")) {
-    return {
-      zh: "今天天气很冷，记得多穿衣服。",
-      vocab: [
-        { word: "今天", pinyin: "jīntiān", meaningVn: "hôm nay", partOfSpeech: "Danh từ" },
-        { word: "天气", pinyin: "tiānqì", meaningVn: "thời tiết", partOfSpeech: "Danh từ" },
-        { word: "很冷", pinyin: "hěn lěng", meaningVn: "rất lạnh", partOfSpeech: "Cụm tính từ" },
-        { word: "记得", pinyin: "jìde", meaningVn: "nhớ, ghi nhớ", partOfSpeech: "Động từ" },
-        { word: "多穿", pinyin: "duō chuān", meaningVn: "mặc nhiều hơn", partOfSpeech: "Cụm động từ" },
-        { word: "衣服", pinyin: "yīfu", meaningVn: "quần áo", partOfSpeech: "Danh từ" },
-      ],
-    };
-  }
-
-  if (lower.includes("máy bay") || lower.includes("sân bay")) {
-    return {
-      zh: "我是坐飞机来的，现在去机场。",
-      vocab: [
-        { word: "飞机", pinyin: "fēijī", meaningVn: "máy bay", partOfSpeech: "Danh từ" },
-        { word: "机场", pinyin: "jīchǎng", meaningVn: "sân bay", partOfSpeech: "Danh từ" },
-        { word: "坐", pinyin: "zuò", meaningVn: "ngồi, đi (phương tiện)", partOfSpeech: "Động từ" },
-      ],
-    };
-  }
-
-  if (lower.includes("xin chào") || lower.includes("chào bạn")) {
-    return {
-      zh: "你好！很高兴认识你。",
-      vocab: [
-        { word: "你好", pinyin: "nǐ hǎo", meaningVn: "xin chào", partOfSpeech: "Lời chào" },
-        { word: "很高兴", pinyin: "hěn gāoxìng", meaningVn: "rất vui", partOfSpeech: "Tính từ" },
-        { word: "认识", pinyin: "rènshi", meaningVn: "quen biết, làm quen", partOfSpeech: "Động từ" },
-      ],
-    };
-  }
-
-  if (lower.includes("cảm ơn")) {
-    return {
-      zh: "非常感谢你的热情帮助！",
-      vocab: [
-        { word: "非常", pinyin: "fēicháng", meaningVn: "vô cùng, rất", partOfSpeech: "Phó từ" },
-        { word: "感谢", pinyin: "gǎnxiè", meaningVn: "cảm tạ, cảm ơn", partOfSpeech: "Động từ" },
-        { word: "帮助", pinyin: "bāngzhù", meaningVn: "sự giúp đỡ", partOfSpeech: "Danh từ" },
-      ],
-    };
-  }
-
-  if (lower.includes("du lịch")) {
-    return {
-      zh: "我想去中国旅游，体验中国文化。",
-      vocab: [
-        { word: "想", pinyin: "xiǎng", meaningVn: "muốn", partOfSpeech: "Động từ năng nguyện" },
-        { word: "中国", pinyin: "Zhōngguó", meaningVn: "Trung Quốc", partOfSpeech: "Danh từ" },
-        { word: "旅游", pinyin: "lǚyóu", meaningVn: "du lịch", partOfSpeech: "Động từ" },
-      ],
-    };
-  }
-
-  // Fallback
-  return {
-    zh: "我们每天都在认真学习汉语。",
-    vocab: [
-      { word: "每天", pinyin: "měitiān", meaningVn: "mỗi ngày, hàng ngày", partOfSpeech: "Danh từ" },
-      { word: "认真", pinyin: "rènzhēn", meaningVn: "chăm chỉ, nghiêm túc", partOfSpeech: "Phó từ / Tính từ" },
-      { word: "学习", pinyin: "xuéxí", meaningVn: "học tập", partOfSpeech: "Động từ" },
-      { word: "汉语", pinyin: "Hànyǔ", meaningVn: "tiếng Trung Quốc", partOfSpeech: "Danh từ" },
-    ],
+    content: `Thầy giáo AI đã nhận câu hỏi: **"${trimmed}"**.\n\n⚠️ Hiện tại hệ thống đang kết nối ở chế độ **Từ Điển Sư Phạm Offline** (do máy chủ AI Cloud đang tạm bận hoặc chờ cấu hình API key), và từ này chưa có sẵn trong danh mục tra nhanh.\n\n💡 **Em có thể hỏi các từ vựng giao tiếp rất thông dụng như:**\n- *"Bố ghi sao?"*, *"Mẹ viết thế nào?"*, *"Con trai, con gái"*...\n- *"Xin chào"*, *"Cảm ơn"*, *"Chúc ngủ ngon"*, *"Tạm biệt"*...\n- *"Ăn cơm"*, *"Uống nước"*, *"Uống trà sữa"*, *"Cà phê"*...\n- *"Bao nhiêu tiền"*, *"Đắt quá"*, *"Rẻ hơn chút đi"*...\n- Hoặc các câu phân biệt ngữ pháp như *"二 và 两"*!`,
+    breakdown: null,
+    engine: "offline-fallback",
   };
 }

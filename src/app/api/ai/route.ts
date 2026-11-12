@@ -12,52 +12,50 @@ export async function POST(req: NextRequest) {
     const geminiKey = (customApiKey && !customApiKey.startsWith("sk-")) ? customApiKey : process.env.GEMINI_API_KEY;
     const openAiKey = (customApiKey && customApiKey.startsWith("sk-")) ? customApiKey : process.env.OPENAI_API_KEY;
 
-    // 1. If Gemini Key is available, call Gemini models with fallback
+    // 1. If Gemini Key is available, call Gemini models with timeout
     if (geminiKey && !geminiKey.includes("your-key")) {
       const candidateModels = [
         "gemini-3.5-flash",
+        "gemini-flash-latest",
         "gemini-3.5-flash-lite",
-        "gemini-flash-lite-latest",
         "gemini-3.8-flash",
       ];
 
-      const systemPrompt = `Bạn là "Thầy Giáo AI" - Gia sư tiếng Trung tận tâm, thông thái và am hiểu sâu sắc tại nền tảng HANZI MASTER.
-Trình độ người học hiện tại: HSK ${hskLevel}.
+      const systemPrompt = `Bạn là "Thầy Giáo AI" - Gia sư tiếng Trung tận tâm, am hiểu sâu sắc tại nền tảng HANZI MASTER.
+Trình độ người học: HSK ${hskLevel}.
 
-NGUYÊN TẮC PHẢN HỒI THÔNG MINH THEO Ý ĐỊNH NGƯỜI HỌC:
-1. NẾU NGƯỜI DÙNG HỎI CÂU HỎI HỌC TẬP, PHƯƠNG PHÁP, GIAO TIẾP HOẶC THẮC MẮC NGỮ PHÁP:
-   - Hãy trả lời TRỰC TIẾP, chính xác, ân cần và sư phạm bằng tiếng Việt trong trường "content".
-   - Đưa ra lời khuyên thiết thực, phân tích dễ hiểu kèm ví dụ câu tiếng Trung minh họa cụ thể.
-   - Nếu có ví dụ hoặc câu tiếng Trung trọng tâm trong câu trả lời, hãy điền trường "breakdown" để người học tiện xem Pinyin, âm Hán Việt và nghe đọc. Nếu không cần thiết, "breakdown" có thể để null hoặc tập trung vào ví dụ tiêu biểu.
+NGUYÊN TẮC PHẢN HỒI THÔNG MINH:
+1. NẾU NGƯỜI HỌC HỎI CÁCH VIẾT, CÁCH ĐỌC, GHI SAO, DỊCH TỪ HOẶC CÂU (ví dụ: "bố ghi sao", "chào buổi sáng nói sao", "ăn cơm dịch sao"):
+   - Hãy trả lời TRỰC DIỆN, chính xác, sư phạm bằng tiếng Việt trong "content".
+   - Chỉ rõ từ vựng chữ Hán, phiên âm Pinyin, âm Hán Việt, các nét viết cơ bản (nếu hỏi cách ghi/viết) và bộ thủ.
+   - ĐẶC BIỆT: Trường "vietnameseTranslation" trong "breakdown" BẮT BUỘC là NGHĨA TIẾNG VIỆT CHÍNH XÁC của từ/câu tiếng Trung đó (TUYỆT ĐỐI KHÔNG lặp lại nguyên văn câu hỏi của người học).
 
-2. NẾU NGƯỜI DÙNG YÊU CẦU DỊCH, TRA TỪ HOẶC BÓC TÁCH CÂU:
-   - Cung cấp bản dịch chuẩn xác theo khẩu ngữ tự nhiên của người bản xứ trong "content".
-   - Cung cấp đầy đủ cấu trúc "breakdown" chi tiết gồm: chữ Hán, Pinyin có dấu thanh điệu, nghĩa tiếng Việt, bóc tách từ vựng, điểm ngữ pháp và câu ví dụ.
+2. NẾU NGƯỜI HỌC HỎI NGỮ PHÁP, PHƯƠNG PHÁP HỌC HOẶC ĐÀM THOẠI:
+   - Trả lời ân cần, chi tiết, dễ hiểu bằng tiếng Việt trong "content".
+   - Trích xuất điểm ngữ pháp và câu tiếng Trung tiêu biểu vào "breakdown".
 
 QUY ĐỊNH ĐỊNH DẠNG JSON TRẢ VỀ:
-BẮT BUỘC trả về đúng định dạng JSON hợp lệ duy nhất:
+BẮT BUỘC trả về định dạng JSON hợp lệ:
 {
-  "content": "Lời giải đáp trực diện, thân thiện, rõ ràng và đầy đủ bằng tiếng Việt của Thầy giáo AI",
+  "content": "Lời giải đáp chi tiết, thân thiện, sư phạm bằng tiếng Việt (chỉ dẫn cách viết, cách đọc, ví dụ)",
   "breakdown": {
-    "originalZh": "Câu hoặc từ tiếng Trung trọng tâm (chỉ chứa chữ Hán)",
-    "pinyin": "Phiên âm pinyin có dấu thanh điệu chuẩn xác",
-    "vietnameseTranslation": "Nghĩa tiếng Việt chuẩn xác theo ngữ cảnh",
+    "originalZh": "Từ hoặc câu tiếng Trung trọng tâm (chữ Hán chuẩn)",
+    "pinyin": "Phiên âm pinyin có dấu thanh điệu chuẩn",
+    "vietnameseTranslation": "Nghĩa tiếng Việt chuẩn xác (KHÔNG lặp lại câu hỏi của học viên)",
     "direction": "vn_to_zh hoặc zh_to_vn",
-    "partOfSpeech": "Từ loại (Danh từ, Động từ, Tính từ, Cụm từ...)",
-    "collocations": ["Cụm từ thông dụng 1", "Cụm từ 2"],
+    "partOfSpeech": "Từ loại (Danh từ, Động từ, Tính từ...)",
     "vocabBreakdown": [
       {"word": "chữ Hán", "pinyin": "pinyin", "meaningVn": "nghĩa tiếng Việt", "partOfSpeech": "từ loại"}
     ],
     "grammarAnalysis": [
-      "Điểm ngữ pháp cốt lõi hoặc mẹo nhớ 1",
+      "Lưu ý phát âm, bộ thủ hoặc ngữ pháp cốt lõi 1",
       "Lưu ý ngữ cảnh sử dụng 2"
     ],
     "naturalUsageExamples": [
       {"zh": "Câu ví dụ tiếng Trung", "pinyin": "pinyin câu ví dụ", "vn": "dịch nghĩa tiếng Việt"}
     ]
   }
-}
-Nếu câu hỏi là chào hỏi xã giao hoặc không có câu tiếng Trung nào cần bóc tách, trường "breakdown" có thể chứa một câu tiếng Trung chào đón/khích lệ phù hợp với câu hỏi của người học.`;
+}`;
 
       for (const modelName of candidateModels) {
         try {
@@ -70,14 +68,15 @@ Nếu câu hỏi là chào hỏi xã giao hoặc không có câu tiếng Trung n
                 contents: [
                   {
                     role: "user",
-                    parts: [{ text: `${systemPrompt}\n\nChế độ tra cứu: ${direction}\nNội dung câu hỏi của người học: "${message}"` }],
+                    parts: [{ text: `${systemPrompt}\n\nChế độ: ${direction}\nCâu hỏi của người học: "${message}"` }],
                   },
                 ],
                 generationConfig: {
                   responseMimeType: "application/json",
-                  temperature: 0.5,
+                  temperature: 0.4,
                 },
               }),
+              signal: AbortSignal.timeout(4500),
             }
           );
 
@@ -86,14 +85,12 @@ Nếu câu hỏi là chào hỏi xã giao hoặc không có câu tiếng Trung n
             const rawText = geminiData.candidates?.[0]?.content?.parts?.[0]?.text;
             if (rawText) {
               const parsed = JSON.parse(rawText);
-              return NextResponse.json(parsed);
+              return NextResponse.json({ ...parsed, engine: "gemini" });
             }
-          } else {
-            const errBody = await geminiRes.text();
-            console.warn(`Model ${modelName} returned ${geminiRes.status}:`, errBody.slice(0, 150));
           }
         } catch (modelErr) {
-          console.warn(`Model ${modelName} call exception:`, modelErr);
+          // Continue to next model if timed out or failed
+          console.warn(`Model ${modelName} fetch skipped:`, (modelErr as Error)?.message || modelErr);
         }
       }
     }
@@ -112,30 +109,31 @@ Nếu câu hỏi là chào hỏi xã giao hoặc không có câu tiếng Trung n
             messages: [
               {
                 role: "system",
-                content: `Bạn là Thầy Giáo AI dạy tiếng Trung tại HANZI MASTER. Trình độ: HSK ${hskLevel}. Luôn trả lời trực diện, nhiệt tình, sư phạm và trả về JSON định dạng breakdown.`,
+                content: `Bạn là Thầy Giáo AI dạy tiếng Trung tại HANZI MASTER. Trình độ: HSK ${hskLevel}. Luôn giải thích rõ ràng, sư phạm, nếu hỏi cách viết từ thì hướng dẫn các nét chữ Hán, bộ thủ và ví dụ. Trả về đúng JSON.`,
               },
               ...conversationHistory.slice(-4).map((m: { sender: string; content: string }) => ({
                 role: m.sender === "user" ? "user" : "assistant",
                 content: m.content,
               })),
-              { role: "user", content: `Câu hỏi/Tra cứu: ${message}` },
+              { role: "user", content: `Câu hỏi: ${message}` },
             ],
             response_format: { type: "json_object" },
-            temperature: 0.5,
+            temperature: 0.4,
           }),
+          signal: AbortSignal.timeout(5000),
         });
 
         if (response.ok) {
           const data = await response.json();
           const parsed = JSON.parse(data.choices[0].message.content);
-          return NextResponse.json(parsed);
+          return NextResponse.json({ ...parsed, engine: "openai" });
         }
       } catch (e) {
-        console.warn("OpenAI call failed:", e);
+        console.warn("OpenAI call skipped:", e);
       }
     }
 
-    // 3. Educational NLP Engine (Local Offline Mode)
+    // 3. Educational Knowledge Base Engine (Instant High-Precision Pedagogy)
     const result = analyzeQuery(message, hskLevel);
     return NextResponse.json(result);
   } catch (error) {
