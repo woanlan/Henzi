@@ -1,0 +1,1761 @@
+{
+  "categories": [
+    {
+      "id": "hsk",
+      "name": "Giáo Trình Chuẩn HSK 1–6",
+      "slug": "giao-trinh-hsk",
+      "description": "Trọn bộ 6 cấp giáo trình chuẩn HSK Quốc tế kèm bài tập, từ vựng cốt lõi và file nghe MP3 Bắc Kinh.",
+      "icon": "GraduationCap",
+      "count": 6,
+      "badge": "Học thuật",
+      "color": "#B45309"
+    },
+    {
+      "id": "exam",
+      "name": "Luyện Đề Thi & Ngữ Pháp",
+      "slug": "luyen-de-ngu-phap",
+      "description": "Ngữ pháp Hán ngữ toàn tập, bộ đề thi thật HSK/HSKK các năm và sơ đồ tư duy 5.000 từ vựng.",
+      "icon": "BookOpen",
+      "count": 5,
+      "badge": "Luyện thi",
+      "color": "#15803D"
+    },
+    {
+      "id": "starter",
+      "name": "Từ Điển, Bộ Thủ & Thư Pháp",
+      "slug": "tu-dien-vo-luyen-viet",
+      "description": "Từ điển 214 bộ thủ Giáp Cốt Văn, 500 chữ tượng hình, tinh giảng Pinyin và vở luyện Khải – Hành thư.",
+      "icon": "PenTool",
+      "count": 5,
+      "badge": "Hán tự",
+      "color": "#991B1B"
+    },
+    {
+      "id": "communication",
+      "name": "Khẩu Ngữ, Du Lịch & Đời Sống",
+      "slug": "sach-khau-ngu-doi-song",
+      "description": "301 câu đàm thoại kinh điển, sổ tay du lịch, khẩu ngữ giới trẻ Douyin, du học sinh và ẩm thực trà đạo.",
+      "icon": "MessageSquare",
+      "count": 5,
+      "badge": "Thực tế",
+      "color": "#1C5D70"
+    },
+    {
+      "id": "business",
+      "name": "Thương Mại, XNK & Công Sở",
+      "slug": "sach-tieng-trung-thuong-mai",
+      "description": "Đàm phán nguồn hàng Taobao/1688, thư tín văn phòng, hải quan logistics, livestream TMĐT và quản lý xưởng.",
+      "icon": "Briefcase",
+      "count": 5,
+      "badge": "Kinh doanh",
+      "color": "#78350F"
+    },
+    {
+      "id": "literature",
+      "name": "Văn Học Song Ngữ & Văn Hóa",
+      "slug": "van-hoc-song-ngu-van-hoa",
+      "description": "100 điển tích thành ngữ bốn chữ, truyện ngắn song ngữ Trung – Việt, 300 bài thơ Đường và lễ tục cổ truyền.",
+      "icon": "Sparkles",
+      "count": 4,
+      "badge": "Tàng thư",
+      "color": "#6D28D9"
+    }
+  ],
+  "products": [
+    {
+      "id": "hsk-1",
+      "name": "Giáo Trình Chuẩn HSK 1 — Nhập Môn Hán Ngữ",
+      "categoryId": "hsk",
+      "categoryName": "Giáo Trình Chuẩn HSK 1–6",
+      "author": "Khương Lệ Bình (Chủ biên)",
+      "publisher": "NXB Tổng Hợp · Ấn Bản HANZI",
+      "pages": 224,
+      "publishYear": 2026,
+      "isbn": "978-604-892-101-1",
+      "price": "115.000đ",
+      "originalPrice": "165.000đ",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "150 từ vựng nền tảng, bảng ngữ âm Pinyin, 15 bài hội thoại đời sống kèm mã QR nghe giọng Bắc Kinh.",
+      "fullDesc": "Ấn phẩm mở đầu trong hệ thống Giáo trình Chuẩn HSK được ủy quyền chính thức. Sách in trên giấy kem chống mỏi mắt, trình bày song ngữ Trung – Việt rõ ràng từ quy tắc biến điệu, nét chữ cơ bản đến 15 chủ đề giao tiếp hằng ngày, kèm bộ đề thi mẫu HSK 1 cuối sách.",
+      "features": [
+        "Giấy kem định lượng 100gsm chống lóa mắt, in màu sắc nét",
+        "Tích hợp mã QR quét nghe toàn bộ Audio MP3 giọng chuẩn Bắc Kinh",
+        "150 mục từ vựng HSK 1 kèm ví dụ và bài tập thực hành sát đề thi",
+        "Tặng kèm bookmark bảng quy tắc biến điệu thanh 3 & chữ Nhất (一)"
+      ],
+      "duration": "224 trang · Kèm Audio QR",
+      "level": "Ấn phẩm 01 · Nhập môn số 1",
+      "rating": 4.9,
+      "studentsCount": 3420,
+      "badge": "Nhập môn số 1",
+      "color": "#1F3A2E",
+      "image": "/images/book-covers/hsk-1.jpg",
+      "lookbookImage": "/images/courses/hsk-1.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm tiêu chuẩn",
+          "price": 115000,
+          "stock": 36,
+          "dimensions": "16 × 24 cm · Bìa tay gấp cán mờ"
+        },
+        "hardcover": {
+          "label": "Bìa cứng vải bố dập nhũ",
+          "price": 215000,
+          "stock": 14,
+          "dimensions": "17 × 24.5 cm · Vải lục bảo nhũ vàng 24K"
+        }
+      }
+    },
+    {
+      "id": "hsk-2",
+      "name": "Giáo Trình Chuẩn HSK 2 — Giao Tiếp Hằng Ngày",
+      "categoryId": "hsk",
+      "categoryName": "Giáo Trình Chuẩn HSK 1–6",
+      "author": "Khương Lệ Bình · Vương Phương",
+      "publisher": "NXB Tổng Hợp · Ấn Bản HANZI",
+      "pages": 256,
+      "publishYear": 2026,
+      "isbn": "978-604-892-102-8",
+      "price": "135.000đ",
+      "originalPrice": "189.000đ",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "300 từ vựng thông dụng, làm chủ câu phức chỉ thời gian, phương hướng, mua sắm và sở thích.",
+      "fullDesc": "Tiếp nối quyển HSK 1, Giáo trình Chuẩn HSK 2 mở rộng vốn từ lên 300 từ cốt lõi cùng hệ thống bổ ngữ kết quả, bổ ngữ thời lượng và câu so sánh chữ Bỉ (比). Mỗi bài học đều có sơ đồ phân tích cấu trúc câu trực quan giúp người tự học nắm chắc ngữ pháp không bị nhầm lẫn.",
+      "features": [
+        "Trọn bộ 300 từ mới HSK 2 phân loại theo từ loại và ngữ cảnh",
+        "Bảng giải thích chuyên sâu 45 chủ điểm ngữ pháp sơ trung cấp",
+        "15 bài khóa hội thoại sinh động kèm phụ lục lời nghe đầy đủ",
+        "Kèm 2 đề thi thử HSK 2 chuẩn định dạng Hanban cuối sách"
+      ],
+      "duration": "256 trang · Kèm Audio QR",
+      "level": "Ấn phẩm 02 ·  Chuẩn quốc tế",
+      "rating": 4.8,
+      "studentsCount": 2890,
+      "badge": " Chuẩn quốc tế",
+      "color": "#1B2C42",
+      "image": "/images/book-covers/hsk-2.jpg",
+      "lookbookImage": "/images/courses/hsk-2.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm tiêu chuẩn",
+          "price": 135000,
+          "stock": 28,
+          "dimensions": "16 × 24 cm · Bìa tay gấp cán mờ"
+        },
+        "hardcover": {
+          "label": "Bìa cứng vải bố dập nhũ",
+          "price": 239000,
+          "stock": 11,
+          "dimensions": "17 × 24.5 cm · Vải lam cổ nhũ vàng 24K"
+        }
+      }
+    },
+    {
+      "id": "hsk-3",
+      "name": "Giáo Trình Chuẩn HSK 3 — Bứt Phá Trung Cấp & Du Học",
+      "categoryId": "hsk",
+      "categoryName": "Giáo Trình Chuẩn HSK 1–6",
+      "author": "Khương Lệ Bình · Lý Toàn",
+      "publisher": "NXB Tổng Hợp · Ấn Bản HANZI",
+      "pages": 288,
+      "publishYear": 2026,
+      "isbn": "978-604-892-103-5",
+      "price": "159.000đ",
+      "originalPrice": "225.000đ",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "600 từ vựng ứng dụng, rèn kỹ năng đọc văn bản chữ Hán thuần không phụ thuộc Pinyin.",
+      "fullDesc": "Ấn phẩm bán chạy nhất tại HANZI dành cho người học chinh phục cột mốc HSK 3 để xét học bổng du học và làm việc tại doanh nghiệp Trung Quốc. Sách chuyển dần từ chữ Hán kèm Pinyin sang văn bản chữ Hán thuần túy, chuyên sâu về câu chữ Bả (把), câu bị động chữ Bị (被) và phân biệt 60 cặp từ đồng nghĩa dễ nhầm.",
+      "features": [
+        "600 từ vựng trung cấp trình bày kèm từ Hán-Việt dễ liên tưởng",
+        "Chuyên mục phân biệt 60 cặp từ gần nghĩa hay gặp trong đề thi",
+        "20 bài khóa rèn kỹ năng đọc hiểu đoạn văn và viết câu hoàn chỉnh",
+        "Tặng sổ tay nhỏ tóm tắt cấu trúc câu chữ 把 & chữ 被"
+      ],
+      "duration": "288 trang · Sách + Sổ tay",
+      "level": "Ấn phẩm 03 · Bán chạy nhất",
+      "rating": 5,
+      "studentsCount": 4650,
+      "popular": true,
+      "badge": "Bán chạy nhất",
+      "color": "#5C2318",
+      "image": "/images/book-covers/hsk-3.jpg",
+      "lookbookImage": "/images/courses/hsk-3.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm tiêu chuẩn",
+          "price": 159000,
+          "stock": 32,
+          "dimensions": "16 × 24 cm · Giấy kem chống lóa"
+        },
+        "hardcover": {
+          "label": "Bìa cứng vải bố dập nhũ",
+          "price": 269000,
+          "stock": 9,
+          "dimensions": "17 × 24.5 cm · Vải nâu hổ phách nhũ vàng"
+        }
+      }
+    },
+    {
+      "id": "hsk-4",
+      "name": "Giáo Trình Chuẩn HSK 4 — Đọc Hiểu & Học Thuật Thượng Cấp",
+      "categoryId": "hsk",
+      "categoryName": "Giáo Trình Chuẩn HSK 1–6",
+      "author": "Khương Lệ Bình · Trương Quân",
+      "publisher": "NXB Tổng Hợp · Ấn Bản HANZI",
+      "pages": 336,
+      "publishYear": 2026,
+      "isbn": "978-604-892-104-2",
+      "price": "189.000đ",
+      "originalPrice": "265.000đ",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "1.200 từ vựng học thuật, nghị luận xã hội, kinh tế, văn hóa và kỹ năng viết đoạn văn HSK 4.",
+      "fullDesc": "Được biên soạn cho độc giả hướng tới trình độ giao tiếp trôi chảy và xét tuyển đại học Trung Quốc. Sách bao quát 1.200 từ vựng HSK 4, các liên từ học thuật trong văn viết (不仅…而且…, 无论…都…, 既然…就…) cùng phương pháp giải nhanh phần sắp xếp câu và viết đoạn văn ngắn.",
+      "features": [
+        "336 trang khổ lớn tổng hợp trọn vẹn kiến thức Thượng – Hạ HSK 4",
+        "Phân tích chi tiết 80 liên từ văn viết & thành ngữ 4 chữ thông dụng",
+        "Hướng dẫn chiến thuật làm bài Đọc hiểu nhanh tìm từ khóa",
+        "Đính kèm phụ lục 3 bộ đề thi sát hạch HSK 4 có lời giải chi tiết"
+      ],
+      "duration": "336 trang · Khổ lớn",
+      "level": "Ấn phẩm 04 · Học bổng Đại học",
+      "rating": 4.9,
+      "studentsCount": 2140,
+      "badge": "Học bổng Đại học",
+      "color": "#4A182B",
+      "image": "/images/book-covers/hsk-4.jpg",
+      "lookbookImage": "/images/courses/hsk-3.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm tiêu chuẩn",
+          "price": 189000,
+          "stock": 22,
+          "dimensions": "17 × 24 cm · Giấy kem dày 100gsm"
+        },
+        "hardcover": {
+          "label": "Bìa cứng vải bố dập nhũ",
+          "price": 315000,
+          "stock": 6,
+          "dimensions": "18 × 25 cm · Vải tím mận hoàng gia nhũ vàng"
+        }
+      }
+    },
+    {
+      "id": "hsk-5",
+      "name": "Giáo Trình Chuẩn HSK 5 — Báo Chí, Văn Chương & Nghị Luận",
+      "categoryId": "hsk",
+      "categoryName": "Giáo Trình Chuẩn HSK 1–6",
+      "author": "Khương Lệ Bình · Lưu Xương (ĐH Ngôn Ngữ Bắc Kinh)",
+      "publisher": "NXB Tổng Hợp · Ấn Bản HANZI",
+      "pages": 384,
+      "publishYear": 2026,
+      "isbn": "978-604-892-105-9",
+      "price": "215.000₫",
+      "originalPrice": "289.000₫",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "2.500 từ vựng cao cấp, đọc hiểu báo chí đương đại, tản văn Trung Hoa và luyện viết bài luận 80 chữ.",
+      "fullDesc": "Cột mốc bước vào trình độ Hán ngữ cao cấp: HSK 5 tuyển chọn 36 bài đọc từ báo chí, kinh tế, khoa học đến văn học đương đại Trung Quốc, giúp độc giả nắm chắc sắc thái từ đồng nghĩa và viết bài nghị luận chặt chẽ.",
+      "features": [
+        "Bao quát 2.500 từ vựng HSK 5 kèm phân tích sắc thái trang trọng / khẩu ngữ",
+        "36 bài đọc dài trích từ tạp chí & tác phẩm văn học hiện đại Trung Quốc",
+        "Phương pháp viết đoạn văn miêu tả tranh & nghị luận đạt điểm tối đa",
+        "Kèm QR Audio tốc độ phát thanh viên Đài Truyền hình Trung ương (CCTV)"
+      ],
+      "duration": "384 trang · Kèm Audio QR",
+      "level": "Ấn phẩm 05 · Cao cấp HSK 5",
+      "rating": 4.9,
+      "studentsCount": 1980,
+      "popular": false,
+      "badge": "Cao cấp HSK 5",
+      "color": "#123A4A",
+      "image": "/images/book-covers/hsk-5.jpg",
+      "lookbookImage": "/images/courses/hsk-3.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm tiêu chuẩn",
+          "price": 215000,
+          "stock": 24,
+          "isbn": "978-604-892-105-9",
+          "dimensions": "16 × 24 cm · Giấy kem chống lóa"
+        },
+        "hardcover": {
+          "label": "Bìa cứng vải bố dập nhũ",
+          "price": 345000,
+          "stock": 8,
+          "isbn": "978-604-892-105-8",
+          "dimensions": "18 × 25 cm · Vải xanh khổng tước nhũ vàng 24K"
+        }
+      }
+    },
+    {
+      "id": "hsk-6",
+      "name": "Giáo Trình Chuẩn HSK 6 — Tinh Hoa Học Thuật & Biên Phiên Dịch",
+      "categoryId": "hsk",
+      "categoryName": "Giáo Trình Chuẩn HSK 1–6",
+      "author": "GS. Khương Lệ Bình · Lỗ Giang",
+      "publisher": "NXB Tổng Hợp · Ấn Bản HANZI",
+      "pages": 448,
+      "publishYear": 2026,
+      "isbn": "978-604-892-106-6",
+      "price": "249.000₫",
+      "originalPrice": "340.000₫",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "5.000+ từ vựng tinh hoa, phân tích lỗi bệnh câu (病句), tóm tắt văn bản 1.000 chữ và dịch thuật chuyên sâu.",
+      "fullDesc": "Đỉnh cao trong bộ Giáo trình Chuẩn HSK dành cho nghiên cứu sinh, biên phiên dịch viên và giảng viên tiếng Trung. Sách đi sâu vào tu từ học, thành ngữ 4 chữ cao cấp, kỹ thuật bắt lỗi ngữ pháp tinh vi và viết tóm tắt luận văn.",
+      "features": [
+        "448 trang khổ đại tổng hợp hơn 5.000 mục từ học thuật & tu từ Hán ngữ",
+        "Chuyên đề giải phẫu 12 dạng 'bệnh câu' (病句) khó nhất trong đề HSK 6",
+        "Kỹ thuật đọc lướt văn bản 1.000 chữ và cô đọng thành bài viết 400 chữ",
+        "Ấn bản bìa cứng vải đen huyền dập nhũ rồng mây xứng tầm sưu tập trọn đời"
+      ],
+      "duration": "448 trang · Kèm Audio QR",
+      "level": "Ấn phẩm 06 · Đỉnh cao HSK 6",
+      "rating": 5,
+      "studentsCount": 1540,
+      "popular": true,
+      "badge": "Đỉnh cao HSK 6",
+      "color": "#18181B",
+      "image": "/images/book-covers/hsk-6.jpg",
+      "lookbookImage": "/images/courses/hsk-3.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm tiêu chuẩn",
+          "price": 249000,
+          "stock": 18,
+          "isbn": "978-604-892-106-6",
+          "dimensions": "16 × 24 cm · Giấy kem chống lóa"
+        },
+        "hardcover": {
+          "label": "Bìa cứng vải bố dập nhũ",
+          "price": 389000,
+          "stock": 6,
+          "isbn": "978-604-892-106-8",
+          "dimensions": "18.5 × 26 cm · Vải đen huyền dập nhũ đỉnh đồng"
+        }
+      }
+    },
+    {
+      "id": "grammar-all",
+      "name": "Cẩm Nang Ngữ Pháp Tiếng Trung Toàn Tập (Sơ – Trung – Cao Cấp)",
+      "categoryId": "exam",
+      "categoryName": "Luyện Đề Thi & Ngữ Pháp",
+      "author": "Lư Phúc Ba · Dịch giả Trần Thị Thanh Liêm",
+      "publisher": "NXB Đại Học Sư Phạm · HANZI",
+      "pages": 412,
+      "publishYear": 2026,
+      "isbn": "978-604-892-401-2",
+      "price": "185.000₫",
+      "originalPrice": "245.000₫",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "Hệ thống hóa 280 cấu trúc ngữ pháp Hán ngữ hiện đại bằng sơ đồ bảng biểu và 1.500 câu ví dụ song ngữ.",
+      "fullDesc": "Cuốn từ điển ngữ pháp tra cứu nhanh dành cho mọi trình độ từ HSK 1 đến HSK 6. Toàn bộ hư từ, bổ ngữ xu hướng, bổ ngữ khả năng, câu tồn hiện và liên từ phức đều được đặt lên bàn cân đối chiếu với tiếng Việt để tránh lỗi dịch từng chữ.",
+      "features": [
+        "280 chủ điểm ngữ pháp sắp xếp khoa học từ từ loại đến câu phức đa tầng",
+        "Bảng so sánh trực quan các hư từ dễ nhầm: 了 / 过, 才 / 就, 再 / 又",
+        "Hơn 1.500 câu ví dụ thực tế kèm bài tập sửa lỗi sai thường gặp của người Việt",
+        "Mục lục tra cứu nhanh ở cuối sách giúp tìm bất kỳ cấu trúc nào trong 10 giây"
+      ],
+      "duration": "412 trang · Kèm Audio QR",
+      "level": "Ấn phẩm 07 · Sách Gối Đầu",
+      "rating": 5,
+      "studentsCount": 4210,
+      "popular": true,
+      "badge": "Sách Gối Đầu",
+      "color": "#5C2D16",
+      "image": "/images/book-covers/grammar-all.jpg",
+      "lookbookImage": "/images/courses/hsk-2.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm tiêu chuẩn",
+          "price": 185000,
+          "stock": 34,
+          "isbn": "978-604-892-401-2",
+          "dimensions": "16 × 24 cm · Giấy kem chống lóa"
+        },
+        "hardcover": {
+          "label": "Bìa cứng vải bố dập nhũ",
+          "price": 299000,
+          "stock": 10,
+          "isbn": "978-604-892-401-8",
+          "dimensions": "17 × 24.5 cm · Bìa da hạt dẻ dập nhũ song cửa cổ"
+        }
+      }
+    },
+    {
+      "id": "hsk-mock-123",
+      "name": "Tuyển Tập 20 Đề Thi Thật HSK 1–2–3 Kèm Lời Giải Chi Tiết",
+      "categoryId": "exam",
+      "categoryName": "Luyện Đề Thi & Ngữ Pháp",
+      "author": "Hội Đồng Nghiên Cứu Đề Thi Bắc Kinh",
+      "publisher": "NXB Tổng Hợp · HANZI Luyện Thi",
+      "pages": 296,
+      "publishYear": 2026,
+      "isbn": "978-604-892-402-9",
+      "price": "149.000₫",
+      "originalPrice": "199.000₫",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "20 bộ đề sát hạch chuẩn cấu trúc phòng thi máy tính kèm giải thích đáp án bẫy và băng ghi âm gốc.",
+      "fullDesc": "Giúp thí sinh làm quen áp lực thời gian và nhận diện toàn bộ các bẫy nghe hiểu – đọc hiểu ở bậc sơ trung cấp HSK 1, 2, 3. Mỗi câu hỏi đều có phần dịch nghĩa lời thoại nghe và giải thích vì sao chọn đáp án đúng.",
+      "features": [
+        "20 đề thi mô phỏng 100% độ khó và tốc độ đọc của kỳ thi HSK chính thức",
+        "Lời giải chi tiết từng câu, chỉ rõ từ khóa ăn điểm trong bài Nghe",
+        "Tặng kèm phiếu tô đáp án mẫu (Answer Sheet) để tự bấm giờ tại nhà",
+        "Quét mã QR trên đầu mỗi đề để mở ngay file nghe MP3 tương ứng"
+      ],
+      "duration": "296 trang · Kèm Audio QR",
+      "level": "Ấn phẩm 08 · 20 Đề Chuẩn",
+      "rating": 4.8,
+      "studentsCount": 2630,
+      "popular": false,
+      "badge": "20 Đề Chuẩn",
+      "color": "#2E4F3E",
+      "image": "/images/book-covers/hsk-mock-123.jpg",
+      "lookbookImage": "/images/courses/hsk-1.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm tiêu chuẩn",
+          "price": 149000,
+          "stock": 38,
+          "isbn": "978-604-892-402-9",
+          "dimensions": "16 × 24 cm · Giấy kem chống lóa"
+        },
+        "hardcover": {
+          "label": "Bìa cứng vải bố dập nhũ",
+          "price": 245000,
+          "stock": 9,
+          "isbn": "978-604-892-402-8",
+          "dimensions": "18.5 × 26 cm · Vải xanh ngọc bích dập nhũ đồng hồ cát"
+        }
+      }
+    },
+    {
+      "id": "hsk-mock-456",
+      "name": "Tuyển Tập 15 Đề Thi Thực Chiến HSK 4–5–6 & Chiến Thuật Phân Bổ Giờ",
+      "categoryId": "exam",
+      "categoryName": "Luyện Đề Thi & Ngữ Pháp",
+      "author": "TS. Lý Hiểu Kỳ · Tổ Chuyên Gia HSK",
+      "publisher": "NXB Tổng Hợp · HANZI Luyện Thi",
+      "pages": 376,
+      "publishYear": 2026,
+      "isbn": "978-604-892-403-6",
+      "price": "195.000₫",
+      "originalPrice": "260.000₫",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "Bộ đề phân hóa điểm cao 260+ cho HSK 4, 5, 6 kèm bài văn mẫu đạt điểm tuyệt đối và kỹ năng đọc lướt.",
+      "fullDesc": "Tập trung giải quyết nút thắt thiếu thời gian làm bài ở bậc HSK 4–6. Sách chia sẻ công thức phân bổ giây cho từng phần Nghe – Đọc – Viết, cùng 30 bài luận mẫu phân tích bố cục mở – thân – kết của thủ khoa HSK.",
+      "features": [
+        "15 bộ đề sát hạch cấp cao bám sát xu hướng ra đề mới nhất năm 2025–2026",
+        "Chiến thuật Skimming & Scanning tìm đáp án đọc hiểu trong 40 giây/câu",
+        "Tuyển tập 30 bài viết mẫu HSK 4, 5, 6 có chấm sửa lỗi dùng từ",
+        "Bảng thống kê 300 bẫy đồng âm – cận nghĩa xuất hiện dày đặc nhất"
+      ],
+      "duration": "376 trang · Kèm Audio QR",
+      "level": "Ấn phẩm 09 · Chinh Phục 260+",
+      "rating": 4.9,
+      "studentsCount": 1870,
+      "popular": false,
+      "badge": "Chinh Phục 260+",
+      "color": "#6B1D24",
+      "image": "/images/book-covers/hsk-mock-456.jpg",
+      "lookbookImage": "/images/courses/hsk-3.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm tiêu chuẩn",
+          "price": 195000,
+          "stock": 27,
+          "isbn": "978-604-892-403-6",
+          "dimensions": "16 × 24 cm · Giấy kem chống lóa"
+        },
+        "hardcover": {
+          "label": "Bìa cứng vải bố dập nhũ",
+          "price": 319000,
+          "stock": 7,
+          "isbn": "978-604-892-403-8",
+          "dimensions": "18.5 × 26 cm · Vải đỏ hồng ngọc dập nhũ cổng bài lâu"
+        }
+      }
+    },
+    {
+      "id": "hskk-speaking",
+      "name": "Bí Quyết Luyện Thi Nói HSKK Sơ – Trung – Cao Cấp",
+      "categoryId": "exam",
+      "categoryName": "Luyện Đề Thi & Ngữ Pháp",
+      "author": "Vương Nhược Giang · Giảng viên Bắc Đại",
+      "publisher": "NXB Ngôn Ngữ · Ấn Bản HANZI",
+      "pages": 248,
+      "publishYear": 2026,
+      "isbn": "978-604-892-404-3",
+      "price": "145.000₫",
+      "originalPrice": "195.000₫",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "Kỹ thuật nghe nhắc lại, mô tả tranh và 80 dàn ý trả lời nghị luận khẩu ngữ HSKK bắt buộc khi xét học bổng.",
+      "fullDesc": "Hiện nay chứng chỉ thi nói HSKK là điều kiện bắt buộc song hành cùng HSK khi nộp hồ sơ học bổng Trung Quốc. Sách cung cấp mẹo ghi tốc ký cho phần Nghe nhắc lại và khung sườn lập luận 3 ý giúp thí sinh nói trôi chảy 2 phút không ấp úng.",
+      "features": [
+        "Bao trọn 3 cấp độ HSKK Sơ cấp, Trung cấp và Cao cấp trong một cuốn",
+        "Kỹ thuật ghi ký hiệu tốc ký giúp nhớ trọn câu dài 25 chữ khi nghe nhắc lại",
+        "80 bài nói mẫu miêu tả tranh & bày tỏ quan điểm xã hội kèm từ nối ăn điểm",
+        "Audio thu âm chuẩn nhịp ngắt nghỉ để luyện Shadowing nhại giọng hằng ngày"
+      ],
+      "duration": "248 trang · Kèm Audio QR",
+      "level": "Ấn phẩm 10 · Thi Nói HSKK",
+      "rating": 4.9,
+      "studentsCount": 2090,
+      "popular": false,
+      "badge": "Thi Nói HSKK",
+      "color": "#7C4D1E",
+      "image": "/images/book-covers/hskk-speaking.jpg",
+      "lookbookImage": "/images/courses/comm-travel.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm tiêu chuẩn",
+          "price": 145000,
+          "stock": 31,
+          "isbn": "978-604-892-404-3",
+          "dimensions": "16 × 24 cm · Giấy kem chống lóa"
+        },
+        "hardcover": {
+          "label": "Bìa cứng vải bố dập nhũ",
+          "price": 245000,
+          "stock": 8,
+          "isbn": "978-604-892-404-8",
+          "dimensions": "16 × 24 cm · Vải đồng cổ dập nhũ chuông Biên Chung"
+        }
+      }
+    },
+    {
+      "id": "vocab-5000-srs",
+      "name": "Sổ Tay 5000 Từ Vựng HSK 3.0 Theo Sơ Đồ Tư Duy & Gốc Chữ",
+      "categoryId": "exam",
+      "categoryName": "Luyện Đề Thi & Ngữ Pháp",
+      "author": "Ban Biên Tập Từ Điển HANZI",
+      "publisher": "NXB Từ Điển Bách Khoa · HANZI",
+      "pages": 352,
+      "publishYear": 2026,
+      "isbn": "978-604-892-405-0",
+      "price": "165.000₫",
+      "originalPrice": "225.000₫",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "Kết nối mạng lưới từ vựng theo gốc chữ Hán (字族) và 45 chủ đề đời sống giúp nhân 5 tốc độ ghi nhớ.",
+      "fullDesc": "Thay vì học vẹt danh sách từ rời rạc theo thứ tự ABC, cuốn sách vẽ sơ đồ tư duy từ 1 chữ gốc tỏa ra 15–20 từ ghép cùng họ, kèm lịch tích ô ôn tập ngắt quãng 1–3–7–15 ngày ngay ở chân mỗi trang sách.",
+      "features": [
+        "120 sơ đồ tư duy gốc chữ Hán giúp học 1 chữ suy ra cả chùm 20 từ vựng",
+        "Cập nhật bổ sung các mục từ mới nhất thuộc khung chuẩn HSK 3.0",
+        "Tích hợp ô đánh dấu chu kỳ ôn tập ngắt quãng SRS ngay trên trang giấy",
+        "In 2 màu xanh chàm – vàng hổ phách dịu mắt, dễ tra cứu ban đêm"
+      ],
+      "duration": "352 trang · Kèm Audio QR",
+      "level": "Ấn phẩm 11 · Mindmap 3.0",
+      "rating": 4.9,
+      "studentsCount": 3340,
+      "popular": false,
+      "badge": "Mindmap 3.0",
+      "color": "#1E2942",
+      "image": "/images/book-covers/vocab-5000-srs.jpg",
+      "lookbookImage": "/images/courses/hsk-2.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm tiêu chuẩn",
+          "price": 165000,
+          "stock": 35,
+          "isbn": "978-604-892-405-0",
+          "dimensions": "16 × 24 cm · Giấy kem chống lóa"
+        },
+        "hardcover": {
+          "label": "Bìa cứng vải bố dập nhũ",
+          "price": 279000,
+          "stock": 11,
+          "isbn": "978-604-892-405-8",
+          "dimensions": "16.5 × 24 cm · Vải chàm đêm dập nhũ cây Bồ Đề"
+        }
+      }
+    },
+    {
+      "id": "pinyin-master",
+      "name": "Tinh Giảng Ngữ Âm Pinyin & Quy Tắc Thuận Bút Chữ Hán",
+      "categoryId": "starter",
+      "categoryName": "Từ Điển, Bộ Thủ & Thư Pháp",
+      "author": "GS. Chu Minh Hoa",
+      "publisher": "NXB Đại Học Quốc Gia · HANZI",
+      "pages": 184,
+      "publishYear": 2026,
+      "isbn": "978-604-892-119-6",
+      "price": "98.000đ",
+      "originalPrice": "145.000đ",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "Hình vẽ vị trí đặt lưỡi 21 thanh mẫu, 36 vận mẫu, 4 thanh điệu và 7 quy tắc vàng viết chữ Hán.",
+      "fullDesc": "Giải quyết triệt để lỗi phát âm sai âm bật hơi (p, t, k, q, c, ch) và âm cuốn lưỡi (zh, ch, sh, r) của người Việt. Phần hai của sách phân tích Vĩnh Tự Bát Pháp (8 nét cơ bản trong chữ 永) và 7 quy tắc bút thuận giúp chữ viết ngay ngắn, cân đối ngay từ tuần đầu tiên.",
+      "features": [
+        "Sơ đồ mặt cắt khoang miệng trực quan cho từng nhóm âm khó",
+        "Bài luyện phân biệt các cặp âm dễ nhầm lẫn kèm Audio đối chiếu",
+        "7 quy tắc thuận bút vàng (ngang trước sổ sau, phẩy trước mác sau...)",
+        "Bảng tra cứu nhanh 400 âm tiết tiếng Phổ thông"
+      ],
+      "duration": "184 trang · Minh họa nét",
+      "level": "Ấn phẩm 12 · Nền tảng chuẩn",
+      "rating": 4.8,
+      "studentsCount": 2760,
+      "badge": "Nền tảng chuẩn",
+      "color": "#786244",
+      "image": "/images/book-covers/pinyin-master.jpg",
+      "lookbookImage": "/images/courses/pinyin-master.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm khâu chỉ",
+          "price": 98000,
+          "stock": 45,
+          "dimensions": "16 × 24 cm · Mở phẳng 180 độ"
+        },
+        "hardcover": {
+          "label": "Bìa cứng vải tơ sống",
+          "price": 185000,
+          "stock": 15,
+          "dimensions": "17 × 24.5 cm · Phong cách sách cổ đóng chỉ"
+        }
+      }
+    },
+    {
+      "id": "radicals-214",
+      "name": "Từ Điển Chiết Tự 214 Bộ Thủ Chữ Hán Cổ Kim",
+      "categoryId": "starter",
+      "categoryName": "Từ Điển, Bộ Thủ & Thư Pháp",
+      "author": "Hứa Thận (Thuyết Văn) · Biên dịch HANZI",
+      "publisher": "NXB Từ Điển Bách Khoa · HANZI",
+      "pages": 368,
+      "publishYear": 2026,
+      "isbn": "978-604-892-214-8",
+      "price": "168.000đ",
+      "originalPrice": "240.000đ",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "Giải mã nguồn gốc tượng hình Giáp Cốt Văn → Kim Văn → Khải Thư giúp nhớ nhanh 2.000 chữ Hán.",
+      "fullDesc": "Hiểu 214 bộ thủ là nắm được chiếc chìa khóa giải mã toàn bộ kho tàng chữ Hán. Sách minh họa sinh động quá trình biến đổi hình thể từ hình vẽ trên mai rùa (Giáp Cốt Văn) sang chữ Hán hiện đại, kèm câu thơ lục bát mẹo nhớ nhanh và 10 chữ Hán tiêu biểu ghép từ mỗi bộ thủ.",
+      "features": [
+        "Minh họa dòng chảy tiến hóa hình thể của trọn bộ 214 Bộ thủ Khang Hy",
+        "Phân tích chiết tự chữ Hội ý & Hình thanh giúp đoán nghĩa chữ lạ",
+        "Mẹo thơ tiếng Việt dễ thuộc lòng cho 50 bộ thủ xuất hiện nhiều nhất",
+        "Mục lục tra cứu theo cả số nét và âm Hán-Việt"
+      ],
+      "duration": "368 trang · Từ điển màu",
+      "level": "Ấn phẩm 13 · Tuyệt phẩm lưu trữ",
+      "rating": 5,
+      "studentsCount": 4120,
+      "popular": true,
+      "badge": "Tuyệt phẩm lưu trữ",
+      "color": "#7F2318",
+      "image": "/images/book-covers/radicals-214.jpg",
+      "lookbookImage": "/images/courses/pinyin-master.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm tiêu chuẩn",
+          "price": 168000,
+          "stock": 26,
+          "dimensions": "16 × 24 cm · Giấy ngà cổ điển"
+        },
+        "hardcover": {
+          "label": "Bìa cứng chu sa dập nhũ",
+          "price": 289000,
+          "stock": 8,
+          "dimensions": "17.5 × 25 cm · Vải đỏ chu sa nhũ đồng cổ"
+        }
+      }
+    },
+    {
+      "id": "calligraphy-workbook",
+      "name": "Bộ Vở Luyện Viết Chữ Hán Khải Thư Ô Mễ (Kèm Bút)",
+      "categoryId": "starter",
+      "categoryName": "Từ Điển, Bộ Thủ & Thư Pháp",
+      "author": "Thư Pháp Gia Điền Anh Chương",
+      "publisher": "Nhà Xuất Bản HANZI",
+      "pages": 160,
+      "publishYear": 2026,
+      "isbn": "978-604-892-399-2",
+      "price": "89.000đ",
+      "originalPrice": "135.000đ",
+      "period": "Bản lẻ / Hộp quà tặng",
+      "desc": "160 trang giấy Xuyên dày chống thấm mực, in chìm 500 chữ Hán chuẩn Khải thư trên ô Mễ đỏ.",
+      "fullDesc": "Bộ vở tập viết cao cấp khâu gáy mở phẳng 180 độ giúp cổ tay thoải mái khi luyện chữ. Chữ mẫu in mờ sắc độ chuẩn để người học tô nét trực tiếp hoặc nhìn mẫu chép sang ô Mễ bên cạnh, kèm hướng dẫn thứ tự từng nét (bút thuận) trên đầu mỗi dòng.",
+      "features": [
+        "Giấy Xuyên định lượng 120gsm viết êm, không nhòe với cả bút máy & bút lông",
+        "In chìm 500 chữ Hán thông dụng nhất HSK 1–3 kèm thứ tự từng nét",
+        "Đóng gáy khâu chỉ thủ công mở phẳng hoàn toàn 180 độ trên mặt bàn",
+        "Tặng kèm 1 bút lông đầu nhỏ chuyên luyện Tiểu Khải + ngòi thay thế"
+      ],
+      "duration": "160 trang · Kèm bút luyện chữ",
+      "level": "Ấn phẩm 14 · Tặng kèm bút",
+      "rating": 4.9,
+      "studentsCount": 3560,
+      "badge": "Tặng kèm bút",
+      "color": "#262B31",
+      "image": "/images/book-covers/calligraphy-workbook.jpg",
+      "lookbookImage": "/images/courses/hsk-1.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bộ Vở khâu chỉ + 1 Bút",
+          "price": 89000,
+          "stock": 50,
+          "dimensions": "18.5 × 26 cm · Giấy Xuyên 120gsm"
+        },
+        "hardcover": {
+          "label": "Hộp Sưu Tầm 3 Quyển + Bút Gỗ",
+          "price": 175000,
+          "stock": 12,
+          "dimensions": "Hộp cứng vải đá mực Huy Châu sang trọng"
+        }
+      }
+    },
+    {
+      "id": "pictograph-500",
+      "name": "500 Chữ Hán Tượng Hình Minh Họa Tranh Khắc Cổ Dễ Nhớ",
+      "categoryId": "starter",
+      "categoryName": "Từ Điển, Bộ Thủ & Thư Pháp",
+      "author": "Lâm Tây Lợi · Họa sĩ Mặc Vũ",
+      "publisher": "NXB Mỹ Thuật · Ấn Bản HANZI",
+      "pages": 272,
+      "publishYear": 2026,
+      "isbn": "978-604-892-215-5",
+      "price": "155.000₫",
+      "originalPrice": "215.000₫",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "Mỗi chữ Hán là một bức tranh kể chuyện: nhìn hình núi sông, trăng sao, muông thú nhớ ngay mặt chữ.",
+      "fullDesc": "Ấn phẩm nghệ thuật được yêu thích bởi cả người lớn mới học lẫn độc giả yêu mỹ thuật phương Đông. 500 chữ Hán nền tảng nhất được minh họa bằng tranh khắc gỗ hai màu son – vàng, dẫn dắt người đọc đi từ sự vật ngoài tự nhiên tới nét chữ vuông vức.",
+      "features": [
+        "500 tranh minh họa độc quyền phong cách mộc bản cổ truyền Á Đông",
+        "Hiển thị 4 bước biến đổi: Tranh vẽ → Giáp cốt → Tiểu triện → Khải thư",
+        "Kèm câu chuyện văn hóa thú vị ẩn sau từng chữ (An 安, Hảo 好, Gia 家...)",
+        "Giấy mỹ thuật dày 120gsm lên màu sắc nét, rất đẹp để làm quà tặng"
+      ],
+      "duration": "272 trang · Kèm Audio QR",
+      "level": "Ấn phẩm 15 · Sách Tranh Nghệ Thuật",
+      "rating": 5,
+      "studentsCount": 3690,
+      "popular": true,
+      "badge": "Sách Tranh Nghệ Thuật",
+      "color": "#8B6E4E",
+      "image": "/images/book-covers/pictograph-500.jpg",
+      "lookbookImage": "/images/courses/pinyin-master.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm tiêu chuẩn",
+          "price": 155000,
+          "stock": 29,
+          "isbn": "978-604-892-215-5",
+          "dimensions": "16 × 24 cm · Giấy kem chống lóa"
+        },
+        "hardcover": {
+          "label": "Bìa cứng vải bố dập nhũ",
+          "price": 275000,
+          "stock": 9,
+          "isbn": "978-604-892-215-8",
+          "dimensions": "17 × 24 cm · Vải lanh cát mộc in chu sa & nhũ vàng"
+        }
+      }
+    },
+    {
+      "id": "running-script-copybook",
+      "name": "Tập Chép Kinh Điển Đường Thi — Luyện Chữ Hành Khải Thanh Nhã",
+      "categoryId": "starter",
+      "categoryName": "Từ Điển, Bộ Thủ & Thư Pháp",
+      "author": "Thư Pháp Gia Ngô Ngọc Sinh",
+      "publisher": "Nhà Xuất Bản HANZI",
+      "pages": 176,
+      "publishYear": 2026,
+      "isbn": "978-604-892-216-2",
+      "price": "112.000₫",
+      "originalPrice": "158.000₫",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "Luyện viết chữ Hành Khải bay bổng tốc độ nhanh qua 60 bài thơ Đường bất hủ kèm giấy mờ can nét.",
+      "fullDesc": "Sau khi nắm vững chữ Khải thư chân phương, chữ Hành Khải (行楷) là bước tiến giúp bạn viết chữ Hán ngoài đời vừa nhanh vừa thanh thoát, liền nét uyển chuyển. Sách đóng chỉ cổ điển kèm 40 tờ giấy Đạo Lâm mỏng để đặt lên chép nét.",
+      "features": [
+        "Hướng dẫn kỹ thuật nối nét (liên bút) và nhịp thanh – đậm của thể Hành Khải",
+        "Chép 60 tuyệt tác thơ Lý Bạch, Đỗ Phủ, Vương Duy kèm lời dịch thơ tiếng Việt",
+        "Đóng gáy khâu chỉ lộ gáy truyền thống (线装书) mở phẳng hoàn toàn",
+        "Đính kèm xấp 40 tờ giấy can mờ hương trầm nhẹ để luyện tô nhiều lần"
+      ],
+      "duration": "176 trang · Kèm Audio QR",
+      "level": "Ấn phẩm 16 · Đóng Chỉ Cổ",
+      "rating": 4.9,
+      "studentsCount": 2280,
+      "popular": false,
+      "badge": "Đóng Chỉ Cổ",
+      "color": "#3F4E38",
+      "image": "/images/book-covers/running-script-copybook.jpg",
+      "lookbookImage": "/images/courses/pinyin-master.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm tiêu chuẩn",
+          "price": 112000,
+          "stock": 33,
+          "isbn": "978-604-892-216-2",
+          "dimensions": "16 × 24 cm · Giấy kem chống lóa"
+        },
+        "hardcover": {
+          "label": "Bìa cứng vải bố dập nhũ",
+          "price": 215000,
+          "stock": 10,
+          "isbn": "978-604-892-216-8",
+          "dimensions": "18 × 26 cm · Vải lụa xanh rêu trúc khâu chỉ trắng"
+        }
+      }
+    },
+    {
+      "id": "comm-travel",
+      "name": "Sổ Tay Khẩu Ngữ Tiếng Trung Du Lịch & Đời Sống",
+      "categoryId": "communication",
+      "categoryName": "Khẩu Ngữ, Du Lịch & Đời Sống",
+      "author": "Trần Nhược Vũ · Biên tập HANZI",
+      "publisher": "NXB Thế Giới · Tủ Sách Thực Chiến",
+      "pages": 208,
+      "publishYear": 2025,
+      "isbn": "978-604-778-210-4",
+      "price": "125.000đ",
+      "originalPrice": "175.000đ",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "1.000+ câu cửa miệng bản xứ tại sân bay, tàu cao tốc, khách sạn, gọi món và mặc cả mua sắm.",
+      "fullDesc": "Cuốn sách bỏ túi thiết yếu cho người đi du lịch tự túc Thượng Hải, Bắc Kinh, Hàng Châu, Thành Đô hoặc giao tiếp sinh hoạt hằng ngày. Mỗi tình huống đều có phiên âm bồi thông minh, Pinyin chuẩn, từ vựng thực đơn ẩm thực minh họa màu và hướng dẫn dùng WeChat Pay / Alipay / bản đồ Baidu.",
+      "features": [
+        "Chia làm 12 chương theo hành trình thực tế: Nhập cảnh → Tàu điện → Ẩm thực",
+        "Từ điển hình ảnh 120 món ăn Trung Hoa nổi tiếng để gọi món không nhầm",
+        "Các câu khẩu ngữ tự nhiên người bản xứ dùng hằng ngày (không sách vở)",
+        "Kèm Audio tốc độ chậm và tốc độ thực tế ngoài đời"
+      ],
+      "duration": "208 trang · In màu",
+      "level": "Ấn phẩm 17 · Du lịch tự túc",
+      "rating": 4.9,
+      "studentsCount": 3180,
+      "badge": "Du lịch tự túc",
+      "color": "#1C3844",
+      "image": "/images/book-covers/comm-travel.jpg",
+      "lookbookImage": "/images/courses/comm-travel.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm bỏ túi",
+          "price": 125000,
+          "stock": 40,
+          "dimensions": "14 × 20.5 cm · Nhỏ gọn mang đi xa"
+        },
+        "hardcover": {
+          "label": "Bìa cứng sưu tầm",
+          "price": 219000,
+          "stock": 12,
+          "dimensions": "15 × 21.5 cm · Vải xanh cổ vịt dập nhũ"
+        }
+      }
+    },
+    {
+      "id": "comm-301",
+      "name": "301 Câu Đàm Thoại Tiếng Hoa Kinh Điển (Bản Chỉnh Lý Mới)",
+      "categoryId": "communication",
+      "categoryName": "Khẩu Ngữ, Du Lịch & Đời Sống",
+      "author": "Khang Ngọc Hoa · Lai Tư Bình (ĐH Ngôn Ngữ Bắc Kinh)",
+      "publisher": "NXB Tổng Hợp · Tái Bản HANZI",
+      "pages": 264,
+      "publishYear": 2026,
+      "isbn": "978-604-778-211-1",
+      "price": "129.000₫",
+      "originalPrice": "179.000₫",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "Giáo trình giao tiếp huyền thoại từng giúp hàng triệu người Việt bật phản xạ nghe nói trong 8 tuần.",
+      "fullDesc": "Phiên bản kỷ niệm được HANZI biên tập lại bố cục thoáng mắt và cập nhật từ vựng thanh toán số hiện đại. Với 40 bài học xoay quanh 301 mẫu câu giao tiếp cốt lõi nhất, đây vẫn là cuốn sách đàm thoại súc tích, dễ học nhất mọi thời đại.",
+      "features": [
+        "40 chủ đề giao tiếp thiết thực nhất từ làm quen, hỏi thăm đến khám bệnh",
+        "Cập nhật thêm từ vựng đời sống số hiện đại (tàu cao tốc, gọi xe, quét mã)",
+        "Bài tập thay thế từ (Substitution Drills) giúp bật câu phản xạ tức thì",
+        "In trên giấy kem ngà nhẹ tay, phông chữ Hán cỡ lớn rõ nét"
+      ],
+      "duration": "264 trang · Kèm Audio QR",
+      "level": "Ấn phẩm 18 · Kinh Điển",
+      "rating": 4.9,
+      "studentsCount": 5120,
+      "popular": true,
+      "badge": "Kinh Điển",
+      "color": "#581C2C",
+      "image": "/images/book-covers/comm-301.jpg",
+      "lookbookImage": "/images/courses/comm-travel.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm tiêu chuẩn",
+          "price": 129000,
+          "stock": 42,
+          "isbn": "978-604-778-211-1",
+          "dimensions": "16 × 24 cm · Giấy kem chống lóa"
+        },
+        "hardcover": {
+          "label": "Bìa cứng vải bố dập nhũ",
+          "price": 229000,
+          "stock": 11,
+          "isbn": "978-604-778-211-8",
+          "dimensions": "16 × 24 cm · Vải đỏ rượu vang dập nhũ phố cổ Bắc Kinh"
+        }
+      }
+    },
+    {
+      "id": "slang-youth",
+      "name": "Khẩu Ngữ Hiện Đại & Từ Lóng Mạng Xã Hội Douyin – Xiaohongshu",
+      "categoryId": "communication",
+      "categoryName": "Khẩu Ngữ, Du Lịch & Đời Sống",
+      "author": "Tô Tiểu Mạn · Biên tập GenZ Bắc Kinh",
+      "publisher": "NXB Trẻ · Ấn Bản HANZI",
+      "pages": 232,
+      "publishYear": 2026,
+      "isbn": "978-604-778-212-8",
+      "price": "139.000₫",
+      "originalPrice": "189.000₫",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "Giải mã 400 cụm từ thịnh hành trên Douyin, Tiểu Hồng Thư, bình luận phim ảnh và văn hóa giới trẻ Trung Quốc.",
+      "fullDesc": "Tại sao học đến HSK 4 vẫn không hiểu bình luận trên Douyin hay Xiaohongshu? Cuốn sách này cập nhật 400 quán dụng ngữ, từ viết tắt và cách nói dí dỏm của giới trẻ Thượng Hải – Bắc Kinh để bạn trò chuyện tự nhiên như bạn bè bản xứ.",
+      "features": [
+        "400 từ lóng & quán dụng ngữ văn minh, dí dỏm đang thịnh hành nhất",
+        "Giải thích nguồn gốc văn hóa đằng sau các từ như 内卷, 躺平, 种草, 打卡",
+        "Mẫu câu bình luận, review mỹ phẩm, ẩm thực và vlog trên Xiaohongshu",
+        "Minh họa hội thoại kiểu khung chat sinh động, đọc cực cuốn"
+      ],
+      "duration": "232 trang · Kèm Audio QR",
+      "level": "Ấn phẩm 19 · Xu Hướng Mới",
+      "rating": 4.9,
+      "studentsCount": 2940,
+      "popular": false,
+      "badge": "Xu Hướng Mới",
+      "color": "#134E4A",
+      "image": "/images/book-covers/slang-youth.jpg",
+      "lookbookImage": "/images/courses/comm-travel.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm tiêu chuẩn",
+          "price": 139000,
+          "stock": 37,
+          "isbn": "978-604-778-212-8",
+          "dimensions": "16 × 24 cm · Giấy kem chống lóa"
+        },
+        "hardcover": {
+          "label": "Bìa cứng vải bố dập nhũ",
+          "price": 239000,
+          "stock": 9,
+          "isbn": "978-604-778-212-8",
+          "dimensions": "15.5 × 23 cm · Vải xanh tùng dập nhũ vàng hồng Thượng Hải"
+        }
+      }
+    },
+    {
+      "id": "campus-scholarship",
+      "name": "Cẩm Nang Hội Thoại Du Học Sinh & Phỏng Vấn Học Bổng CSC",
+      "categoryId": "communication",
+      "categoryName": "Khẩu Ngữ, Du Lịch & Đời Sống",
+      "author": "ThS. Nguyễn Hà My (Cựu DHS Thanh Hoa)",
+      "publisher": "NXB Giáo Dục · HANZI Du Học",
+      "pages": 244,
+      "publishYear": 2026,
+      "isbn": "978-604-778-213-5",
+      "price": "148.000₫",
+      "originalPrice": "198.000₫",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "120 câu hỏi phỏng vấn học bổng Chính phủ CSC/CIS, viết Kế hoạch học tập và giao tiếp giảng đường đại học.",
+      "fullDesc": "Dành riêng cho học sinh – sinh viên ấp ủ giấc mơ du học Trung Quốc. Sách hướng dẫn chi tiết cách viết Study Plan (学习计划) ấn tượng bằng tiếng Trung, kịch bản trả lời hội đồng giáo sư phỏng vấn và từ vựng sinh hoạt ký túc xá, thư viện, mở thẻ ngân hàng.",
+      "features": [
+        "120 câu hỏi – đáp thực tế trong vòng phỏng vấn học bổng CSC & Khổng Tử",
+        "10 mẫu Kế hoạch học tập (Study Plan) & Thư giới thiệu song ngữ đạt học bổng toàn phần",
+        "Từ vựng chọn tín chỉ, thảo luận nhóm và báo cáo luận văn với giáo sư hướng dẫn",
+        "Kinh nghiệm nhập học 72 giờ đầu tiên tại Bắc Kinh, Thượng Hải, Vũ Hán"
+      ],
+      "duration": "244 trang · Kèm Audio QR",
+      "level": "Ấn phẩm 20 · Học Bổng CSC",
+      "rating": 4.9,
+      "studentsCount": 1790,
+      "popular": false,
+      "badge": "Học Bổng CSC",
+      "color": "#1E3A5F",
+      "image": "/images/book-covers/campus-scholarship.jpg",
+      "lookbookImage": "/images/courses/hsk-2.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm tiêu chuẩn",
+          "price": 148000,
+          "stock": 26,
+          "isbn": "978-604-778-213-5",
+          "dimensions": "16 × 24 cm · Giấy kem chống lóa"
+        },
+        "hardcover": {
+          "label": "Bìa cứng vải bố dập nhũ",
+          "price": 249000,
+          "stock": 8,
+          "isbn": "978-604-778-213-8",
+          "dimensions": "16 × 24 cm · Vải xanh lam tháp Bác Nhã dập nhũ"
+        }
+      }
+    },
+    {
+      "id": "culinary-tea",
+      "name": "Hoa Ngữ Ẩm Thực Bát Đại Trường Phái & Nghệ Thuật Trà Đạo",
+      "categoryId": "communication",
+      "categoryName": "Khẩu Ngữ, Du Lịch & Đời Sống",
+      "author": "Lục Vũ · Biên khảo Trần Mặc",
+      "publisher": "NXB Văn Hóa · Ấn Bản HANZI",
+      "pages": 256,
+      "publishYear": 2026,
+      "isbn": "978-604-778-214-2",
+      "price": "162.000₫",
+      "originalPrice": "220.000₫",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "Khám phá từ vựng 8 trường phái ẩm thực lớn Trung Hoa, dụng cụ pha trà Tử Sa và văn hóa bàn tiệc.",
+      "fullDesc": "Sự giao thoa tuyệt đẹp giữa sách học ngôn ngữ và khảo cứu văn hóa thưởng thức. Độc giả vừa học hơn 800 từ vựng về nguyên liệu, kỹ pháp chế biến (xào, hấp, hầm, quay), lục đại trà loại (Lục trà, Ô long, Phổ Nhĩ...) vừa thưởng thức các giai thoại ẩm thực cổ kim.",
+      "features": [
+        "Hệ thống tên gọi & điển tích của 8 trường phái ẩm thực lớn (Tứ Xuyên, Quảng Đông...)",
+        "Thuật ngữ chuyên sâu về ấm Tử Sa Nghi Hưng, trà cụ và 6 dòng trà danh tiếng",
+        "Quy tắc chúc rượu, sắp xếp chỗ ngồi và giao tiếp lịch thiệp trên bàn tiệc Trung Hoa",
+        "In giấy ngà dày kèm phụ lục thực đơn song ngữ cho nhà hàng & khách sạn"
+      ],
+      "duration": "256 trang · Kèm Audio QR",
+      "level": "Ấn phẩm 21 · Văn Hóa Trà & Vị",
+      "rating": 4.9,
+      "studentsCount": 1620,
+      "popular": false,
+      "badge": "Văn Hóa Trà & Vị",
+      "color": "#8C3B2B",
+      "image": "/images/book-covers/culinary-tea.jpg",
+      "lookbookImage": "/images/courses/comm-travel.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm tiêu chuẩn",
+          "price": 162000,
+          "stock": 23,
+          "isbn": "978-604-778-214-2",
+          "dimensions": "16 × 24 cm · Giấy kem chống lóa"
+        },
+        "hardcover": {
+          "label": "Bìa cứng vải bố dập nhũ",
+          "price": 279000,
+          "stock": 9,
+          "isbn": "978-604-778-214-8",
+          "dimensions": "17 × 24 cm · Vải đất nung ấm Tử Sa dập nhũ vàng"
+        }
+      }
+    },
+    {
+      "id": "biz-taobao",
+      "name": "Cẩm Nang Tiếng Trung Thương Mại & Đàm Phán Nguồn Hàng",
+      "categoryId": "business",
+      "categoryName": "Thương Mại, XNK & Công Sở",
+      "author": "Lâm Gia Bảo · Chuyên gia XNK Á Châu",
+      "publisher": "NXB Công Thương · Ấn Bản HANZI",
+      "pages": 312,
+      "publishYear": 2026,
+      "isbn": "978-604-892-308-4",
+      "price": "179.000đ",
+      "originalPrice": "250.000đ",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "Mẫu thư tín, kịch bản chat AliWangWang/WeChat ép giá sỉ tận xưởng 1688, kho vận & hải quan.",
+      "fullDesc": "Tài liệu gối đầu giường cho chủ shop kinh doanh, dân nhập hàng Quảng Châu – Thâm Quyến và nhân viên thu mua tiếng Trung. Sách cung cấp hơn 500 mẫu câu đàm phán chiết khấu theo MOQ, đặt gia công OEM, kiểm định chất lượng hàng mẫu, xử lý khiếu nại hoàn tiền và bộ từ vựng 20 ngành hàng hot.",
+      "features": [
+        "500+ mẫu câu chat thực tế trên 1688, Taobao, WeChat với chủ xưởng",
+        "Bảng thuật ngữ 20 ngành hàng: Thời trang, gia dụng, điện tử, phụ kiện",
+        "Mẫu hợp đồng mua bán ngoại thương song ngữ Trung – Việt chuẩn",
+        "Kịch bản đàm phán công nợ, phí vận chuyển nội địa & biên mậu"
+      ],
+      "duration": "312 trang · Chuyên ngành",
+      "level": "Ấn phẩm 22 · Sách Kinh Doanh",
+      "rating": 5,
+      "studentsCount": 3890,
+      "popular": true,
+      "badge": "Sách Kinh Doanh",
+      "color": "#261E1B",
+      "image": "/images/book-covers/biz-taobao.jpg",
+      "lookbookImage": "/images/courses/biz-taobao.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm tiêu chuẩn",
+          "price": 179000,
+          "stock": 19,
+          "dimensions": "16 × 24 cm · Bìa cán mờ chống nước"
+        },
+        "hardcover": {
+          "label": "Bìa cứng Art-Deco dập nhũ",
+          "price": 295000,
+          "stock": 4,
+          "dimensions": "17 × 24.5 cm · Ấn bản giới hạn Bến Thượng Hải"
+        }
+      }
+    },
+    {
+      "id": "biz-office",
+      "name": "Tiếng Trung Văn Phòng — Soạn Thảo Email, Họp & Hợp Đồng Song Ngữ",
+      "categoryId": "business",
+      "categoryName": "Thương Mại, XNK & Công Sở",
+      "author": "Trương Hồng · Chuyên gia Nhân sự Thượng Hải",
+      "publisher": "NXB Kinh Tế · Ấn Bản HANZI",
+      "pages": 304,
+      "publishYear": 2026,
+      "isbn": "978-604-892-309-1",
+      "price": "172.000₫",
+      "originalPrice": "235.000₫",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "Mẫu email công sở trang trọng, báo cáo KPI, thuyết trình cuộc họp và phỏng vấn tuyển dụng doanh nghiệp FDI.",
+      "fullDesc": "Dành cho nhân viên văn phòng, thư ký giám đốc và trợ lý tiếng Trung tại các tập đoàn Đài Loan, Trung Quốc, Singapore. Sách chuẩn hóa văn phong kính ngữ thương mại (商务敬语), giúp bạn viết email WeChat/DingTalk chuyên nghiệp và tự tin điều phối cuộc họp.",
+      "features": [
+        "90 mẫu Email & tin nhắn WeChat công việc: báo giá, xin phép, đôn đốc tiến độ",
+        "Mẫu câu thuyết trình biểu đồ tăng trưởng, doanh số và báo cáo quý",
+        "15 mẫu Hợp đồng lao động, Biên bản ghi nhớ (MOU) và Bảo mật (NDA) song ngữ",
+        "Bộ câu hỏi phỏng vấn ứng tuyển vị trí Trợ lý Tổng giám đốc mức lương ngàn đô"
+      ],
+      "duration": "304 trang · Kèm Audio QR",
+      "level": "Ấn phẩm 23 · Công Sở FDI",
+      "rating": 4.9,
+      "studentsCount": 2840,
+      "popular": false,
+      "badge": "Công Sở FDI",
+      "color": "#1E293B",
+      "image": "/images/book-covers/biz-office.jpg",
+      "lookbookImage": "/images/courses/biz-taobao.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm tiêu chuẩn",
+          "price": 172000,
+          "stock": 29,
+          "isbn": "978-604-892-309-1",
+          "dimensions": "16 × 24 cm · Giấy kem chống lóa"
+        },
+        "hardcover": {
+          "label": "Bìa cứng vải bố dập nhũ",
+          "price": 285000,
+          "stock": 8,
+          "isbn": "978-604-892-309-8",
+          "dimensions": "16.5 × 24 cm · Vải xanh than công sở dập nhũ bút máy"
+        }
+      }
+    },
+    {
+      "id": "biz-logistics",
+      "name": "Thuật Ngữ Xuất Nhập Khẩu, Hải Quan & Logistics Trung – Việt",
+      "categoryId": "business",
+      "categoryName": "Thương Mại, XNK & Công Sở",
+      "author": "Lê Quốc Tuấn · Chuyên gia Cửa khẩu Hữu Nghị",
+      "publisher": "NXB Công Thương · HANZI Ngoại Thương",
+      "pages": 328,
+      "publishYear": 2026,
+      "isbn": "978-604-892-310-7",
+      "price": "189.000₫",
+      "originalPrice": "255.000₫",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "Trọn bộ chứng từ Incoterms, Packing List, C/O Form E, khai báo hải quan cửa khẩu và vận tải đường biển – đường bộ.",
+      "fullDesc": "Cuốn sách chuyên ngành thực tiễn cao dành cho nhân viên chứng từ XNK, thu mua quốc tế và điều vận kho bãi biên giới. Giải thích cặn kẽ toàn bộ bộ chứng từ ngoại thương song ngữ Trung – Anh – Việt và quy trình thông quan chính ngạch.",
+      "features": [
+        "Từ điển 1.800 thuật ngữ Logistics, Container, Cước tàu & Incoterms 2020",
+        "Hướng dẫn đọc hiểu Invoice, Packing List, Bill of Lading và C/O Form E Trung – ASEAN",
+        "Kịch bản xử lý sự cố chậm tàu, kiểm hóa hải quan và bồi thường bảo hiểm hàng hóa",
+        "Bản đồ từ vựng hệ thống cảng biển lớn (Thượng Hải, Ninh Ba, Thâm Quyến) & cửa khẩu"
+      ],
+      "duration": "328 trang · Kèm Audio QR",
+      "level": "Ấn phẩm 24 · Chuyên Ngành XNK",
+      "rating": 5,
+      "studentsCount": 2410,
+      "popular": true,
+      "badge": "Chuyên Ngành XNK",
+      "color": "#163B50",
+      "image": "/images/book-covers/biz-logistics.jpg",
+      "lookbookImage": "/images/courses/biz-taobao.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm tiêu chuẩn",
+          "price": 189000,
+          "stock": 25,
+          "isbn": "978-604-892-310-7",
+          "dimensions": "16 × 24 cm · Giấy kem chống lóa"
+        },
+        "hardcover": {
+          "label": "Bìa cứng vải bố dập nhũ",
+          "price": 309000,
+          "stock": 7,
+          "isbn": "978-604-892-310-8",
+          "dimensions": "17 × 24.5 cm · Vải xanh hải dương dập nhũ la bàn"
+        }
+      }
+    },
+    {
+      "id": "biz-livestream",
+      "name": "Kịch Bản Livestream Bán Hàng & Thương Mại Điện Tử Xuyên Biên Giới",
+      "categoryId": "business",
+      "categoryName": "Thương Mại, XNK & Công Sở",
+      "author": "Trần Giai Kỳ · Học viện TMĐT Hàng Châu",
+      "publisher": "NXB Công Thương · Ấn Bản HANZI",
+      "pages": 268,
+      "publishYear": 2026,
+      "isbn": "978-604-892-311-4",
+      "price": "165.000₫",
+      "originalPrice": "228.000₫",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "Công thức giữ chân người xem 3 giây đầu, mẫu câu chốt đơn bùng nổ và từ vựng làm việc với MCN Hàng Châu.",
+      "fullDesc": "Đúc kết trực tiếp từ thủ phủ livestream Hàng Châu: cuốn sách cung cấp trọn bộ kịch bản giới thiệu sản phẩm thời trang, mỹ phẩm, đồ gia dụng và thuật ngữ vận hành gian hàng TikTok Shop / Taobao Live song ngữ Trung – Việt.",
+      "features": [
+        "300 câu chốt đơn (Call-to-Action) tạo hiệu ứng khan hiếm chuẩn streamer Hàng Châu",
+        "Từ vựng chuyên ngành chỉ số phòng live: GMV, ROI, tỷ lệ chuyển đổi, lưu lượng tự nhiên",
+        "Kịch bản đàm phán hoa hồng với KOL/KOC và xưởng cung ứng chuỗi cung ứng",
+        "Phân tích 12 phiên livestream triệu đô thành công nhất ngành tiêu dùng"
+      ],
+      "duration": "268 trang · Kèm Audio QR",
+      "level": "Ấn phẩm 25 · TMĐT Hàng Châu",
+      "rating": 4.8,
+      "studentsCount": 1930,
+      "popular": false,
+      "badge": "TMĐT Hàng Châu",
+      "color": "#3B1938",
+      "image": "/images/book-covers/biz-livestream.jpg",
+      "lookbookImage": "/images/courses/biz-taobao.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm tiêu chuẩn",
+          "price": 165000,
+          "stock": 30,
+          "isbn": "978-604-892-311-4",
+          "dimensions": "16 × 24 cm · Giấy kem chống lóa"
+        },
+        "hardcover": {
+          "label": "Bìa cứng vải bố dập nhũ",
+          "price": 269000,
+          "stock": 7,
+          "isbn": "978-604-892-311-8",
+          "dimensions": "16 × 24 cm · Vải tím mận chín dập nhũ vàng kim"
+        }
+      }
+    },
+    {
+      "id": "biz-factory-qc",
+      "name": "Tiếng Trung Quản Lý Nhà Máy, Sản Xuất & Kiểm Định Chất Lượng (QC)",
+      "categoryId": "business",
+      "categoryName": "Thương Mại, XNK & Công Sở",
+      "author": "KS. Phạm Văn Hùng · Cố vấn Khu Công Nghiệp",
+      "publisher": "NXB Khoa Học Kỹ Thuật · HANZI",
+      "pages": 320,
+      "publishYear": 2026,
+      "isbn": "978-604-892-312-1",
+      "price": "182.000₫",
+      "originalPrice": "249.000₫",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "Từ vựng dây chuyền SMT, khuôn mẫu, may mặc, da giày, tiêu chuẩn 5S – ISO và biên bản kiểm hàng AQL.",
+      "fullDesc": "Cẩm nang thực chiến không thể thiếu cho phiên dịch viên hiện trường, kỹ sư, tổ trưởng sản xuất và nhân viên QC/QA tại các khu công nghiệp Bắc Ninh, Bắc Giang, Hải Phòng, Bình Dương, Đồng Nai.",
+      "features": [
+        "2.000 thuật ngữ kỹ thuật chia theo 6 ngành: Điện tử, Cơ khí, Nhựa, May mặc, Giày da, Gỗ",
+        "Mẫu hội thoại họp giao ban đầu ca, an toàn lao động, 5S và xử lý hàng lỗi (NG)",
+        "Mẫu báo cáo kiểm định chất lượng (QC Inspection Report) song ngữ Trung – Việt",
+        "Bìa cán màng chống bám bụi, chịu quăng quật tốt khi mang trực tiếp xuống xưởng"
+      ],
+      "duration": "320 trang · Kèm Audio QR",
+      "level": "Ấn phẩm 26 · Kỹ Thuật & Nhà Máy",
+      "rating": 4.9,
+      "studentsCount": 2780,
+      "popular": false,
+      "badge": "Kỹ Thuật & Nhà Máy",
+      "color": "#33241B",
+      "image": "/images/book-covers/biz-factory-qc.jpg",
+      "lookbookImage": "/images/courses/biz-taobao.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm tiêu chuẩn",
+          "price": 182000,
+          "stock": 31,
+          "isbn": "978-604-892-312-1",
+          "dimensions": "16 × 24 cm · Giấy kem chống lóa"
+        },
+        "hardcover": {
+          "label": "Bìa cứng vải bố dập nhũ",
+          "price": 295000,
+          "stock": 8,
+          "isbn": "978-604-892-312-8",
+          "dimensions": "16.5 × 24 cm · Vải nâu đồng công nghiệp dập nhũ bánh răng"
+        }
+      }
+    },
+    {
+      "id": "idioms-chengyu",
+      "name": "100 Điển Tích Thành Ngữ Bốn Chữ Trung Hoa (成语故事双语)",
+      "categoryId": "literature",
+      "categoryName": "Văn Học Song Ngữ & Văn Hóa",
+      "author": "Biên khảo Chu Thụy · Dịch chú HANZI",
+      "publisher": "NXB Văn Học · Ấn Bản HANZI",
+      "pages": 312,
+      "publishYear": 2026,
+      "isbn": "978-604-892-501-9",
+      "price": "169.000₫",
+      "originalPrice": "230.000₫",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "Kể chuyện lịch sử Xuân Thu – Chiến Quốc – Tam Quốc đằng sau 100 câu thành ngữ 4 chữ hay dùng nhất.",
+      "fullDesc": "Người Trung Quốc cực kỳ trân trọng người nước ngoài biết vận dụng đúng thành ngữ bốn chữ (成语). Mỗi chương sách mở ra một điển tích lịch sử hấp dẫn như 'Ngọa tân thường đảm', 'Họa long điểm睛', 'Tái Ông thất mã', kèm hướng dẫn cách đặt câu hiện đại tinh tế.",
+      "features": [
+        "100 câu chuyện điển tích lịch sử viết song ngữ Trung – Việt giàu chất văn chương",
+        "Chú giải từng chữ Hán cổ, âm Hán-Việt và thành ngữ tiếng Việt tương đương",
+        "Chỉ dẫn ngữ cảnh nên dùng & lỗi dùng sai sắc thái khen/chê thường gặp",
+        "Minh họa 20 bức tranh thủy mặc cổ điển xen kẽ giữa các chương sách"
+      ],
+      "duration": "312 trang · Kèm Audio QR",
+      "level": "Ấn phẩm 27 · Tinh Hoa Cổ Học",
+      "rating": 5,
+      "studentsCount": 2560,
+      "popular": true,
+      "badge": "Tinh Hoa Cổ Học",
+      "color": "#6E471F",
+      "image": "/images/book-covers/idioms-chengyu.jpg",
+      "lookbookImage": "/images/courses/hsk-3.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm tiêu chuẩn",
+          "price": 169000,
+          "stock": 26,
+          "isbn": "978-604-892-501-9",
+          "dimensions": "16 × 24 cm · Giấy kem chống lóa"
+        },
+        "hardcover": {
+          "label": "Bìa cứng vải bố dập nhũ",
+          "price": 289000,
+          "stock": 9,
+          "isbn": "978-604-892-501-8",
+          "dimensions": "17 × 24.5 cm · Vải lụa hổ phách dập nhũ tùng hạc"
+        }
+      }
+    },
+    {
+      "id": "bilingual-short-stories",
+      "name": "Tuyển Tập Truyện Ngắn Song Ngữ Trung – Việt Đương Đại",
+      "categoryId": "literature",
+      "categoryName": "Văn Học Song Ngữ & Văn Hóa",
+      "author": "Nhiều tác giả · Tuyển dịch Lâm Thu Thủy",
+      "publisher": "NXB Văn Học · Ấn Bản HANZI",
+      "pages": 296,
+      "publishYear": 2026,
+      "isbn": "978-604-892-502-6",
+      "price": "152.000₫",
+      "originalPrice": "205.000₫",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "18 truyện ngắn ấm áp về tuổi trẻ, gia đình và phố thị Giang Nam trình bày đối chiếu từng trang Trung – Việt.",
+      "fullDesc": "Phương pháp nâng trình đọc hiểu tự nhiên và thư giãn nhất từ HSK 3 lên HSK 5: trang bên trái là nguyên tác chữ Hán kèm chú thích từ khó ngay chân trang, trang bên phải là bản dịch văn học tiếng Việt mượt mà.",
+      "features": [
+        "18 truyện ngắn chọn lọc giàu cảm xúc, từ vựng vừa sức trình độ HSK 3–5",
+        "Trình bày dàn trang đối chiếu song song (Left-Right Parallel Reading) không cần lật giở",
+        "Chú thích từ vựng & cấu trúc hay ngay dưới chân trang nguyên tác",
+        "Kèm Audio giọng đọc truyền cảm như radio đêm khuya để luyện nghe thụ động"
+      ],
+      "duration": "296 trang · Kèm Audio QR",
+      "level": "Ấn phẩm 28 · Đọc Song Ngữ",
+      "rating": 4.9,
+      "studentsCount": 2150,
+      "popular": false,
+      "badge": "Đọc Song Ngữ",
+      "color": "#2E3552",
+      "image": "/images/book-covers/bilingual-short-stories.jpg",
+      "lookbookImage": "/images/courses/comm-travel.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm tiêu chuẩn",
+          "price": 152000,
+          "stock": 30,
+          "isbn": "978-604-892-502-6",
+          "dimensions": "16 × 24 cm · Giấy kem chống lóa"
+        },
+        "hardcover": {
+          "label": "Bìa cứng vải bố dập nhũ",
+          "price": 265000,
+          "stock": 10,
+          "isbn": "978-604-892-502-8",
+          "dimensions": "15.5 × 23 cm · Vải lam tím hoàng hôn dập nhũ cầu đá Giang Nam"
+        }
+      }
+    },
+    {
+      "id": "tang-poetry-300",
+      "name": "Ba Trăm Bài Thơ Đường Song Ngữ — Phiên Âm, Dịch Thơ & Bình Giải",
+      "categoryId": "literature",
+      "categoryName": "Văn Học Song Ngữ & Văn Hóa",
+      "author": "Hoành Đường Thoái Sĩ tuyển · Bản dịch kinh điển",
+      "publisher": "NXB Văn Học · Ấn Bản Sưu Tầm HANZI",
+      "pages": 420,
+      "publishYear": 2026,
+      "isbn": "978-604-892-503-3",
+      "price": "198.000₫",
+      "originalPrice": "275.000₫",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "Ấn bản trang trọng hội tụ nguyên tác chữ Hán, Pinyin, âm Hán-Việt, dịch nghĩa và các bản dịch thơ trứ danh.",
+      "fullDesc": "Một cuốn sách không thể thiếu trên kệ của người yêu chữ Hán và văn chương cổ điển. Tuyển tập đầy đủ các kiệt tác của Lý Bạch, Đỗ Phủ, Bạch Cư Dị, Vương Duy, Lý Thương Ẩn với phần bình giảng thi pháp tinh tế.",
+      "features": [
+        "Đầy đủ 5 tầng tiếp cận: Chữ Hán phồn/giản – Pinyin – Hán Việt – Dịch xuôi – Dịch thơ",
+        "Đối chiếu các bản dịch thơ Đường kinh điển của Tản Đà, Trần Trọng Kim, Ngô Tất Tố",
+        "Giải thích điển cố thi ca và luật bằng trắc Đường luật dễ hiểu",
+        "Ấn bản khâu chỉ lụa xanh ngọc bích tuyệt đẹp xứng đáng lưu giữ nhiều thế hệ"
+      ],
+      "duration": "420 trang · Kèm Audio QR",
+      "level": "Ấn phẩm 29 · Tuyệt Tác Thi Ca",
+      "rating": 5,
+      "studentsCount": 1890,
+      "popular": true,
+      "badge": "Tuyệt Tác Thi Ca",
+      "color": "#52685B",
+      "image": "/images/book-covers/tang-poetry-300.jpg",
+      "lookbookImage": "/images/courses/pinyin-master.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm tiêu chuẩn",
+          "price": 198000,
+          "stock": 21,
+          "isbn": "978-604-892-503-3",
+          "dimensions": "16 × 24 cm · Giấy kem chống lóa"
+        },
+        "hardcover": {
+          "label": "Bìa cứng vải bố dập nhũ",
+          "price": 349000,
+          "stock": 7,
+          "isbn": "978-604-892-503-8",
+          "dimensions": "17.5 × 25 cm · Bìa lụa ngọc bích khâu chỉ truyền thống"
+        }
+      }
+    },
+    {
+      "id": "chinese-culture-history",
+      "name": "Lược Sử Văn Hóa, Lễ Tết & Phong Tục Truyền Thống Trung Hoa",
+      "categoryId": "literature",
+      "categoryName": "Văn Học Song Ngữ & Văn Hóa",
+      "author": "GS. Trình Dụ Trinh · Biên dịch HANZI",
+      "publisher": "NXB Thế Giới · Ấn Bản HANZI",
+      "pages": 344,
+      "publishYear": 2026,
+      "isbn": "978-604-892-504-0",
+      "price": "178.000₫",
+      "originalPrice": "245.000₫",
+      "period": "Bìa mềm / Bìa cứng",
+      "desc": "Bức tranh toàn cảnh về triết học, kiến trúc cổ, gốm sứ, y phục, lễ Tết bốn mùa và văn hóa ứng xử Á Đông.",
+      "fullDesc": "Học ngôn ngữ mà hiểu sâu văn hóa thì lời nói mới có hồn. Cuốn sách đưa độc giả du ngoạn qua 5.000 năm văn minh Hoa Hạ: từ Tứ đại phát minh, kiến trúc Tử Cấm Thành, ngọc Bích cho tới ý nghĩa Tết Đoan Ngọ, Trung Thu, Nguyên Tiêu.",
+      "features": [
+        "16 chuyên đề văn hóa chuẩn giáo trình môn 'Trung Quốc Khái Huống' bậc đại học",
+        "Bảng từ vựng chuyên ngành văn hóa – lịch sử – di sản thế giới song ngữ",
+        "Giải đáp những điều kiêng kỵ và nghệ thuật tặng quà của người Trung Quốc",
+        "Bìa cứng đỏ rượu cung đình dập nhũ ngọc Bích & phượng hoàng sang trọng"
+      ],
+      "duration": "344 trang · Kèm Audio QR",
+      "level": "Ấn phẩm 30 · Khảo Cứu Văn Hóa",
+      "rating": 4.9,
+      "studentsCount": 1740,
+      "popular": false,
+      "badge": "Khảo Cứu Văn Hóa",
+      "color": "#4F1524",
+      "image": "/images/book-covers/chinese-culture-history.jpg",
+      "lookbookImage": "/images/courses/hsk-1.jpg",
+      "editions": {
+        "paperback": {
+          "label": "Bìa mềm tiêu chuẩn",
+          "price": 178000,
+          "stock": 24,
+          "isbn": "978-604-892-504-0",
+          "dimensions": "16 × 24 cm · Giấy kem chống lóa"
+        },
+        "hardcover": {
+          "label": "Bìa cứng vải bố dập nhũ",
+          "price": 299000,
+          "stock": 8,
+          "isbn": "978-604-892-504-8",
+          "dimensions": "17 × 24.5 cm · Vải đỏ cung đình dập nhũ ngọc Bích"
+        }
+      }
+    }
+  ],
+  "plans": [
+    {
+      "id": "boxset-starter",
+      "name": "Combo Nhập Môn Hán Tự Toàn Diện (4 Quyển)",
+      "badge": "Cho Người Mới",
+      "price": "419.000₫",
+      "originalPrice": "517.000₫",
+      "period": "Tiết kiệm 98.000₫ + Freeship",
+      "desc": "Bộ 4 cuốn nền tảng từ phát âm Pinyin, chữ tượng hình tới HSK 1 và vở luyện viết Khải thư.",
+      "features": [
+        "01 Giáo Trình Chuẩn HSK 1 + 01 Tinh Giảng Ngữ Âm Pinyin",
+        "01 Sách 500 Chữ Hán Tượng Hình + 01 Bộ Vở Luyện Viết Ô Mễ",
+        "Tặng Poster Bảng Pinyin khổ A2 & Bút luyện chữ Tiểu Khải",
+        "Miễn phí vận chuyển toàn quốc tận nhà"
+      ]
+    },
+    {
+      "id": "boxset-hsk-1-6",
+      "name": "Boxset Trọn Bộ Giáo Trình Chuẩn HSK 1–6 (6 Tập)",
+      "badge": "Bán Chạy Số 1",
+      "popular": true,
+      "price": "890.000₫",
+      "originalPrice": "1.062.000₫",
+      "period": "Tiết kiệm 172.000₫ + Quà tặng",
+      "desc": "Lộ trình xuyên suốt từ con số 0 tới đỉnh cao học thuật HSK 6 trong hộp cứng lưu trữ đồng bộ.",
+      "features": [
+        "Đầy đủ 06 tập Giáo Trình Chuẩn HSK 1, 2, 3, 4, 5 & 6",
+        "Tặng kèm Cẩm nang tóm tắt 120 cấu trúc ngữ pháp trọng tâm",
+        "Tích hợp trọn bộ mã QR nghe Audio MP3 giọng chuẩn Bắc Kinh",
+        "Đóng hộp cứng chống sốc + Miễn phí giao hàng toàn quốc"
+      ]
+    },
+    {
+      "id": "boxset-exam-pro",
+      "name": "Combo Luyện Đề Thực Chiến Đạt Điểm Cao (4 Quyển)",
+      "badge": "Bứt Phá Điểm Thi",
+      "price": "569.000₫",
+      "originalPrice": "694.000₫",
+      "period": "Tiết kiệm 125.000₫ + Freeship",
+      "desc": "Bộ vũ khí nước rút trước kỳ thi HSK & HSKK với 35 bộ đề chuẩn và cẩm nang ngữ pháp toàn tập.",
+      "features": [
+        "01 Cẩm Nang Ngữ Pháp Toàn Tập + 01 Sổ Tay 5000 Từ Vựng Mindmap",
+        "01 Tuyển Tập Đề Thi HSK 4–5–6 + 01 Bí Quyết Thi Nói HSKK",
+        "Tặng xấp phiếu tô đáp án chuẩn phòng thi thật để tự bấm giờ",
+        "Miễn phí vận chuyển toàn quốc"
+      ]
+    },
+    {
+      "id": "boxset-comm-life",
+      "name": "Combo Khẩu Ngữ Thực Chiến & Du Học (4 Quyển)",
+      "badge": "Nói Trôi Chảy",
+      "price": "445.000₫",
+      "originalPrice": "541.000₫",
+      "period": "Tiết kiệm 96.000₫ + Freeship",
+      "desc": "Tự tin giao tiếp đời sống, bắt nhịp ngôn ngữ mạng xã hội giới trẻ và phỏng vấn học bổng Trung Quốc.",
+      "features": [
+        "01 Sách 301 Câu Đàm Thoại + 01 Sổ Tay Du Lịch Trung Hoa",
+        "01 Khẩu Ngữ Douyin/Xiaohongshu + 01 Hội Thoại Du Học Học Bổng CSC",
+        "Tặng kèm sổ tay bỏ túi 200 câu giao tiếp khẩn cấp nơi sân bay",
+        "Miễn phí vận chuyển toàn quốc"
+      ]
+    },
+    {
+      "id": "boxset-business-vip",
+      "name": "Boxset Hoa Ngữ Kinh Doanh & Xuất Nhập Khẩu (5 Quyển)",
+      "badge": "Doanh Nhân & FDI",
+      "price": "739.000₫",
+      "originalPrice": "887.000₫",
+      "period": "Tiết kiệm 148.000₫ + Hợp đồng mẫu",
+      "desc": "Trọn bộ nghiệp vụ cho chủ shop nguồn hàng, nhân sự FDI, chứng từ Logistics và kỹ sư nhà máy.",
+      "features": [
+        "Đủ 05 cuốn: Đàm phán Taobao, Văn phòng, Logistics XNK, Livestream & Nhà máy QC",
+        "Tặng bộ file mềm 30 mẫu Hợp đồng, Packing List & Báo cáo QC song ngữ",
+        "Bìa cán mờ chống nước bền bỉ trong môi trường công sở & kho xưởng",
+        "Miễn phí giao nhanh toàn quốc"
+      ]
+    },
+    {
+      "id": "boxset-collector-heritage",
+      "name": "Hộp Quà Tàng Thư Bìa Cứng Dập Nhũ 24K (5 Tuyệt Phẩm)",
+      "badge": "Ấn Bản Sưu Tầm",
+      "popular": true,
+      "price": "1.190.000₫",
+      "originalPrice": "1.491.000₫",
+      "period": "Tiết kiệm 301.000₫ + Hộp Gỗ Lụa",
+      "desc": "Tuyển chọn 5 ấn bản bìa cứng bọc vải bố & lụa khâu chỉ đẹp nhất HANZI dành tặng người trân quý sách.",
+      "features": [
+        "05 bản Bìa Cứng 24K: 214 Bộ Thủ, 100 Thành Ngữ, 300 Bài Thơ Đường, Văn Hóa & Trà Đạo",
+        "Đặt trong Hộp lưu trữ lót lụa kèm thẻ chứng nhận ấn bản đánh số",
+        "Tặng kèm Bookmark đồng thau chạm rỗng & Bút lông gỗ đàn hương",
+        "Miễn phí giao hàng bảo hiểm góc sách 100%"
+      ]
+    }
+  ],
+  "hskCourses": [
+    {
+      "level": 1,
+      "title": "Tủ Sách Cấp Độ HSK 1",
+      "titleVn": "150 từ vựng · Bậc Nhập Môn",
+      "description": "Các đầu sách nhập môn ngữ âm Pinyin, nét chữ cơ bản và 150 từ vựng giao tiếp đầu đời.",
+      "requiredVocabCount": 150,
+      "passingScore": 120,
+      "maxScore": 200,
+      "colorHex": "#10B981",
+      "id": "hsk-level-1"
+    },
+    {
+      "level": 2,
+      "title": "Tủ Sách Cấp Độ HSK 2",
+      "titleVn": "300 từ vựng · Bậc Sơ Trung Cấp",
+      "description": "Sách rèn luyện phản xạ hội thoại hằng ngày, mua sắm, hỏi đường và câu phức cơ bản.",
+      "requiredVocabCount": 300,
+      "passingScore": 120,
+      "maxScore": 200,
+      "colorHex": "#3B82F6",
+      "id": "hsk-level-2"
+    },
+    {
+      "level": 3,
+      "title": "Tủ Sách Cấp Độ HSK 3",
+      "titleVn": "600 từ vựng · Bậc Trung Cấp",
+      "description": "Giáo trình đọc hiểu chữ Hán không Pinyin, chuẩn bị hồ sơ du học và làm việc văn phòng.",
+      "requiredVocabCount": 600,
+      "passingScore": 180,
+      "maxScore": 300,
+      "colorHex": "#F59E0B",
+      "id": "hsk-level-3"
+    },
+    {
+      "level": 4,
+      "title": "Tủ Sách Cấp Độ HSK 4",
+      "titleVn": "1200 từ vựng · Bậc Thượng Cấp",
+      "description": "Tài liệu nghị luận xã hội, kinh tế, thương mại và kỹ năng viết đoạn văn học thuật.",
+      "requiredVocabCount": 1200,
+      "passingScore": 180,
+      "maxScore": 300,
+      "colorHex": "#8B5CF6",
+      "id": "hsk-level-4"
+    }
+  ],
+  "users": [
+    {
+      "id": "usr-admin",
+      "username": "admin",
+      "password": "123",
+      "email": "quanly@hanzi.vn",
+      "fullName": "Quản Trị HANZI (Admin)",
+      "phone": "0901234567",
+      "role": "admin"
+    },
+    {
+      "id": "usr-student",
+      "username": "student",
+      "password": "123",
+      "email": "docgia@hanzi.vn",
+      "fullName": "Độc Giả Thành Viên",
+      "phone": "0909888777",
+      "role": "student"
+    },
+    {
+      "id": "usr-minhchau",
+      "username": "minhchau",
+      "password": "123",
+      "email": "minhchau@gmail.com",
+      "fullName": "Nguyễn Minh Châu",
+      "phone": "0912345678",
+      "role": "student"
+    },
+    {
+      "id": "usr-hoanglan",
+      "username": "hoanglan",
+      "password": "123",
+      "email": "hoanglan@gmail.com",
+      "fullName": "Trần Hoàng Lân",
+      "phone": "0987654321",
+      "role": "student"
+    }
+  ],
+  "orders": [
+    {
+      "id": "ord-2005",
+      "studentName": "Nguyễn Minh Châu",
+      "email": "minhchau@gmail.com",
+      "phone": "0912345678",
+      "shippingAddress": "Số 182 Nguyễn Thị Minh Khai, Phường Võ Thị Sáu, Quận 3, TP.HCM",
+      "courseId": "hsk-3",
+      "courseName": "Giáo Trình Chuẩn HSK 3 (Bìa cứng ×1), Từ Điển 214 Bộ Thủ (Bìa mềm ×1)",
+      "subtotal": 437000,
+      "discountAmount": 50000,
+      "shippingFee": 0,
+      "totalNumeric": 387000,
+      "amount": "387.000đ",
+      "voucherCode": "HANZI50K",
+      "status": "pending",
+      "createdAt": "Hôm nay · 14:20"
+    },
+    {
+      "id": "ord-2004",
+      "studentName": "Trần Hoàng Lân",
+      "email": "hoanglan@gmail.com",
+      "phone": "0987654321",
+      "shippingAddress": "Tầng 6, Tòa nhà Cầu Giấy, Số 85 Xuân Thủy, Cầu Giấy, Hà Nội",
+      "courseId": "biz-taobao",
+      "courseName": "Cẩm Nang Tiếng Trung Thương Mại (Bìa cứng ×1)",
+      "subtotal": 295000,
+      "discountAmount": 30000,
+      "shippingFee": 25000,
+      "totalNumeric": 290000,
+      "amount": "290.000đ",
+      "voucherCode": "SACHMOI30K",
+      "status": "pending",
+      "createdAt": "Hôm nay · 10:05"
+    },
+    {
+      "id": "ord-2003",
+      "studentName": "Lê Thu Hà",
+      "email": "thuha.le@gmail.com",
+      "phone": "0934567890",
+      "shippingAddress": "Số 42 Bạch Đằng, Quận Hải Châu, TP. Đà Nẵng",
+      "courseId": "hsk-1",
+      "courseName": "Giáo Trình Chuẩn HSK 1 (Bìa mềm ×1), Bộ Vở Luyện Viết Ô Mễ (×2)",
+      "subtotal": 293000,
+      "discountAmount": 0,
+      "shippingFee": 25000,
+      "totalNumeric": 318000,
+      "amount": "318.000đ",
+      "status": "approved",
+      "createdAt": "Hôm qua · 19:42"
+    },
+    {
+      "id": "ord-2002",
+      "studentName": "Phạm Quốc Khánh",
+      "email": "quockhanh@gmail.com",
+      "phone": "0977112233",
+      "shippingAddress": "Số 19 Đại lộ Hòa Bình, Quận Ninh Kiều, TP. Cần Thơ",
+      "courseId": "hsk-4",
+      "courseName": "Giáo Trình Chuẩn HSK 4 (Bìa cứng ×1), Giáo Trình HSK 3 (Bìa cứng ×1)",
+      "subtotal": 584000,
+      "discountAmount": 100000,
+      "shippingFee": 0,
+      "totalNumeric": 484000,
+      "amount": "484.000đ",
+      "voucherCode": "BOXSET100K",
+      "status": "approved",
+      "createdAt": "20/11/2026"
+    },
+    {
+      "id": "ord-2001",
+      "studentName": "Vũ Thanh Tùng",
+      "email": "thanhtung@gmail.com",
+      "phone": "0966554433",
+      "shippingAddress": "Khu đô thị Ecopark, Văn Giang, Hưng Yên",
+      "courseId": "pinyin-master",
+      "courseName": "Tinh Giảng Ngữ Âm Pinyin & Thuận Bút (Bìa mềm ×1)",
+      "subtotal": 98000,
+      "discountAmount": 0,
+      "shippingFee": 25000,
+      "totalNumeric": 123000,
+      "amount": "123.000đ",
+      "status": "cancelled",
+      "createdAt": "18/11/2026"
+    }
+  ],
+  "vouchers": [
+    {
+      "id": "vch-1",
+      "code": "SACHMOI30K",
+      "title": "Giảm 30.000₫ Đơn Sách Đầu Tiên",
+      "desc": "Áp dụng cho mọi đầu sách & vở luyện viết tại HANZI",
+      "condition": "Đơn từ 150.000₫",
+      "expiry": "HSD: 31/12/2026",
+      "badge": "Độc Giả Mới",
+      "discountAmount": 30000,
+      "minOrderAmount": 150000
+    },
+    {
+      "id": "vch-2",
+      "code": "HANZI50K",
+      "title": "Giảm 50.000₫ Sách Giáo Trình HSK",
+      "desc": "Ưu đãi khi mua từ 2 cuốn giáo trình hoặc từ điển bộ thủ",
+      "condition": "Đơn từ 299.000₫",
+      "expiry": "HSD: 31/12/2026",
+      "badge": "Bán Chạy",
+      "discountAmount": 50000,
+      "minOrderAmount": 299000
+    },
+    {
+      "id": "vch-3",
+      "code": "BOXSET100K",
+      "title": "Giảm 100.000₫ Đơn Sưu Tầm Bìa Cứng",
+      "desc": "Dành cho đơn hàng ấn bản bìa cứng dập nhũ hoặc trọn bộ Boxset",
+      "condition": "Đơn từ 500.000₫",
+      "expiry": "HSD: 31/12/2026",
+      "badge": "VIP 24K",
+      "discountAmount": 100000,
+      "minOrderAmount": 500000
+    },
+    {
+      "id": "vch-4",
+      "code": "FREESHIP25K",
+      "title": "Trợ Giá 25.000₫ Phí Giao Sách Tận Nhà",
+      "desc": "Đóng gói hộp chống sốc 3 lớp bảo vệ góc sách nguyên vẹn",
+      "condition": "Đơn từ 120.000₫",
+      "expiry": "HSD: 31/12/2026",
+      "badge": "Freeship",
+      "discountAmount": 25000,
+      "minOrderAmount": 120000
+    }
+  ]
+}

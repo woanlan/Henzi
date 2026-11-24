@@ -1,89 +1,95 @@
-# HANZI MASTER — Master Chinese, One Step at a Time
+# HANZI — Nhà Sách & Học Liệu Tiếng Trung (React/Next.js + Node.js/Express + MongoDB)
 
-Nền tảng học tiếng Trung toàn diện từ HSK 1 đến HSK 6 dành cho người Việt, kết hợp trải nghiệm của **Duolingo**, **Anki**, **Quizlet** và **Gia sư AI** thông minh, áp dụng tiêu chuẩn thiết kế chống rập khuôn (**Anti-Slop Design**) từ **tasteskill.dev**.
+Dự án được phân chia rõ ràng thành 2 thư mục độc lập:
 
----
+- **`frontend/`**: Giao diện Hiệu sách 3D & trang Quản trị Admin viết bằng **React 19 / Next.js 16 + TypeScript + Tailwind CSS + Redux Toolkit + SWR** (chạy tại `http://localhost:3003`).
+- **`backend/`**: Máy chủ REST API viết bằng **Node.js + Express 5 + Mongoose**, kết nối trực tiếp cơ sở dữ liệu **MongoDB** (`mongodb://127.0.0.1:27017/hanzi_master`, chạy tại `http://localhost:3001/api`), có sẵn chế độ dự phòng bộ nhớ khi triển khai trên cloud chưa cấu hình `MONGODB_URI`.
 
-## 🌟 TÍNH NĂNG NỔI BẬT
-
-1. **Giao Diện Chuẩn Taste Skill (Anti-Slop):**
-   - Bảng màu Chu sa & Hổ phách ấm (`#F59E0B`, `#D97706`), mực xanh chàm sâu (`#172554`), nền giấy dó ấm (`#FAFAF9`).
-   - Tích hợp font thư pháp chuyên biệt *Noto Serif SC* và chữ quốc ngữ chuẩn xác.
-   - Thẻ đa tầng đổ bóng tự nhiên, âm thanh Web Audio API phản hồi xúc giác.
-
-2. **Lộ Trình HSK 1 Đến HSK 6:**
-   - Cấu trúc chuẩn hóa: Cấp độ HSK → Unit → Bài học → Mục tiêu học tập & thời lượng.
-   - Phân biệt rõ dữ liệu giáo trình chuẩn, tài liệu nhập khẩu và bài học mẫu.
-
-3. **Từ Vựng & Thẻ Flashcard SRS (SuperMemo SM-2):**
-   - Thẻ lật 3D trực quan (Chữ Hán, Pinyin có dấu, Nghĩa tiếng Việt, Bộ thủ, Số nét, Câu ví dụ).
-   - 3 nút đánh giá chuẩn SRS: *Từ Khó* (ôn ngày mai) / *Đang Học* (sau 3 ngày) / *Đã Thuộc* (sau 7 ngày).
-   - 4 chế độ trắc nghiệm: Chữ Hán → Tiếng Việt, Tiếng Việt → Chữ Hán, Pinyin → Chữ Hán, Âm thanh → Chữ Hán.
-   - Sổ tay từ vựng cá nhân lưu trữ tức thời.
-
-4. **Phòng Luyện Viết Chữ Hán (Writing Lab):**
-   - Viết trực tiếp trên ô Mễ Tự Cách (米字格) hỗ trợ chuột và màn hình cảm ứng.
-   - Hướng dẫn thứ tự từng nét bút chuẩn thuận bút (Quy tắc ngang trước sổ sau, trên trước dưới sau...).
-   - 3 chế độ: Viết theo mẫu mờ (Trace), Tự nhớ nét (Memory), Chép chính tả (Dictation).
-
-5. **Phòng Luyện Nghe (Listening Lab):**
-   - Giọng đọc phổ thông Bắc Kinh chuẩn xác với điều chỉnh tốc độ (0.75x, 1.0x, 1.25x).
-   - Bật/tắt linh hoạt 3 tầng phụ đề: Chữ Hán, Pinyin, Dịch nghĩa tiếng Việt.
-   - Bài tập trắc nghiệm nghe hiểu & chép chính tả âm thanh.
-
-6. **Phòng Luyện Nói & Chấm Điểm AI (Speaking Lab):**
-   - Ghi âm giọng nói qua Web Speech API / Whisper.
-   - Đối chiếu văn bản nhận diện, chấm điểm thanh điệu và sự chuẩn xác theo % kèm nhận xét sư phạm bằng tiếng Việt.
-   - Kịch bản hội thoại AI thực tế (Làm quen, Gọi món, Hỏi đường, Phỏng vấn xin việc).
-
-7. **Bách Khoa Toàn Thư Ngữ Pháp HSK (Grammar Lab):**
-   - Tra cứu tức thì cấu trúc ngữ pháp HSK 1–6.
-   - Phân tích điều kiện sử dụng, lưu ý lỗi sai phổ biến của người Việt và so sánh cấu trúc tương đồng.
-   - Bài tập trắc nghiệm củng cố kèm lời giải thích chi tiết.
-
-8. **Trung Tâm Thi Thử HSK Bấm Giờ (Mock Exam Center):**
-   - Đề thi mô phỏng chuẩn hóa (H11003, H21004, H31005) có đếm ngược thời gian thực.
-   - Phân mục Nghe Hiểu (听力) và Đọc Hiểu (阅读).
-   - Chấm điểm tự động, báo cáo tỷ lệ Đạt/Không đạt và phân tích chi tiết từng câu.
-
-9. **Gia Sư AI Tiếng Trung (AI Tutor):**
-   - Chat tương tác đa năng, tự động bóc tách câu theo 6 tầng:
-     1. Chữ Hán chuẩn
-     2. Pinyin có dấu thanh
-     3. Dịch nghĩa tiếng Việt
-     4. Bóc tách từ vựng cốt lõi
-     5. Phân tích điểm ngữ pháp
-     6. Mẫu câu mở rộng tự nhiên
-   - Hỗ trợ cả OpenAI API / Gemini API hoặc bộ phân tích sư phạm offline thông minh không cần cấu hình khóa.
-
-10. **Bảng Điều Khiển Quản Trị (Admin Center):**
-    - Quản lý học viên, duyệt bài học, thêm từ vựng mới vào kho HSK, xuất file JSON.
-    - Chuyển đổi vai trò linh hoạt: Học viên, Giáo viên, Quản trị viên chỉ với 1 click.
+> **Mẹo khi bảo vệ ASM trước Cô:** Trong VS Code, bấm **`Ctrl + Shift + F`** và gõ từ khóa **`[YÊU CẦU CÔ`** để nhảy tới đúng từng dòng code đã gắn chú thích theo yêu cầu môn học!
 
 ---
 
-## 🚀 HƯỚNG DẪN KHỞI CHẠY DỰ ÁN
+## Cấu trúc thư mục
 
-### 1. Khởi chạy môi trường phát triển (Dev Server):
-```bash
-npm run dev
+```text
+wd21201/
+├── backend/                     # Backend Node.js + Express 5 + MongoDB
+│   ├── src/
+│   │   ├── config/
+│   │   │   ├── db.js            # Kết nối Mongoose tới MongoDB (hanzi_master / Atlas)
+│   │   │   └── memoryStore.js   # Dự phòng dữ liệu bộ nhớ khi chạy cloud không có MONGODB_URI
+│   │   ├── models/              # 7 Mongoose Models (Category, Product, User, Order, Voucher, Plan, HskCourse)
+│   │   ├── controllers/         # Xử lý CRUD + Đăng ký/Đăng nhập + Cố vấn Sách AI
+│   │   ├── routes/index.js      # Định tuyến 28 REST API (/api/...)
+│   │   ├── seed/                # 30 đầu sách, 6 tủ chuyên đề, 6 bộ Boxset & script nạp vào MongoDB
+│   │   └── server.js            # Khởi chạy Express Server cổng 3001
+│   ├── .env                     # Biến môi trường Backend (PORT, MONGODB_URI, GEMINI_API_KEY)
+│   └── package.json
+│
+├── frontend/                    # Frontend React 19 / Next.js 16
+│   ├── src/
+│   │   ├── app/                 # Các trang (/, /products, /category, /detail, /detail/[id], /about, /login, /register, /admin)
+│   │   ├── components/
+│   │   │   ├── vankho/          # Giao diện Hiệu sách 3D (VanKhoExperience, HeaderFooterShell, CoverFlowHero, Lookbook, Catalog, Drawers)
+│   │   │   ├── admin/           # Admin Dashboard 6 phân hệ CRUD (Tổng quan, Đơn sách, Đầu sách, Tủ chuyên đề, Voucher, Tài khoản)
+│   │   │   ├── ai/              # Hộp thoại Cố vấn Sách AI & Từ điển Hán ngữ (AITutorChatBox.tsx)
+│   │   │   └── *.tsx            # Thẻ sách & Form (WolfProductCard, CategoryCard, ProductCard, ProductDetailCard, LoginForm, RegisterForm)
+│   │   ├── context/             # Context API (AiTutorContext.tsx: createContext + useContext)
+│   │   ├── hooks/               # Custom Hooks + useSWR (useSwrApi.ts)
+│   │   ├── store/               # Redux Toolkit (configureStore, authSlice, voucherWalletSlice, cartSlice, AppProviders)
+│   │   ├── interfaces/          # Khai báo kiểu TypeScript (IProduct, ICategory, IUser, IOrder, IVoucher)
+│   │   ├── lib/                 # Validation thuần TS (validation.ts), cấu hình API (api-url.ts), Audio (audio.ts)
+│   │   └── services/            # Gọi 28 REST API Backend qua fetch + try...catch
+│   ├── public/                  # Hình ảnh 30 bìa sách & tài nguyên tĩnh
+│   ├── .env.local               # NEXT_PUBLIC_API_URL=http://localhost:3001/api
+│   └── package.json
+│
+├── start-render.mjs             # Script khởi chạy đồng thời Backend + Frontend khi deploy Render
+└── package.json                 # Scripts dev / build / start / lint / seed toàn dự án
 ```
-Mở trình duyệt tại: [http://localhost:3000](http://localhost:3000)
 
-### 2. Biên dịch Production Build:
-```bash
-npm run build
-npm run start
-```
+---
 
-### 3. Cấu hình cơ sở dữ liệu Supabase (Tùy chọn):
-Hệ thống được thiết kế theo cơ chế **Dual-Mode**, đã tích hợp sẵn kho dữ liệu đầy đủ chạy mượt mà offline. Khi muốn kết nối dự án Supabase thật:
-1. Tạo một dự án mới trên [Supabase](https://supabase.com).
-2. Vào SQL Editor trên Supabase Dashboard và dán toàn bộ nội dung file:
-   `supabase/migrations/20261101_initial_schema.sql`
-3. Điền thông tin vào `.env.local`:
-   ```env
-   NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key-here
-   OPENAI_API_KEY=sk-your-openai-api-key
+## Bảng tra cứu nhanh các yêu cầu chấm bài của Cô
+
+| Hạng mục yêu cầu | Nơi triển khai đang chạy thực tế trong code (có gắn comment `[YÊU CẦU CÔ - ...]`) |
+| :--- | :--- |
+| **Lab 1: Tạo Project & Bố cục gốc** | `frontend/src/app/layout.tsx`, `frontend/src/app/page.tsx`, `backend/src/server.js` |
+| **Lab 2: Tạo Component tái sử dụng** | `frontend/src/components/vankho/VanKhoHeaderFooterShell.tsx`, `frontend/src/components/WolfProductCard.tsx`, `frontend/src/components/CategoryCard.tsx`, `frontend/src/components/ProductCard.tsx` |
+| **Lab 3: Component + Props (Cha → Con)** | `page.tsx` → `VanKhoExperience.tsx` → `VanKhoCoverFlowHero.tsx` / `VanKhoLookbook.tsx` / `VanKhoCatalogSection.tsx`; `products/page.tsx` → `WolfProductCard.tsx`; `detail/[id]/page.tsx` → `ProductDetailCard.tsx`; `AdminDashboard.tsx` → `AdminOverview.tsx` / `AdminOrdersSection.tsx` / `AdminUsersSection.tsx` / `AdminVouchersSection.tsx` |
+| **Lab 4: `useState` + Form & Validation JS/TS** | `frontend/src/lib/validation.ts`, `LoginForm.tsx`, `RegisterForm.tsx`, `ProductDetailCard.tsx`, `VanKhoDrawers.tsx` (Form thanh toán giỏ sách), `VanKhoHeaderFooterShell.tsx` (Form bản tin), Modal CRUD trong `AdminDashboard.tsx`, `AdminOrdersSection.tsx`, `AdminUsersSection.tsx`, `AdminVouchersSection.tsx` |
+| **`useEffect` (Vòng đời & Sự kiện)** | `AppProviders.tsx` (đồng bộ auth/cart/voucher từ `localStorage`), `VanKhoHeaderFooterShell.tsx`, `AdminDashboard.tsx` (gọi API khi xác nhận Admin & bắt phím `Escape`), `AITutorChatBox.tsx` |
+| **`useMemo` (Tối ưu lọc & Biểu đồ)** | `VanKhoCatalogSection.tsx` (lọc & sắp xếp 30 đầu sách), `VanKhoDrawers.tsx` (tính tổng tiền & mã giảm giá), `AdminOverview.tsx`, `AdminDashboard.tsx`, `AdminOrdersSection.tsx`, `AdminUsersSection.tsx`, `AdminVouchersSection.tsx` |
+| **Custom Hooks + `useSWR` (`swr`)** | `frontend/src/hooks/useSwrApi.ts` (`useVouchersSWR`, `useBackendHealthSWR`, `useProductsSWR`), dùng trực tiếp ở `VanKhoExperience.tsx`, `VanKhoHeaderFooterShell.tsx`, `VanKhoDrawers.tsx`, `ProductDetailCard.tsx` và `AdminDashboard.tsx` (`mutate`) |
+| **Context API (`createContext` / `useContext`)** | `frontend/src/context/AiTutorContext.tsx`, dùng ở `VanKhoHeaderFooterShell.tsx` (nút **Cố vấn AI**) và `AITutorChatBox.tsx` |
+| **Redux Toolkit (`@reduxjs/toolkit` + `react-redux`)** | `frontend/src/store/index.ts`, `authSlice.ts`, `voucherWalletSlice.ts`, `cartSlice.ts`, `AppProviders.tsx`; dùng ở `VanKhoHeaderFooterShell.tsx`, `VanKhoCoverFlowHero.tsx`, `VanKhoCatalogSection.tsx`, `VanKhoDrawers.tsx`, `WolfProductCard.tsx`, `ProductDetailCard.tsx`, `LoginForm.tsx`, `AdminDashboard.tsx` |
+| **Phân quyền RBAC & CRUD React + REST API Node.js & MongoDB** | 28 API tại `backend/src/routes/index.js` + 7 Mongoose Models + `frontend/src/services/*.service.ts` + trang quản trị 6 phân hệ `frontend/src/components/admin/AdminDashboard.tsx` (chặn 403 tài khoản thường) |
+
+---
+
+## Cách khởi chạy dự án (Localhost)
+
+Đảm bảo dịch vụ **MongoDB** đang bật trên máy (`127.0.0.1:27017`), sau đó mở **2 cửa sổ Terminal** tại `c:\Users\Admin\Desktop\REACT\wd21201`:
+
+1. **Terminal 1 — Chạy Backend (Node.js + MongoDB cổng `3001`):**
+   ```bash
+   cd backend
+   npm run dev
    ```
+   *(Lần đầu chạy hoặc khi muốn làm mới dữ liệu gốc trong MongoDB: `npm run seed`)*
+
+2. **Terminal 2 — Chạy Frontend (React/Next.js cổng `3003`):**
+   ```bash
+   cd frontend
+   npm run dev
+   ```
+
+- Trang hiệu sách: `http://localhost:3003`
+- Trang quản trị Admin: `http://localhost:3003/admin` (Tài khoản mặc định: `admin` / `123`, độc giả mẫu: `student` / `123`)
+- Kiểm tra API MongoDB: `http://localhost:3001/api/health`
+
+## Deploy lên Render (1 Web Service duy nhất)
+
+- **Build Command:** `npm install; npm run build`
+- **Start Command:** `npm run start`
+- **Biến môi trường tùy chọn:** Thêm `MONGODB_URI` (MongoDB Atlas) và `GEMINI_API_KEY` trong mục *Environment* của Render để lưu dữ liệu vĩnh viễn và bật Gemini AI trực tuyến.

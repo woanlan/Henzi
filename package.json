@@ -1,39 +1,16 @@
 {
-  "name": "hanzi-master",
-  "version": "0.1.0",
+  "name": "wd21201-hanzi-master",
+  "version": "1.0.0",
   "private": true,
+  "description": "Dự án HANZI MASTER chia tách Frontend (React/Next.js) và Backend (Node.js/Express + MongoDB)",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
-  },
-  "dependencies": {
-    "@supabase/supabase-js": "^2.118.0",
-    "@types/canvas-confetti": "^1.9.0",
-    "@types/three": "^0.187.0",
-    "canvas-confetti": "^1.9.4",
-    "clsx": "^2.1.1",
-    "framer-motion": "^14.9.0",
-    "hanzi-writer": "^3.7.3",
-    "lucide-react": "^1.66.0",
-    "next": "16.4.3",
-    "pinyin-pro": "^3.29.5",
-    "react": "19.3.0",
-    "react-dom": "19.3.0",
-    "recharts": "^3.10.1",
-    "tailwind-merge": "^3.7.0",
-    "three": "^0.185.1",
-    "zod": "^4.6.7"
-  },
-  "devDependencies": {
-    "@tailwindcss/turbopack": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.4.3",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "dev:be": "npm --prefix backend run dev",
+    "dev:fe": "npm --prefix frontend run dev",
+    "start:be": "npm --prefix backend start",
+    "build:fe": "npm --prefix frontend run build",
+    "build": "npm --prefix backend install --no-audit --no-fund && npm --prefix frontend install --no-audit --no-fund && npm --prefix frontend run build",
+    "start": "node start-render.mjs",
+    "lint:fe": "npm --prefix frontend run lint",
+    "seed": "npm --prefix backend run seed"
   }
 }

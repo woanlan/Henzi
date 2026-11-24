@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 220" width="100%" height="100%">
+  <defs>
+    <linearGradient id="amberGold5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+    <filter id="softGlow5" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.15" />
+    </filter>
+  </defs>
+
+  <!-- BACKGROUND: Subtle Paper Texture / Card -->
+  <rect width="640" height="220" rx="16" fill="#FAFAF9" />
+  <rect x="1.5" y="1.5" width="637" height="217" rx="14.5" fill="none" stroke="#E7E5E4" stroke-width="1.5" />
+
+  <!-- LOGO MARK: HANZI WITH CALLIGRAPHIC 'Z' AND PINYIN TONE 'I' -->
+  <g id="wordmark" fill="#1C1917" filter="url(#softGlow5)">
+    <!-- LETTER H -->
+    <path d="M 60,55 L 78,55 L 78,86 L 114,86 L 114,55 L 132,55 L 132,135 L 114,135 L 114,104 L 78,104 L 78,135 L 60,135 Z" />
+
+    <!-- LETTER A -->
+    <path d="M 194,55 L 208,55 L 244,135 L 224,135 L 216,116 L 186,116 L 178,135 L 158,135 Z M 193,76 L 183,101 L 219,101 Z" />
+
+    <!-- LETTER N -->
+    <path d="M 264,55 L 282,55 L 322,113 L 322,55 L 340,55 L 340,135 L 322,135 L 282,77 L 282,135 L 264,135 Z" />
+
+    <!-- LETTER Z : DYNAMIC CALLIGRAPHY BRUSH STROKE (Nét thảo thư uyển chuyển phóng khoáng) -->
+    <path d="M 358,62 C 374,56 405,52 436,56 C 440,57 442,60 440,65 C 438,70 433,73 425,74 C 400,77 392,84 380,100 C 368,116 358,124 358,128 C 358,132 368,134 384,134 C 408,134 430,130 444,124 C 447,123 450,126 448,130 C 445,136 430,140 402,141 C 370,142 352,138 350,126 C 348,116 358,104 372,88 C 386,72 396,69 414,68 L 362,70 C 356,70 354,66 358,62 Z" fill="url(#amberGold5)" />
+
+    <!-- LETTER I : WITH ACCENT PINYIN TONE MARK -->
+    <path d="M 466,65 L 484,65 L 484,135 L 466,135 Z" />
+    <!-- Tone 1 Macron / Flat Tone in Amber Gold (Dấu thanh ngang Pinyin chuẩn) -->
+    <rect x="464" y="48" width="22" height="5.5" rx="2.5" fill="#EF4444" />
+  </g>
+
+  <!-- SUBTITLE & SLOGAN -->
+  <text x="60" y="186" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" font-weight="700" letter-spacing="4.5" fill="#78716C">
+    MASTER PINYIN &middot; MASTER HANZI
+  </text>
+  <rect x="382" y="177" width="4" height="4" rx="1" fill="#D97706" />
+  <text x="394" y="186" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" letter-spacing="1.5" fill="#D97706">
+    CHUẨN BẮC KINH
+  </text>
+</svg>

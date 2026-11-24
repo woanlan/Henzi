@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 210" width="100%" height="100%">
+  <defs>
+    <linearGradient id="goldPair3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+    <filter id="softGlowPair3" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3.5" flood-opacity="0.12" />
+    </filter>
+  </defs>
+
+  <rect width="860" height="210" rx="16" fill="#FAFAF9" />
+  <rect x="1.5" y="1.5" width="857" height="207" rx="14.5" fill="none" stroke="#E7E5E4" stroke-width="1.5" />
+
+  <g id="dualStylizedLogo" filter="url(#softGlowPair3)">
+    
+    <!-- WORD 1: HANZI (Stylized H: Open Book + Stylized Z: Dynamic Calligraphy Stroke) -->
+    <g id="wordHanzi" fill="#1C1917">
+      <!-- STYLIZED 1 IN HANZI -> H : OPEN BOOK IN CROSSBAR (Cuốn sách tri thức mở rộng) -->
+      <path d="M 44,60 L 60,60 L 60,140 L 44,140 Z" />
+      <path d="M 104,60 L 120,60 L 120,140 L 104,140 Z" />
+      <!-- Book Pages -->
+      <path d="M 60,94 C 68,92 76,90 82,96 L 82,109 C 76,103 68,105 60,107 Z" fill="url(#goldPair3)" />
+      <path d="M 104,94 C 96,92 88,90 82,96 L 82,109 C 88,103 96,105 104,107 Z" fill="url(#goldPair3)" />
+      <line x1="82" y1="96" x2="82" y2="109" stroke="#78350F" stroke-width="1.2" />
+
+      <!-- A -->
+      <path d="M 160,60 L 172,60 L 204,140 L 186,140 L 180,121 L 154,121 L 148,140 L 130,140 Z M 161,80 L 151,104 L 183,104 Z" />
+
+      <!-- N -->
+      <path d="M 222,60 L 238,60 L 274,119 L 274,60 L 290,60 L 290,140 L 274,140 L 238,81 L 238,140 L 222,140 Z" />
+
+      <!-- STYLIZED 2 IN HANZI -> Z : DYNAMIC CALLIGRAPHY STROKE (Nét thảo thư uyển chuyển) -->
+      <path d="M 310,67 C 326,61 355,57 384,61 C 388,62 390,65 388,70 C 386,75 381,78 373,79 C 348,82 340,89 328,105 C 316,121 306,129 306,133 C 306,137 316,139 332,139 C 356,139 378,135 392,129 C 395,128 398,131 396,135 C 393,141 378,145 350,146 C 318,147 300,143 298,131 C 296,121 306,109 320,93 C 334,77 344,74 362,73 L 314,75 C 308,75 306,71 310,67 Z" fill="url(#goldPair3)" />
+
+      <!-- I -->
+      <path d="M 406,60 L 422,60 L 422,140 L 406,140 Z" />
+    </g>
+
+    <!-- WORD 2: MASTER (Stylized A: Golden Star of Mastery + Stylized S: Speech Soundwaves) -->
+    <g id="wordMaster" fill="url(#goldPair3)">
+      <!-- M -->
+      <path d="M 456,60 L 474,60 L 491,104 L 508,60 L 526,60 L 526,140 L 512,140 L 512,85 L 496,123 L 486,123 L 470,85 L 470,140 L 456,140 Z" />
+
+      <!-- STYLIZED 1 IN MASTER -> A : GOLDEN STAR OF MASTERY (Ngôi sao vàng tinh thông lấp lánh) -->
+      <path d="M 566,60 L 578,60 L 608,140 L 590,140 L 584,121 L 559,121 L 553,140 L 535,140 Z M 565,80 L 557,104 L 587,104 Z" />
+      <!-- Star inside the A counter -->
+      <path d="M 572,87 L 573.5,91.5 L 578,91.5 L 574.5,94 L 576,98.5 L 572,96 L 568,98.5 L 569.5,94 L 566,91.5 L 570.5,91.5 Z" fill="#EF4444" />
+
+      <!-- STYLIZED 2 IN MASTER -> S : PHONETIC SPEECH SOUNDWAVES (Dải sóng âm giao tiếp) -->
+      <!-- Soundwave ripples beside S -->
+      <path d="M 678,82 C 682,88 682,96 678,102" stroke="#EF4444" stroke-width="2" stroke-linecap="round" fill="none" />
+      <path d="M 683,76 C 690,85 690,103 683,112" stroke="url(#goldPair3)" stroke-width="2" stroke-linecap="round" fill="none" />
+      <path d="M 654,76 C 649,65 639,59 626,59 C 613,59 605,66 605,75 C 605,85 612,90 626,94 C 644,98 654,104 654,117 C 654,130 643,139 628,139 C 613,139 603,131 598,120 L 611,113 C 614,120 620,125 628,125 C 635,125 640,121 640,116 C 640,110 635,107 621,102 C 605,97 592,91 592,77 C 592,65 603,46 626,46 C 637,46 646,51 651,59 Z" transform="translate(10, 5)" />
+
+      <!-- T -->
+      <path d="M 698,60 L 734,60 L 734,76 L 724,76 L 724,140 L 708,140 L 708,76 L 698,76 Z" />
+
+      <!-- E -->
+      <path d="M 744,60 L 778,60 L 778,76 L 760,76 L 760,91 L 774,91 L 774,107 L 760,107 L 760,124 L 779,124 L 779,140 L 744,140 Z" />
+
+      <!-- R -->
+      <path d="M 788,60 L 818,60 C 830,60 838,68 838,81 C 838,91 832,98 823,101 L 840,140 L 823,140 L 809,105 L 802,105 L 802,140 L 788,140 Z M 802,74 L 802,92 L 816,92 C 820,92 823,89 823,83 C 823,77 820,74 816,74 Z" />
+    </g>
+  </g>
+
+  <!-- SUBTITLE & SLOGAN -->
+  <text x="44" y="186" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" letter-spacing="4" fill="#78716C">
+    2 ĐIỂM NHẤN HANZI (SÁCH MỞ &middot; NÉT THẢO THƯ) + 2 ĐIỂM NHẤN MASTER (SAO TINH HOA &middot; SÓNG ÂM GIAO TIẾP)
+  </text>
+  <rect x="734" y="177" width="4" height="4" rx="1" fill="#D97706" />
+  <text x="746" y="186" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" letter-spacing="1.5" fill="#D97706">
+    PHẢN XẠ
+  </text>
+</svg>

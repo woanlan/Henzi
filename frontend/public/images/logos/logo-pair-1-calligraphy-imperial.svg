@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 210" width="100%" height="100%">
+  <defs>
+    <linearGradient id="goldPair1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+    <linearGradient id="redPair1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EF4444" />
+      <stop offset="100%" stop-color="#B91C1C" />
+    </linearGradient>
+    <filter id="softGlowPair1" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3.5" flood-opacity="0.12" />
+    </filter>
+  </defs>
+
+  <rect width="860" height="210" rx="16" fill="#FAFAF9" />
+  <rect x="1.5" y="1.5" width="857" height="207" rx="14.5" fill="none" stroke="#E7E5E4" stroke-width="1.5" />
+
+  <g id="dualStylizedLogo" filter="url(#softGlowPair1)">
+    
+    <!-- WORD 1: HANZI (Stylized A: Pagoda Roof + Stylized I: Calligraphy Brush) -->
+    <g id="wordHanzi" fill="#1C1917">
+      <!-- H -->
+      <path d="M 44,60 L 60,60 L 60,91 L 92,91 L 92,60 L 108,60 L 108,140 L 92,140 L 92,108 L 60,108 L 60,140 L 44,140 Z" />
+
+      <!-- STYLIZED 1 IN HANZI -> A : PAGODA ROOF (Mái đình uốn lượn Á Đông) -->
+      <path d="M 168,46 C 180,48 196,55 206,60 C 209,57 212,53 214,52 C 211,60 204,66 197,68 C 185,64 175,57 168,55 C 161,57 151,64 139,68 C 132,66 125,60 122,52 C 124,53 127,57 130,60 C 140,55 156,48 168,46 Z" fill="url(#goldPair1)" />
+      <path d="M 162,59 L 174,59 L 202,140 L 184,140 L 178,121 L 155,121 L 149,140 L 131,140 Z M 162,79 L 154,103 L 181,103 Z" />
+      <!-- Subtle hanging lantern -->
+      <ellipse cx="168" cy="112" rx="3" ry="4" fill="url(#redPair1)" />
+
+      <!-- N -->
+      <path d="M 222,60 L 238,60 L 274,119 L 274,60 L 290,60 L 290,140 L 274,140 L 238,81 L 238,140 L 222,140 Z" />
+
+      <!-- Z -->
+      <path d="M 310,60 L 374,60 L 374,76 L 333,123 L 374,123 L 374,140 L 310,140 L 310,123 L 351,76 L 310,76 Z" />
+
+      <!-- STYLIZED 2 IN HANZI -> I : CALLIGRAPHY INK BRUSH (Cây bút lông thư pháp thả mực) -->
+      <path d="M 400,50 L 412,50 L 411,96 L 401,96 Z" fill="#1C1917" />
+      <line x1="401" y1="72" x2="411" y2="72" stroke="#FAFAF9" stroke-width="1.2" />
+      <rect x="400" y="96" width="13" height="5" rx="1.5" fill="url(#goldPair1)" />
+      <path d="M 400,101 C 398,112 402,127 406.5,139 C 411,127 415,112 413,101 Z" fill="#1C1917" />
+      <!-- Amber ink droplet -->
+      <path d="M 406.5,146 C 403,151 402,154 402,157 C 402,160 404,162 406.5,162 C 409,162 411,160 411,157 C 411,154 410,151 406.5,146 Z" fill="url(#goldPair1)" />
+    </g>
+
+    <!-- TRADITIONAL SEPARATOR NOTCH -->
+    <circle cx="440" cy="100" r="3.5" fill="url(#goldPair1)" />
+
+    <!-- WORD 2: MASTER (Stylized M: Imperial Crown + Stylized T: Graduation Cap) -->
+    <g id="wordMaster" fill="url(#goldPair1)">
+      <!-- STYLIZED 1 IN MASTER -> M : IMPERIAL 3-PEAK CROWN (Vương miện 3 đỉnh ngọc tinh xảo) -->
+      <circle cx="478" cy="51" r="2.8" fill="url(#redPair1)" />
+      <circle cx="505" cy="46" r="3.2" fill="url(#redPair1)" />
+      <circle cx="532" cy="51" r="2.8" fill="url(#redPair1)" />
+      <path d="M 470,60 L 488,60 L 505,103 L 522,60 L 540,60 L 540,140 L 526,140 L 526,85 L 510,123 L 500,123 L 484,85 L 484,140 L 470,140 Z" />
+
+      <!-- A -->
+      <path d="M 580,60 L 592,60 L 622,140 L 604,140 L 598,121 L 573,121 L 567,140 L 549,140 Z M 579,80 L 571,104 L 601,104 Z" />
+
+      <!-- S -->
+      <path d="M 668,76 C 663,65 653,59 640,59 C 627,59 619,66 619,75 C 619,85 626,90 640,94 C 658,98 668,104 668,117 C 668,130 657,139 642,139 C 627,139 617,131 612,120 L 625,113 C 628,120 634,125 642,125 C 649,125 654,121 654,116 C 654,110 649,107 635,102 C 619,97 606,91 606,77 C 606,65 617,46 640,46 C 651,46 660,51 665,59 Z" transform="translate(10, 5)" />
+
+      <!-- STYLIZED 2 IN MASTER -> T : SCHOLAR GRADUATION CAP (Mũ cử nhân đỗ đạt HSK) -->
+      <path d="M 700,49 L 719,43 L 738,49 L 719,55 Z" fill="#1C1917" />
+      <circle cx="738" cy="51" r="1.5" fill="#D97706" />
+      <line x1="738" y1="51" x2="740" y2="57" stroke="#D97706" stroke-width="1.2" />
+      <path d="M 686,60 L 726,60 L 726,76 L 716,76 L 716,140 L 700,140 L 700,76 L 686,76 Z" />
+
+      <!-- E -->
+      <path d="M 736,60 L 770,60 L 770,76 L 752,76 L 752,91 L 766,91 L 766,107 L 752,107 L 752,124 L 771,124 L 771,140 L 736,140 Z" />
+
+      <!-- R -->
+      <path d="M 780,60 L 810,60 C 822,60 830,68 830,81 C 830,91 824,98 815,101 L 832,140 L 815,140 L 801,105 L 794,105 L 794,140 L 780,140 Z M 794,74 L 794,92 L 808,92 C 812,92 815,89 815,83 C 815,77 812,74 808,74 Z" />
+    </g>
+  </g>
+
+  <!-- SUBTITLE & SLOGAN -->
+  <text x="44" y="186" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" letter-spacing="4" fill="#78716C">
+    2 ĐIỂM NHẤN HANZI (MÁI ĐÌNH &middot; BÚT LÔNG) + 2 ĐIỂM NHẤN MASTER (VƯƠNG MIỆN &middot; MŨ CỬ NHÂN)
+  </text>
+  <rect x="668" y="177" width="4" height="4" rx="1" fill="#D97706" />
+  <text x="680" y="186" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" letter-spacing="1.5" fill="#D97706">
+    CHUẨN QUỐC TẾ
+  </text>
+</svg>

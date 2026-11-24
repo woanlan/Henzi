@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 200" width="100%" height="100%">
+  <defs>
+    <linearGradient id="amberGold2w1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+    <filter id="softGlow2w1" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.12" />
+    </filter>
+  </defs>
+
+  <!-- BACKGROUND: Subtle Paper Texture / Card -->
+  <rect width="820" height="200" rx="16" fill="#FAFAF9" />
+  <rect x="1.5" y="1.5" width="817" height="197" rx="14.5" fill="none" stroke="#E7E5E4" stroke-width="1.5" />
+
+  <!-- 2 WORDS: "HANZI" + "MASTER" -->
+  <g id="twoWordsLogo" filter="url(#softGlow2w1)">
+    
+    <!-- WORD 1: "HANZI" (Solid Charcoal Black with Calligraphy Brush 'I') -->
+    <g id="wordHanzi" fill="#1C1917">
+      <!-- LETTER H -->
+      <path d="M 46,55 L 62,55 L 62,86 L 94,86 L 94,55 L 110,55 L 110,135 L 94,135 L 94,103 L 62,103 L 62,135 L 46,135 Z" />
+
+      <!-- LETTER A -->
+      <path d="M 166,55 L 178,55 L 210,135 L 192,135 L 185,116 L 159,116 L 152,135 L 134,135 Z M 165,75 L 156,99 L 188,99 Z" />
+
+      <!-- LETTER N -->
+      <path d="M 230,55 L 246,55 L 282,114 L 282,55 L 298,55 L 298,135 L 282,135 L 246,76 L 246,135 L 230,135 Z" />
+
+      <!-- LETTER Z -->
+      <path d="M 318,55 L 382,55 L 382,71 L 341,118 L 382,118 L 382,135 L 318,135 L 318,118 L 359,71 L 318,71 Z" />
+
+      <!-- LETTER I : CLEVER CHINESE CALLIGRAPHY INK BRUSH -->
+      <path d="M 408,46 L 420,46 L 419,92 L 409,92 Z" fill="#1C1917" />
+      <line x1="409" y1="67" x2="419" y2="67" stroke="#FAFAF9" stroke-width="1.2" />
+      <rect x="408" y="92" width="13" height="5" rx="1.5" fill="url(#amberGold2w1)" />
+      <!-- Brush bristle tip -->
+      <path d="M 408,97 C 406,108 410,123 414.5,135 C 419,123 423,108 421,97 Z" fill="#1C1917" />
+      <!-- Amber Ink Droplet -->
+      <path d="M 414.5,142 C 411,147 410,150 410,153 C 410,156 412,158 414.5,158 C 417,158 419,156 419,153 C 419,150 418,147 414.5,142 Z" fill="url(#amberGold2w1)" />
+    </g>
+
+    <!-- WORD DIVIDER: Subtle Gold Bamboo Notch -->
+    <circle cx="448" cy="95" r="3.5" fill="url(#amberGold2w1)" />
+
+    <!-- WORD 2: "MASTER" (Warm Amber Gold & Sharp Mastery Style) -->
+    <g id="wordMaster" fill="url(#amberGold2w1)">
+      <!-- LETTER M -->
+      <path d="M 474,55 L 493,55 L 512,106 L 531,55 L 550,55 L 550,135 L 535,135 L 535,82 L 518,124 L 506,124 L 489,82 L 489,135 L 474,135 Z" />
+
+      <!-- LETTER A -->
+      <path d="M 596,55 L 608,55 L 640,135 L 622,135 L 615,116 L 589,116 L 582,135 L 564,135 Z M 595,75 L 586,99 L 618,99 Z" />
+
+      <!-- LETTER S -->
+      <path d="M 698,71 C 693,60 681,54 667,54 C 653,54 644,62 644,72 C 644,83 652,88 668,92 C 688,97 699,103 699,117 C 699,130 687,136 671,136 C 654,136 643,128 638,116 L 652,109 C 655,117 662,122 671,122 C 679,122 684,118 684,112 C 684,105 678,102 662,97 C 644,92 630,86 630,71 C 630,59 642,40 667,40 C 679,40 689,45 694,54 Z" transform="translate(10, 5)" />
+
+      <!-- LETTER T (With Wisdom Beam Bar) -->
+      <path d="M 700,55 L 738,55 L 738,71 L 727,71 L 727,135 L 711,135 L 711,71 L 700,71 Z" />
+
+      <!-- LETTER E -->
+      <path d="M 748,55 L 784,55 L 784,71 L 764,71 L 764,86 L 780,86 L 780,102 L 764,102 L 764,119 L 785,119 L 785,135 L 748,135 Z" />
+
+      <!-- LETTER R -->
+      <path d="M 794,55 L 826,55 C 840,55 848,63 848,76 C 848,86 842,93 832,96 L 850,135 L 832,135 L 817,100 L 810,100 L 810,135 L 794,135 Z M 810,69 L 810,87 L 824,87 C 829,87 832,84 832,78 C 832,72 829,69 824,69 Z" transform="scale(0.95) translate(38, 4)" />
+    </g>
+  </g>
+
+  <!-- SUBTITLE & SLOGAN -->
+  <text x="46" y="178" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" letter-spacing="4" fill="#78716C">
+    HỌC VIỆN TIẾNG TRUNG CHUYÊN SÂU &middot; HSK 3.0
+  </text>
+  <rect x="420" y="169" width="4" height="4" rx="1" fill="#D97706" />
+  <text x="432" y="178" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" letter-spacing="1.5" fill="#D97706">
+    CHINESE ACADEMY
+  </text>
+</svg>

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 220" width="100%" height="100%">
+  <defs>
+    <linearGradient id="amberGold2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+    <linearGradient id="cinnabarRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EF4444" />
+      <stop offset="100%" stop-color="#B91C1C" />
+    </linearGradient>
+    <filter id="softGlow2" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.15" />
+    </filter>
+  </defs>
+
+  <!-- BACKGROUND: Subtle Paper Texture / Card -->
+  <rect width="640" height="220" rx="16" fill="#FAFAF9" />
+  <rect x="1.5" y="1.5" width="637" height="217" rx="14.5" fill="none" stroke="#E7E5E4" stroke-width="1.5" />
+
+  <!-- LOGO MARK: HANZI WITH PAGODA ROOF 'A' -->
+  <g id="wordmark" fill="#1C1917" filter="url(#softGlow2)">
+    <!-- LETTER H -->
+    <path d="M 60,55 L 78,55 L 78,86 L 114,86 L 114,55 L 132,55 L 132,135 L 114,135 L 114,104 L 78,104 L 78,135 L 60,135 Z" />
+
+    <!-- LETTER A : CHINESE PAGODA PAVILION ROOF (Mái đình cổ phong uốn cong vút) -->
+    <!-- Pagoda Eaves (Mái đao cong vút) -->
+    <path d="M 201,42 C 215,44 235,52 248,58 C 251,54 254,49 257,48 C 254,58 246,65 238,67 C 224,62 211,54 201,52 C 191,54 178,62 164,67 C 156,65 148,58 145,48 C 148,49 151,54 154,58 C 167,52 187,44 201,42 Z" fill="url(#amberGold2)" />
+    <!-- Main A Stems descending from under the roof -->
+    <path d="M 194,54 L 208,54 L 240,135 L 220,135 L 213,114 L 189,114 L 182,135 L 162,135 Z M 194,74 L 186,98 L 216,98 Z" />
+    <!-- Small Hanging Lantern below crossbar -->
+    <ellipse cx="201" cy="107" rx="3.5" ry="4.5" fill="url(#cinnabarRed)" />
+    <line x1="201" y1="98" x2="201" y2="102" stroke="#B91C1C" stroke-width="1.2" />
+    <line x1="201" y1="112" x2="201" y2="116" stroke="url(#amberGold2)" stroke-width="1" />
+
+    <!-- LETTER N -->
+    <path d="M 266,55 L 284,55 L 324,113 L 324,55 L 342,55 L 342,135 L 324,135 L 284,77 L 284,135 L 266,135 Z" />
+
+    <!-- LETTER Z -->
+    <path d="M 364,55 L 436,55 L 436,72 L 390,118 L 436,118 L 436,135 L 364,135 L 364,118 L 410,72 L 364,72 Z" />
+
+    <!-- LETTER I -->
+    <path d="M 460,55 L 478,55 L 478,135 L 460,135 Z" />
+    <!-- Traditional Chinese Red Seal Stamp next to I (Triện son chữ Hán) -->
+    <rect x="496" y="55" width="28" height="28" rx="5" fill="url(#cinnabarRed)" />
+    <text x="510" y="75" font-family="'Noto Serif SC', 'Songti SC', 'SimSun', serif" font-size="18" font-weight="900" fill="#FFFFFF" text-anchor="middle">
+      汉
+    </text>
+  </g>
+
+  <!-- SUBTITLE & SLOGAN -->
+  <text x="60" y="186" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" font-weight="700" letter-spacing="4.5" fill="#78716C">
+    TRADITIONAL WISDOM &middot; MODERN MASTERY
+  </text>
+  <rect x="435" y="177" width="4" height="4" rx="1" fill="#D97706" />
+  <text x="447" y="186" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" letter-spacing="1.5" fill="#D97706">
+    HỌC CHỮ HÁN
+  </text>
+</svg>

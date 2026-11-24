@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 220" width="100%" height="100%">
+  <defs>
+    <linearGradient id="amberGold3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+    <filter id="softGlow3" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.15" />
+    </filter>
+  </defs>
+
+  <!-- BACKGROUND: Subtle Paper Texture / Card -->
+  <rect width="640" height="220" rx="16" fill="#FAFAF9" />
+  <rect x="1.5" y="1.5" width="637" height="217" rx="14.5" fill="none" stroke="#E7E5E4" stroke-width="1.5" />
+
+  <!-- LOGO MARK: HANZI WITH PANDA MASCOT 'A' -->
+  <g id="wordmark" fill="#1C1917" filter="url(#softGlow3)">
+    <!-- LETTER H -->
+    <path d="M 60,55 L 78,55 L 78,86 L 114,86 L 114,55 L 132,55 L 132,135 L 114,135 L 114,104 L 78,104 L 78,135 L 60,135 Z" />
+
+    <!-- LETTER A : CLEVER PANDA MASCOT PEEK-A-BOO -->
+    <!-- Panda Round Ears (Đôi tai tròn đen ngộ nghĩnh) -->
+    <circle cx="180" cy="48" r="9.5" fill="#1C1917" />
+    <circle cx="222" cy="48" r="9.5" fill="#1C1917" />
+    <!-- Inner Ear Pink / Amber Accent -->
+    <circle cx="180" cy="48" r="4.5" fill="url(#amberGold3)" opacity="0.85" />
+    <circle cx="222" cy="48" r="4.5" fill="url(#amberGold3)" opacity="0.85" />
+
+    <!-- Letter A Body Outer -->
+    <path d="M 194,55 L 208,55 L 244,135 L 224,135 L 216,116 L 186,116 L 178,135 L 158,135 Z M 193,73 L 181,101 L 221,101 Z" />
+
+    <!-- Panda Face Features inside the A Counter (Khoảng trống bên trong chữ A) -->
+    <!-- Left Eye Patch (Vệt mắt gấu trúc nghiêng) -->
+    <ellipse cx="195" cy="85" rx="3.8" ry="5.5" transform="rotate(-15 195 85)" fill="#1C1917" />
+    <circle cx="194.2" cy="83.8" r="1.3" fill="#FFFFFF" />
+
+    <!-- Right Eye Patch -->
+    <ellipse cx="207" cy="85" rx="3.8" ry="5.5" transform="rotate(15 207 85)" fill="#1C1917" />
+    <circle cx="206.2" cy="83.8" r="1.3" fill="#FFFFFF" />
+
+    <!-- Cute Panda Nose -->
+    <path d="M 199.5,92.5 L 202.5,92.5 L 201,94.2 Z" fill="#1C1917" />
+
+    <!-- LETTER N -->
+    <path d="M 264,55 L 282,55 L 322,113 L 322,55 L 340,55 L 340,135 L 322,135 L 282,77 L 282,135 L 264,135 Z" />
+
+    <!-- LETTER Z -->
+    <path d="M 362,55 L 434,55 L 434,72 L 388,118 L 434,118 L 434,135 L 362,135 L 362,118 L 408,72 L 362,72 Z" />
+
+    <!-- LETTER I -->
+    <path d="M 458,55 L 476,55 L 476,135 L 458,135 Z" />
+    <!-- Bamboo leaf growing off letter I (Cành lá trúc tươi sáng) -->
+    <path d="M 476,68 C 484,65 496,62 506,60 C 499,69 490,75 476,77 Z" fill="#10B981" />
+    <path d="M 476,77 C 486,77 498,78 508,82 C 499,86 488,86 476,83 Z" fill="#059669" />
+  </g>
+
+  <!-- SUBTITLE & SLOGAN -->
+  <text x="60" y="186" font-family="system-ui, -apple-system, sans-serif" font-size="11.5" font-weight="700" letter-spacing="4.5" fill="#78716C">
+    LEARN CHINESE WITH AI PANDA
+  </text>
+  <rect x="390" y="177" width="4" height="4" rx="1" fill="#D97706" />
+  <text x="402" y="186" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" letter-spacing="1.5" fill="#D97706">
+    THÂN THIỆN &middot; DỄ HIỂU
+  </text>
+</svg>

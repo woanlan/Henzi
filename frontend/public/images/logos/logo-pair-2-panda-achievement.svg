@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 210" width="100%" height="100%">
+  <defs>
+    <linearGradient id="goldPair2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+    <linearGradient id="flameGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#EF4444" />
+      <stop offset="50%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#FDE047" />
+    </linearGradient>
+    <filter id="softGlowPair2" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3.5" flood-opacity="0.12" />
+    </filter>
+  </defs>
+
+  <rect width="860" height="210" rx="16" fill="#FAFAF9" />
+  <rect x="1.5" y="1.5" width="857" height="207" rx="14.5" fill="none" stroke="#E7E5E4" stroke-width="1.5" />
+
+  <g id="dualStylizedLogo" filter="url(#softGlowPair2)">
+    
+    <!-- WORD 1: HANZI (Stylized A: Panda Ears & Face + Stylized I: Green Bamboo Stalk) -->
+    <g id="wordHanzi" fill="#1C1917">
+      <!-- H -->
+      <path d="M 44,60 L 60,60 L 60,91 L 92,91 L 92,60 L 108,60 L 108,140 L 92,140 L 92,108 L 60,108 L 60,140 L 44,140 Z" />
+
+      <!-- STYLIZED 1 IN HANZI -> A : PANDA MASCOT (Gấu trúc đáng yêu) -->
+      <circle cx="150" cy="53" r="8.5" fill="#1C1917" />
+      <circle cx="188" cy="53" r="8.5" fill="#1C1917" />
+      <circle cx="150" cy="53" r="4" fill="url(#goldPair2)" opacity="0.8" />
+      <circle cx="188" cy="53" r="4" fill="url(#goldPair2)" opacity="0.8" />
+      <path d="M 164,60 L 176,60 L 208,140 L 190,140 L 183,121 L 157,121 L 150,140 L 132,140 Z M 163,79 L 153,104 L 187,104 Z" />
+      <!-- Eyes and nose -->
+      <ellipse cx="164" cy="90" rx="3.2" ry="4.8" transform="rotate(-15 164 90)" fill="#1C1917" />
+      <circle cx="163.5" cy="89" r="1.1" fill="#FFFFFF" />
+      <ellipse cx="174" cy="90" rx="3.2" ry="4.8" transform="rotate(15 174 90)" fill="#1C1917" />
+      <circle cx="173.5" cy="89" r="1.1" fill="#FFFFFF" />
+      <path d="M 167.5,96.5 L 170.5,96.5 L 169,98 Z" fill="#1C1917" />
+
+      <!-- N -->
+      <path d="M 226,60 L 242,60 L 278,119 L 278,60 L 294,60 L 294,140 L 278,140 L 242,81 L 242,140 L 226,140 Z" />
+
+      <!-- Z -->
+      <path d="M 314,60 L 378,60 L 378,76 L 337,123 L 378,123 L 378,140 L 314,140 L 314,123 L 355,76 L 314,76 Z" />
+
+      <!-- STYLIZED 2 IN HANZI -> I : GREEN BAMBOO STALK & LEAF (Cành lá trúc xanh tươi mát) -->
+      <path d="M 398,60 L 414,60 L 414,140 L 398,140 Z" />
+      <!-- Bamboo segment line -->
+      <line x1="398" y1="95" x2="414" y2="95" stroke="#FAFAF9" stroke-width="1.5" />
+      <!-- Green bamboo leaves sprouting -->
+      <path d="M 414,72 C 424,68 436,65 446,63 C 438,73 428,79 414,81 Z" fill="#10B981" />
+      <path d="M 414,81 C 426,81 438,83 448,87 C 438,91 426,90 414,87 Z" fill="#059669" />
+    </g>
+
+    <!-- WORD 2: MASTER (Stylized M: Soaring Wings + Stylized T: Torch of Wisdom) -->
+    <g id="wordMaster" fill="url(#goldPair2)">
+      <!-- STYLIZED 1 IN MASTER -> M : SOARING WINGS (Cánh chim vươn mình bay cao) -->
+      <!-- Left Wing curve -->
+      <path d="M 458,70 C 466,54 480,48 494,46 C 492,54 486,64 478,72 Z" fill="#1C1917" />
+      <!-- Right Wing curve -->
+      <path d="M 534,70 C 526,54 512,48 498,46 C 500,54 506,64 514,72 Z" fill="#1C1917" />
+      <path d="M 466,60 L 484,60 L 501,104 L 518,60 L 536,60 L 536,140 L 522,140 L 522,85 L 506,123 L 496,123 L 480,85 L 480,140 L 466,140 Z" />
+
+      <!-- A -->
+      <path d="M 576,60 L 588,60 L 618,140 L 600,140 L 594,121 L 569,121 L 563,140 L 545,140 Z M 575,80 L 567,104 L 597,104 Z" />
+
+      <!-- S -->
+      <path d="M 664,76 C 659,65 649,59 636,59 C 623,59 615,66 615,75 C 615,85 622,90 636,94 C 654,98 664,104 664,117 C 664,130 653,139 638,139 C 623,139 613,131 608,120 L 621,113 C 624,120 630,125 638,125 C 645,125 650,121 650,116 C 650,110 645,107 631,102 C 615,97 602,91 602,77 C 602,65 613,46 636,46 C 647,46 656,51 661,59 Z" transform="translate(10, 5)" />
+
+      <!-- STYLIZED 2 IN MASTER -> T : TORCH OF WISDOM (Ngọn đuốc tri thức bừng sáng) -->
+      <!-- Flame above T -->
+      <path d="M 708,40 C 702,46 700,50 703,55 C 706,58 710,58 713,55 C 716,51 716,46 708,40 Z" fill="url(#flameGrad)" />
+      <path d="M 688,60 L 728,60 L 728,76 L 718,76 L 718,140 L 702,140 L 702,76 L 688,76 Z" />
+
+      <!-- E -->
+      <path d="M 738,60 L 772,60 L 772,76 L 754,76 L 754,91 L 768,91 L 768,107 L 754,107 L 754,124 L 773,124 L 773,140 L 738,140 Z" />
+
+      <!-- R -->
+      <path d="M 782,60 L 812,60 C 824,60 832,68 832,81 C 832,91 826,98 817,101 L 834,140 L 817,140 L 803,105 L 796,105 L 796,140 L 782,140 Z M 796,74 L 796,92 L 810,92 C 814,92 817,89 817,83 C 817,77 814,74 810,74 Z" />
+    </g>
+  </g>
+
+  <!-- SUBTITLE & SLOGAN -->
+  <text x="44" y="186" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" letter-spacing="4" fill="#78716C">
+    2 ĐIỂM NHẤN HANZI (GẤU TRÚC &middot; LÁ TRÚC) + 2 ĐIỂM NHẤN MASTER (CÁNH CHIM &middot; NGỌN ĐUỐC TRI THỨC)
+  </text>
+  <rect x="714" y="177" width="4" height="4" rx="1" fill="#D97706" />
+  <text x="726" y="186" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" letter-spacing="1.5" fill="#D97706">
+    THÂN THIỆN
+  </text>
+</svg>

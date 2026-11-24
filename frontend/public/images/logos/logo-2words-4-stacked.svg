@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 360" width="100%" height="100%">
+  <defs>
+    <linearGradient id="amberGoldStacked" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+    <linearGradient id="cinnabarStacked" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EF4444" />
+      <stop offset="100%" stop-color="#B91C1C" />
+    </linearGradient>
+    <filter id="softGlowStacked" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.12" />
+    </filter>
+  </defs>
+
+  <rect width="560" height="360" rx="24" fill="#FAFAF9" />
+  <rect x="2" y="2" width="556" height="356" rx="22" fill="none" stroke="#E7E5E4" stroke-width="2" />
+
+  <g filter="url(#softGlowStacked)">
+    <!-- ROW 1: "HANZI" (Chữ to dòng trên) -->
+    <g id="hanziRow" fill="#1C1917" transform="translate(18, 20)">
+      <!-- H -->
+      <path d="M 40,55 L 60,55 L 60,90 L 102,90 L 102,55 L 122,55 L 122,145 L 102,145 L 102,110 L 60,110 L 60,145 L 40,145 Z" />
+
+      <!-- A : PAGODA ROOF (Mái đình uốn lượn) -->
+      <path d="M 185,42 C 198,44 216,52 227,58 C 230,55 233,50 236,49 C 233,58 225,65 217,67 C 204,62 193,54 185,52 C 177,54 166,62 153,67 C 145,65 137,58 134,49 C 137,50 140,55 143,58 C 154,52 172,44 185,42 Z" fill="url(#amberGoldStacked)" />
+      <path d="M 178,55 L 192,55 L 226,145 L 204,145 L 196,124 L 170,124 L 162,145 L 140,145 Z M 178,78 L 168,105 L 204,105 Z" />
+
+      <!-- N -->
+      <path d="M 248,55 L 268,55 L 312,120 L 312,55 L 332,55 L 332,145 L 312,145 L 268,80 L 268,145 L 248,145 Z" />
+
+      <!-- Z -->
+      <path d="M 356,55 L 434,55 L 434,74 L 384,126 L 434,126 L 434,145 L 356,145 L 356,126 L 406,74 L 356,74 Z" />
+
+      <!-- I : CALLIGRAPHY INK BRUSH (Bút lông thả mực) -->
+      <path d="M 462,45 L 476,45 L 475,98 L 463,98 Z" fill="#1C1917" />
+      <rect x="462" y="98" width="14" height="6" rx="1.5" fill="url(#amberGoldStacked)" />
+      <path d="M 462,104 C 460,118 465,134 469,148 C 474,134 479,118 477,104 Z" fill="#1C1917" />
+      <path d="M 469,156 C 465,162 464,166 464,169 C 464,172 466,174 469,174 C 472,174 474,172 474,169 C 474,166 473,162 469,156 Z" fill="url(#amberGoldStacked)" />
+    </g>
+
+    <!-- ROW 2: "MASTER" + CINNABAR STAMP (Dòng dưới màu vàng hổ phách) -->
+    <g id="masterRow" fill="url(#amberGoldStacked)" transform="translate(18, 90)">
+      <!-- Cinnabar stamp "漢" -->
+      <rect x="40" y="112" width="38" height="38" rx="8" fill="url(#cinnabarStacked)" />
+      <text x="59" y="139" font-family="'Noto Serif SC', serif" font-size="22" font-weight="900" fill="#FFFFFF" text-anchor="middle">
+        字
+      </text>
+
+      <!-- M -->
+      <path d="M 98,115 L 118,115 L 138,154 L 158,115 L 178,115 L 178,175 L 164,175 L 164,136 L 146,170 L 130,170 L 112,136 L 112,175 L 98,175 Z" />
+
+      <!-- A -->
+      <path d="M 206,115 L 218,115 L 244,175 L 228,175 L 222,160 L 202,160 L 196,175 L 180,175 Z M 205,130 L 198,148 L 226,148 Z" />
+
+      <!-- S -->
+      <path d="M 288,128 C 284,120 276,115 264,115 C 252,115 244,120 244,127 C 244,135 250,139 263,142 C 279,146 288,151 288,160 C 288,170 278,176 265,176 C 251,176 242,170 238,161 L 249,155 C 252,161 257,165 264,165 C 270,165 274,162 274,158 C 274,153 270,151 258,147 C 244,143 233,138 233,128 C 233,119 242,105 264,105 C 273,105 281,109 285,115 Z" transform="translate(10, 5)" />
+
+      <!-- T (Graduation cap) -->
+      <path d="M 336,106 L 348,102 L 360,106 L 348,110 Z" fill="#1C1917" />
+      <path d="M 326,115 L 370,115 L 370,127 L 356,127 L 356,175 L 340,175 L 340,127 L 326,127 Z" />
+
+      <!-- E -->
+      <path d="M 380,115 L 412,115 L 412,127 L 396,127 L 396,139 L 409,139 L 409,151 L 396,151 L 396,163 L 413,163 L 413,175 L 380,175 Z" />
+
+      <!-- R -->
+      <path d="M 422,115 L 448,115 C 458,115 465,121 465,131 C 465,139 460,144 452,147 L 466,175 L 451,175 L 439,150 L 434,150 L 434,175 L 422,175 Z M 434,126 L 434,140 L 446,140 C 450,140 452,138 452,133 C 452,128 450,126 446,126 Z" />
+    </g>
+  </g>
+
+  <!-- BOTTOM SLOGAN -->
+  <text x="280" y="318" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" letter-spacing="4" fill="#78716C" text-anchor="middle">
+    HỆ SINH THÁI HỌC TIẾNG TRUNG CHUẨN HSK 3.0
+  </text>
+</svg>
