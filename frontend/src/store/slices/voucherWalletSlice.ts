@@ -3,8 +3,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 // ============================================================================
 // [YÊU CẦU CÔ - Redux Toolkit (createSlice, Reducers & Actions)]
 // Slice quản lý Ví Mã Ưu Đãi dùng chung toàn ứng dụng:
-// - Học viên bấm "Lưu mã" ở Trang chủ (VoucherStrip) -> dispatch(saveVoucherCode)
-// - Khi sang trang Chi tiết khóa học (/detail/[id]) bấm "Đăng Ký" -> tự động điền
+// - Độc giả bấm "Lưu mã" ở ngăn kéo Phiếu ưu đãi (VanKhoDrawers) -> dispatch(saveVoucherCode)
+// - Khi sang trang Chi tiết sách (/detail/[id]) hoặc Giỏ sách -> tự động điền
 //   mã ưu đãi đã lưu vào ô Voucher nhờ useAppSelector!
 // ============================================================================
 

@@ -4,7 +4,7 @@ import React, { createContext, useCallback, useContext, useEffect, useMemo, useS
 
 // ============================================================================
 // [YÊU CẦU CÔ - Context API (createContext + useContext + Provider)]
-// Chia sẻ trạng thái đóng/mở hộp thoại Gia sư AI & cấp độ HSK giữa Navbar và
+// Chia sẻ trạng thái đóng/mở hộp thoại Cố vấn AI & cấp độ HSK giữa Header (VanKhoHeaderFooterShell) và
 // AITutorChatBox xuyên nhiều tầng component mà không cần truyền Props trung gian.
 // ============================================================================
 

@@ -3,8 +3,8 @@ import { IUser } from "@/interfaces/user";
 
 // ============================================================================
 // [YÊU CẦU CÔ - Redux Toolkit (Slice quản lý Phiên đăng nhập toàn cục)]
-// Lưu trữ thông tin user (Học viên / Admin) tập trung trên Redux Store để
-// Navbar, LoginForm, ProductDetailCard và AdminDashboard truy cập đồng bộ.
+// Lưu trữ thông tin user (Độc giả / Admin) tập trung trên Redux Store để
+// VanKhoHeaderFooterShell, LoginForm, ProductDetailCard và AdminDashboard truy cập đồng bộ.
 // ============================================================================
 
 export interface AuthSliceState {
