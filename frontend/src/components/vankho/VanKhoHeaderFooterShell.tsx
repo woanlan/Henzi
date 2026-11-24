@@ -240,37 +240,32 @@ export function VanKhoHeaderFooterShell({
       {/* HEADER HIỆU SÁCH HANZI                                            */}
       {/* ================================================================= */}
       <header className="sticky top-0 z-40 border-b border-(--vk-border) bg-(--vk-paper)/92 backdrop-blur-md">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-2 px-3 sm:gap-3 sm:px-6 lg:gap-2.5 lg:px-5 xl:gap-5 xl:px-8">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 xl:gap-5 xl:px-8">
           {/* Brand Logo: [字] HANZI */}
           <Link
             href="/"
             onClick={() => setIsMobileMenuOpen(false)}
-            className="inline-flex min-h-[44px] min-w-0 shrink-0 items-center gap-2 rounded-xl text-(--vk-fg) transition-colors hover:text-(--vk-brass)"
+            className="inline-flex min-h-[44px] shrink-0 items-center gap-2.5 rounded-xl text-(--vk-fg) transition-colors hover:text-(--vk-brass)"
           >
             <span className="flex size-8 shrink-0 items-center justify-center rounded-lg border border-(--vk-primary)/30 bg-(--vk-primary) font-hanzi text-base font-bold text-(--vk-primary-fg)">
               字
             </span>
-            <span className="flex items-baseline gap-2.5 whitespace-nowrap">
-              <span className="vankho-serif text-base font-semibold tracking-wide text-(--vk-fg) sm:text-lg">
-                HANZI
-              </span>
-              <span className="hidden border-l border-(--vk-border) pl-2.5 text-xs text-(--vk-muted) 2xl:inline">
-                Nhà Sách &amp; Học Liệu Tiếng Trung
-              </span>
+            <span className="vankho-serif text-base font-semibold tracking-wide whitespace-nowrap text-(--vk-fg) sm:text-lg">
+              HANZI
             </span>
           </Link>
 
-          {/* Center Nav — fits comfortably at 1024px (lg) and expands at xl */}
+          {/* Center Nav — shrink-0 at xl+ (1280px+) so links NEVER overlap right actions at any viewport */}
           <nav
             aria-label="Điều hướng Hiệu Sách HANZI"
-            className="hidden min-w-0 shrink items-center gap-0.5 lg:flex xl:gap-1"
+            className="hidden shrink-0 items-center gap-1 xl:flex"
           >
             {navItems.map((item) =>
               item.href.startsWith("#") ? (
                 <a
                   key={item.href}
                   href={item.href}
-                  className="inline-flex min-h-[38px] items-center whitespace-nowrap rounded-xl px-2 text-[13px] font-medium text-(--vk-muted) transition-colors hover:bg-(--vk-btn-hover) hover:text-(--vk-fg) xl:min-h-[40px] xl:px-3 xl:text-sm"
+                  className="inline-flex min-h-[40px] shrink-0 items-center whitespace-nowrap rounded-xl px-3 text-sm font-medium text-(--vk-muted) transition-colors hover:bg-(--vk-btn-hover) hover:text-(--vk-fg)"
                 >
                   {item.label}
                 </a>
@@ -278,7 +273,7 @@ export function VanKhoHeaderFooterShell({
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="inline-flex min-h-[38px] items-center whitespace-nowrap rounded-xl px-2 text-[13px] font-medium text-(--vk-muted) transition-colors hover:bg-(--vk-btn-hover) hover:text-(--vk-fg) xl:min-h-[40px] xl:px-3 xl:text-sm"
+                  className="inline-flex min-h-[40px] shrink-0 items-center whitespace-nowrap rounded-xl px-3 text-sm font-medium text-(--vk-muted) transition-colors hover:bg-(--vk-btn-hover) hover:text-(--vk-fg)"
                 >
                   {item.label}
                 </Link>
@@ -287,7 +282,7 @@ export function VanKhoHeaderFooterShell({
           </nav>
 
           {/* Right Editorial Actions */}
-          <div className="flex shrink-0 items-center gap-0.5 sm:gap-1 xl:gap-1.5">
+          <div className="flex shrink-0 items-center gap-1 sm:gap-1.5">
             {/* Light / Dark Theme Switcher */}
             <button
               type="button"
@@ -302,12 +297,12 @@ export function VanKhoHeaderFooterShell({
                   ? "Nền sáng Trắng Kem Hổ Phách"
                   : "Nền tối Đêm Thư Các"
               }
-              className="inline-flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-xl text-(--vk-muted) transition-colors hover:bg-(--vk-btn-hover) hover:text-(--vk-brass) lg:min-h-[36px] lg:min-w-[36px] xl:min-h-[40px] xl:min-w-[40px]"
+              className="inline-flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-xl text-(--vk-muted) transition-colors hover:bg-(--vk-btn-hover) hover:text-(--vk-brass) xl:min-h-[40px] xl:min-w-[40px]"
             >
               {theme === "dark" ? (
-                <Sun className="size-[19px]" aria-hidden="true" />
+                <Sun className="size-5" aria-hidden="true" />
               ) : (
-                <Moon className="size-[19px]" aria-hidden="true" />
+                <Moon className="size-5" aria-hidden="true" />
               )}
             </button>
 
@@ -317,17 +312,17 @@ export function VanKhoHeaderFooterShell({
                 type="button"
                 onClick={onQuickSearchClick}
                 aria-label="Tìm kiếm đầu sách"
-                className="hidden min-h-[36px] min-w-[36px] cursor-pointer items-center justify-center rounded-xl text-(--vk-muted) transition-colors hover:bg-(--vk-btn-hover) hover:text-(--vk-fg) lg:inline-flex xl:min-h-[40px] xl:min-w-[40px]"
+                className="hidden min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-xl text-(--vk-muted) transition-colors hover:bg-(--vk-btn-hover) hover:text-(--vk-fg) md:inline-flex xl:min-h-[40px] xl:min-w-[40px]"
               >
-                <Search className="size-[19px]" aria-hidden="true" />
+                <Search className="size-5" aria-hidden="true" />
               </button>
             ) : (
               <Link
                 href="/products"
                 aria-label="Tìm kiếm đầu sách"
-                className="hidden min-h-[36px] min-w-[36px] items-center justify-center rounded-xl text-(--vk-muted) transition-colors hover:bg-(--vk-btn-hover) hover:text-(--vk-fg) lg:inline-flex xl:min-h-[40px] xl:min-w-[40px]"
+                className="hidden min-h-[44px] min-w-[44px] items-center justify-center rounded-xl text-(--vk-muted) transition-colors hover:bg-(--vk-btn-hover) hover:text-(--vk-fg) md:inline-flex xl:min-h-[40px] xl:min-w-[40px]"
               >
-                <Search className="size-[19px]" aria-hidden="true" />
+                <Search className="size-5" aria-hidden="true" />
               </Link>
             )}
 
@@ -337,13 +332,12 @@ export function VanKhoHeaderFooterShell({
               onClick={toggleAiChat}
               aria-label="Mở Cố vấn Sách AI và Tra từ điển Hán ngữ"
               title="Cố Vấn Sách AI & Tra Từ Điển Hán Ngữ"
-              className="hidden min-h-[36px] cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-xl border border-(--vk-border-strong) bg-(--vk-surface) px-2.5 text-xs font-semibold text-(--vk-fg) transition-colors hover:border-(--vk-primary) hover:text-(--vk-brass) sm:inline-flex xl:min-h-[40px] xl:px-3"
+              className="hidden min-h-[40px] cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-xl border border-(--vk-border-strong) bg-(--vk-surface) px-3 text-xs font-semibold text-(--vk-fg) transition-colors hover:border-(--vk-primary) hover:text-(--vk-brass) sm:inline-flex"
             >
               <span className="font-hanzi text-sm font-bold text-(--vk-brass)" aria-hidden="true">
                 书
               </span>
-              <span className="lg:hidden xl:inline">Cố vấn AI</span>
-              <span className="hidden lg:inline xl:hidden">AI</span>
+              <span>Cố vấn AI</span>
             </button>
 
             {/* Voucher Wallet Trigger */}
@@ -352,11 +346,11 @@ export function VanKhoHeaderFooterShell({
               onClick={() => setIsVoucherOpen(true)}
               aria-label={`Phiếu giảm giá mua sách (${displaySavedVoucherCount} mã đã lưu)`}
               title="Phiếu giảm giá mua sách"
-              className="relative hidden min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-xl text-(--vk-muted) transition-colors hover:bg-(--vk-btn-hover) hover:text-(--vk-fg) sm:inline-flex lg:min-h-[36px] lg:min-w-[36px] xl:min-h-[40px] xl:min-w-[40px]"
+              className="relative hidden min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-xl text-(--vk-muted) transition-colors hover:bg-(--vk-btn-hover) hover:text-(--vk-fg) sm:inline-flex xl:min-h-[40px] xl:min-w-[40px]"
             >
-              <Ticket className="size-[19px]" aria-hidden="true" />
+              <Ticket className="size-5" aria-hidden="true" />
               {displaySavedVoucherCount > 0 && (
-                <span className="absolute top-1 right-1 flex size-4 items-center justify-center rounded-full bg-(--vk-primary) vankho-mono text-[10px] font-bold text-(--vk-primary-fg)">
+                <span className="absolute top-1.5 right-1.5 flex size-4 items-center justify-center rounded-full bg-(--vk-primary) vankho-mono text-[10px] font-bold text-(--vk-primary-fg)">
                   {displaySavedVoucherCount}
                 </span>
               )}
@@ -368,12 +362,12 @@ export function VanKhoHeaderFooterShell({
               onClick={() => setIsOrdersOpen(true)}
               aria-label="Sổ đơn mua sách MongoDB"
               title="Sổ đơn đặt mua sách lưu trên MongoDB"
-              className="relative hidden min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-xl text-(--vk-muted) transition-colors hover:bg-(--vk-btn-hover) hover:text-(--vk-fg) sm:inline-flex lg:min-h-[36px] lg:min-w-[36px] xl:min-h-[40px] xl:min-w-[40px]"
+              className="relative hidden min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-xl text-(--vk-muted) transition-colors hover:bg-(--vk-btn-hover) hover:text-(--vk-fg) sm:inline-flex xl:min-h-[40px] xl:min-w-[40px]"
             >
-              <Package className="size-[19px]" aria-hidden="true" />
+              <Package className="size-5" aria-hidden="true" />
               <span
                 aria-hidden="true"
-                className={`absolute top-2 right-2 size-2 rounded-full ${
+                className={`absolute top-2.5 right-2.5 size-2 rounded-full ${
                   displayIsOnline ? "bg-emerald-500" : "bg-amber-500"
                 }`}
               />
@@ -384,11 +378,11 @@ export function VanKhoHeaderFooterShell({
               type="button"
               onClick={() => setIsWishlistOpen(true)}
               aria-label={`Sách đã lưu (${displayWishlistCount})`}
-              className="relative hidden min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-xl text-(--vk-muted) transition-colors hover:bg-(--vk-btn-hover) hover:text-(--vk-fg) sm:inline-flex lg:min-h-[36px] lg:min-w-[36px] xl:min-h-[40px] xl:min-w-[40px]"
+              className="relative hidden min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-xl text-(--vk-muted) transition-colors hover:bg-(--vk-btn-hover) hover:text-(--vk-fg) sm:inline-flex xl:min-h-[40px] xl:min-w-[40px]"
             >
-              <Heart className="size-[19px]" aria-hidden="true" />
+              <Heart className="size-5" aria-hidden="true" />
               {displayWishlistCount > 0 && (
-                <span className="absolute top-1 right-1 flex size-4 items-center justify-center rounded-full bg-(--vk-primary) vankho-mono text-[10px] font-bold text-(--vk-primary-fg)">
+                <span className="absolute top-1.5 right-1.5 flex size-4 items-center justify-center rounded-full bg-(--vk-primary) vankho-mono text-[10px] font-bold text-(--vk-primary-fg)">
                   {displayWishlistCount}
                 </span>
               )}
@@ -400,11 +394,11 @@ export function VanKhoHeaderFooterShell({
               onClick={() => dispatch(openCart())}
               aria-label={`Giỏ sách (${displayCartTotalQty} cuốn)`}
               title="Mở giỏ sách & thanh toán"
-              className="relative inline-flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-xl text-(--vk-fg) transition-colors hover:bg-(--vk-btn-hover) hover:text-(--vk-brass) lg:min-h-[36px] lg:min-w-[36px] xl:min-h-[40px] xl:min-w-[40px]"
+              className="relative inline-flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-xl text-(--vk-fg) transition-colors hover:bg-(--vk-btn-hover) hover:text-(--vk-brass) xl:min-h-[40px] xl:min-w-[40px]"
             >
-              <ShoppingBag className="size-[19px]" aria-hidden="true" />
+              <ShoppingBag className="size-5" aria-hidden="true" />
               {displayCartTotalQty > 0 && (
-                <span className="absolute top-1 right-1 flex min-w-[18px] h-[18px] items-center justify-center rounded-full bg-(--vk-primary) px-1 vankho-mono text-[10px] font-bold text-(--vk-primary-fg) tabular-nums">
+                <span className="absolute top-1.5 right-1.5 flex min-w-[18px] h-[18px] items-center justify-center rounded-full bg-(--vk-primary) px-1 vankho-mono text-[10px] font-bold text-(--vk-primary-fg) tabular-nums">
                   {displayCartTotalQty}
                 </span>
               )}
@@ -413,7 +407,7 @@ export function VanKhoHeaderFooterShell({
             {/* Account / Login Link */}
             <Link
               href={displayUser?.role === "admin" ? "/admin" : "/login"}
-              className="hidden min-h-[36px] items-center gap-1.5 whitespace-nowrap rounded-xl border border-(--vk-border-strong) bg-(--vk-surface) px-2.5 text-xs font-medium text-(--vk-fg) transition-colors hover:bg-(--vk-btn-hover) lg:inline-flex xl:min-h-[40px] xl:px-3"
+              className="hidden min-h-[40px] items-center gap-1.5 whitespace-nowrap rounded-xl border border-(--vk-border-strong) bg-(--vk-surface) px-3 text-xs font-medium text-(--vk-fg) transition-colors hover:bg-(--vk-btn-hover) lg:inline-flex"
             >
               <User className="size-3.5 shrink-0 text-(--vk-brass)" aria-hidden="true" />
               <span className="max-w-[92px] truncate">
@@ -432,18 +426,18 @@ export function VanKhoHeaderFooterShell({
                 onClick={handleLogout}
                 aria-label="Đăng xuất tài khoản"
                 title="Đăng xuất"
-                className="hidden min-h-[36px] min-w-[36px] cursor-pointer items-center justify-center rounded-xl border border-(--vk-border-strong) bg-(--vk-surface) text-(--vk-muted) transition-colors hover:border-rose-300 hover:bg-rose-50 hover:text-rose-600 lg:inline-flex xl:min-h-[40px] xl:min-w-[40px]"
+                className="hidden min-h-[40px] min-w-[40px] cursor-pointer items-center justify-center rounded-xl border border-(--vk-border-strong) bg-(--vk-surface) text-(--vk-muted) transition-colors hover:border-rose-300 hover:bg-rose-50 hover:text-rose-600 lg:inline-flex"
               >
                 <LogOut className="size-4" aria-hidden="true" />
               </button>
             )}
 
-            {/* Mobile / Tablet Hamburger (shown below lg when center nav is hidden) */}
+            {/* Mobile / Tablet Hamburger (shown below xl when center nav is hidden) */}
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen((p) => !p)}
               aria-label={isMobileMenuOpen ? "Đóng menu điều hướng" : "Mở menu điều hướng"}
-              className="inline-flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-xl text-(--vk-fg) lg:hidden"
+              className="inline-flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-xl text-(--vk-fg) xl:hidden"
             >
               {isMobileMenuOpen ? (
                 <X className="size-5" aria-hidden="true" />
@@ -456,7 +450,7 @@ export function VanKhoHeaderFooterShell({
 
         {/* Mobile / Tablet Dropdown Navigation */}
         {isMobileMenuOpen && (
-          <div className="border-t border-(--vk-border) bg-(--vk-surface) px-4 py-3 space-y-1 lg:hidden">
+          <div className="border-t border-(--vk-border) bg-(--vk-surface) px-4 py-3 space-y-1 xl:hidden">
             {navItems.map((item) =>
               item.href.startsWith("#") ? (
                 <a
