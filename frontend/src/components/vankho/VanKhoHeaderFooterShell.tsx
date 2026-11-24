@@ -4,11 +4,11 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import {
   AlertCircle,
+  CreditCard,
   Heart,
   LogOut,
   Menu,
   Moon,
-  Package,
   Search,
   Send,
   ShieldCheck,
@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import { IProduct } from "@/interfaces/product";
 import { useAiTutor } from "@/context/AiTutorContext";
-import { useBackendHealthSWR, useProductsSWR } from "@/hooks/useSwrApi";
+import { useProductsSWR } from "@/hooks/useSwrApi";
 import { validateEmail } from "@/lib/validation";
 import { clearCurrentUser } from "@/services/auth.service";
 import { useAppDispatch, useAppSelector } from "@/store";
@@ -86,9 +86,7 @@ export function VanKhoHeaderFooterShell({
 }: VanKhoHeaderFooterShellProps) {
   const dispatch = useAppDispatch();
   const { toggleAiChat } = useAiTutor();
-  const { isOnline } = useBackendHealthSWR(true);
-  const { products: swrProducts, mutateProducts } =
-    useProductsSWR(initialProducts);
+  const { products: swrProducts } = useProductsSWR(initialProducts);
 
   const currentUser = useAppSelector((s) => s.auth.currentUser);
   const savedVoucherCount = useAppSelector(
@@ -114,7 +112,6 @@ export function VanKhoHeaderFooterShell({
 
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
   const [isVoucherOpen, setIsVoucherOpen] = useState(false);
-  const [isOrdersOpen, setIsOrdersOpen] = useState(false);
 
   // Footer Newsletter State (with validation.ts)
   const [newsletterEmail, setNewsletterEmail] = useState("");
@@ -223,7 +220,6 @@ export function VanKhoHeaderFooterShell({
   const displaySavedVoucherCount = mounted ? savedVoucherCount : 0;
   const displayCartTotalQty = mounted ? cartTotalQty : 0;
   const displayWishlistCount = mounted ? wishlistIds.length : 0;
-  const displayIsOnline = mounted ? isOnline : false;
 
   return (
     <BookReaderModalContext.Provider
@@ -354,23 +350,6 @@ export function VanKhoHeaderFooterShell({
                   {displaySavedVoucherCount}
                 </span>
               )}
-            </button>
-
-            {/* MongoDB Order History Trigger */}
-            <button
-              type="button"
-              onClick={() => setIsOrdersOpen(true)}
-              aria-label="Sổ đơn mua sách MongoDB"
-              title="Sổ đơn đặt mua sách lưu trên MongoDB"
-              className="relative hidden min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-xl text-(--vk-muted) transition-colors hover:bg-(--vk-btn-hover) hover:text-(--vk-fg) sm:inline-flex xl:min-h-[40px] xl:min-w-[40px]"
-            >
-              <Package className="size-5" aria-hidden="true" />
-              <span
-                aria-hidden="true"
-                className={`absolute top-2.5 right-2.5 size-2 rounded-full ${
-                  displayIsOnline ? "bg-emerald-500" : "bg-amber-500"
-                }`}
-              />
             </button>
 
             {/* Wishlist Trigger */}
@@ -506,17 +485,14 @@ export function VanKhoHeaderFooterShell({
                 <Heart className="size-3.5 text-(--vk-brass)" aria-hidden="true" />
                 <span>Sách lưu ({displayWishlistCount})</span>
               </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  setIsOrdersOpen(true);
-                }}
-                className="inline-flex min-h-[44px] cursor-pointer items-center justify-center gap-1.5 rounded-xl border border-(--vk-border-strong) text-xs font-semibold text-(--vk-fg)"
+              <Link
+                href="/checkout"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="inline-flex min-h-[44px] items-center justify-center gap-1.5 rounded-xl border border-(--vk-border-strong) text-xs font-semibold text-(--vk-fg)"
               >
-                <Package className="size-3.5 text-(--vk-brass)" aria-hidden="true" />
-                <span>Đơn mua sách</span>
-              </button>
+                <CreditCard className="size-3.5 text-(--vk-brass)" aria-hidden="true" />
+                <span>Thanh toán ({displayCartTotalQty})</span>
+              </Link>
             </div>
             <div className="flex items-center gap-2 pt-1">
               <Link
@@ -620,6 +596,11 @@ export function VanKhoHeaderFooterShell({
                     </Link>
                   </li>
                   <li>
+                    <Link href="/checkout" className="hover:text-(--vk-brass)">
+                      Thanh toán đơn sách
+                    </Link>
+                  </li>
+                  <li>
                     <Link href="/about" className="hover:text-(--vk-brass)">
                       Về Hiệu Sách HANZI
                     </Link>
@@ -687,7 +668,7 @@ export function VanKhoHeaderFooterShell({
         />
 
         {/* ================================================================= */}
-        {/* GLOBAL SLIDE-OVER DRAWERS (CART, WISHLIST, VOUCHER, ORDERS)       */}
+        {/* GLOBAL SLIDE-OVER DRAWERS (CART, WISHLIST, VOUCHER)               */}
         {/* ================================================================= */}
         <VanKhoDrawers
           products={swrProducts}
@@ -695,18 +676,12 @@ export function VanKhoHeaderFooterShell({
           initialTab={activeBookTab}
           isWishlistOpen={isWishlistOpen}
           isVoucherOpen={isVoucherOpen}
-          isOrdersOpen={isOrdersOpen}
           wishlistIds={wishlistIds}
           onCloseCourse={handleCloseBookDrawer}
           onOpenCourse={handleOpenBookDrawer}
           onCloseWishlist={() => setIsWishlistOpen(false)}
           onCloseVoucher={() => setIsVoucherOpen(false)}
-          onCloseOrders={() => setIsOrdersOpen(false)}
-          onOpenOrders={() => setIsOrdersOpen(true)}
           onToggleWishlist={handleToggleWishlist}
-          onOrderCreated={() => {
-            void mutateProducts();
-          }}
         />
       </div>
     </BookReaderModalContext.Provider>

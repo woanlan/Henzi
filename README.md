@@ -28,9 +28,10 @@ wd21201/
 │
 ├── frontend/                    # Frontend React 19 / Next.js 16
 │   ├── src/
-│   │   ├── app/                 # Các trang (/, /products, /category, /detail, /detail/[id], /about, /login, /register, /admin)
+│   │   ├── app/                 # Các trang (/, /products, /category, /detail, /detail/[id], /checkout, /about, /login, /register, /admin)
 │   │   ├── components/
 │   │   │   ├── vankho/          # Giao diện Hiệu sách 3D (VanKhoExperience, HeaderFooterShell, CoverFlowHero, Lookbook, Catalog, Drawers)
+│   │   │   ├── checkout/        # Trang Thanh toán riêng biệt 2 cột (CheckoutPageClient.tsx)
 │   │   │   ├── admin/           # Admin Dashboard 6 phân hệ CRUD (Tổng quan, Đơn sách, Đầu sách, Tủ chuyên đề, Voucher, Tài khoản)
 │   │   │   ├── ai/              # Hộp thoại Cố vấn Sách AI & Từ điển Hán ngữ (AITutorChatBox.tsx)
 │   │   │   └── *.tsx            # Thẻ sách & Form (WolfProductCard, CategoryCard, ProductCard, ProductDetailCard, LoginForm, RegisterForm)
@@ -57,12 +58,12 @@ wd21201/
 | **Lab 1: Tạo Project & Bố cục gốc** | `frontend/src/app/layout.tsx`, `frontend/src/app/page.tsx`, `backend/src/server.js` |
 | **Lab 2: Tạo Component tái sử dụng** | `frontend/src/components/vankho/VanKhoHeaderFooterShell.tsx`, `frontend/src/components/WolfProductCard.tsx`, `frontend/src/components/CategoryCard.tsx`, `frontend/src/components/ProductCard.tsx` |
 | **Lab 3: Component + Props (Cha → Con)** | `page.tsx` → `VanKhoExperience.tsx` → `VanKhoCoverFlowHero.tsx` / `VanKhoLookbook.tsx` / `VanKhoCatalogSection.tsx`; `products/page.tsx` → `WolfProductCard.tsx`; `detail/[id]/page.tsx` → `ProductDetailCard.tsx`; `AdminDashboard.tsx` → `AdminOverview.tsx` / `AdminOrdersSection.tsx` / `AdminUsersSection.tsx` / `AdminVouchersSection.tsx` |
-| **Lab 4: `useState` + Form & Validation JS/TS** | `frontend/src/lib/validation.ts`, `LoginForm.tsx`, `RegisterForm.tsx`, `ProductDetailCard.tsx`, `VanKhoDrawers.tsx` (Form thanh toán giỏ sách), `VanKhoHeaderFooterShell.tsx` (Form bản tin), Modal CRUD trong `AdminDashboard.tsx`, `AdminOrdersSection.tsx`, `AdminUsersSection.tsx`, `AdminVouchersSection.tsx` |
-| **`useEffect` (Vòng đời & Sự kiện)** | `AppProviders.tsx` (đồng bộ auth/cart/voucher từ `localStorage`), `VanKhoHeaderFooterShell.tsx`, `AdminDashboard.tsx` (gọi API khi xác nhận Admin & bắt phím `Escape`), `AITutorChatBox.tsx` |
-| **`useMemo` (Tối ưu lọc & Biểu đồ)** | `VanKhoCatalogSection.tsx` (lọc & sắp xếp 30 đầu sách), `VanKhoDrawers.tsx` (tính tổng tiền & mã giảm giá), `AdminOverview.tsx`, `AdminDashboard.tsx`, `AdminOrdersSection.tsx`, `AdminUsersSection.tsx`, `AdminVouchersSection.tsx` |
-| **Custom Hooks + `useSWR` (`swr`)** | `frontend/src/hooks/useSwrApi.ts` (`useVouchersSWR`, `useBackendHealthSWR`, `useProductsSWR`), dùng trực tiếp ở `VanKhoExperience.tsx`, `VanKhoHeaderFooterShell.tsx`, `VanKhoDrawers.tsx`, `ProductDetailCard.tsx` và `AdminDashboard.tsx` (`mutate`) |
+| **Lab 4: `useState` + Form & Validation JS/TS** | `frontend/src/lib/validation.ts`, `CheckoutPageClient.tsx` (`/checkout`), `LoginForm.tsx`, `RegisterForm.tsx`, `ProductDetailCard.tsx`, `VanKhoHeaderFooterShell.tsx` (Form bản tin), Modal CRUD trong `AdminDashboard.tsx`, `AdminOrdersSection.tsx`, `AdminUsersSection.tsx`, `AdminVouchersSection.tsx` |
+| **`useEffect` (Vòng đời & Sự kiện)** | `AppProviders.tsx` (đồng bộ auth/cart/voucher từ `localStorage`), `VanKhoHeaderFooterShell.tsx`, `CheckoutPageClient.tsx`, `AdminDashboard.tsx` (gọi API khi xác nhận Admin & bắt phím `Escape`), `AITutorChatBox.tsx` |
+| **`useMemo` (Tối ưu lọc & Biểu đồ)** | `VanKhoCatalogSection.tsx` (lọc & sắp xếp 30 đầu sách), `CheckoutPageClient.tsx` (tính tổng tiền, voucher & phí ship), `AdminOverview.tsx`, `AdminDashboard.tsx`, `AdminOrdersSection.tsx`, `AdminUsersSection.tsx`, `AdminVouchersSection.tsx` |
+| **Custom Hooks + `useSWR` (`swr`)** | `frontend/src/hooks/useSwrApi.ts` (`useVouchersSWR`, `useBackendHealthSWR`, `useProductsSWR`), dùng trực tiếp ở `VanKhoExperience.tsx`, `VanKhoHeaderFooterShell.tsx`, `VanKhoDrawers.tsx`, `CheckoutPageClient.tsx`, `ProductDetailCard.tsx` và `AdminDashboard.tsx` (`mutate`) |
 | **Context API (`createContext` / `useContext`)** | `frontend/src/context/AiTutorContext.tsx`, dùng ở `VanKhoHeaderFooterShell.tsx` (nút **Cố vấn AI**) và `AITutorChatBox.tsx` |
-| **Redux Toolkit (`@reduxjs/toolkit` + `react-redux`)** | `frontend/src/store/index.ts`, `authSlice.ts`, `voucherWalletSlice.ts`, `cartSlice.ts`, `AppProviders.tsx`; dùng ở `VanKhoHeaderFooterShell.tsx`, `VanKhoCoverFlowHero.tsx`, `VanKhoCatalogSection.tsx`, `VanKhoDrawers.tsx`, `WolfProductCard.tsx`, `ProductDetailCard.tsx`, `LoginForm.tsx`, `AdminDashboard.tsx` |
+| **Redux Toolkit (`@reduxjs/toolkit` + `react-redux`)** | `frontend/src/store/index.ts`, `authSlice.ts`, `voucherWalletSlice.ts`, `cartSlice.ts`, `AppProviders.tsx`; dùng ở `VanKhoHeaderFooterShell.tsx`, `VanKhoCoverFlowHero.tsx`, `VanKhoCatalogSection.tsx`, `VanKhoDrawers.tsx`, `CheckoutPageClient.tsx`, `WolfProductCard.tsx`, `ProductDetailCard.tsx`, `LoginForm.tsx`, `AdminDashboard.tsx` |
 | **Phân quyền RBAC & CRUD React + REST API Node.js & MongoDB** | 28 API tại `backend/src/routes/index.js` + 7 Mongoose Models + `frontend/src/services/*.service.ts` + trang quản trị 6 phân hệ `frontend/src/components/admin/AdminDashboard.tsx` (chặn 403 tài khoản thường) |
 
 ---

@@ -4,15 +4,13 @@ import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import {
-  AlertCircle,
+  ArrowRight,
   BookOpen,
   Check,
   CheckCircle2,
   ExternalLink,
   Heart,
-  MapPin,
   Minus,
-  Package,
   Plus,
   ShoppingBag,
   Star,
@@ -22,26 +20,13 @@ import {
   Volume2,
   X,
 } from "lucide-react";
-import { IOrder, IOrderItem } from "@/interfaces/order";
 import { BookEditionFormat, IProduct } from "@/interfaces/product";
 import { audioEngine } from "@/lib/audio";
-import {
-  hasErrors,
-  validateEmail,
-  validateFullName,
-  validatePhone,
-  validateShippingAddress,
-  validateVoucherCode,
-} from "@/lib/validation";
-import { getSavedUser } from "@/services/auth.service";
-import { createOrder, getAllOrders } from "@/services/order.service";
 import { useVouchersSWR } from "@/hooks/useSwrApi";
 import { useAppDispatch, useAppSelector } from "@/store";
 import {
   addToCart,
-  clearCart,
   closeCart,
-  openCart,
   removeFromCart,
   updateCartQty,
 } from "@/store/slices/cartSlice";
@@ -56,7 +41,6 @@ import {
   formatVnd,
   FREE_SHIPPING_THRESHOLD,
   getCourseArchivalMeta,
-  parseVndPrice,
   resolveBookEditions,
   STANDARD_SHIPPING_FEE,
 } from "./vankho-data";
@@ -67,16 +51,12 @@ export interface VanKhoDrawersProps {
   initialTab: DetailTabMode;
   isWishlistOpen: boolean;
   isVoucherOpen: boolean;
-  isOrdersOpen: boolean;
   wishlistIds: Array<string | number>;
   onCloseCourse: () => void;
   onOpenCourse: (productId: string | number, tab: DetailTabMode) => void;
   onCloseWishlist: () => void;
   onCloseVoucher: () => void;
-  onCloseOrders: () => void;
-  onOpenOrders?: () => void;
   onToggleWishlist: (id: string | number) => void;
-  onOrderCreated?: () => void;
 }
 
 export function VanKhoDrawers({
@@ -85,19 +65,14 @@ export function VanKhoDrawers({
   initialTab,
   isWishlistOpen,
   isVoucherOpen,
-  isOrdersOpen,
   wishlistIds,
   onCloseCourse,
   onOpenCourse,
   onCloseWishlist,
   onCloseVoucher,
-  onCloseOrders,
-  onOpenOrders,
   onToggleWishlist,
-  onOrderCreated,
 }: VanKhoDrawersProps) {
   const dispatch = useAppDispatch();
-  const reduxUser = useAppSelector((s) => s.auth.currentUser);
   const { savedCodes, activeVoucherCode } = useAppSelector(
     (s) => s.voucherWallet
   );
@@ -108,21 +83,6 @@ export function VanKhoDrawers({
   const [selectedEdition, setSelectedEdition] =
     useState<BookEditionFormat>("paperback");
   const [speakingWord, setSpeakingWord] = useState<string | null>(null);
-
-  // Checkout form state inside CartDrawer (validated via validation.ts)
-  const [studentName, setStudentName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [shippingAddress, setShippingAddress] = useState("");
-  const [email, setEmail] = useState("");
-  const [voucherCode, setVoucherCode] = useState("");
-  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
-  const [checkoutError, setCheckoutError] = useState("");
-  const [createdReceipt, setCreatedReceipt] = useState<IOrder | null>(null);
-  const [submitting, setSubmitting] = useState(false);
-
-  // Orders history state from MongoDB
-  const [orders, setOrders] = useState<IOrder[]>([]);
-  const [loadingOrders, setLoadingOrders] = useState(false);
 
   const selectedIndex =
     selectedCourseId !== null
@@ -141,49 +101,13 @@ export function VanKhoDrawers({
     setSelectedEdition(eds.paperback.stock > 0 ? "paperback" : "hardcover");
   }, [selectedBook, initialTab]);
 
-  useEffect(() => {
-    if (!isCartOpen) return;
-    const saved = reduxUser || getSavedUser();
-    setStudentName((prev) => prev || saved?.fullName || saved?.username || "");
-    setEmail((prev) => prev || saved?.email || "");
-    setPhone((prev) => prev || saved?.phone || "");
-    if (activeVoucherCode && !voucherCode) {
-      setVoucherCode(activeVoucherCode);
-    }
-    setFieldErrors({});
-    setCheckoutError("");
-  }, [isCartOpen, reduxUser, activeVoucherCode, voucherCode]);
-
-  useEffect(() => {
-    if (cartItems.length > 0 && createdReceipt) {
-      setCreatedReceipt(null);
-    }
-  }, [cartItems.length, createdReceipt]);
-
-  useEffect(() => {
-    if (!isOrdersOpen) return;
-    let ignore = false;
-    setLoadingOrders(true);
-    getAllOrders()
-      .then((list) => {
-        if (!ignore) setOrders(list);
-      })
-      .finally(() => {
-        if (!ignore) setLoadingOrders(false);
-      });
-    return () => {
-      ignore = true;
-    };
-  }, [isOrdersOpen]);
-
   // Close active drawer on Escape
   useEffect(() => {
     const anyOpen =
       selectedCourseId !== null ||
       isCartOpen ||
       isWishlistOpen ||
-      isVoucherOpen ||
-      isOrdersOpen;
+      isVoucherOpen;
     if (!anyOpen) return;
 
     const onKeyDown = (e: KeyboardEvent) => {
@@ -192,7 +116,6 @@ export function VanKhoDrawers({
         dispatch(closeCart());
         onCloseWishlist();
         onCloseVoucher();
-        onCloseOrders();
       }
     };
     window.addEventListener("keydown", onKeyDown);
@@ -202,11 +125,9 @@ export function VanKhoDrawers({
     isCartOpen,
     isWishlistOpen,
     isVoucherOpen,
-    isOrdersOpen,
     onCloseCourse,
     onCloseWishlist,
     onCloseVoucher,
-    onCloseOrders,
     dispatch,
   ]);
 
@@ -222,7 +143,10 @@ export function VanKhoDrawers({
         const meta = getCourseArchivalMeta(book, idx);
         const eds = resolveBookEditions(book);
         const ed = eds[entry.edition];
-        const safeQty = Math.max(1, Math.min(Math.max(1, ed.stock), entry.quantity));
+        const safeQty = Math.max(
+          1,
+          Math.min(Math.max(1, ed.stock), entry.quantity)
+        );
         return {
           book,
           meta,
@@ -245,65 +169,12 @@ export function VanKhoDrawers({
     [resolvedCartLines]
   );
 
-  // Match voucher from MongoDB SWR list & compute discount
-  const matchedVoucher = useMemo(() => {
-    const clean = voucherCode.trim().toUpperCase();
-    if (!clean) return null;
-    return vouchers.find((v) => v.code.toUpperCase() === clean) || null;
-  }, [voucherCode, vouchers]);
-
-  const { discountAmount, shippingFee, voucherNotice } = useMemo(() => {
-    if (subtotal <= 0) {
-      return { discountAmount: 0, shippingFee: 0, voucherNotice: "" };
-    }
-    const baseShipping =
-      subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : STANDARD_SHIPPING_FEE;
-
-    if (!voucherCode.trim()) {
-      return {
-        discountAmount: 0,
-        shippingFee: baseShipping,
-        voucherNotice: "",
-      };
-    }
-
-    if (!matchedVoucher) {
-      return {
-        discountAmount: 0,
-        shippingFee: baseShipping,
-        voucherNotice: "Mã chưa có trong danh mục ưu đãi hiện hành.",
-      };
-    }
-
-    const minReq = matchedVoucher.minOrderAmount ?? 0;
-    if (subtotal < minReq) {
-      return {
-        discountAmount: 0,
-        shippingFee: baseShipping,
-        voucherNotice: `Cần đơn từ ${formatVnd(minReq)} để áp mã ${matchedVoucher.code}.`,
-      };
-    }
-
-    // Special FREESHIP handling
-    if (matchedVoucher.code.toUpperCase().includes("SHIP")) {
-      return {
-        discountAmount: 0,
-        shippingFee: 0,
-        voucherNotice: `Đã miễn phí vận chuyển với mã ${matchedVoucher.code}!`,
-      };
-    }
-
-    const rawDisc =
-      matchedVoucher.discountAmount ?? parseVndPrice(matchedVoucher.badge) ?? 30000;
-    const capped = Math.min(subtotal, rawDisc);
-    return {
-      discountAmount: capped,
-      shippingFee: baseShipping,
-      voucherNotice: `Đã giảm ${formatVnd(capped)} từ mã ${matchedVoucher.code}.`,
-    };
-  }, [subtotal, voucherCode, matchedVoucher]);
-
-  const finalTotal = Math.max(0, subtotal - discountAmount + shippingFee);
+  const estimatedShipping =
+    subtotal <= 0
+      ? 0
+      : subtotal >= FREE_SHIPPING_THRESHOLD
+      ? 0
+      : STANDARD_SHIPPING_FEE;
 
   const handleSpeak = (text: string) => {
     setSpeakingWord(text);
@@ -330,79 +201,6 @@ export function VanKhoDrawers({
         openDrawer: true,
       })
     );
-  };
-
-  const handleCheckoutSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (resolvedCartLines.length === 0) return;
-
-    // [YÊU CẦU CÔ - Validation JS/TS thuần] Kiểm tra đầy đủ Họ tên, SĐT, Địa chỉ nhận sách & Email/Voucher
-    const errors: Record<string, string> = {
-      studentName: validateFullName(studentName, true, "Họ và tên người nhận"),
-      phone: validatePhone(phone, true),
-      shippingAddress: validateShippingAddress(shippingAddress, true),
-      email: validateEmail(email, false),
-      voucherCode: validateVoucherCode(voucherCode, false),
-    };
-
-    if (hasErrors(errors)) {
-      setFieldErrors(errors);
-      return;
-    }
-
-    setSubmitting(true);
-    setFieldErrors({});
-    setCheckoutError("");
-
-    const orderItems: IOrderItem[] = resolvedCartLines.map((line) => ({
-      bookId: String(line.book.id),
-      bookName: line.book.name,
-      edition: line.editionKey,
-      editionLabel:
-        line.editionKey === "paperback" ? "Bìa mềm" : "Bìa cứng vải bố",
-      unitPrice: line.editionObj.price,
-      quantity: line.quantity,
-    }));
-
-    const summaryTitle = orderItems
-      .map(
-        (it) =>
-          `${it.bookName} (${it.editionLabel}${
-            it.quantity > 1 ? ` ×${it.quantity}` : ""
-          })`
-      )
-      .join(" + ");
-
-    try {
-      const { order } = await createOrder({
-        studentName: studentName.trim(),
-        phone: phone.trim(),
-        shippingAddress: shippingAddress.trim(),
-        email: email.trim() || "docgia@hanzi.vn",
-        courseId: orderItems[0].bookId,
-        courseName: summaryTitle,
-        items: orderItems,
-        subtotal,
-        discountAmount,
-        shippingFee,
-        totalNumeric: finalTotal,
-        amount: formatVnd(finalTotal),
-        voucherCode:
-          matchedVoucher && subtotal >= (matchedVoucher.minOrderAmount ?? 0)
-            ? matchedVoucher.code
-            : voucherCode.trim() || undefined,
-      });
-
-      dispatch(clearCart());
-      setCreatedReceipt(order);
-      onOrderCreated?.();
-    } catch {
-      setCheckoutError(
-        "Không thể gửi đơn đặt sách lúc này. Vui lòng kiểm tra kết nối máy chủ."
-      );
-    } finally {
-      setSubmitting(false);
-    }
   };
 
   const wishlistedBooks = products.filter((p) =>
@@ -832,7 +630,7 @@ export function VanKhoDrawers({
       </AnimatePresence>
 
       {/* ================================================================= */}
-      {/* 2. REDUX SHOPPING CART + VOUCHER + SHIPPING CHECKOUT DRAWER       */}
+      {/* 2. REDUX SHOPPING CART DRAWER (CHỈ GIỎ SÁCH + CHUYỂN /checkout)   */}
       {/* ================================================================= */}
       <AnimatePresence>
         {isCartOpen && (
@@ -849,14 +647,14 @@ export function VanKhoDrawers({
             <motion.div
               role="dialog"
               aria-modal="true"
-              aria-label="Giỏ sách và đặt giao hàng"
+              aria-label="Giỏ sách HANZI"
               initial={{ x: "100%" }}
               animate={{
                 x: 0,
                 transition: { duration: 0.4, ease: [0.32, 0.72, 0, 1] },
               }}
               exit={{ x: "100%", transition: { duration: 0.28 } }}
-              className="relative z-10 flex h-full w-full max-w-lg flex-col border-l border-(--vk-border) bg-(--vk-surface) text-(--vk-fg) [box-shadow:var(--vk-elevation-drawer)]"
+              className="relative z-10 flex h-full w-full max-w-md flex-col border-l border-(--vk-border) bg-(--vk-surface) text-(--vk-fg) [box-shadow:var(--vk-elevation-drawer)]"
             >
               {/* Header */}
               <div className="flex shrink-0 items-center justify-between border-b border-(--vk-border) px-5 py-4">
@@ -877,66 +675,8 @@ export function VanKhoDrawers({
               </div>
 
               {/* Body */}
-              <div className="flex-1 overflow-y-auto p-5 space-y-5">
-                {createdReceipt ? (
-                  <div
-                    role="status"
-                    aria-live="polite"
-                    className="rounded-2xl border border-emerald-500/35 bg-emerald-500/10 p-5 space-y-3.5"
-                  >
-                    <div className="flex items-center gap-2 font-semibold text-emerald-700 dark:text-emerald-300">
-                      <CheckCircle2 className="size-5 shrink-0" />
-                      <span>Đặt mua sách thành công!</span>
-                    </div>
-
-                    <p className="text-xs leading-relaxed text-(--vk-fg)/90">
-                      Đơn hàng <strong className="vankho-mono">#{createdReceipt.id}</strong> đã được ghi vào <strong>MongoDB</strong> và tự động giữ tồn kho ấn bản cho bạn.
-                    </p>
-
-                    <div className="rounded-xl border border-(--vk-border) bg-(--vk-surface) p-3.5 space-y-1.5 text-xs">
-                      <p className="font-semibold text-(--vk-fg)">
-                        {createdReceipt.courseName}
-                      </p>
-                      <p className="text-(--vk-muted)">
-                        Người nhận: <strong>{createdReceipt.studentName}</strong> ·{" "}
-                        {createdReceipt.phone}
-                      </p>
-                      {createdReceipt.shippingAddress && (
-                        <p className="text-(--vk-muted)">
-                          Giao tới: {createdReceipt.shippingAddress}
-                        </p>
-                      )}
-                      <p className="pt-1 vankho-mono text-sm font-bold text-(--vk-brass)">
-                        Tổng thanh toán: {createdReceipt.amount}
-                      </p>
-                    </div>
-
-                    <div className="flex flex-wrap gap-2 pt-1">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setCreatedReceipt(null);
-                          dispatch(closeCart());
-                          onOpenOrders?.();
-                        }}
-                        className="inline-flex min-h-[42px] flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-xl bg-(--vk-primary) px-4 text-xs font-semibold text-(--vk-primary-fg) hover:bg-(--vk-primary-hover)"
-                      >
-                        <Package className="size-4" />
-                        <span>Xem Sổ Đơn Mua Sách</span>
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setCreatedReceipt(null);
-                          dispatch(closeCart());
-                        }}
-                        className="inline-flex min-h-[42px] cursor-pointer items-center justify-center rounded-xl border border-(--vk-border-strong) bg-(--vk-surface) px-4 text-xs font-semibold text-(--vk-fg) hover:bg-(--vk-btn-hover)"
-                      >
-                        Tiếp tục chọn sách
-                      </button>
-                    </div>
-                  </div>
-                ) : resolvedCartLines.length === 0 ? (
+              <div className="flex-1 overflow-y-auto p-5 space-y-4">
+                {resolvedCartLines.length === 0 ? (
                   <div className="flex flex-col items-center justify-center py-14 text-center">
                     <ShoppingBag className="size-10 text-(--vk-muted)/70" />
                     <p className="mt-3 vankho-serif text-lg font-medium text-(--vk-fg)">
@@ -1090,292 +830,53 @@ export function VanKhoDrawers({
                         </li>
                       ))}
                     </ul>
-
-                    {/* Voucher Input & Quick Redux/SWR Chips */}
-                    <div className="rounded-xl border border-(--vk-border) bg-(--vk-gallery) p-3.5 space-y-2.5">
-                      <div className="flex items-center justify-between">
-                        <label
-                          htmlFor="vk-cart-voucher"
-                          className="text-xs font-semibold text-(--vk-fg)"
-                        >
-                          Mã giảm giá mua sách
-                        </label>
-                        {voucherCode && (
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setVoucherCode("");
-                              setFieldErrors((p) => ({ ...p, voucherCode: "" }));
-                            }}
-                            className="cursor-pointer text-[11px] text-(--vk-muted) hover:text-(--vk-fg)"
-                          >
-                            Bỏ mã
-                          </button>
-                        )}
-                      </div>
-
-                      <input
-                        id="vk-cart-voucher"
-                        type="text"
-                        value={voucherCode}
-                        aria-invalid={Boolean(fieldErrors.voucherCode)}
-                        onChange={(e) => {
-                          setVoucherCode(e.target.value.toUpperCase());
-                          setFieldErrors((p) => ({ ...p, voucherCode: "" }));
-                        }}
-                        placeholder="Nhập HANZI50K, TANTHU30K, FREESHIP..."
-                        className={`h-10 w-full rounded-xl border bg-(--vk-surface) px-3 vankho-mono text-xs text-(--vk-fg) focus:outline-none ${
-                          fieldErrors.voucherCode
-                            ? "border-red-400"
-                            : "border-(--vk-border-strong)"
-                        }`}
-                      />
-
-                      {fieldErrors.voucherCode && (
-                        <p className="flex items-center gap-1 text-xs font-medium text-red-500">
-                          <AlertCircle className="size-3.5 shrink-0" />
-                          <span>{fieldErrors.voucherCode}</span>
-                        </p>
-                      )}
-
-                      {voucherNotice && !fieldErrors.voucherCode && (
-                        <p
-                          className={`text-[11px] font-medium ${
-                            discountAmount > 0 || shippingFee === 0
-                              ? "text-emerald-700 dark:text-emerald-400"
-                              : "text-amber-700 dark:text-amber-400"
-                          }`}
-                        >
-                          {voucherNotice}
-                        </p>
-                      )}
-
-                      {vouchers.length > 0 && (
-                        <div className="flex flex-wrap gap-1.5 pt-0.5">
-                          {vouchers.map((v) => {
-                            const active = voucherCode === v.code;
-                            return (
-                              <button
-                                key={v.id}
-                                type="button"
-                                onClick={() => {
-                                  setVoucherCode(v.code);
-                                  setFieldErrors((p) => ({
-                                    ...p,
-                                    voucherCode: "",
-                                  }));
-                                  dispatch(saveVoucherCode(v.code));
-                                  dispatch(selectActiveVoucher(v.code));
-                                }}
-                                className={`cursor-pointer rounded-md border px-2 py-1 vankho-mono text-[11px] font-semibold transition-colors ${
-                                  active
-                                    ? "border-(--vk-primary) bg-(--vk-primary) text-(--vk-primary-fg)"
-                                    : "border-(--vk-border-strong) bg-(--vk-surface) text-(--vk-brass)"
-                                }`}
-                              >
-                                {v.code} ({v.badge})
-                              </button>
-                            );
-                          })}
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Price Summary */}
-                    <div className="rounded-xl border border-(--vk-border) bg-(--vk-paper) p-4 space-y-2 text-xs">
-                      <div className="flex justify-between text-(--vk-muted)">
-                        <span>Tạm tính ({totalCartBooks} cuốn)</span>
-                        <span className="vankho-mono font-medium text-(--vk-fg) tabular-nums">
-                          {formatVnd(subtotal)}
-                        </span>
-                      </div>
-                      {discountAmount > 0 && (
-                        <div className="flex justify-between text-emerald-700 dark:text-emerald-400">
-                          <span>Ưu đãi Voucher</span>
-                          <span className="vankho-mono font-semibold tabular-nums">
-                            -{formatVnd(discountAmount)}
-                          </span>
-                        </div>
-                      )}
-                      <div className="flex justify-between text-(--vk-muted)">
-                        <span>Đóng gói chống sốc &amp; Giao hàng</span>
-                        <span className="vankho-mono font-medium text-(--vk-fg) tabular-nums">
-                          {shippingFee === 0 ? "Miễn phí" : formatVnd(shippingFee)}
-                        </span>
-                      </div>
-                      <div className="flex items-baseline justify-between border-t border-(--vk-border) pt-2.5 text-sm font-semibold text-(--vk-fg)">
-                        <span>Tổng thanh toán (COD)</span>
-                        <span className="vankho-mono text-lg font-bold text-(--vk-brass) tabular-nums">
-                          {formatVnd(finalTotal)}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Validated Shipping Form (`noValidate` + `validation.ts`) */}
-                    <form
-                      noValidate
-                      onSubmit={handleCheckoutSubmit}
-                      className="space-y-3.5 border-t border-(--vk-border) pt-4"
-                    >
-                      <p className="vankho-mono text-xs font-semibold uppercase tracking-wider text-(--vk-brass)">
-                        Thông tin người nhận &amp; Địa chỉ giao sách
-                      </p>
-
-                      {checkoutError && (
-                        <div
-                          role="alert"
-                          className="rounded-xl border border-red-400/40 bg-red-500/10 p-3 text-xs font-semibold text-red-600 dark:text-red-300"
-                        >
-                          {checkoutError}
-                        </div>
-                      )}
-
-                      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                        <div className="space-y-1">
-                          <label
-                            htmlFor="vk-ship-name"
-                            className="block text-xs font-semibold text-(--vk-fg)"
-                          >
-                            Họ tên người nhận <span className="text-red-500">*</span>
-                          </label>
-                          <input
-                            id="vk-ship-name"
-                            type="text"
-                            aria-invalid={Boolean(fieldErrors.studentName)}
-                            value={studentName}
-                            onChange={(e) => {
-                              setStudentName(e.target.value);
-                              setFieldErrors((p) => ({ ...p, studentName: "" }));
-                            }}
-                            placeholder="Nguyễn Minh Anh"
-                            className={`h-11 w-full rounded-xl border bg-(--vk-surface) px-3 text-sm text-(--vk-fg) focus:outline-none ${
-                              fieldErrors.studentName
-                                ? "border-red-400"
-                                : "border-(--vk-border-strong)"
-                            }`}
-                          />
-                          {fieldErrors.studentName && (
-                            <p className="flex items-center gap-1 text-xs font-medium text-red-500">
-                              <AlertCircle className="size-3.5 shrink-0" />
-                              <span>{fieldErrors.studentName}</span>
-                            </p>
-                          )}
-                        </div>
-
-                        <div className="space-y-1">
-                          <label
-                            htmlFor="vk-ship-phone"
-                            className="block text-xs font-semibold text-(--vk-fg)"
-                          >
-                            Số điện thoại <span className="text-red-500">*</span>
-                          </label>
-                          <input
-                            id="vk-ship-phone"
-                            type="tel"
-                            aria-invalid={Boolean(fieldErrors.phone)}
-                            value={phone}
-                            onChange={(e) => {
-                              setPhone(e.target.value);
-                              setFieldErrors((p) => ({ ...p, phone: "" }));
-                            }}
-                            placeholder="0901234567"
-                            className={`h-11 w-full rounded-xl border bg-(--vk-surface) px-3 text-sm text-(--vk-fg) focus:outline-none ${
-                              fieldErrors.phone
-                                ? "border-red-400"
-                                : "border-(--vk-border-strong)"
-                            }`}
-                          />
-                          {fieldErrors.phone && (
-                            <p className="flex items-center gap-1 text-xs font-medium text-red-500">
-                              <AlertCircle className="size-3.5 shrink-0" />
-                              <span>{fieldErrors.phone}</span>
-                            </p>
-                          )}
-                        </div>
-                      </div>
-
-                      <div className="space-y-1">
-                        <label
-                          htmlFor="vk-ship-address"
-                          className="block text-xs font-semibold text-(--vk-fg)"
-                        >
-                          Địa chỉ nhận sách tận nơi{" "}
-                          <span className="text-red-500">*</span>
-                        </label>
-                        <input
-                          id="vk-ship-address"
-                          type="text"
-                          aria-invalid={Boolean(fieldErrors.shippingAddress)}
-                          value={shippingAddress}
-                          onChange={(e) => {
-                            setShippingAddress(e.target.value);
-                            setFieldErrors((p) => ({
-                              ...p,
-                              shippingAddress: "",
-                            }));
-                          }}
-                          placeholder="Số nhà, tên đường, phường/xã, quận/huyện, tỉnh/TP"
-                          className={`h-11 w-full rounded-xl border bg-(--vk-surface) px-3 text-sm text-(--vk-fg) focus:outline-none ${
-                            fieldErrors.shippingAddress
-                              ? "border-red-400"
-                              : "border-(--vk-border-strong)"
-                          }`}
-                        />
-                        {fieldErrors.shippingAddress && (
-                          <p className="flex items-center gap-1 text-xs font-medium text-red-500">
-                            <AlertCircle className="size-3.5 shrink-0" />
-                            <span>{fieldErrors.shippingAddress}</span>
-                          </p>
-                        )}
-                      </div>
-
-                      <div className="space-y-1">
-                        <label
-                          htmlFor="vk-ship-email"
-                          className="block text-xs font-semibold text-(--vk-fg)"
-                        >
-                          Email nhận phiếu xác nhận &amp; QR Audio (tùy chọn)
-                        </label>
-                        <input
-                          id="vk-ship-email"
-                          type="email"
-                          aria-invalid={Boolean(fieldErrors.email)}
-                          value={email}
-                          onChange={(e) => {
-                            setEmail(e.target.value);
-                            setFieldErrors((p) => ({ ...p, email: "" }));
-                          }}
-                          placeholder="docgia@hanzi.vn"
-                          className={`h-11 w-full rounded-xl border bg-(--vk-surface) px-3 text-sm text-(--vk-fg) focus:outline-none ${
-                            fieldErrors.email
-                              ? "border-red-400"
-                              : "border-(--vk-border-strong)"
-                          }`}
-                        />
-                        {fieldErrors.email && (
-                          <p className="flex items-center gap-1 text-xs font-medium text-red-500">
-                            <AlertCircle className="size-3.5 shrink-0" />
-                            <span>{fieldErrors.email}</span>
-                          </p>
-                        )}
-                      </div>
-
-                      <button
-                        type="submit"
-                        disabled={submitting}
-                        className="inline-flex min-h-[46px] w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-(--vk-primary) px-5 text-sm font-semibold text-(--vk-primary-fg) transition-colors hover:bg-(--vk-primary-hover) disabled:opacity-50"
-                      >
-                        <ShoppingBag className="size-4" />
-                        <span>
-                          {submitting
-                            ? "Đang lưu đơn đặt sách vào MongoDB..."
-                            : `Đặt mua sách · ${formatVnd(finalTotal)}`}
-                        </span>
-                      </button>
-                    </form>
                   </>
                 )}
               </div>
+
+              {/* Sticky Cart Footer -> Dedicated /checkout Page */}
+              {resolvedCartLines.length > 0 && (
+                <div className="shrink-0 border-t border-(--vk-border) bg-(--vk-paper) p-5 space-y-3">
+                  <div className="space-y-1.5 text-xs">
+                    <div className="flex justify-between text-(--vk-muted)">
+                      <span>Tạm tính ({totalCartBooks} cuốn)</span>
+                      <span className="vankho-mono font-medium text-(--vk-fg) tabular-nums">
+                        {formatVnd(subtotal)}
+                      </span>
+                    </div>
+                    <div className="flex justify-between text-(--vk-muted)">
+                      <span>Phí vận chuyển ước tính</span>
+                      <span className="vankho-mono font-medium text-(--vk-fg) tabular-nums">
+                        {estimatedShipping === 0
+                          ? "Miễn phí"
+                          : formatVnd(estimatedShipping)}
+                      </span>
+                    </div>
+                  </div>
+
+                  <p className="text-[11px] text-(--vk-muted)">
+                    Mã giảm giá và phương thức thanh toán sẽ được áp dụng tại trang Thanh toán riêng.
+                  </p>
+
+                  <div className="flex flex-col gap-2 pt-1">
+                    <Link
+                      href="/checkout"
+                      onClick={() => dispatch(closeCart())}
+                      className="inline-flex min-h-[46px] w-full items-center justify-center gap-2 rounded-xl bg-(--vk-primary) px-5 text-sm font-semibold text-(--vk-primary-fg) transition-colors hover:bg-(--vk-primary-hover)"
+                    >
+                      <span>Tiến hành thanh toán</span>
+                      <ArrowRight className="size-4" aria-hidden="true" />
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => dispatch(closeCart())}
+                      className="inline-flex min-h-[40px] w-full cursor-pointer items-center justify-center rounded-xl border border-(--vk-border-strong) bg-(--vk-surface) text-xs font-semibold text-(--vk-fg) hover:bg-(--vk-btn-hover)"
+                    >
+                      Tiếp tục chọn sách
+                    </button>
+                  </div>
+                </div>
+              )}
             </motion.div>
           </div>
         )}
@@ -1554,7 +1055,7 @@ export function VanKhoDrawers({
 
               <div className="flex-1 overflow-y-auto p-5 space-y-3">
                 <p className="text-xs leading-relaxed text-(--vk-muted)">
-                  Danh sách phiếu giảm giá hiệu sách được đồng bộ từ MongoDB qua <b>useSWR</b>. Khi lưu mã vào <b>Ví Redux</b>, mã sẽ tự động áp dụng trong Giỏ Sách.
+                  Danh sách phiếu giảm giá hiệu sách được đồng bộ từ MongoDB qua <b>useSWR</b>. Khi lưu mã vào <b>Ví Redux</b>, mã sẽ tự động áp dụng tại trang Thanh toán.
                 </p>
 
                 {vouchers.map((v) => {
@@ -1585,7 +1086,6 @@ export function VanKhoDrawers({
                           onClick={() => {
                             dispatch(saveVoucherCode(v.code));
                             dispatch(selectActiveVoucher(v.code));
-                            setVoucherCode(v.code);
                           }}
                           className={`inline-flex min-h-[40px] flex-1 cursor-pointer items-center justify-center gap-1.5 rounded-lg text-xs font-semibold transition-colors ${
                             isSelected
@@ -1606,131 +1106,22 @@ export function VanKhoDrawers({
                         </button>
 
                         {totalCartBooks > 0 && (
-                          <button
-                            type="button"
+                          <Link
+                            href="/checkout"
                             onClick={() => {
                               dispatch(saveVoucherCode(v.code));
                               dispatch(selectActiveVoucher(v.code));
-                              setVoucherCode(v.code);
                               onCloseVoucher();
-                              dispatch(openCart());
                             }}
-                            className="inline-flex min-h-[40px] cursor-pointer items-center justify-center rounded-lg border border-(--vk-border-strong) bg-(--vk-surface) px-3 text-xs font-semibold text-(--vk-brass) hover:bg-(--vk-btn-hover)"
+                            className="inline-flex min-h-[40px] items-center justify-center rounded-lg border border-(--vk-border-strong) bg-(--vk-surface) px-3 text-xs font-semibold text-(--vk-brass) hover:bg-(--vk-btn-hover)"
                           >
-                            Dùng ngay
-                          </button>
+                            Thanh toán ngay
+                          </Link>
                         )}
                       </div>
                     </div>
                   );
                 })}
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
-
-      {/* ================================================================= */}
-      {/* 5. MONGODB BOOK ORDER HISTORY DRAWER                              */}
-      {/* ================================================================= */}
-      <AnimatePresence>
-        {isOrdersOpen && (
-          <div className="fixed inset-0 z-50 flex justify-end">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={onCloseOrders}
-              aria-hidden="true"
-              className="fixed inset-0 bg-black/35 backdrop-blur-[1px]"
-            />
-            <motion.div
-              role="dialog"
-              aria-modal="true"
-              aria-label="Lịch sử đơn đặt sách MongoDB"
-              initial={{ x: "100%" }}
-              animate={{
-                x: 0,
-                transition: { duration: 0.38, ease: [0.32, 0.72, 0, 1] },
-              }}
-              exit={{ x: "100%", transition: { duration: 0.28 } }}
-              className="relative z-10 flex h-full w-full max-w-md flex-col border-l border-(--vk-border) bg-(--vk-surface) text-(--vk-fg) [box-shadow:var(--vk-elevation-drawer)]"
-            >
-              <div className="flex items-center justify-between border-b border-(--vk-border) px-5 py-4">
-                <div className="flex items-center gap-2">
-                  <Package className="size-4 text-(--vk-brass)" />
-                  <h2 className="vankho-serif text-lg font-medium">
-                    Sổ Đơn Mua Sách ({orders.length})
-                  </h2>
-                </div>
-                <button
-                  type="button"
-                  onClick={onCloseOrders}
-                  aria-label="Đóng sổ đơn mua sách"
-                  className="inline-flex min-h-[44px] min-w-[44px] cursor-pointer items-center justify-center rounded-xl text-(--vk-muted) hover:bg-(--vk-btn-hover)"
-                >
-                  <X className="size-5" />
-                </button>
-              </div>
-
-              <div className="flex-1 overflow-y-auto p-5 space-y-3">
-                {loadingOrders ? (
-                  <p className="py-10 text-center text-sm text-(--vk-muted)">
-                    Đang tải lịch sử đơn đặt sách từ MongoDB...
-                  </p>
-                ) : orders.length === 0 ? (
-                  <p className="py-10 text-center text-sm text-(--vk-muted)">
-                    Chưa có đơn đặt sách nào được ghi nhận.
-                  </p>
-                ) : (
-                  orders.map((ord) => (
-                    <div
-                      key={ord.id}
-                      className="rounded-xl border border-(--vk-border) bg-(--vk-gallery) p-4 space-y-2"
-                    >
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="vankho-mono text-[11px] text-(--vk-muted)">
-                          #{ord.id} · {ord.createdAt}
-                        </span>
-                        <span
-                          className={`rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${
-                            ord.status === "approved"
-                              ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300"
-                              : ord.status === "cancelled"
-                              ? "bg-red-500/15 text-red-600 dark:text-red-300"
-                              : "bg-amber-500/15 text-amber-800 dark:text-amber-300"
-                          }`}
-                        >
-                          {ord.status === "approved"
-                            ? "Đang giao sách"
-                            : ord.status === "cancelled"
-                            ? "Đã hủy · Hoàn kho"
-                            : "Chờ xác nhận"}
-                        </span>
-                      </div>
-
-                      <p className="vankho-serif text-sm font-medium leading-snug text-(--vk-fg)">
-                        {ord.courseName}
-                      </p>
-
-                      {ord.shippingAddress && (
-                        <p className="flex items-start gap-1.5 text-xs text-(--vk-muted)">
-                          <MapPin className="mt-0.5 size-3.5 shrink-0 text-(--vk-brass)" />
-                          <span>{ord.shippingAddress}</span>
-                        </p>
-                      )}
-
-                      <div className="flex items-center justify-between border-t border-(--vk-border) pt-2 text-xs text-(--vk-muted)">
-                        <span>
-                          {ord.studentName} · {ord.phone}
-                        </span>
-                        <span className="vankho-mono font-bold text-(--vk-brass)">
-                          {ord.amount}
-                        </span>
-                      </div>
-                    </div>
-                  ))
-                )}
               </div>
             </motion.div>
           </div>
